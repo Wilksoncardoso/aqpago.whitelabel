@@ -1,0 +1,161 @@
+<template lang="html">
+  <div>
+    <v-btn color="primary" class="normal" text @click="voltar()"> <icon__back /> Voltar</v-btn>
+    <div class="card__edit_">
+      <h2 class="titulo__edit">Altera e-mail</h2>
+      <p class="text__edit">Informe seu novo e-mail</p>
+      <div class="card__edit__form">
+        <p class="label__padrao">E-mail novo:</p>
+        <v-text-field
+          solo
+          label="Digite aqui seu e-mail"
+          type="tel"
+          class="input__padrao"
+          v-model="form.email"
+        
+        >
+        </v-text-field>
+
+        <!-- <p class="label__padrao">Senha de acesso:</p>
+        <v-text-field
+          solo
+          label="Senha"
+          class="input__padrao"
+          :type="show1 ? 'text' : 'password'"
+          v-mask="['######']"
+          v-model="senha"
+          @click:append="show1 = !show1"
+          :error-messages="mensagem"
+        >
+          <template #append>
+            <v-btn icon @click="show1 = !show1">
+              <span v-if="show1 === true"><icon__visible /></span>
+              <span v-if="show1 === false"><icon__invisible /></span>
+            </v-btn>
+          </template>
+        </v-text-field> -->
+
+        <div class="info__edit">
+          Enviaremos um código para seu novo e-mail para validação do dispositivo.
+        </div>
+      </div>
+      <div class="d-flex justify-end">
+        <v-btn
+          color="primary"
+          class="button__default"
+          
+          :loading="loading"
+          @click="id__token()"
+          >Continuar</v-btn
+        >
+      </div>
+    </div>
+  </div>
+</template>
+<script>
+import icon__back from "./icon/icon__back.vue";
+import icon__visible from "./icon/icon__visible.vue";
+import icon__invisible from "./icon/icon__invisible.vue";
+import { mask } from "vue-the-mask";
+
+export default {
+  directives: { mask },
+  props: {
+    data: {
+      type: Object,
+      required: true,
+    },
+  },
+  components: {
+    icon__back,
+    icon__invisible,
+    icon__visible,
+  },
+  data() {
+    return {
+      show1: false,
+      loading: false,
+      senha: "",
+      form: {
+        email: "",
+      },
+      mensagem: "",
+      token: [],
+      error: [],
+    };
+  },
+  methods: {
+    id__token() {
+      this.loading = true;
+
+      this.$axios
+        .$post(
+          "/contato/mail/registro",
+          this.form
+        )
+        .then((response) => {
+          this.token = response.verefild_id;
+          var token = this.token;
+          var modal = true;
+          var email = this.form.email;
+          var senha = this.senha
+          this.loading = false;
+
+          this.$nuxt.$emit("edit__email", { token, modal, email, senha });
+        })
+        .catch((error) => {
+          this.loading = false;
+          this.error = error.response.data.error;
+        });
+    },
+
+    voltar() {
+      var next__page = 0;
+      this.$nuxt.$emit("window__page", { next__page });
+    },
+  },
+  computed: {
+    
+   
+  },
+  mounted() {
+    // this.form.email = this.data.email;
+  },
+};
+</script>
+<style lang="scss">
+.card__edit_ {
+  margin-top: 37px;
+  padding: 24px;
+  background: #fff;
+  .titulo__edit {
+    margin-bottom: 16px;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+    color: #131313;
+  }
+  .text__edit {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 28px;
+    color: #131313;
+    margin-bottom: 48px;
+  }
+  .card__edit__form {
+    width: 366px;
+    max-width: 100%;
+  }
+  .info__edit {
+    padding: 16px;
+    background: rgba(31, 120, 209, 0.1);
+    border-radius: 6px;
+
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 28px;
+    color: #131313;
+    margin-bottom: 48px;
+  }
+}
+</style>

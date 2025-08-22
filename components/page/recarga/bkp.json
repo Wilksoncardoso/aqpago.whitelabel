@@ -1,0 +1,26 @@
+{
+  "app": ["NETFLIX", "SPOTIFY", "UBER", "UBER VARIAVEL", "GOOGLEPLAY"],
+  "tv": ["CLARO TV", "SKY", "OI TV"],
+  "jogos": [
+    "XBOX",
+    "XBOX CARD",
+    "XBOX LIVE",
+    "XBOX GAME PASS",
+    "XBOX GAME PASS ULTI",
+    "PLAYSTATION",
+    "PLAYSTATION CARD",
+    "STEAM",
+    "LEVEL UP",
+    "RAZER GOLD"
+  ],
+  "delivery": ["IFOOD VARIAVEL", "MC DONALDS", "ZE DELIVERY"],
+  "cel": [
+    "TIM",
+    "OI",
+    "CLARO",
+    "VIVO",
+    "ALGAR CEL",
+    "SERCOMTELC",
+    "CORREIOS CELULAR"
+  ]
+}

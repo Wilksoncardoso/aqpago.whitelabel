@@ -1,0 +1,14 @@
+.body_loading_top_menu{
+    .loading_top_menu {
+        &.text{
+            width: 200px;
+        }
+        &.circle{
+            .v-skeleton-loader__text{
+                width: 20px;
+                height: 20px;
+
+            }
+        }
+    }
+}

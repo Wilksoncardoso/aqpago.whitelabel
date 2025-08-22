@@ -1,0 +1,311 @@
+.body__cobranca__recorrente {
+  .space_padrao_get_recorrente {
+    &.space_id {
+      width: 50%;
+    }
+    width: 33.33%;
+
+    .value {
+      color: #131313;
+      font-family: Inter;
+      font-weight: 600;
+      font-style: normal;
+      line-height: 24px; /* 120% */
+      font-size: 16px;
+      margin-bottom: 36px;
+      &.money {
+        font-size: 20px;
+      }
+      &.id_change {
+        color: rgba(19, 19, 19, 0.5);
+        font-size: 16px;
+        line-height: 19px;
+      }
+    }
+    .label {
+      color: rgba(19, 19, 19, 0.6);
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 28px;
+      margin-bottom: 8px;
+    }
+  }
+  .label_padrao_get_recorrente {
+    color: rgba(19, 19, 19, 0.6);
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 28px;
+    margin-bottom: 8px;
+  }
+  .title_recorrente_get {
+    color: #131313;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 24px; /* 120% */
+  }
+  .title_recorrente_itens_get_recorrent {
+    color: #525252;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 24px; /* 150% */
+    letter-spacing: -0.32px;
+    span {
+      margin-left: 16px;
+      border-radius: 8px;
+      background: #edeff2;
+      padding: 2px 8px;
+      color: #52555d;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 20px;
+      letter-spacing: -0.07px;
+    }
+  }
+  .status {
+    span {
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: normal;
+      padding: 8px 16px;
+      border-radius: 12px;
+      text-transform: lowercase;
+      &.PENDENTE {
+        color: #ef8a13;
+        background: rgba(255, 192, 67, 0.1);
+      }
+      &.CANCELADA, &.REPROVADO, &.reversed, &.refunded, &.dispute {
+        color: #f14a2f;
+        background: rgba(195, 27, 0, 0.1);
+      }
+      &.EXPIRADO,
+      &.FALHADA {
+        color: rgba(26, 26, 26, 0.5);
+        background: rgba(26, 26, 26, 0.1);
+      }
+      &.ATIVO {
+        color: #1aaa55;
+        background: rgba(22, 136, 69, 0.1);
+      }
+      &.ANALISANDO {
+        background: #f3f3f3;
+      }
+      &.APROVADO, &.APROVADA {
+        color: #1aaa55;
+        background: rgba(114, 163, 134, 0.1);
+      }
+    }
+  }
+  .card_share_cobranca {
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid #e8e8e8;
+    width: 100%;
+    max-width: 446px;
+    .description {
+      max-width: 356px;
+      color: rgba(26, 26, 26, 0.5);
+      text-align: center;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: normal;
+      max-width: 356px;
+    }
+  }
+  .input_bloqueado_copy {
+    .v-input__control {
+      min-height: 36px !important;
+      cursor: pointer !important;
+
+      .v-input__slot {
+        cursor: pointer !important;
+        box-shadow: none !important;
+        border: 1px solid #d6d6d6;
+        border-radius: 8px 0 0 8px;
+        margin-bottom: 0;
+        input {
+          cursor: pointer !important;
+          color: #131313;
+          font-size: 14px;
+          font-style: normal;
+          font-weight: 500;
+          line-height: 20px; /* 142.857% */
+          letter-spacing: -0.07px;
+        }
+      }
+    }
+    .v-text-field__details {
+      display: none;
+    }
+    .v-input__append-outer {
+      margin-left: 0;
+      margin-top: 0 !important;
+      margin-bottom: 0 !important;
+      .button_bloqueado_copy {
+        border-radius: 0 8px 8px 0;
+      }
+    }
+  }
+  .card_recorrente_atrasados {
+    width: 328px;
+    padding: 16px;
+    border-radius: 12px;
+    border: 1px solid #e5e5e5;
+    margin-right: 24px;
+    .text {
+      color: #777a8b;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 20px;
+      letter-spacing: -0.07px;
+    }
+    .value {
+      color: #131313;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 20px;
+      letter-spacing: -0.28px;
+    }
+  }
+  .title_cliente_rc {
+    color: #131313;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 24px; /* 120% */
+  }
+  .text-atualizacao {
+    color: #a3a3a3;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px; 
+    letter-spacing: -0.28px;
+  }
+}
+.body_cliente_rc {
+  .title_name {
+    color: #525252;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 24px; /* 150% */
+    letter-spacing: -0.32px;
+  }
+  .description_document {
+    color: #a3a3a3;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px; /* 142.857% */
+    letter-spacing: -0.28px;
+  }
+}
+
+.card_pagamentos_rc_historico {
+  padding: 24px;
+  border-radius: 8px;
+  background: #fff;
+  .component_cobranca_get {
+    padding: var(--spacing-12, 12px);
+    border-radius: var(--radius-md, 8px) !important;
+    border: 1px solid var(--border-primary, #e5e5e5);
+    margin-bottom: 8px;
+    &::before {
+      box-shadow: none;
+      border: none;
+    }
+    .v-expansion-panel-header {
+      padding: 0;
+    }
+    &.v-expansion-panel:not(:first-child)::after {
+      border-color: rgba(0, 0, 0, 0) !important;
+    }
+    .v-expansion-panel-header {
+      min-height: auto !important;
+    }
+    .v-expansion-panel-content__wrap {
+      padding: 0;
+    }
+    .title {
+      .title_cobranca {
+        color: #000;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 20px; /* 142.857% */
+        letter-spacing: -0.28px;
+      }
+      .date {
+        color: #525252;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 20px;
+        letter-spacing: -0.28px;
+      }
+      .ativo {
+        transform: rotate(180deg);
+        transition: transform 0.3s ease; /* Para uma animação suave */
+      }
+    }
+    .body {
+      border-radius: 6px;
+      background: #fcfcfc;
+      .label_rc {
+        color: rgba(19, 19, 19, 0.6);
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 20px; /* 142.857% */
+        letter-spacing: -0.28px;
+        margin-bottom: 8px;
+      }
+      .value_rc {
+        color: var(--text-base-dark, #131313);
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 20px; /* 142.857% */
+        letter-spacing: -0.28px;
+      }
+      .space_width {
+        margin-top: 24px;
+        width: 33.33%;
+      }
+      .card_desconto {
+        margin-left: 8px;
+        padding: 2px 3px;
+        border-radius: 6px;
+        border: 1px solid #dfe2e6;
+        display: inline-block;
+        color: #52555d;
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 16px; /* 133.333% */
+        letter-spacing: -0.06px;
+      }
+    }
+  }
+}
+
+.btn_edit_get_cr {
+  border-radius: 10px !important;
+  border: 1px solid #e8e8e8 !important;
+  &.v-btn--disabled{
+    svg{
+      path{
+        fill:rgba(0, 0, 0, 0.26) !important;
+      }
+    }
+  }
+}

@@ -1,0 +1,121 @@
+.body_recorrente {
+    .title_cobranca_gerada {
+        padding: 8px 16px;
+        border-radius: 15px;
+        border: 2px solid #c5f6d2;
+
+        // style fonte
+        color: #1a1a1a;
+        text-align: center;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 24px;
+    }
+    .card_cobranca_gerada {
+        .card_cobranca_gerada {
+            color: rgba(26, 26, 26, 0.5);
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: normal;
+        }
+        .value_gerada {
+            color: #131313;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: 24px; /* 150% */
+            letter-spacing: -0.08px;
+        }
+    }
+    .card_share_cobranca {
+        padding: 20px;
+        border-radius: 12px;
+        border: 1px solid #e8e8e8;
+        width: 100%;
+        max-width: 446px;
+        .description {
+            max-width: 356px;
+            color: rgba(26, 26, 26, 0.5);
+            text-align: center;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: normal;
+            max-width: 356px;
+        }
+    }
+    .input_bloqueado_copy {
+        .v-input__control {
+            min-height: 36px !important;
+            cursor: pointer !important;
+
+            .v-input__slot {
+                cursor: pointer !important;
+                box-shadow: none !important;
+                border: 1px solid #d6d6d6;
+                border-radius: 8px 0 0 8px;
+                margin-bottom: 0;
+                input {
+                    cursor: pointer !important;
+                    color: #131313;
+                    font-size: 14px;
+                    font-style: normal;
+                    font-weight: 500;
+                    line-height: 20px; /* 142.857% */
+                    letter-spacing: -0.07px;
+                }
+            }
+        }
+        .v-text-field__details {
+            display: none;
+        }
+        .v-input__append-outer {
+            margin-left: 0;
+            margin-top: 0 !important;
+            margin-bottom: 0 !important;
+        }
+    }
+    .button_bloqueado_copy {
+        border-radius: 0 8px 8px 0 !important;
+        height: 36px !important;
+        .v-btn__content {
+            color: #fff;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: 20px; /* 142.857% */
+            letter-spacing: -0.07px;
+        }
+    }
+    .btn_bloqueio {
+        min-height: 40px;
+        border-radius: 12px;
+        .v-btn__content {
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: 20px; /* 142.857% */
+            letter-spacing: -0.07px;
+        }
+    }
+    .create_cobranca {
+        background: #f9f5ff !important;
+    }
+    .button_secon_copy {
+        padding: 10px 12px !important;
+        border-radius: 12px !important;
+        border: 1px solid #e8e8e8 !important;
+        background: #fff !important;
+        box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.15) !important;
+        .v-btn__content {
+            color: $color-primary;
+            font-size: 14px !important;
+            font-style: normal !important;
+            font-weight: 600 !important;
+            line-height: 20px !important;
+            letter-spacing: -0.07px !important;
+        }
+    }
+}

@@ -1,0 +1,261 @@
+.card_pagamento_listagem {
+    h2 {
+        color: $color-black;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 24px; /* 120% */
+    }
+    .heigth_list_type {
+        margin-top: 6px;
+        height: 16px;
+    }
+    .button_pagamento {
+        padding: 6px 10px !important;
+        border-radius: 10px !important;
+        box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.15) !important;
+        .v-btn__content {
+            color: #fff;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: 20px; /* 142.857% */
+            letter-spacing: -0.07px;
+        }
+    }
+    .group_type_list {
+        min-height: 36px !important;
+        background: #fff !important;
+        border-radius: 10px !important;
+        border: 1px solid #e5e5e5 !important;
+        .v-btn {
+            min-height: 28px !important;
+            width: 174px !important;
+            border: none !important;
+            background: transparent;
+            &:hover {
+                border-radius: 8px !important;
+            }
+            &.v-item--active {
+                border-radius: 8px !important;
+                background: #f3f4f6 !important;
+                box-shadow: 0px 1px 2px 0px rgba(20, 21, 26, 0.05) !important;
+            }
+            .v-btn__content {
+                color: #525252;
+                font-size: 14px;
+                font-style: normal;
+                font-weight: 500;
+                line-height: 20px; /* 142.857% */
+                letter-spacing: -0.07px;
+            }
+        }
+    }
+    .lista_main_pagamentos {
+        border-radius: 16px;
+        border: 1px solid $color-border;
+        .input_buscar_boleto {
+            .v-input__slot {
+                box-shadow: none !important;
+                border-radius: 16px;
+                margin-bottom: 0 !important;
+            }
+            .v-text-field__details {
+                display: none !important;
+            }
+        }
+        .title_list {
+            background: #f3f4f6;
+            color: #525252;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 20px; /* 142.857% */
+            letter-spacing: -0.07px;
+            .witdh_space_boleto {
+                padding-top: 10px;
+                padding-bottom: 10px;
+                padding-left: 12px;
+                &.boleto {
+                    width: 288px;
+                }
+                &.vencimento {
+                    width: 112px;
+                }
+                &.pagamento {
+                    width: 112px;
+                }
+                &.valor_boleto {
+                    width: 154px;
+                }
+                &.valor_pago {
+                    width: 154px;
+                }
+                &.status {
+                    width: 112px;
+                }
+                &.space {
+                    width: 100px;
+                }
+            }
+        }
+        .v-data-table {
+            background: transparent !important;
+        }
+        .body_list {
+            height: 84px;
+            border-bottom: 1px solid #e5e5e5;
+
+            .witdh_space_boleto {
+                padding-top: 10px;
+                padding-bottom: 10px;
+                padding-left: 12px;
+                &.boleto {
+                    width: 288px;
+                    .empresa {
+                        color: #000;
+                        font-size: 14px;
+                        font-weight: 600;
+                        line-height: 20px;
+                        letter-spacing: -0.28px;
+                        margin-bottom: 2px;
+                    }
+                    .instituicao {
+                        color: #525252;
+                        font-size: 14px;
+                        font-style: normal;
+                        font-weight: 500;
+                        line-height: 20px;
+                        letter-spacing: -0.28px;
+                        text-transform: uppercase;
+                    }
+                }
+                &.vencimento,
+                &.pagamento {
+                    width: 112px;
+                    color: #a3a3a3;
+                    font-size: 12px;
+                    font-style: normal;
+                    font-weight: 500;
+                    line-height: 16px; /* 133.333% */
+                    letter-spacing: -0.24px;
+                }
+                &.valor_boleto {
+                    width: 154px;
+
+                    color: #525252;
+                    font-size: 14px;
+                    font-style: normal;
+                    font-weight: 500;
+                    line-height: 20px;
+                    letter-spacing: -0.28px;
+
+                    .multa_value {
+                        color: #a3a3a3;
+                        font-size: 12px;
+                        font-style: normal;
+                        font-weight: 600;
+                        line-height: 16px;
+                        letter-spacing: -0.06px;
+                    }
+                }
+                &.valor_pago {
+                    width: 154px;
+
+                    color: #000;
+                    font-size: 14px;
+                    font-style: normal;
+                    font-weight: 500;
+                    line-height: 20px;
+                    letter-spacing: -0.28px;
+                }
+                &.status {
+                    width: 112px;
+                    span {
+                        padding: 2px 6px;
+                        font-size: 12px;
+                        font-style: normal;
+                        font-weight: 500;
+                        line-height: 16px;
+                        border-radius: 6px;
+                        &.pago,
+                        &.efetivado {
+                            color: #186c49;
+                            background: #f2f9f5;
+                        }
+                        &.cancelado {
+                            color: #8b352e;
+                            background: #fef4f3;
+                        }
+                        &.agendado {
+                            color: #8e7629;
+                            background: #fff9f2;
+                        }
+                    }
+                }
+                &.space {
+                    padding-right: 16px;
+                    text-align: right;
+                    width: 100px;
+                    .icon_button_boleto {
+                        min-height: 32px !important;
+                        min-width: 32px !important;
+                        border-radius: 30px;
+                    }
+                }
+            }
+            &.last-item {
+                // border-bottom: none !important;
+                border-bottom-left-radius: 16px !important;
+                border-bottom-right-radius: 16px !important;
+                background: transparent !important;
+                border: none !important;
+            }
+        }
+    }
+    .button_selecao_date {
+        border-radius: 10px;
+        background: #000;
+        .v-btn__content {
+            color: #fff;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: 20px; /* 142.857% */
+            letter-spacing: -0.07px;
+        }
+    }
+}
+.v-tooltip__content {
+    background: transparent !important;
+}
+.toooltip_boleto {
+    padding: 12px 16px !important;
+    border-radius: 8px !important;
+    border: 1px solid #ebf0ef !important;
+    box-shadow:
+        0px 18px 24px -5px rgba(20, 21, 26, 0.1),
+        0px 8px 8px -5px rgba(20, 21, 26, 0.05) !important;
+    background: #fff !important ;
+    opacity: 1 !important;
+}
+.menuable__content__active {
+    opacity: 1 !important;
+    background: transparent !important;
+}
+.label_tooltip {
+    color: #0e1211;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 16px;
+    letter-spacing: -0.24px;
+}
+.value_tooltip {
+    color: #5e6e6a;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 16px;
+    letter-spacing: -0.24px;
+}

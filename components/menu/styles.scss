@@ -1,0 +1,239 @@
+.menu__web {
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  @media (max-width: $media-medium) {
+    display: none;
+  }
+
+  position: fixed;
+  width: 296px;
+  height: 100%;
+  background: linear-gradient(
+    240.58deg,
+    #521c89 -29%,
+    #1d0931 42.16%,
+    #1d0931 57.16%
+  );
+  padding-left: 16px;
+  padding-right: 16px;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 101;
+
+  .titulo__menu {
+    text-align: left;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 16px;
+    margin-top: 16px;
+    margin-left: 8px;
+  }
+
+  .logo__ {
+    margin-top: 24px;
+    margin-bottom: 24px;
+  }
+
+  .nuxt-link-exact-active {
+    .item__menu {
+      background: rgba(255, 255, 255, 0.1);
+    }
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  .item__menu {
+    height: 32px;
+    width: 100%;
+    padding: 6px 8px;
+    border-radius: 8px;
+    margin-bottom: 4px;
+
+    .icon {
+      margin-top: 6px;
+      margin-right: 17px;
+    }
+
+    .label__menu {
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 20px;
+      color: $color-white;
+      text-transform: none !important;
+      text-decoration: none !important;
+      letter-spacing: -0.07px;
+    }
+  }
+
+  .menu__bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    width: 264px;
+    position: absolute;
+    bottom: 0px;
+
+    @media (max-height: 800px) {
+      position: relative;
+      overflow-y: auto;
+    }
+  }
+
+  .menu__submanu {
+    .marcador__sub__item {
+      transform: rotate(180deg);
+      transition: 0.5s;
+      margin-right: 10px;
+    }
+
+    .v-expansion-panel--active {
+      .marcador__sub__item {
+        transform: rotate(0deg);
+        transition: 0.5s;
+      }
+
+      .v-expansion-panel-header--active {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 8px;
+        min-height: 32px !important;
+        padding: 6px 8px !important;
+        box-shadow: 0px 8px 16px 0px rgba(85, 97, 108, 0.05),
+          0px 2px 4px 0px rgba(136, 152, 165, 0.02);
+      }
+    }
+
+    .v-expansion-panel {
+      background: transparent !important;
+      padding: 0;
+
+      &::before {
+        box-shadow: none !important;
+      }
+
+      .v-expansion-panel-header {
+        padding: 0 !important;
+        max-height: 32px;
+        margin-bottom: 4px;
+
+        .item__submenu__principal {
+          padding-left: 6px;
+
+          .icon {
+          }
+
+          .label__menu {
+            margin-left: 17px;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 600;
+            color: $color-white;
+          }
+        }
+      }
+
+      .v-expansion-panel-content {
+        text-align: left;
+        margin-left: 26px;
+        border-left: 1px solid rgba(255, 255, 255, 0.1);
+
+        .v-expansion-panel-content__wrap {
+          padding-left: 16px;
+          padding-top: 12px;
+          padding-bottom: 12px;
+
+          .item__submenu {
+            opacity: 0.5;
+
+            &.nuxt-link-active {
+              opacity: 1;
+              transition: 0.5s;
+            }
+
+            .icon {
+              height: 20px;
+              width: 20px;
+            }
+
+            .label__menu {
+              margin-left: 8px;
+              font-size: 14px;
+              font-weight: 600;
+              color: $color-white;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .card_workspace {
+    background: #150325;
+    box-shadow: 0 0 10px 0 #150325;
+
+    border: 1px solid #ffffff10;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+    .label_workspace {
+      font-size: 12px;
+    }
+    .change_workspace {
+      border: 1px solid #ffffff46;
+      min-width: auto !important;
+      box-shadow: 0 0 10px 0 #ffffff81;
+      animation: pulseGlow 2s infinite alternate;
+    }
+    @keyframes pulseGlow {
+      0% {
+        box-shadow: 0 0 5px 0 #ffffff2f;
+      }
+      50% {
+        box-shadow: 0 0 12px 0 #ffffff50, 0 0 16px 0 #ffffff75;
+      }
+      100% {
+        box-shadow: 0 0 10px 0 #ffffff2f;
+      }
+    }
+  }
+  .menu_contact {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    @media (max-height: 800px) {
+      position: relative !important;
+    }
+    h5 {
+      color: #fff;
+      text-align: left !important;
+      font-size: 14px;
+      font-family: var(--Typography-family-Inter, Inter);
+      font-size: var(--Typography-size-body-14px, 14px) !important;
+      font-style: normal;
+      font-weight: 500 !important;
+      line-height: var(
+        --Typography-size-line-height-2-xs,
+        20px
+      ) !important; /* 142.857% */
+      letter-spacing: -0.28px !important;
+    }
+    .card_main_contact {
+      border-radius: var(--radius-xl, 12px);
+      background: var(--background-brand, #521c89);
+      .button_icon_contact {
+        border-radius: var(--radius-xl, 12px);
+        border: 1px solid var(--border-secondary, #efefef);
+        background: var(--content-inverse, #fff);
+        box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.15);
+      }
+    }
+  }
+}

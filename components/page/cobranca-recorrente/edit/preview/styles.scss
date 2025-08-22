@@ -1,0 +1,27 @@
+.card_cobranca_recorrente_preview_top {
+    padding: 16px;
+    background: #fff;
+    border-radius: 12px 12px 0 0;
+    .cicle {
+        height: 8px;
+        width: 8px;
+        border-radius: 50%;
+        background: rgba(82, 28, 137, 0.15);
+        margin-right: 5px;
+    }
+}
+.menseger_preview {
+    max-width: 457px;
+    color: #525252;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px; /* 142.857% */
+    letter-spacing: -0.07px;
+}
+
+.preview_card{
+    position: sticky;
+    top: 0;
+    height: 100%;
+}

@@ -1,0 +1,72 @@
+.CardModalDeletePagamento {
+    border-radius:  20px !important;
+    box-shadow:none !important;
+    h2 {
+        color: #000;
+        font-size: 24px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 28px; /* 116.667% */
+        letter-spacing: -0.48px;
+    }
+    .description_pagamento {
+        color: #525252;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 24px;
+        letter-spacing: -0.32px;
+    }
+    .card_body {
+        padding: 16px 20px;
+        border-radius: 16px;
+        border: 1px solid #ebf0ef;
+    }
+    .label_card {
+        color: #989898;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 20px;
+        letter-spacing: -0.07px;
+        margin-bottom: 2px;
+    }
+    .value_card {
+        color: #262626;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 24px;
+        letter-spacing: -0.4px;
+    }
+    .value_secondary {
+        color: #525252;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 20px;
+        letter-spacing: -0.28px;
+        text-align: start !important;
+        &.secondary_card {
+            color: #989898;
+        }
+        &.text_ {
+            color: #262626;
+        }
+    }
+    .button_pagamento_cancel{
+        border-radius: 12px !important;
+        &.v-btn--outlined{
+            border: 1px solid #E8E8E8 !important;
+            box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.15) !important;
+        }
+        &.principal{
+           .v-btn__content{
+            color: #fff !important;
+           } 
+        }
+    }
+}
+.v-dialog{
+    box-shadow: none !important;
+}

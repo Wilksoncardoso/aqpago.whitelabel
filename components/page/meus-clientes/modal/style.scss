@@ -1,0 +1,174 @@
+.modal_user_created_cobranca {
+    border-radius: 20px;
+
+    .head {
+        padding: 24px 24px 12px 24px;
+    }
+    .body {
+        padding: 12px 24px 24px 24px;
+    }
+    .footer {
+        padding: 32px 20px;
+    }
+    .label__user {
+        color: #131313;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 20px; /* 142.857% */
+        letter-spacing: -0.07px;
+        margin-bottom: 6px;
+    }
+    .input__user {
+        .v-input__slot {
+            border: 1px solid #d6d6d6;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: none !important;
+        }
+        &.error--text {
+            .v-input__slot {
+                border: 1px solid #f15a42;
+                .v-text-field__slot {
+                    input {
+                        color: #f15a42 !important;
+                    }
+                }
+            }
+        }
+    }
+    h1 {
+        color: #292929;
+        font-size: 24px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 28px; /* 116.667% */
+        letter-spacing: -0.48px;
+        margin-bottom: 28px;
+    }
+    h4 {
+        color: #521c89;
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 16px; /* 133.333% */
+        letter-spacing: -0.24px;
+        text-transform: uppercase;
+    }
+    .width_mediam {
+        width: calc(50% - 12px);
+    }
+    .label_preview {
+        color: rgba(26, 26, 26, 0.5);
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 20px; /* 142.857% */
+        letter-spacing: -0.28px;
+    }
+    .value_preview {
+        color: #131313;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 20px; /* 142.857% */
+        letter-spacing: -0.28px;
+    }
+}
+
+.modal_delete_client {
+    .body_user_itens {
+        .camp_name {
+            width: 346px;
+
+            .slog_fist_name {
+                height: 40px;
+                width: 40px;
+                background: #f6f6ff;
+                border-radius: 50%;
+
+                color: #521c89;
+                font-size: 20px;
+                font-style: normal;
+                font-weight: 700;
+                line-height: 24px;
+                letter-spacing: -0.4px;
+                text-transform: capitalize !important;
+            }
+        }
+        .camp_email {
+            width: 346px;
+        }
+        .camp_celular {
+            width: 200px;
+        }
+        .camp_space {
+            width: 140px;
+        }
+    }
+    .name_user {
+        color: #000;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 20px;
+        letter-spacing: -0.28px;
+    }
+    .doc_user {
+        color: #525252;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 20px; /* 142.857% */
+        letter-spacing: -0.28px;
+    }
+    .camp_name {
+        width: 100%;
+        padding: 16px;
+        border-radius: 8px;
+        border: 1px solid #e8e8e8;
+    }
+    .head {
+        h2 {
+            color: #292929;
+            font-size: 20px !important;
+            font-style: normal;
+            font-weight: 600;
+            line-height: 26px;
+            letter-spacing: -0.4px;
+        }
+    }
+    .text_description_modal {
+        color: #000;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 20px;
+        letter-spacing: -0.07px;
+    }
+    .footer {
+        border-top: 1px solid #edeff2;
+    }
+}
+
+.input_rc_autocomplete {
+    .v-input__slot {
+        border: 1px solid #d6d6d6;
+        border-radius: 12px;
+        box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.15) !important;
+    }
+}
+
+.modal_z_index_all {
+    z-index: 100000 !important;
+}
+
+// .v-dialog__content {
+//     z-index: 100001 !important;
+// }
+// .v-dialog__content {
+//     z-index: 100001 !important;
+// }
+// .v-dialog__content{
+//     z-index: 100001 !important;
+// }

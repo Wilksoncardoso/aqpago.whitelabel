@@ -1,0 +1,97 @@
+.extrato__modal_c{
+    padding: 20px 40px;
+
+
+    .export_transction .container__group {
+        padding-left: 0;
+        padding-right: 0;
+        padding-top: 20px;
+    }
+    
+    .container_exp {
+        max-width: 1300px;
+        padding: 20px;
+    
+        .name_store {
+            color: $color-primary;
+            font-size: 40px;
+            font-weight: 600;
+        }
+    
+        .date_c {
+            width: 100px;
+        }
+    
+        .type_c {
+            width: 100px;
+            text-align: center;
+        }
+    
+        .categoria_c {
+            width: 120px;
+            text-align: center;
+        }
+    
+        .valor_c {
+            width: 90px;
+        }
+    
+        .taxa_c {
+            width: 90px;
+            text-align: center;
+        }
+    
+        .out_c {
+            width: 300px;
+        }
+    
+        .doc_out_c {
+            width: 200px;
+        }
+    
+        .end_to_end_c {
+            width: 270px;
+        }
+    
+        .title_tabe {
+            margin-bottom: 20px;
+            font-size: 13px;
+            border-radius: 10px;
+            padding: 7px 10px;
+            background: $color-primary;
+            color: #fff;
+        }
+    
+        .value_table {
+            margin-bottom: 30px;
+            border: 1px solid $color-primary;
+            border-radius: 10px;
+            padding: 7px 10px;
+            background: #f2f2f2;
+            font-size: 13px;
+    
+            &.ativo {
+                background: #d3d3d3;
+            }
+    
+            .date_c {
+                font-size: 12px;
+            }
+        }
+    
+        .row_extract {
+            margin-bottom: 20px;
+            padding: 7px 10px;
+            font-size: 18px;
+            border-radius: 10px;
+    
+            .title_e {
+                font-weight: 600;
+            }
+    
+            &.secon_background {
+                background: #d3d3d3;
+            }
+        }
+    }
+}

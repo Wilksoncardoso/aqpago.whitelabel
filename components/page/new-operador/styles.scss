@@ -1,0 +1,94 @@
+.card_login_init {
+  width: 420px;
+  height: fit-content;
+  h1 {
+    color: #000;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 38px;
+    letter-spacing: -0.64px;
+  }
+  h6 {
+    color: #525252;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: -0.32px;
+  }
+  .type_label_empresa {
+    color: $color-primary;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 16px; /* 133.333% */
+    letter-spacing: -0.24px;
+    text-transform: uppercase;
+  }
+  .label_login {
+    margin-bottom: 6px;
+    color: #131313;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px; /* 142.857% */
+    letter-spacing: -0.07px;
+  }
+
+  .reset_form {
+    color: $color-primary;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 20px; /* 142.857% */
+    letter-spacing: -0.07px;
+    text-decoration: none;
+  }
+  .input_form_login {
+    &.error--text {
+      .v-input__control {
+        .v-input__slot {
+          border: 1px solid #ff5252 !important;
+          input {
+            color: #ff5252 !important;
+          }
+        }
+      }
+    }
+    .v-input__slot {
+      padding-left: 16px !important;
+      padding-right: 16px !important;
+      min-height: 48px !important;
+      box-shadow: none !important;
+      border-radius: 12px;
+      border: 1px solid #d6d6d6;
+      background: #fff;
+      color: #131313;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 20px;
+      letter-spacing: -0.07px;
+      .v-label {
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 20px;
+        letter-spacing: -0.07px;
+      }
+    }
+  }
+}
+
+.button_login_new {
+  border-radius: 12px !important;
+  background: $color-primary;
+  box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.15);
+  min-height: 44px;
+  &.v-btn--disabled.v-btn--has-bg {
+    background: $color-primary !important;
+    opacity: 0.3;
+    .v-btn__content {
+      color: #fff !important;
+    }
+  }
+}

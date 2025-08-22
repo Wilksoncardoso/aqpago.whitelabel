@@ -1,0 +1,112 @@
+$size-indice: 40px;
+
+$size-item-amount: 150px;
+$size-item-operador: 150px;
+$size-item-detalhes: 400px;
+
+$color-divider: #c2c2ff6c;
+
+$size-item-detalhes-icon: 20px;
+
+.list-transaction {
+  .v-input--is-disabled {
+    .indice,
+    .item-detalhes,
+    .item-operador,
+    .item-amount {
+      opacity: 0.4 !important;
+    }
+    .item-detalhes,
+    .item-operador,
+    .item-amount {
+      text-decoration: line-through;
+    }
+    .indice{
+      background: #dadada !important;
+      border:none !important;
+    }
+  }
+
+  .itens {
+    border-left: 3px solid $color-divider;
+    padding-left: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+    margin: 20px 0;
+
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+
+    .indice {
+      width: $size-indice;
+      min-width: $size-indice;
+      max-width: $size-indice;
+
+      height: $size-indice;
+      min-height: $size-indice;
+      max-height: $size-indice;
+
+      border-radius: $size-indice;
+      -webkit-border-radius: $size-indice;
+      -moz-border-radius: $size-indice;
+      -ms-border-radius: $size-indice;
+      -o-border-radius: $size-indice;
+      border: 1px solid $color-primary-secondary;
+
+      //style font
+      font-size: 12px;
+      font-weight: 700;
+      &.ativo {
+        transition: 0.5s;
+        background: $color-primary-secondary;
+        -webkit-transition: 0.5s;
+        -moz-transition: 0.5s;
+        -ms-transition: 0.5s;
+        -o-transition: 0.5s;
+      }
+    }
+
+    .item-detalhes {
+      min-width: $size-item-detalhes;
+      max-width: $size-item-detalhes;
+      .icon {
+        svg {
+          width: $size-item-detalhes-icon;
+          object-fit: contain;
+        }
+      }
+      font-size: 13px;
+      span{
+        font-size: 10px;
+        color: #888888;
+      }
+      .recebedor{
+        color: #99a7ac;
+        font-weight: 500;
+      }
+    }
+    .item-operador {
+      min-width: $size-item-operador;
+      max-width: $size-item-operador;
+    }
+    .item-amount {
+      min-width: $size-item-amount;
+      max-width: $size-item-amount;
+
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .item-close {
+      min-width: 30x;
+      max-width: 30x;
+    }
+  }
+  .operador-detalhes {
+    color: #888888;
+    font-size: 12px;
+  }
+}

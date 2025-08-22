@@ -1,0 +1,22 @@
+{
+  "success": true,
+  "msg": "cartao gerado com sucesso",
+  "body": {
+    "id": 85858,
+    "tipo_cartao": "credito",
+    "cpf_proprietario": "02130412270",
+    "nome_proprietario": "procode ltda",
+    "numero": "549738xxxxxx5716",
+    "bandeira": "MasterCard",
+    "pagamento_validate_cartao": null,
+    "pagamento_validacao_check": 0,
+    "validade_mes": "01",
+    "verificacao_cartao": null,
+    "validate_tentativas": null,
+    "validade_ano": "2031",
+    "apelido_cartao": null,
+    "endereco": null,
+    "created_at": "2025-01-09 15:17:26",
+    "updated_at": "2025-01-09 15:17:26"
+  }
+}

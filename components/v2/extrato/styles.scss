@@ -1,0 +1,232 @@
+.List_extrato_comp {
+  width: 100%;
+  display: block;
+  &.cards_style {
+    border-radius: 12px;
+    border: 1px solid var(--border-secondary, #efefef);
+    background: #fff;
+  }
+  .table_extrato {
+    border-radius: var(--radius-2xl, 20px);
+    border: 1px solid var(--border-secondary, #efefef);
+    .v-chip {
+      background: red;
+    }
+    .head_extrato {
+      width: 100%;
+      height: 40px;
+      background: var(--background-surface, #f8f8f8);
+
+      color: var(--content-secondary, #525252);
+      font-size: var(--Typography-size-body-14px, 14px);
+      font-style: normal;
+      font-weight: 400;
+      line-height: var(--Typography-size-line-height-2-xs, 20px); /* 142.857% */
+      letter-spacing: -0.28px;
+    }
+    .input_buscar {
+      .v-text-field__details {
+        display: none;
+      }
+      .v-input__slot {
+        box-shadow: none !important;
+        border-radius: 20px;
+        -webkit-border-radius: 20px;
+        -moz-border-radius: 20px;
+        -ms-border-radius: 20px;
+        -o-border-radius: 20px;
+      }
+      .v-label, .v-input__control {
+        font-size: 13px;
+      }
+    }
+    .itens_list {
+      .font_default_extrato {
+        color: var(--content-primary, #131313);
+        font-size: var(--Typography-size-body-12px, 12px) !important;
+        font-style: normal !important;
+        font-weight: 400;
+        line-height: var(
+          --Typography-size-line-height-xxs,
+          16px
+        ) !important; /* 133.333% */
+        letter-spacing: -0.24px !important;
+        &.bold {
+          font-weight: 500 !important;
+        }
+        &.color_primary {
+          color: var(--content-primary, #131313) !important;
+        }
+        &.color_secondary {
+          color: var(--content-secondary, #525252) !important;
+        }
+        &.color_description {
+          color: var(--content-tertiary, #989898);
+        }
+      }
+      .item {
+        height: 54px;
+        width: 100%;
+        border-bottom: 1px solid var(--border-secondary, #efefef);
+        &:last-of-type {
+          border: none;
+        }
+      }
+    }
+    .collumn-view {
+      width: 100%;
+      max-width: 64px;
+    }
+    .collumn-date {
+      min-width: 106px;
+      max-width: 106px;
+    }
+    .collumn-name {
+      width: 100%;
+      max-width: 239px;
+    }
+    .collumn-type {
+      min-width: 160px;
+      max-width: 160px;
+    }
+    .collumn-status {
+      min-width: 95px;
+      max-width: 95px;
+
+      span {
+        padding: 2px 6px;
+        border-radius: var(--radius-sm, 6px);
+
+        font-family: var(--Typography-family-Inter, Inter);
+        font-size: var(--Typography-size-body-12px, 12px);
+        font-style: normal;
+        font-weight: 500;
+        line-height: var(
+          --Typography-size-line-height-xxs,
+          16px
+        ); /* 133.333% */
+        letter-spacing: -0.24px;
+        &.Transferido,
+        &.Enviado {
+          color: #131313;
+          background: #f1f4f9;
+        }
+        &.Falha {
+          color: #131313;
+          background: #f1f4f9;
+          opacity: 0.5;
+        }
+        &.Recebido {
+          color: var(--alert-content-sucess, #064e3b);
+          background: var(--alert-background-sucess, #ecfdf5);
+        }
+        &.Aguardando,
+        &.Criado {
+          color: var(--alert-content-warning, #5f4f1b);
+          background: var(--alert-background-warning, #ffead1);
+        }
+        &.Bloqueado,
+        &.Devolvido {
+          color: var(--alert-content-error, #8b352e) !important;
+          background: var(--alert-background-error, #fdeceb);
+        }
+      }
+    }
+    .collumn-amount {
+      min-width: 110px;
+      max-width: 110px;
+    }
+
+    .icon_transaction {
+      height: 32px;
+      min-height: 32px;
+      width: 32px;
+      min-width: 32px;
+      border-radius: 8px;
+      -webkit-border-radius: 8px;
+      -moz-border-radius: 8px;
+      -ms-border-radius: 8px;
+      -o-border-radius: 8px;
+      &.Transferido,
+      &.Enviado {
+        color: #131313;
+        background: #f1f4f9;
+      }
+      &.Falha {
+        color: #131313;
+        background: #f1f4f9;
+        opacity: 0.5;
+      }
+      &.Recebido {
+        color: var(--alert-content-sucess, #064e3b);
+        background: var(--alert-background-sucess, #ecfdf5);
+      }
+      &.Aguardando,
+      &.Criado {
+        svg {
+          height: 16px;
+          width: 16px;
+          path {
+            fill: var(--alert-content-warning, #5f4f1b) !important;
+          }
+        }
+        background: var(--alert-background-warning, #ffead1);
+      }
+      &.Bloqueado,
+      &.Devolvido {
+        svg {
+          path {
+            fill: var(--alert-content-error, #8b352e) !important;
+          }
+        }
+        background: var(--alert-background-error, #fdeceb);
+      }
+    }
+  }
+
+  .navigation_pagination {
+    .v-pagination__item {
+      background: transparent;
+      box-shadow: none;
+      border: none;
+
+      color: var(--content-tertiary, #989898);
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 24px; /* 150% */
+      letter-spacing: -0.16px;
+    }
+    .v-pagination__item--active {
+      width: 40px;
+      height: 40px;
+      border-radius: var(--radius-xl, 12px);
+      background: var(--background-surface, #f8f8f8) !important;
+      color: var(--content-primary, #131313) !important;
+    }
+    .v-pagination__navigation--disabled {
+      opacity: 0.5;
+    }
+    .v-pagination__navigation {
+      background: transparent !important;
+      box-shadow: none !important;
+      border: none !important;
+
+      .mdi-chevron-left {
+        width: 13px;
+        height: 13px;
+        object-fit: contain;
+        background-repeat: none;
+
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3.52385 6.16658H13.6668V7.83325H3.52385L7.99383 12.3032L6.81533 13.4817L0.333496 6.99992L6.81533 0.518066L7.99383 1.69657L3.52385 6.16658Z" fill="%23525252"/></svg>') !important;
+      }
+      .mdi-chevron-right {
+        width: 20px;
+        height: 20px;
+        object-fit: contain;
+        background-repeat: none;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M13.4765 9.16658L9.0065 4.69657L10.185 3.51807L16.6668 9.99992L10.185 16.4817L9.0065 15.3032L13.4765 10.8332H3.3335V9.16658H13.4765Z" fill="%23525252"/></svg>') !important;
+      }
+    }
+  }
+}

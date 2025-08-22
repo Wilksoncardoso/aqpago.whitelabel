@@ -1,0 +1,72 @@
+.card_auth_app {
+    width: 420px;
+    height: fit-content;
+    h1 {
+        color: #000;
+        font-size: 24px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 28px;
+        letter-spacing: -0.48px;
+    }
+    h6 {
+        color: #a3a3a3;
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 16px; /* 133.333% */
+        letter-spacing: -0.24px;
+        text-transform: uppercase;
+    }
+    .list_pass {
+        .item {
+            width: 100%;
+            .value {
+                height: 24px !important;
+                width: 24px !important;
+                background: #1d0931;
+                border-radius: 30px;
+                display: inline-block;
+
+                color: #fff;
+                font-weight: 800;
+            }
+            .text {
+                color: #525252;
+                font-size: 14px;
+                font-style: normal;
+                font-weight: 500;
+                line-height: 20px;
+                letter-spacing: -0.28px;
+            }
+        }
+    }
+    .card_code {
+        border-radius: 16px;
+        background: #f6f6ff;
+        height: 332px;
+
+        @media (max-height: 600px) {
+            background: Red;
+        }
+    }
+    .img_fake_qrcode {
+        object-fit: cover !important;
+        position: fixed;
+        filter: blur(4px);
+        transition: filter 0.3s ease;
+    }
+    .button_create_qrcode {
+        border-radius: 12px;
+        box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.15);
+        min-height: 40px;
+        .v-btn__content {
+            color: #fff;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: 20px; /* 142.857% */
+            letter-spacing: -0.07px;
+        }
+    }
+}

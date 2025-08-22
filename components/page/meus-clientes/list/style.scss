@@ -1,0 +1,101 @@
+.body__client {
+    background: #fff;
+    padding: 24px;
+    width: 100%;
+    border-radius: 8px;
+    h3 {
+        color: #131313;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 24px;
+    }
+    h6 {
+        color: #131313;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 28px; /* 175% */
+    }
+    .input__client {
+        .v-input__slot {
+            border-radius: 12px;
+            border: 1px solid #d6d6d6;
+            background: #fff;
+            padding: 14px 16px;
+            box-shadow: none !important;
+        }
+    }
+    .title_body_client {
+        color: rgba(19, 19, 19, 0.6);
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        .camp_name {
+            width: 310px;
+        }
+        .camp_email {
+            width: 310px;
+        }
+        .camp_celular {
+            width: 200px;
+        }
+        .camp_space {
+            width: 140px;
+        }
+    }
+    .body_user_itens {
+        .camp_name {
+            width: 310px;
+
+            .slog_fist_name {
+                height: 40px;
+                width: 40px;
+                background: #f6f6ff;
+                border-radius: 50%;
+
+                color: #521c89;
+                font-size: 20px;
+                font-style: normal;
+                font-weight: 700;
+                line-height: 24px;
+                letter-spacing: -0.4px;
+            }
+        }
+        .camp_email {
+            width: 310px;
+        }
+        .camp_celular {
+            width: 200px;
+        }
+        .camp_space {
+            width: 140px;
+        }
+    }
+    .label_list {
+        color: #000;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 20px;
+        letter-spacing: -0.28px;
+    }
+    .doc_list {
+        color: #525252;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 20px; /* 142.857% */
+        letter-spacing: -0.28px;
+    }
+}
+
+.button__dropdown {
+    &.delet {
+        color: #c60f21 !important;
+        div {
+            color: #c60f21 !important;
+        }
+    }
+}

@@ -1,0 +1,152 @@
+.card_list_dashboard {
+  .v-btn {
+    padding: 6px 14px !important;
+    .v-btn__content {
+      color: var(--content-brand, #521c89);
+      font-size: var(--Typography-size-body-14px, 14px);
+      font-style: normal;
+      font-weight: 600;
+      line-height: var(--Typography-size-line-height-2-xs, 20px); /* 142.857% */
+      letter-spacing: -0.28px;
+    }
+  }
+  .cards_style {
+    border-radius: 12px;
+    border: 1px solid var(--border-secondary, #efefef);
+    background: #fff;
+  }
+  .card_one_main {
+    width: calc(33%);
+    h3 {
+      color: var(--content-primary, #131313);
+      font-size: var(--Typography-size-heading-H6, 18px);
+      font-style: normal;
+      font-weight: 700;
+      line-height: var(--Typography-size-line-height-sm, 24px); /* 133.333% */
+      letter-spacing: -0.36px;
+    }
+    h5 {
+      color: var(--content-secondary, #525252);
+      text-align: center;
+      font-size: var(--Typography-size-body-14px, 14px);
+      font-style: normal;
+      font-weight: 400;
+      line-height: var(--Typography-size-line-height-2-xs, 20px); /* 142.857% */
+      letter-spacing: -0.28px;
+    }
+    p {
+      color: #131313;
+      font-size: var(--Typography-size-body-14px, 14px);
+      font-style: normal;
+      font-weight: 500;
+      line-height: var(--Typography-size-line-height-2-xs, 20px); /* 142.857% */
+      letter-spacing: -0.28px;
+    }
+  }
+  .card_two_main {
+    width: calc(67%);
+  }
+  h2 {
+    color: var(--content-primary, #131313);
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 24px; /* 150% */
+    letter-spacing: -0.32px;
+  }
+  
+    .itens_list {
+      .font_default_extrato {
+        color: var(--content-primary, #131313);
+        font-size: var(--Typography-size-body-12px, 12px) !important;
+        font-style: normal !important;
+        font-weight: 400;
+        line-height: var(
+          --Typography-size-line-height-xxs,
+          16px
+        ) !important; /* 133.333% */
+        letter-spacing: -0.24px !important;
+        &.bold {
+          font-weight: 500 !important;
+        }
+        &.color_primary {
+          color: var(--content-primary, #131313) !important;
+        }
+        &.color_secondary {
+          color: var(--content-secondary, #525252) !important;
+        }
+        &.color_description {
+          color: var(--content-tertiary, #989898);
+        }
+      }
+      .item {
+        height: 54px;
+        width: 100%;
+      }
+      .collumn-date {
+        min-width: 106px;
+        max-width: 106px;
+      }
+      .collumn-name {
+        width: 100%;
+        max-width: 239px;
+      }
+      .collumn-type {
+        min-width: 95px;
+        max-width: 95px;
+      }
+      .collumn-status {
+        min-width: 95px;
+        max-width: 95px;
+        span {
+          padding: 2px 6px;
+          border-radius: var(--radius-sm, 6px);
+
+          font-family: var(--Typography-family-Inter, Inter);
+          font-size: var(--Typography-size-body-12px, 12px);
+          font-style: normal;
+          font-weight: 500;
+          line-height: var(
+            --Typography-size-line-height-xxs,
+            16px
+          ); /* 133.333% */
+          letter-spacing: -0.24px;
+          &.Transferido,
+          &.Enviado {
+            color: #131313;
+            background: #f1f4f9;
+          }
+          &.Falha {
+            color: #131313;
+            background: #f1f4f9;
+            opacity: 0.5;
+          }
+          &.Recebido {
+            color: var(--alert-content-sucess, #064e3b);
+            background: var(--alert-background-sucess, #ecfdf5);
+          }
+          &.Aguardando,
+          &.Criado {
+            color: var(--alert-content-warning, #5f4f1b);
+            background: var(--alert-background-warning, #ffead1);
+          }
+          &.Bloqueado,
+          &.Devolvido {
+            color: var(--alert-content-error, #8b352e);
+            background: var(--alert-background-error, #fdeceb);
+          }
+        }
+      }
+      .collumn-amount {
+        min-width: 110px;
+        max-width: 110px;
+      }
+    }
+
+  .img_dashboard_app {
+    svg {
+      width: 134px;
+      height: auto;
+    }
+  }
+}

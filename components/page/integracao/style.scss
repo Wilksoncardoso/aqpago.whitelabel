@@ -1,0 +1,288 @@
+.card__painel {
+    border-radius: 8px;
+    background: #fff;
+    padding: 24px;
+
+    h1 {
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 24px;
+        margin-bottom: 8px;
+    }
+    p {
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 28px;
+        color: #131313;
+        margin-bottom: 48px;
+    }
+    .list__integracao {
+        height: 64px;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        color: rgba(19, 19, 19, 0.6);
+        .status {
+            width: 80px;
+        }
+        .token {
+            width: 200px;
+        }
+        .dominio {
+            width: 492px;
+        }
+        .service {
+            width: 180px;
+        }
+        .icon {
+            width: 80px;
+        }
+    }
+    .list__body {
+        height: auto;
+        .status {
+            width: 80px;
+        }
+        .token {
+            cursor: pointer;
+            width: 200px;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 600;
+            color: #131313;
+
+            max-width: 176px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+        .dominio {
+            width: 492px;
+            .url__line {
+                font-size: 14px;
+                font-style: normal;
+                font-weight: 600;
+                line-height: normal;
+                color: #131313;
+
+                max-width: 400px;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+            }
+            .ip__line {
+                margin-top: 4px;
+                font-size: 14px;
+                font-style: normal;
+                font-weight: 500;
+                line-height: normal;
+                color: #757575;
+            }
+        }
+        .service {
+            width: 180px;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 500;
+            color: #131313;
+        }
+        .icon {
+            width: 80px;
+            padding: 0 8px;
+        }
+    }
+    .list__description {
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 28px;
+        color: #757575;
+        margin-top: 31px;
+    }
+    .button__add__key {
+        padding: 10px 12px !important;
+        border-radius: 12px;
+        
+        &.v-btn--disabled {
+            .v-btn__content{
+                svg{
+                    path{
+                        stroke: rgba(0, 0, 0, 0.26) !important
+                    }
+                }
+            }
+        }
+    }
+}
+.v-tab {
+    text-transform: none !important;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px;
+    color: #757575;
+    .v-tab--active {
+        color: $color-primary;
+    }
+}
+
+.v-application--is-ltr
+    .v-tabs--align-with-title
+    > .v-tabs-bar:not(.v-tabs-bar--show-arrows):not(.v-slide-group--is-overflowing)
+    > .v-slide-group__wrapper
+    > .v-tabs-bar__content
+    > .v-tabs-slider-wrapper
+    + .v-tab {
+    margin-left: 0px;
+}
+.v-dialog {
+    border-radius: 0px !important;
+}
+.modal_key_dell {
+    border-radius: 20px !important;
+    .top {
+        padding: 24px 24px 12px 24px;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 26px;
+        color: #292929;
+    }
+    .body {
+        max-width: 405px;
+        width: 100%;
+        padding-top: 12px;
+        padding-bottom: 24px;
+    }
+    .body__card {
+        padding: 24px 26px;
+        border-radius: 8px;
+        border: 1px solid #e8e8e8;
+        margin-bottom: 10px;
+        .url__title {
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 600;
+            color: #131313;
+
+            max-width: 266px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+        .ip__description {
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 600;
+            color: #131313;
+        }
+        .description__body {
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 20px;
+            color: #000;
+        }
+    }
+    .bottom {
+        padding: 20px 32px;
+    }
+}
+
+.modal_key_add {
+    border-radius: 20px !important;
+    .top {
+        padding: 24px 24px 12px 24px;
+
+        .title {
+            font-size: 20px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: 26px;
+            color: #292929;
+        }
+        .descrition {
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 24px;
+            color: #52555d;
+            margin-bottom: 24px;
+        }
+    }
+    .body {
+        padding: 24px 24px;
+
+        .label__add {
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 20px;
+            color: #131313;
+            margin-bottom: 6px;
+        }
+        .select__modal__key__api {
+            .v-input__slot {
+                height: 60px;
+                box-shadow: none !important;
+                border: 1px solid #d6d6d6;
+                border-radius: 12px;
+            }
+        }
+    }
+    .bottom {
+        padding: 32px 24px;
+    }
+}
+
+
+.modal_key_add.success_modal {
+    padding: 48px;
+    .icon__success {
+        background: #e9f7ee;
+        height: 78px;
+        width: 78px;
+        border-radius: 50%;
+    }
+    .card_integracao {
+        margin-top: 16px;
+        margin-bottom: 48px;
+        padding: 26px;
+        border-radius: 8px;
+        border: 1px solid #e8e8e8;
+        max-width: 342px;
+
+        .url__type {
+            max-width: 266px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+        .url__type {
+            color: #131313;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: normal;
+            margin-bottom: 4px;
+        }
+        .ip__type {
+            color: #131313;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: normal;
+        }
+    }
+}
+
+.size__default {
+    padding: 10px 12px !important;
+    border-radius: 12px;
+    &.v-btn--outlined {
+        border: 1px solid #e8e8e8 !important;
+    }
+}

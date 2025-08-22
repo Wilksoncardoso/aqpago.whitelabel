@@ -1,0 +1,426 @@
+.card_recarga {
+    border-radius: 12px !important;
+    .card_head {
+        padding: 24px 24px 0 24px;
+    }
+    .title__head {
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 26px; /* 130% */
+        letter-spacing: -0.4px;
+        color: #292929;
+    }
+    .description__head {
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 24px;
+        letter-spacing: -0.08px;
+        color: #52555d;
+    }
+    .label_end_rec {
+        color: rgba(9, 10, 11, 0.6);
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 16px; /* 133.333% */
+        letter-spacing: -0.24px;
+    }
+    .card_body {
+        padding: 0 24px 64px 24px;
+        .list_tel {
+            .item_tel_list {
+                border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            }
+            .tel_text {
+                font-size: 14px;
+                font-style: normal;
+                font-weight: 500;
+                line-height: 20px; /* 142.857% */
+                letter-spacing: -0.07px;
+                color: #521c89;
+            }
+        }
+        .badge_value {
+            background: #f4f4f4;
+            border-radius: 12px;
+            padding: 8px;
+            display: inline-block;
+            .icon_value {
+                svg {
+                    height: 20px;
+                    width: 20px;
+                }
+            }
+            .text_product {
+                color: #000;
+                font-size: 14px;
+                font-style: normal;
+                font-weight: 600;
+                line-height: 20px;
+                letter-spacing: -0.28px;
+            }
+        }
+        .label__input {
+            color: #131313;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 20px;
+            letter-spacing: -0.07px;
+        }
+        .alert_info_rec {
+            padding: 12px;
+            border-radius: 12px;
+            background: #fff5e6;
+
+            // style
+            color: #52555d;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 20px; /* 142.857% */
+            letter-spacing: -0.07px;
+            b {
+                font-weight: 700;
+            }
+        }
+        .radio__padrao_recarga {
+            border-radius: 16px;
+            border: 1px solid #e8e8e8;
+            background: #fff;
+            padding: 12px 16px;
+            position: relative;
+            margin-bottom: 16px !important;
+
+            .icon_credito {
+                svg {
+                    width: 32px;
+                    height: 20px;
+                    object-fit: contain;
+                }
+            }
+            .v-input--selection-controls__ripple {
+                display: none;
+            }
+            .v-input--selection-controls__ripple::before {
+                top: 7px;
+                left: 2px;
+                width: 20px;
+                height: 20px;
+            }
+            .v-input--selection-controls__input {
+                position: absolute;
+                right: 10px;
+                background: #fff;
+                border-radius: 50%;
+                border: 1px solid #e8e8e8;
+                width: 16px;
+                height: 16px;
+            }
+            .v-label {
+                .label__credito {
+                    font-size: 14px;
+                    font-style: normal;
+                    font-weight: 700;
+                    line-height: 20px;
+                    color: #1a1a1a;
+                }
+            }
+
+            &.v-item--active {
+                border-radius: 16px;
+                border: 1px solid #e6d5ff;
+                background: #f9f5ff;
+                .v-input--selection-controls__input {
+                    background: #fff;
+                    border: 3px solid $color-primary;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    i {
+                        background: $color-primary;
+                        width: 6px;
+                        height: 6px;
+                        border-radius: 50%;
+                    }
+                }
+            }
+        }
+        .list_credit {
+            max-height: 350px;
+            overflow-y: auto;
+            padding-right: 12px;
+        }
+        .label_r {
+            color: rgba(26, 26, 26, 0.5);
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 20px;
+            letter-spacing: -0.28px;
+        }
+        .value_r {
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: 20px;
+            letter-spacing: -0.28px;
+            color: #131313;
+            .product_type {
+                display: inline-block;
+                border-radius: 12px;
+                padding: 8px 12px;
+                background: #f4f4f4;
+                .icon_flag_revisao {
+                    svg {
+                        width: 20px;
+                        height: 20px;
+                    }
+                }
+            }
+            .flag_r {
+                svg {
+                    width: 32px;
+                    height: 20px;
+                }
+            }
+        }
+        .card__parcela {
+            padding: 16px;
+            border-radius: 16px;
+            border: 1px solid #e8e8e8;
+            .label_p {
+                font-size: 14px;
+                font-style: normal;
+                font-weight: 500;
+                line-height: 20px;
+                letter-spacing: -0.07px;
+                color: #131313;
+            }
+            .select__padrao {
+                &.parcela {
+                    .v-input__control {
+                        max-height: 44px;
+                        .v-input__slot {
+                            box-shadow: none !important;
+                            padding: 12px 16px;
+                            border-radius: 12px;
+                            border: 1px solid #d6d6d6;
+                            background: #fff;
+                        }
+                        .v-select__slot {
+                            .select__label {
+                                font-size: 14px;
+                                font-style: normal;
+                                font-weight: 500;
+                                line-height: 20px;
+                                letter-spacing: -0.07px;
+                                color: #131313;
+                                span {
+                                    color: rgba(19, 19, 19, 0.6);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .comprovante_btn {
+            padding: 12px 10px;
+            border-radius: 12px;
+            background: #f9f5ff;
+        }
+    }
+    .card_footer {
+        height: 104px;
+        padding-left: 20px;
+        padding-right: 20px;
+        border-top: 1px solid #edeff2;
+        .button__component {
+            border-radius: 12px;
+            height: 40px !important;
+            .v-btn__content {
+                font-size: 14px;
+                font-style: normal;
+                font-weight: 600;
+                line-height: 20px;
+                letter-spacing: -0.07px;
+            }
+        }
+    }
+
+    .button__recarga__type {
+        max-height: 56px !important;
+        height: 56px !important;
+        padding: 12px 16px;
+        background: #fff;
+        margin-bottom: 16px;
+        border-radius: 12px;
+        border: 1px solid #d6d6d6;
+        .icon__ {
+            padding: 2px 3px;
+            width: 32px;
+            height: 32px;
+            object-fit: contain;
+            svg {
+                width: 100%;
+                height: 100%;
+            }
+        }
+        .label__ {
+            text-transform: capitalize;
+            color: #000;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: 20px; /* 142.857% */
+            letter-spacing: -0.28px;
+        }
+    }
+    .input__recarga {
+        &.error--text {
+            .v-input__slot {
+                border: 1px solid #f15a42 !important;
+
+                .v-label {
+                    color: #f15a42 !important;
+                }
+            }
+            &.v-input {
+                input {
+                    &::placeholder {
+                        color: #f15a42 !important;
+                    }
+                    color: #f15a42 !important;
+                }
+            }
+        }
+
+        .v-input__slot {
+            box-shadow: none !important;
+            border: 1px solid rgba(26, 26, 26, 0.1) !important;
+            border-radius: 12px !important;
+            .v-label {
+                font-size: 14px;
+                font-style: normal;
+                font-weight: 500;
+                line-height: 20px;
+                letter-spacing: -0.07px;
+                color: #a5a5a5;
+            }
+        }
+
+        &.cvv {
+            .v-text-field__details {
+                display: none;
+            }
+            .v-input__slot {
+                border: 1px solid #d6d6d6;
+            }
+        }
+    }
+}
+
+.card_sucess {
+    .title_success {
+        color: #1a1a1a;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 24px; /* 120% */
+        letter-spacing: -0.4px;
+    }
+    .value_description_success {
+        color: rgba(26, 26, 26, 0.5);
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 20px;
+        letter-spacing: -0.28px;
+    }
+    .value_success {
+        color: #1a1a1a;
+        font-size: 24px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 28px;
+        letter-spacing: -0.48px;
+    }
+
+    .type_description_sucess {
+        color: rgba(26, 26, 26, 0.5);
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 20px;
+        letter-spacing: -0.28px;
+    }
+    .type_title_sucess {
+        color: #1a1a1a;
+        font-size: 24px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 28px;
+        letter-spacing: -0.48px;
+    }
+    .value_card {
+        width: 300px;
+        padding: 20px 0px;
+        border-radius: 16px;
+        border: 1px solid #e5e5e5;
+        margin-left: auto;
+        margin-right: auto;
+        .type_description_sucess {
+            color: rgba(26, 26, 26, 0.5);
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 20px;
+            letter-spacing: -0.28px;
+        }
+        .type_title_sucess {
+            color: #000;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: 20px;
+            letter-spacing: -0.28px;
+        }
+    }
+    .icon_flag_success {
+        svg {
+            height: 20px;
+            width: auto;
+            object-fit: contain;
+        }
+    }
+    .button__copy__success {
+        background: #f4f4f4 !important;
+        border-radius: 12px !important;
+        padding: 8px 12px !important;
+        box-shadow: none !important;
+        .v-btn__content {
+            color: #525252 !important;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 20px; /* 142.857% */
+            letter-spacing: -0.28px;
+            svg {
+                path {
+                    fill: #521c89 !important;
+                }
+            }
+            .text_bold_pin {
+                color: #525252 !important;
+                font-size: 14px;
+                font-style: normal;
+                font-weight: 700;
+                line-height: 20px; /* 142.857% */
+                letter-spacing: -0.28px;
+            }
+        }
+    }
+}

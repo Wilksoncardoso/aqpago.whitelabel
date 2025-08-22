@@ -1,0 +1,50 @@
+.body_client_get {
+    background: #fff;
+    border-radius: 8px;
+    padding: 24px;
+    .width_space_media {
+        width: 50%;
+    }
+    .label_get_client {
+        color: rgba(19, 19, 19, 0.6);
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 28px;
+    }
+    .value_get_client {
+        color: #525252;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 19px;
+    }
+    .btn-edit-client {
+        border-radius: 10px !important;
+        border: 1px solid #e8e8e8 !important;
+        background: #fff !important;
+        box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.15);
+        padding: 6px 10px !important;
+        .v-btn__content {
+            color: #521c89;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: 20px; /* 142.857% */
+            letter-spacing: -0.07px;
+        }
+    }
+}
+.btn-excluir-client {
+    padding: 6px 10px !important;
+    background: #f15a42 !important;
+    border-radius: 10px;
+    .v-btn__content {
+        color: #fff;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 20px; /* 142.857% */
+        letter-spacing: -0.07px;
+    }
+}

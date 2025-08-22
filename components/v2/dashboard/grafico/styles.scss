@@ -1,0 +1,57 @@
+.card_grafico_dashboard {
+  .cards_style {
+    border-radius: 12px;
+    border: 1px solid var(--border-secondary, #efefef);
+    background: #fff;
+  }
+  h2 {
+    color: var(--content-primary, #131313);
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 24px; /* 150% */
+    letter-spacing: -0.32px;
+  }
+  .card_money {
+    border-radius: 12px;
+    border: 1px solid var(--border-secondary, #efefef);
+    padding: 10px 15px;
+    .fixed_value {
+      border: 1px solid var(--border-secondary, #efefef);
+      display: inline-block;
+      padding: 5px;
+      border-radius: 5px;
+      -webkit-border-radius: 5px;
+      -moz-border-radius: 5px;
+      -ms-border-radius: 5px;
+      -o-border-radius: 5px;
+      font-size: 12px;
+    }
+    
+    .fixed_badge {
+      &.in {
+        background: #10b981;
+      }
+      &.out {
+        background: #f15b50;
+      }
+      width: 10px;
+      height: 10px;
+      border-radius: 10px;
+      -webkit-border-radius: 10px;
+      -moz-border-radius: 10px;
+      -ms-border-radius: 10px;
+      -o-border-radius: 10px;
+}
+  }
+  .description {
+      color: var(--content-tertiary, #989898);
+      font-size: 14px;
+      font-size: var(--Typography-size-body-14px, 14px);
+      font-style: normal;
+      font-weight: 400;
+      line-height: 20px;
+      line-height: var(--Typography-size-line-height-2-xs, 20px);
+      letter-spacing: -0.28px;
+    }
+}

@@ -1,0 +1,75 @@
+.modal_pagamento_boleto {
+    position: fixed;
+    top: 48px;
+    right: 0;
+    left: 0;
+    width: 100% !important;
+    height: calc(100vh - 48px);
+    transition:
+        transform 0.6s ease-in-out,
+        top 0.6s ease-in-out; /* Ajusta para deslizar lentamente */
+    transform: translateY(0);
+    border-radius: 20px 20px 0px 0px !important;
+    overflow-y: auto;
+
+}
+
+.card_toolbar {
+    border-bottom: 1px solid #efefef;
+    padding: 20px 16px;
+    .title_toolbar {
+        color: #000;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 24px; /* 150% */
+        letter-spacing: -0.32px;
+    }
+}
+.card_left_modal_ {
+    width: 296px;
+    position: sticky;
+    top: 10px;
+    height: 100%;
+
+    .selector_page {
+        min-height: 20px;
+        min-width: 20px;
+        height: 20px;
+        width: 20px;
+        border-radius: 100px;
+
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 20px; /* 166.667% */
+        letter-spacing: -0.06px;
+        color: $color-secondary-item;
+        border: 1px solid $color-secondary-item;
+    }
+  
+    .label_page {
+        color: $color-secondary-item;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 20px; /* 142.857% */
+        letter-spacing: -0.28px;
+    }
+    .active {
+        .selector_page {
+            background: $color-primary;
+            color: $color-white;
+        }
+        .label_page {
+            color: $color-black;
+        }
+    }
+}
+.card_right_modal_{
+    margin-left: 256px;
+    width: calc(100% - 296px);
+    .body_comp_return{
+        width: 470px;
+    }
+}
