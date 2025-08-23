@@ -94,7 +94,7 @@ export default {
     border-radius: 30px !important;
 
     &.v-btn--active {
-      background: #521c89 !important;
+      background: var(--primary) !important;
       border-radius: 30px !important;
       .v-btn__content {
         color: #fff;
@@ -107,7 +107,7 @@ export default {
       font-weight: 700;
       font-size: 14px;
       line-height: 17px;
-      color: #521c89;
+      color: var(--primary);
       padding-top: 17px;
       padding-bottom: 17px;
     }

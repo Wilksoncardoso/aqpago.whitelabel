@@ -151,7 +151,7 @@ export default {
     margin-bottom: 48px;
   }
   .button__reenviar__token {
-  //  color: #521c89;
+  //  color: var(--primary);
     &.disabled {
       font-weight: 700;
       font-size: 16px;

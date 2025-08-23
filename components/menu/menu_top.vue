@@ -3,11 +3,9 @@
     <div class="heigth__menu d-flex justify-space-between" v-if="data__user">
       <div></div>
       <div class="d-flex align-center">
-
         <div v-if="data.conta?.empresa?.razao_social != null">
           <div class="name text-center mr-10">
-            {{ $fistendtext(data.nome + ' ' + data.sobrenome ) }}
-            <!-- {{ data.nome }} {{ data.sobrenome }} -->
+            {{ $fistendtext(data.nome + " " + data.sobrenome) }}
             <div class="type__cont">{{ data.user_tipo }}</div>
           </div>
         </div>
@@ -35,7 +33,7 @@
                   v-if="data.conta?.empresa?.razao_social != null"
                 >
                   <div class="empresa name text-end">
-                    {{ $fistendtext( data.conta?.empresa?.razao_social) }}
+                    {{ $fistendtext(data.conta?.empresa?.razao_social) }}
                     <div class="text__cont text-end">
                       Agência <span class="bold__cont">0001 .</span> Conta
                       <span class="bold__cont">{{
@@ -82,8 +80,6 @@
             </v-list-item>
           </v-list>
         </v-menu>
-
-        
       </div>
     </div>
     <MenuWorkspaceMain ref="modalWorkspaceMain" :data="data__user?.workspace" />
@@ -115,11 +111,6 @@ export default {
       closeOnClick: true,
       items: [
         { label: "Perfil", to: "/painel/perfil", permission: false },
-        // {
-        //   label: "Conta Bancária",
-        //   to: "/painel/conta-bancaria",
-        //   permission: false,
-        // },
         { label: "Operadores", to: "/painel/operadores", permission: true },
         { label: "Sair", to: "/painel/logout", permission: false },
       ],
@@ -185,12 +176,6 @@ export default {
   .heigth__menu {
     height: 60px;
 
-    //position: fixed;
-    // top: 0;
-    // left: 0;
-    // right: 0;
-    // background: #f8f9fd;
-    // z-index: 100;
     .notificacao {
       margin-left: 51px;
       padding-left: 51px;
@@ -217,9 +202,6 @@ export default {
       font-weight: 600;
       line-height: normal;
       text-transform: capitalize;
-    }
-
-    .empresa {
     }
 
     .avatar {
@@ -249,10 +231,7 @@ export default {
   }
 }
 
-// .menu__web__dropdown{
-//   width: 200px;
-//   max-width: 250px !important;
-// }
+
 .text-bold {
   font-weight: 700;
 }
@@ -266,7 +245,11 @@ export default {
   color: #131313 !important;
 
   &.nuxt-link-active {
-    background: #f2eafb;
+    background: var(--primaryop);
+    border-radius: 8px;
+  }
+  &:hover {
+    background: var(--primaryop);
     border-radius: 8px;
   }
 }

@@ -9,7 +9,7 @@ $media-large: "1600px";
 
 $media-palco-lg: 936px;
 $media-palco-xl: 1400px;
-$color-primary: #521c89;
+$color-primary: var(--primary);
 $color-secondary-item:#A5A5A5;
 $color-venda-online: #5094d9;
 $color-primary-50: #f9f5fd;
@@ -76,17 +76,17 @@ $alert-content-sucess: #064e3b;
 $alert-content-sucess-accent: #10b981;
 $alert-content-warning: #905604;
 $alert-content-warning-accent: #f5cd47;
-$background-brand: #521c89;
+$background-brand: var(--primary);
 $background-brand-secondary: #4cb769;
 $background-inverse: #ffffff;
 $background-primary: #fff;
 $background-secondary: #525252;
 $background-surface: #f8f8f8;
 $background-surface-brand: #1d0931;
-$border-brand: #521c89;
+$border-brand: var(--primary);
 $border-primary: #dcdcdc;
 $border-secondary: #efefef;
-$content-brand: #521c89;
+$content-brand: var(--primary);
 $content-brand-secundary: #4cb769;
 $content-inverse: #ffffff;
 $content-neutral: #f8f8f8;
@@ -96,7 +96,7 @@ $content-tertiary: #989898;
 $background-tertiary: #dcdcdc;
 $background-surface-background: #f7f7f8;
 $background-neutral: #f2f2f5;
-$background-brand-opacity: #521c89b2;
+$background-brand-opacity: var(--primary)b2;
 
 $radius-2xl: 20px;
 $radius-1xl: 16px;
@@ -206,7 +206,7 @@ i {
 }
 
 #voll-float-button {
-  background-color: #521c89;
+  background-color: var(--primary);
 }
 #voll-contact-widget {
   label {
@@ -214,14 +214,14 @@ i {
     font-size: 13px !important;
   }
   .voll-form-header {
-    background-color: #521c89;
+    background-color: var(--primary);
   }
   #voll-form-title {
     font-family: $body-font-family;
   }
   #voll-submit-button {
-    border-color: #521c89;
-    background-color: #521c89;
+    border-color: var(--primary);
+    background-color: var(--primary);
     font-family: $body-font-family;
   }
 }
@@ -349,7 +349,7 @@ html {
 }
 
 .bg__login {
-  background: linear-gradient(240.58deg, #521c89 -29%, #1d0931 42.16%, #1d0931 57.16%);
+  background: linear-gradient(240.58deg, var(--primary) -29%, #1d0931 42.16%, #1d0931 57.16%);
   height: auto;
   @media (min-width: $media-large) {
     height: 100vh;
@@ -375,7 +375,7 @@ html {
 
   &.v-btn--outlined {
     .v-btn__content {
-      color: #521c89;
+      color: var(--primary);
     }
   }
 }
@@ -486,7 +486,7 @@ html {
   width: 320px;
 }
 .Vue-Toastification__toast--default {
-  background-color: #521c89 !important;
+  background-color: var(--primary) !important;
 }
 .Vue-Toastification__toast--warning {
   background-color: #fc9403 !important;
@@ -584,17 +584,17 @@ $alert-content-sucess: #064e3b;
 $alert-content-sucess-accent: #10b981;
 $alert-content-warning: #905604;
 $alert-content-warning-accent: #f5cd47;
-$background-brand: #521c89;
+$background-brand: var(--primary);
 $background-brand-secondary: #4cb769;
 $background-inverse: #ffffff;
 $background-primary: #fff;
 $background-secondary: #525252;
 $background-surface: #f8f8f8;
 $background-surface-brand: #1d0931;
-$border-brand: #521c89;
+$border-brand: var(--primary);
 $border-primary: #dcdcdc;
 $border-secondary: #efefef;
-$content-brand: #521c89;
+$content-brand: var(--primary);
 $content-brand-secundary: #4cb769;
 $content-inverse: #ffffff;
 $content-neutral: #f8f8f8;
@@ -604,7 +604,7 @@ $content-tertiary: #989898;
 $background-tertiary: #dcdcdc;
 $background-surface-background: #f7f7f8;
 $background-neutral: #f2f2f5;
-$background-brand-opacity: #521c8930;
+$background-brand-opacity: var(--primary)30;
 
 // space icon
 $space_8: 8px;

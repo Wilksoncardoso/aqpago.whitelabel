@@ -38,7 +38,7 @@
         >
           <template v-slot:activator="{ on, attrs }">
             <div class="d-flex align-center" v-bind="attrs" v-on="on">
-              <div class="prefix mr-2 d-flex align-center justify-center">
+              <div class="prefix primary mr-2 d-flex align-center justify-center">
                 {{ $textCaptalizer($fisttext(data?.nome)) }}
               </div>
               <div class="mr-2">

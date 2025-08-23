@@ -46,7 +46,7 @@
             }
             &.v-btn--disabled {
                 opacity: 0.3 !important;
-                background: #521c89 !important;
+                background: var(--primary) !important;
                 color: #fff !important;
             }
         }

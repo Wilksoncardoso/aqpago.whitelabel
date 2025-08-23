@@ -41,7 +41,7 @@
     &.v-input--is-label-active {
         .v-input__slot {
             transition: 0.1s;
-            border: 1px solid #521c89 !important ;
+            border: 1px solid var(--primary) !important ;
         }
     }
 }
@@ -147,7 +147,7 @@
                 color: #757575;
             }
             &.v-item--active {
-                background: #521c89 !important ;
+                background: var(--primary) !important ;
                 .v-btn__content {
                     color: #fff;
                 }

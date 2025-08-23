@@ -255,7 +255,7 @@ export default {
         &.v-btn--outlined {
           margin-top: 24px;
           .v-btn__content {
-            color: #521c89;
+            color: var(--primary);
           }
         }
         .v-btn__content {

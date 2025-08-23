@@ -9,19 +9,19 @@
             <path fill-rule="evenodd" clip-rule="evenodd" d="M13.66 17.6053C12.9348 17.6053 12.347 18.1932 12.347 18.9183V19.6117C12.347 19.6223 12.3547 19.6313 12.3651 19.633C14.7686 20.0254 17.2198 20.0254 19.6233 19.633C19.6337 19.6313 19.6413 19.6223 19.6413 19.6117V18.9183C19.6413 18.1932 19.0535 17.6053 18.3284 17.6053H18.1294C18.1141 17.6053 18.0988 17.6078 18.0842 17.6125L17.5791 17.7775C16.5492 18.1137 15.4391 18.1137 14.4092 17.7775L13.9042 17.6125C13.8896 17.6078 13.8743 17.6053 13.8589 17.6053H13.66ZM11.4717 18.9183C11.4717 17.7097 12.4514 16.73 13.66 16.73H13.8589C13.9666 16.73 14.0735 16.747 14.1759 16.7804L14.6809 16.9454C15.5343 17.224 16.4541 17.224 17.3074 16.9454L17.8125 16.7804C17.9148 16.747 18.0218 16.73 18.1294 16.73H18.3284C19.5369 16.73 20.5167 17.7097 20.5167 18.9183V19.6117C20.5167 20.0513 20.1981 20.426 19.7643 20.4969C17.2674 20.9045 14.7209 20.9045 12.224 20.4969C11.7902 20.426 11.4717 20.0513 11.4717 19.6117V18.9183Z" fill="white"/>
             <defs>
             <linearGradient id="paint0_linear_2327_86248" x1="16" y1="0" x2="16" y2="32" gradientUnits="userSpaceOnUse">
-            <stop stop-color="#521C89"/>
+            <stop stop-color="var(--primary)"/>
             <stop offset="1" stop-color="#4CB769"/>
             </linearGradient>
             <linearGradient id="paint1_linear_2327_86248" x1="15.8689" y1="1.82812" x2="15.8689" y2="29.9098" gradientUnits="userSpaceOnUse">
-            <stop stop-color="#521C89"/>
+            <stop stop-color="var(--primary)"/>
             <stop offset="1" stop-color="#4CB769"/>
             </linearGradient>
             <linearGradient id="paint2_linear_2327_86248" x1="15.8684" y1="4.11328" x2="15.8684" y2="27.6235" gradientUnits="userSpaceOnUse">
-            <stop stop-color="#521C89"/>
+            <stop stop-color="var(--primary)"/>
             <stop offset="1" stop-color="#4CB769"/>
             </linearGradient>
             <linearGradient id="paint3_linear_2327_86248" x1="15.9592" y1="6" x2="15.9592" y2="25.9184" gradientUnits="userSpaceOnUse">
-            <stop stop-color="#521C89"/>
+            <stop stop-color="var(--primary)"/>
             <stop offset="1" stop-color="#4CB769"/>
             </linearGradient>
             </defs>

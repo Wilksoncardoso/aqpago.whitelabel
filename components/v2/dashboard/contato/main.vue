@@ -23,7 +23,9 @@
             >Abertura de ticket</v-btn
           >
         </div>
+        <!-- <div class="img-mail"></div> -->
         <img
+          class="img-mail"
           src="/img/dashboard/Mail.png"
           alt="Aqpago left index"
           width="80"

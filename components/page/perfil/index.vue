@@ -234,7 +234,7 @@ export default {
     margin-bottom: 24px;
   }
   .plano {
-    background: #521c89;
+    background: var(--primary);
     border-radius: 6px;
     width: 328px;
     height: 87px;

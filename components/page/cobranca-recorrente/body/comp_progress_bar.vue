@@ -55,7 +55,7 @@ export default {
   .ativo {
     .number_progress {
       color: #fff;
-      background: #521c89;
+      background: var(--primary);
       border: none;
     }
     .text_progress {

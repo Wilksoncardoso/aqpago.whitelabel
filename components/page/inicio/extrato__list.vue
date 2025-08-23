@@ -617,7 +617,7 @@ export default {
                 line-height: 17px;
                 text-decoration-line: underline;
                 .value__detalhes {
-                  color: #521c89 !important;
+                  color: var(--primary) !important;
                 }
               }
               .label__detalhes {

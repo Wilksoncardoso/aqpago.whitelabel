@@ -246,7 +246,7 @@ export default {
     padding: 24px;
     box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.1);
     &.v-item--active {
-      border: 1px solid var(--primria, #521c89);
+      border: 1px solid var(--primria, var(--primary));
       .v-input--selection-controls__input {
         border: 4px solid $color-primary;
         transition: 0.2s;

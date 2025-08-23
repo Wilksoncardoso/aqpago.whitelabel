@@ -177,7 +177,7 @@ export default {
         transition: 5ms;
         .v-btn__content {
           background: #f9f5fd;
-          border: 1px solid #521c89;
+          border: 1px solid var(--primary);
           .text__password {
             color: #131313;
           }
@@ -185,7 +185,7 @@ export default {
             margin-top: 26px;
             svg {
               path {
-                fill: #521c89;
+                fill: var(--primary);
               }
             }
           }

@@ -383,7 +383,7 @@
                     :disabled="data?.cobranca_recorrente?.is_active === 0"
                     @click="geracao_boleto_filha(c.id, data)"
                   >
-                    <icon_boleto class="d-flex mr-2" :color="'#521C89'" /> Visualizar
+                    <icon_boleto class="d-flex mr-2" :color="'var(--primary)'" /> Visualizar
                     boleto
                   </v-btn>
 

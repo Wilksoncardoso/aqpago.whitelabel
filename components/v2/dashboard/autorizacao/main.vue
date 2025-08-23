@@ -66,7 +66,7 @@ export default {
     box-shadow: 0px 1px 1px 0px rgba(20, 21, 26, 0.15);
 
     .v-btn__content {
-      color: var(--content-brand, #521c89);
+      color: var(--content-brand, var(--primary));
       text-align: center;
 
       /* Typography Global/Button/M */

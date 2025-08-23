@@ -368,6 +368,6 @@ export default {
 }
 .v-list-item__mask {
   color: rgba(0, 0, 0, 0.45);
-  background: #521c8950 !important;
+  background: var(--primary)50 !important;
 }
 </style>

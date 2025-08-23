@@ -111,8 +111,9 @@
 
           <!-- submneu component end -->
         </div>
-         <div class=" menu_contact" >
-          <div class="pa-4 card_main_contact ma-4">
+         <div class=" menu_contact " >
+          <ColortesteMain/>
+          <div class="pa-4 card_main_contact ma-4 primary">
             <h5 class="mb-4">Teve algum problema ou precisa de suporte?</h5>
             <div class="d-flex">
               <v-btn color="primary" to="/painel/atendimento-ao-cliente" icon class="pa-2 button_icon_contact mr-2">

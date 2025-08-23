@@ -747,7 +747,7 @@ export default {
 .button__filtro {
   background: #e5d5f6 !important;
   .v-btn__content {
-    color: #521c89;
+    color: var(--primary);
   }
 }
 .titulo_ext__ {
@@ -821,7 +821,7 @@ export default {
                 line-height: 17px;
                 text-decoration-line: underline;
                 .value__detalhes {
-                  color: #521c89 !important;
+                  color: var(--primary) !important;
                 }
               }
               .label__detalhes {

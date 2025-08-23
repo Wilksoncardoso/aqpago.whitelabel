@@ -535,7 +535,7 @@ export default {
   margin-bottom: 24px;
 
   .v-btn__content {
-    color: #521c89;
+    color: var(--primary);
     font-weight: 600;
     font-size: 14px;
     line-height: 18px;

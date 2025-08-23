@@ -720,7 +720,7 @@ export default {
     font-weight: 500;
     font-size: 16px;
     line-height: 19px;
-    color: #521c89;
+    color: var(--primary);
   }
 }
 .chave__pix {
@@ -758,10 +758,10 @@ export default {
           }
         }
         .v-item--active {
-          border: 1px solid #521c89;
+          border: 1px solid var(--primary);
           transition: 0.5s;
           .v-input--selection-controls__input {
-            border: 4px solid #521c89;
+            border: 4px solid var(--primary);
           }
         }
       }

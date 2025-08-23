@@ -32,7 +32,7 @@ export default {};
   background: transparent !important;
   
   .link__termos {
-    color: #521c89;
+    color: var(--primary);
     font-size: 14px;
     font-style: normal;
     font-weight: 600;

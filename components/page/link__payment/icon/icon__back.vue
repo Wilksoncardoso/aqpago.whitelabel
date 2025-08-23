@@ -9,7 +9,7 @@
     >
       <path
         d="M14.3996 5.99922H1.59961M1.59961 5.99922L6.39961 1.19922M1.59961 5.99922L6.39961 10.7992"
-        stroke="#521C89"
+        stroke="var(--primary)"
         stroke-width="1.8"
         stroke-linecap="round"
         stroke-linejoin="round"

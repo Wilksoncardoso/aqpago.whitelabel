@@ -127,7 +127,7 @@ export default {
           border-radius: 50%;
           background: #a3a3a3;
           &.v-item--active {
-            background: #521c89 !important;
+            background: var(--primary) !important;
           }
         }
       }

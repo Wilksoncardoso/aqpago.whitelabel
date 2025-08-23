@@ -47,7 +47,7 @@
         margin-bottom: 28px;
     }
     h4 {
-        color: #521c89;
+        color: var(--primary);
         font-size: 12px;
         font-style: normal;
         font-weight: 700;
@@ -87,7 +87,7 @@
                 background: #f6f6ff;
                 border-radius: 50%;
 
-                color: #521c89;
+                color: var(--primary);
                 font-size: 20px;
                 font-style: normal;
                 font-weight: 700;

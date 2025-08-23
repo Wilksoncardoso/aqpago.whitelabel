@@ -174,7 +174,7 @@ export default {
 
   &:focus {
     background: $background-inverse !important;
-    border: 2px solid $alert-content-purple-accent !important;
+    border: 2px solid var(--primary) !important;
     box-shadow: 0px 0px 0px 2px rgba(200, 178, 255, 0.5) !important;
     &::before {
       opacity: 0 !important;

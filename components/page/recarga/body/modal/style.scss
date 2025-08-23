@@ -39,7 +39,7 @@
                 font-weight: 500;
                 line-height: 20px; /* 142.857% */
                 letter-spacing: -0.07px;
-                color: #521c89;
+                color: var(--primary);
             }
         }
         .badge_value {
@@ -410,7 +410,7 @@
             letter-spacing: -0.28px;
             svg {
                 path {
-                    fill: #521c89 !important;
+                    fill: var(--primary) !important;
                 }
             }
             .text_bold_pin {

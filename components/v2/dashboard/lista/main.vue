@@ -18,7 +18,7 @@
                 ></i>
                 <h2>Últimas transações</h2>
               </div>
-              <v-btn to="/painel/extrato" text color="primary">Ver todas</v-btn>
+              <v-btn to="/painel/extrato" class="primary--text" text color="primary">Ver todas</v-btn>
             </div>
             <div class="itens_list" v-if="list_conta_digital.length > 0">
               <div

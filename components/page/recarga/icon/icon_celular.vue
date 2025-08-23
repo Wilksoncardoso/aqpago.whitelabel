@@ -1,7 +1,7 @@
 <template>
     <div>
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-  <path d="M6 17H18M11.5 6H12.5M9 21H15C16.6569 21 18 19.6569 18 18V6C18 4.34315 16.6569 3 15 3H9C7.34315 3 6 4.34315 6 6V18C6 19.6569 7.34315 21 9 21Z" stroke="#521C89" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M6 17H18M11.5 6H12.5M9 21H15C16.6569 21 18 19.6569 18 18V6C18 4.34315 16.6569 3 15 3H9C7.34315 3 6 4.34315 6 6V18C6 19.6569 7.34315 21 9 21Z" stroke="var(--primary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
     </div>
 </template>

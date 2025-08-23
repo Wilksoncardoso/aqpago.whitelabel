@@ -333,7 +333,7 @@ export default {
   width: 200px !important;
   height: 200px !important;
   background: #f2eafb !important;
-  border: 1.5px solid #521c89;
+  border: 1.5px solid var(--primary);
   border-radius: 8px;
   margin-bottom: 48px;
 }
@@ -355,7 +355,7 @@ export default {
   font-weight: 700;
   font-size: 16px;
   line-height: 18px;
-  color: #521c89;
+  color: var(--primary);
 }
 
 .button__copy {

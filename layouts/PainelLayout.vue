@@ -1,7 +1,6 @@
 <template>
   <v-app class="bg__system">
-    <!-- <menu__top :data="data.data" :loading="loading" /> -->
-    <V2MenuTopMain :data="data.data" :loading="loading"/>
+    <V2MenuTopMain :data="data.data" :loading="loading" />
     <menu__web
       :data="data.data"
       :loading="loading"
@@ -15,7 +14,6 @@
 
 <script>
 import menu__web from "../components/menu/web.vue";
-import menu__top from "../components/menu/menu_top.vue";
 import mobile__component from "../components/mobi/mobile__.vue";
 
 // import icons
@@ -47,12 +45,10 @@ import { mapState, mapActions } from "vuex";
 
 export default {
   name: "PainelLayout",
-  // middleware: "auth",
   middleware: ["auth-expiration"],
 
   components: {
     menu__web,
-    menu__top,
     mobile__component,
     icon__simulador,
     icon__link__payment,
@@ -90,28 +86,6 @@ export default {
               icon: icon__extrato,
               submenu: [],
             },
-            // {
-            //   permission: false,
-            //   label: "Transferir",
-            //   op_permission: ["transfer"],
-            //   to: "/painel/autorizar-pagamento",
-            //   icon: icon_transferencia,
-            //   submenu: [],
-            // },
-            // {
-            //   permission: false,
-            //   label: "Pagamento de contas",
-            //   to: "/painel/pagamento-de-contas",
-            //   icon: icon__pagamento,
-            //   submenu: [],
-            // },
-            // {
-            //   permission: false,
-            //   label: "Investimentos",
-            //   to: "/painel/extrato",
-            //   icon: icon__investimento,
-            //   submenu: [],
-            // },
             {
               permission: false,
               position: "top",
@@ -152,14 +126,6 @@ export default {
                 },
               ],
             },
-
-            {
-              permission: true,
-              label: "Recargas",
-              to: "/painel/recarga",
-              icon: icon__recarga,
-              submenu: [],
-            },
           ],
         },
         {
@@ -177,24 +143,6 @@ export default {
             },
           ],
         },
-        // {
-        //   position: "top",
-        //   title: "Cobrança inteligente",
-        //   array: [
-        //     {
-        //       label: "Minhas cobranças",
-        //       to: "/painel/cobranca-recorrente",
-        //       icon: icon__create__crobrance,
-        //       submenu: [],
-        //     },
-        //     {
-        //       label: "Meus clientes",
-        //       to: "/painel/meus-clientes",
-        //       icon: icon__user,
-        //       submenu: [],
-        //     },
-        //   ],
-        // },
         {
           position: "top",
           title: "Meios de pagamento",
@@ -218,17 +166,6 @@ export default {
           ],
         },
       ],
-      acconunt_permission: {
-        balance_view: true, // saldo
-        api: true, //api
-        digital_account: true, // conta digital
-        vendas: true, // vendas
-        pix_charge: true, // cobrança pix
-        transfer: true, // transferencia
-        pix_copy_paste: true, // pix copia e cola
-        my_keys: true, // minhas chaves
-        payment_link: true, // link pagamento
-      },
       data: [],
       menssager_data: [],
       loading: true,
@@ -295,29 +232,24 @@ export default {
     return_itens_menu_permission() {
       const user_tipo = this.data__user?.user_tipo;
       const permission_list = this.data__user?.user_permissao;
-
-      //regra de menu para o operador
       if (user_tipo === "operador") {
         return this.menu__oficial
           .map((section) => {
             const filteredArray = section.array.filter((item) => {
-              // Verifica se o item principal tem permissão (baseado apenas em op_permission)
               const hasItemPermission = item.op_permission
                 ? item.op_permission.some((perm) => permission_list[perm] === 1)
-                : true; // Se não houver op_permission, considera como permitido
+                : true;
 
-              // Filtra o submenu (também sem verificar permission, apenas op_permission)
               if (item.submenu && item.submenu.length > 0) {
                 item.submenu = item.submenu.filter((subItem) => {
                   return subItem.op_permission
                     ? subItem.op_permission.some(
                         (perm) => permission_list[perm] === 1
                       )
-                    : true; // Permite se não houver op_permission
+                    : true;
                 });
               }
 
-              // Mantém o item principal se ele ou seu submenu tiverem permissão
               return (
                 hasItemPermission || (item.submenu && item.submenu.length > 0)
               );
@@ -336,7 +268,6 @@ export default {
   },
   mounted() {
     this.return__saldo();
-    // this.menssages_crm();
     this.startWatching();
   },
 };
