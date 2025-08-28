@@ -3,7 +3,11 @@
     <div class="d-flex-inline text-center">
       <div class="logo__">
         <nuxt-link to="/painel/">
-          <logo />
+          <img
+            class="size_logo"
+            :src="theme?.assets?.logotipe?.img"
+            :alt="theme?.data?.initcomp?.description"
+          />
         </nuxt-link>
       </div>
 
@@ -35,8 +39,8 @@
           ></v-skeleton-loader>
         </div>
       </div>
-      <div v-if="!loading" >
-        <div v-for="(data, index) in menu_all[0]" :key="index" >
+      <div v-if="!loading">
+        <div v-for="(data, index) in menu_all[0]" :key="index">
           <!-- item de menu, component start -->
           <div
             class="titulo__menu"
@@ -111,19 +115,35 @@
 
           <!-- submneu component end -->
         </div>
-         <div class=" menu_contact " >
-          <ColortesteMain/>
+        <div class="menu_contact">
           <div class="pa-4 card_main_contact ma-4 primary">
             <h5 class="mb-4">Teve algum problema ou precisa de suporte?</h5>
             <div class="d-flex">
-              <v-btn color="primary" to="/painel/atendimento-ao-cliente" icon class="pa-2 button_icon_contact mr-2">
-                <i class="ri-mail-line" style="font-size: 20px;"></i>
+              <v-btn
+                color="primary"
+                to="/painel/atendimento-ao-cliente"
+                icon
+                class="pa-2 button_icon_contact mr-2"
+              >
+                <i class="ri-mail-line" style="font-size: 20px"></i>
               </v-btn>
-              <v-btn target="_blank" href="tel:+08009898100" color="primary" icon class="pa-2 button_icon_contact mr-2">
-                <i class="ri-phone-line" style="font-size: 20px;"></i>
+              <v-btn
+                target="_blank"
+                href="tel:+08009898100"
+                color="primary"
+                icon
+                class="pa-2 button_icon_contact mr-2"
+              >
+                <i class="ri-phone-line" style="font-size: 20px"></i>
               </v-btn>
-              <v-btn target="_blank" href="https://wa.me/message/QGT7ZBSXHMGGG1" color="primary" icon class="pa-2 button_icon_contact mr-2">
-                <i class="ri-whatsapp-line" style="font-size: 20px;"></i>
+              <v-btn
+                target="_blank"
+                href="https://wa.me/message/QGT7ZBSXHMGGG1"
+                color="primary"
+                icon
+                class="pa-2 button_icon_contact mr-2"
+              >
+                <i class="ri-whatsapp-line" style="font-size: 20px"></i>
               </v-btn>
             </div>
           </div>
@@ -180,6 +200,9 @@ export default {
     },
   },
   computed: {
+    theme() {
+      return this.$store?.state?.theme?.data || null;
+    },
     data__user() {
       return this.$store.state.user.user__data;
     },

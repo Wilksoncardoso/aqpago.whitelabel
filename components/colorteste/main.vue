@@ -107,7 +107,7 @@ export default {
     },
   },
   created() {
-    this.applyTheme();
+    // this.applyTheme();
   },
 };
 </script>

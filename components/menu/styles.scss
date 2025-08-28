@@ -11,9 +11,8 @@
   height: 100%;
   background: linear-gradient(
     240.58deg,
-    var(--primary) -29%,
-    #1d0931 42.16%,
-    #1d0931 57.16%
+    var(--background-primary) -29%,
+    var(--background-secondary) 57.16%
   );
   padding-left: 16px;
   padding-right: 16px;
@@ -27,7 +26,7 @@
     font-weight: 400;
     font-size: 14px;
     line-height: 17px;
-    color: rgba(255, 255, 255, 0.6);
+    color: var(--menu-title-color-primary);
     margin-bottom: 16px;
     margin-top: 16px;
     margin-left: 8px;
@@ -36,6 +35,11 @@
   .logo__ {
     margin-top: 24px;
     margin-bottom: 24px;
+    .size_logo {
+      width: 130px;
+      height: auto;
+      object-fit: cover;
+    }
   }
 
   .nuxt-link-exact-active {
@@ -46,6 +50,7 @@
 
   a {
     text-decoration: none;
+    color: var(--menu-color-primary);
   }
 
   .item__menu {
@@ -65,7 +70,7 @@
       font-style: normal;
       font-weight: 500;
       line-height: 20px;
-      color: $color-white;
+      color: var(--menu-color-primary);
       text-transform: none !important;
       text-decoration: none !important;
       letter-spacing: -0.07px;
@@ -131,7 +136,7 @@
             font-size: 14px;
             font-style: normal;
             font-weight: 600;
-            color: $color-white;
+            color: var(--menu-color-primary);
           }
         }
       }
@@ -163,7 +168,7 @@
               margin-left: 8px;
               font-size: 14px;
               font-weight: 600;
-              color: $color-white;
+              color: var(--menu-color-primary);
             }
           }
         }
@@ -172,8 +177,8 @@
   }
 
   .card_workspace {
-    background: #150325;
-    box-shadow: 0 0 10px 0 #150325;
+    background: var(--secondary);
+    box-shadow: 0 0 10px 0 var(--secondary);
 
     border: 1px solid #ffffff10;
     border-radius: 10px;

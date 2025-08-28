@@ -5,8 +5,8 @@
     </div>
 </template>
 <script>
-import index from "../../../components/page/mykey/index.vue";
-import modal__delete__key from "../../../components/page/mykey/modal__excluir__key.vue";
+import index from "~/components/page/mykey/index.vue";
+import modal__delete__key from "~/components/page/mykey/modal__excluir__key.vue";
 
 export default {
     name: "indexPage",

@@ -713,7 +713,7 @@ export default {
   }
 }
 .key__pix {
-  background: #f2eafb !important;
+  background: var(--primaryop) !important;
   padding: 10px 16px;
   height: auto !important;
   .v-chip__content {

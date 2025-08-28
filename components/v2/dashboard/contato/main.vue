@@ -23,14 +23,7 @@
             >Abertura de ticket</v-btn
           >
         </div>
-        <!-- <div class="img-mail"></div> -->
-        <img
-          class="img-mail"
-          src="/img/dashboard/Mail.png"
-          alt="Aqpago left index"
-          width="80"
-          height="80"
-        />
+        <div class="img-mail" ></div>
       </div>
       <V2DashboardContatoLoading v-else />
     </div>
@@ -51,17 +44,21 @@
               text
               color="primary"
               target="_blank"
-              href="tel:+08009898100"
+              :href="'tel:' + theme?.data?.business?.phone"
               ><i
                 class="ri-phone-line"
                 style="font-size: 16px; margin-right: 6px"
               ></i
-              >0800 989 8100</v-btn
+              >{{ theme?.data?.business?.phone }}</v-btn
             >
 
             <v-btn
               target="_blank"
-              href="https://wa.me/message/QGT7ZBSXHMGGG1"
+              :href="
+                'https://api.whatsapp.com/send/?phone=55' +
+                theme?.data?.business?.whatsapp +
+                '&type=phone_number&app_absent=0'
+              "
               class="btn_secondary"
               text
               color="primary"
@@ -73,12 +70,7 @@
             >
           </div>
         </div>
-        <img
-          src="/img/dashboard/info.png"
-          alt="Aqpago left index"
-          width="80"
-          height="80"
-        />
+        <div class="img-info"></div>
       </div>
       <V2DashboardContatoLoading v-else />
     </div>
@@ -91,6 +83,14 @@ export default {
     loading: {
       type: Object,
       default: {},
+    },
+  },
+  computed: {
+    theme() {
+      return this.$store?.state?.theme?.data || null;
+    },
+    color() {
+      return this.theme?.styles?.color?.primary;
     },
   },
 };

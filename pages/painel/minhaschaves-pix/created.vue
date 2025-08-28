@@ -6,12 +6,12 @@
   </div>
 </template>
 <script>
-import index from "../../../components/page/mykey/created.vue";
-import selected__key from "../../../components/page/mykey/selected__key.vue";
-import return__page from "../../../components/page/mykey/page/return__page.vue";
+import index from "~/components/page/mykey/created.vue";
+import selected__key from "~/components/page/mykey/selected__key.vue";
+import return__page from "~/components/page/mykey/page/return__page.vue";
 
-import modal__token from "../../../components/page/mykey/modal__confirme__token.vue";
-import modal__set__portabilidade from "../../../components/page/mykey/modal__portabilidade__set.vue";
+import modal__token from "~/components/page/mykey/modal__confirme__token.vue";
+import modal__set__portabilidade from "~/components/page/mykey/modal__portabilidade__set.vue";
 
 export default {
   name: "createdPixPage",

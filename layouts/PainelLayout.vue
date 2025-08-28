@@ -1,5 +1,7 @@
 <template>
   <v-app class="bg__system">
+    <ThemeMain />
+
     <V2MenuTopMain :data="data.data" :loading="loading" />
     <menu__web
       :data="data.data"
@@ -112,12 +114,12 @@ export default {
                   icon: icon__transfer__pix,
                   op_permission: ["transfer"],
                 },
-                {
-                  label: "Minhas Chaves",
-                  to: "/painel/minhaschaves-pix",
-                  icon: icon__pix__key,
-                  op_permission: ["my_keys"],
-                },
+                // {
+                //   label: "Minhas Chaves",
+                //   to: "/painel/minhaschaves-pix",
+                //   icon: icon__pix__key,
+                //   op_permission: ["my_keys"],
+                // },
                 {
                   label: "Pix Copia e Cola",
                   to: "/painel/pixcopiaecola",
@@ -277,5 +279,16 @@ export default {
   height: 100%;
   width: 100%;
   background: #f8f9fd !important;
+}
+.v-input--is-label-active,
+.v-input--checkbox {
+  .v-input--selection-controls__input {
+    .icon-checkbox-on,
+    .mdi-checkbox-marked {
+      background-color: var(--primary) !important;
+      border-radius: 4px !important;
+      border: 1px solid #e8e8e8 !important;
+    }
+  }
 }
 </style>

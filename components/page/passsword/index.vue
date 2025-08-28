@@ -31,6 +31,7 @@
       <v-btn
         class="button__login"
         :loading="loading"
+        :disabled="form.cnpj.length < 14 || form.cpf.length < 11"
         @click="password__reset()"
         block
         color="primary"

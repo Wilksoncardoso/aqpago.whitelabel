@@ -1,5 +1,6 @@
 <template>
-  <v-app dark>
+  <v-app>
+    <ThemeMain />
     <div class="layout__def">
       <Nuxt />
     </div>
@@ -13,9 +14,7 @@ export default {
   name: "DefaultLayout",
   components: {
     mobile__component,
-  }
+  },
 };
 </script>
-<style lang="scss">
-
-</style>
+<style lang="scss"></style>

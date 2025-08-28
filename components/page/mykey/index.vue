@@ -291,7 +291,7 @@ export default {
   }
   .card__resumo__key {
     border-radius: 8px;
-    background: #f2eafb;
+    background: var(--primaryop);
     padding: 16px;
     width: 100%;
     max-width: 412px;

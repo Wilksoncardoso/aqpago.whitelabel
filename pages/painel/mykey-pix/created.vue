@@ -4,8 +4,8 @@
   </div>
 </template>
 <script>
-import index from "../../../components/page/mykey/created.vue";
-import selected__key from "../../../components/page/mykey/selected__key.vue";
+import index from "~/components/page/mykey/created.vue";
+import selected__key from "~/components/page/mykey/selected__key.vue";
 
 export default {
   name: "createdPage",

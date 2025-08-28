@@ -327,7 +327,7 @@ export default {
   }
   .alert__key__pix {
     border-radius: 8px;
-    background: #fffae6;
+    background: var(--primaryop);
     padding: 16px;
     max-width: 412px;
     width: 100%;

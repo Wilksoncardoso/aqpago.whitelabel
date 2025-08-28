@@ -1,12 +1,12 @@
 export const namespaced = true;
 
 export const state = () => ({
-  saldo_data: null
+  data: null
 })
 
 export const mutations = {
   salvar(state, objeto) {
-    state.saldo_data = objeto
+    state.data = objeto
   },
 }
 

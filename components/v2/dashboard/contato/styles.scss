@@ -1,13 +1,53 @@
 .card_half {
   width: 100%;
   .img-mail {
+    position: relative; /* garante que o ::after fique preso dentro */
     width: 80px;
     height: 80px;
-  filter: grayscale(100%) brightness(0) invert(1);
+    background: url("/img/dashboard/email_.png") no-repeat center;
+    background-size: contain;
+    &::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-color: var(--primary);
+      mix-blend-mode: soft-light;
+      opacity: 1;
+      pointer-events: none;
+    }
+    &::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-color: var(--primary);
+      mix-blend-mode: soft-light;
+      opacity: 1;
+      pointer-events: none;
+    }
+  }
+  .img-info {
+    position: relative; /* garante que o ::after fique preso dentro */
+    width: 80px;
+    height: 80px;
+    background: url("/img/dashboard/info.png") no-repeat center;
+    background-size: contain;
+    &::after,
+    &::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-color: var(--primary);
+      mix-blend-mode: soft-light;
+      opacity: 1;
+      pointer-events: none;
+    }
+    &::before {
+      opacity: 0.8; /* camada base */
+    }
 
-  /* aplica a cor da variável */
-  background-color: var(--primary);
-  mix-blend-mode: multiply;
+    &::after {
+      opacity: 1; /* camada reforço */
+    }
   }
 }
 .cards_style {

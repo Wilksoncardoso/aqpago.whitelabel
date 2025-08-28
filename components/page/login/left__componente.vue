@@ -4,19 +4,27 @@
       <div class="d-flex-inline item__">
         <div class="d-flex-inline">
           <nuxt-link to="/">
-            <logo_aqpago />
+            <img
+              class="size_logo"
+              :src="theme?.assets?.logotipe?.img"
+              :alt="theme?.data?.initcomp?.description"
+            />
           </nuxt-link>
           <div class="d-flex">
-            <div class="mr-1 text_left_logo">Um produto da Holding</div>
-            <logo_white />
+            <div class="mr-1 text_left_logo">
+              {{
+                theme?.data?.initcomp?.title +
+                " - " +
+                theme?.data?.initcomp?.description
+              }}
+            </div>
           </div>
         </div>
       </div>
       <div class="d-flex-inline item__app">
         <div>
           <p>
-            Baixe nosso app e aproveite todas as funcionalidades que só a AQPago
-            oferece
+            {{ theme?.data?.initcomp?.bottom_text }}
           </p>
         </div>
         <div class="d-flex">
@@ -34,10 +42,12 @@
       </div>
     </div>
     <v-img
-      src="/img/login/login__backgorund.webp"
+      :src="theme?.assets?.initcomp?.img"
+      :alt="theme?.data?.initcomp?.description"
       alt="Aqpago left index"
       preload
       class="img__login"
+      :class="theme?.assets?.initcomp?.right ? 'right' : ''"
     />
   </div>
 </template>
@@ -64,6 +74,11 @@ export default {
       },
     };
   },
+  computed: {
+    theme() {
+      return this.$store?.state?.theme?.data || null;
+    },
+  },
 };
 </script>
 <style lang="scss">
@@ -77,25 +92,17 @@ export default {
   object-fit: cover;
   z-index: 0;
   overflow: hidden !important;
-
+  &.right {
+    transform: rotateY(360deg);
+  }
 }
 .left__index {
   height: 100vh;
-  
-  /*
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  width: 50%;
-  overflow: hidden;
-  background: url("https://res.cloudinary.com/djtomydsv/image/upload/v1686070724/app__aqpago/login/login__backgorund.webp");
-  display: block;
-  background-size: cover;
-  background-position: center;
-  */
-
+  .size_logo {
+    width: 150px;
+    height: auto;
+    object-fit: cover;
+  }
   .body {
     padding: 41px 72px;
     position: relative;

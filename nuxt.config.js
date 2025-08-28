@@ -1,9 +1,11 @@
 import colors from "vuetify/es5/util/colors";
 
 export default {
+  ssr: false,
+  loading: false,
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: " AQPago | Portal Corporativo Banking & Vendas",
+    title: "Aguarde...",
     htmlAttrs: {
       lang: "pt-br",
     },
@@ -14,56 +16,6 @@ export default {
       { name: "format-detection", content: "telephone=no" },
     ],
     link: [
-      {
-        rel: "apple-touch-icon",
-        sizes: "192x192",
-        type: "image/x-icon",
-        href: "/icon/apple-touch-icon.png",
-      },
-      {
-        rel: "icon",
-        sizes: "512x512",
-        type: "image/png",
-        href: "/icon/android-chrome-512x512.png",
-      },
-      {
-        rel: "icon",
-        sizes: "96x96",
-        type: "image/png",
-        href: "/icon/favicon.ico",
-      },
-      {
-        rel: "icon",
-        sizes: "32x32",
-        type: "image/png",
-        href: "/icon/favicon-32x32.png",
-      },
-      {
-        rel: "icon",
-        sizes: "16x16",
-        type: "image/png",
-        href: "/icon/favicon-16x16.png",
-      },
-
-      {
-        rel: "icon",
-        sizes: "70x70",
-        type: "image/png",
-        href: "/icon/mstile-70x70.png",
-      },
-      {
-        rel: "icon",
-        sizes: "144x144",
-        type: "image/png",
-        href: "/icon/mstile-144x144.png",
-      },
-
-      {
-        rel: "icon",
-        sizes: "150x150",
-        type: "image/png",
-        href: "/icon/mstile-150x150.png",
-      },
       {
         rel: "stylesheet",
         href: "https://fonts.googleapis.com/css?family=Roboto",
@@ -120,6 +72,7 @@ export default {
     { src: "~/plugins/new/mask.js" },
     { src: "~/plugins/new/type.js" },
     { src: "~/plugins/new/ListFake.js" },
+    { src: "~/plugins/new/ColorFake.js" },
 
 
   ],
@@ -199,7 +152,7 @@ export default {
           secondary__roxo: "#9646FE",
           danger: "#DB3B21",
           delete: "#8B352E",
-          btndelete:"#F15B50"
+          btndelete: "#F15B50"
 
           // primary:'#28a824 '
         },
@@ -243,7 +196,9 @@ export default {
       changeOrigin: true,
     },
   },
+
   router: {},
+
   loading: {
     color: "#521C89",
     height: "3px",
