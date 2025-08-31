@@ -1,6 +1,6 @@
 <template>
   <v-app class="bg__system">
-    <ThemeMain />
+    <V2ThemeApiProvider />
 
     <V2MenuTopMain :data="data.data" :loading="loading" />
     <menu__web
@@ -72,6 +72,7 @@ export default {
               label: "Início",
               to: "/painel/",
               icon: icon__home,
+              iconlib: "ri-home-line",
               submenu: [],
             },
           ],
@@ -86,6 +87,7 @@ export default {
               op_permission: ["digital_account", "vendas"],
               to: "/painel/extrato",
               icon: icon__extrato,
+              iconlib: "ri-file-text-line",
               submenu: [],
             },
             {
@@ -93,6 +95,8 @@ export default {
               position: "top",
               label: "Pix",
               to: "#",
+              iconlib: "ri-pix-fill",
+
               icon: icon__pix,
               op_permission: [
                 "pix_charge",
@@ -107,12 +111,14 @@ export default {
                   to: "/painel/cobranca-pix",
                   icon: icon__pix__cobrar,
                   op_permission: ["pix_charge"],
+                  iconlib: "ri-coins-line",
                 },
                 {
                   label: "Transferir",
                   to: "/painel/transferencia-pix",
                   icon: icon__transfer__pix,
                   op_permission: ["transfer"],
+                  iconlib: "ri-money-dollar-box-line",
                 },
                 // {
                 //   label: "Minhas Chaves",
@@ -125,6 +131,7 @@ export default {
                   to: "/painel/pixcopiaecola",
                   icon: icon__pix__copia__cola,
                   op_permission: ["pix_copy_paste"],
+                  iconlib: "ri-file-copy-2-line",
                 },
               ],
             },
@@ -141,6 +148,8 @@ export default {
               to: "/painel/integracao",
               icon: icon_api,
               op_permission: ["api"],
+              iconlib: "ri-command-line",
+
               submenu: [],
             },
           ],
@@ -154,6 +163,8 @@ export default {
               label: "Link de Pagamento",
               to: "/painel/link_payment",
               icon: icon__link__payment,
+              iconlib: "ri-link",
+
               submenu: [],
               op_permission: ["payment_link"],
             },
@@ -164,6 +175,7 @@ export default {
               to: "/painel/simulador",
               icon: icon__simulador,
               submenu: [],
+              iconlib: "ri-calculator-line",
             },
           ],
         },

@@ -1,0 +1,257 @@
+<template>
+  <div>
+    <V2ThemeListaMain :ListThemes="ListThemes"/>
+    <V2ThemeCreatedMain />
+  </div>
+</template>
+
+<script>
+export default {
+  layout: "PainelLayout",
+  data() {
+    return {
+      ListThemes: [
+        {
+          id: 32193021321,
+          assets: {
+            initcomp: {
+              right: true,
+              img: "https://images.pexels.com/photos/3943716/pexels-photo-3943716.jpeg",
+            },
+            logotipe: {
+              img: "https://aqbank.com.br/wp-content/uploads/2024/07/Brand.svg",
+            },
+            icon: {
+              img32x32:
+                "https://aqbank.com.br/wp-content/uploads/2024/06/Favicon.svg",
+              img96x96:
+                "https://aqbank.com.br/wp-content/uploads/2024/06/Favicon.svg",
+              img192x192:
+                "https://aqbank.com.br/wp-content/uploads/2024/06/Favicon.svg",
+              img300x300:
+                "https://aqbank.com.br/wp-content/uploads/2024/06/Favicon.svg",
+              img512x512:
+                "https://aqbank.com.br/wp-content/uploads/2024/06/Favicon.svg",
+            },
+          },
+          styles: {
+            color: {
+              primary: "#0d9378",
+              primary_op: "#a6f3e4",
+              secondary: "#012f26",
+            },
+            menuleft: {
+              background: {
+                primary: "#02130f",
+                secondary: "#02130f",
+              },
+              font: {
+                color: "#ffffff",
+              },
+              title: {
+                color: "#b3b3b3",
+              },
+            },
+          },
+          data: {
+            initcomp: {
+              title: "Procode",
+              description: "Desenvolvimento de Software ",
+              bottom_text:
+                "Procode Desenvolvimento de Software de Qualidade LTDA",
+            },
+            business: {
+              name: "Procode",
+              email: "procode@gmail.com",
+              phone: "91983958559",
+              whatsapp: "91983958559",
+              website: "procodepj.com.br",
+              external_link: {
+                link_payment: "",
+              },
+              termos: "",
+            },
+            api: {
+              base_url: "",
+            },
+          },
+          seo: {
+            title: "AQBank - whitelabel",
+            description: "Teste title",
+            locale: "pt-br",
+            "theme-color": "#0d9378",
+            "image-url":
+              "https://aqbank.com.br/wp-content/uploads/2024/07/Banner-1.png",
+            "twitter-site": "https://x.com/aqbankdigital",
+            "twitter-title": "aqbank digital",
+            "twitter-description":
+              "Aqbank é uma fintech brasileira especializada em abertura e movimentação de contas-correntes digitais e emissão de cartões de débito, crédito e pré-pago.",
+            "twitter-image-url":
+              "https://aqbank.com.br/wp-content/uploads/2024/07/Banner-1.png",
+          },
+        },
+        {
+          id: 32193021322,
+          assets: {
+            initcomp: {
+              right: true,
+              img: "https://images.pexels.com/photos/3943716/pexels-photo-3943716.jpeg",
+            },
+            logotipe: {
+              img: "https://aqbank.com.br/wp-content/uploads/2024/07/Brand.svg",
+            },
+            icon: {
+              img32x32:
+                "https://aqbank.com.br/wp-content/uploads/2024/06/Favicon.svg",
+              img96x96:
+                "https://aqbank.com.br/wp-content/uploads/2024/06/Favicon.svg",
+              img192x192:
+                "https://aqbank.com.br/wp-content/uploads/2024/06/Favicon.svg",
+              img300x300:
+                "https://aqbank.com.br/wp-content/uploads/2024/06/Favicon.svg",
+              img512x512:
+                "https://aqbank.com.br/wp-content/uploads/2024/06/Favicon.svg",
+            },
+          },
+          styles: {
+            color: {
+              primary: "#0d9378",
+              primary_op: "#a6f3e4",
+              secondary: "#012f26",
+            },
+            menuleft: {
+              background: {
+                primary: "#02130f",
+                secondary: "#02130f",
+              },
+              font: {
+                color: "#ffffff",
+              },
+              title: {
+                color: "#b3b3b3",
+              },
+            },
+          },
+          data: {
+            initcomp: {
+              title: "Procode",
+              description: "Desenvolvimento de Software ",
+              bottom_text:
+                "Procode Desenvolvimento de Software de Qualidade LTDA",
+            },
+            business: {
+              name: "Procode",
+              email: "procode@gmail.com",
+              phone: "91983958559",
+              whatsapp: "91983958559",
+              website: "procodepj.com.br",
+              external_link: {
+                link_payment: "",
+              },
+              termos: "",
+            },
+            api: {
+              base_url: "",
+            },
+          },
+          seo: {
+            title: "AQBank - whitelabel",
+            description: "Teste title",
+            locale: "pt-br",
+            "theme-color": "#0d9378",
+            "image-url":
+              "https://aqbank.com.br/wp-content/uploads/2024/07/Banner-1.png",
+            "twitter-site": "https://x.com/aqbankdigital",
+            "twitter-title": "aqbank digital",
+            "twitter-description":
+              "Aqbank é uma fintech brasileira especializada em abertura e movimentação de contas-correntes digitais e emissão de cartões de débito, crédito e pré-pago.",
+            "twitter-image-url":
+              "https://aqbank.com.br/wp-content/uploads/2024/07/Banner-1.png",
+          },
+        },
+        {
+          id: 32193021324,
+          assets: {
+            initcomp: {
+              right: true,
+              img: "https://images.pexels.com/photos/3943716/pexels-photo-3943716.jpeg",
+            },
+            logotipe: {
+              img: "https://aqbank.com.br/wp-content/uploads/2024/07/Brand.svg",
+            },
+            icon: {
+              img32x32:
+                "https://aqbank.com.br/wp-content/uploads/2024/06/Favicon.svg",
+              img96x96:
+                "https://aqbank.com.br/wp-content/uploads/2024/06/Favicon.svg",
+              img192x192:
+                "https://aqbank.com.br/wp-content/uploads/2024/06/Favicon.svg",
+              img300x300:
+                "https://aqbank.com.br/wp-content/uploads/2024/06/Favicon.svg",
+              img512x512:
+                "https://aqbank.com.br/wp-content/uploads/2024/06/Favicon.svg",
+            },
+          },
+          styles: {
+            color: {
+              primary: "#0d9378",
+              primary_op: "#a6f3e4",
+              secondary: "#012f26",
+            },
+            menuleft: {
+              background: {
+                primary: "#02130f",
+                secondary: "#02130f",
+              },
+              font: {
+                color: "#ffffff",
+              },
+              title: {
+                color: "#b3b3b3",
+              },
+            },
+          },
+          data: {
+            initcomp: {
+              title: "Procode",
+              description: "Desenvolvimento de Software ",
+              bottom_text:
+                "Procode Desenvolvimento de Software de Qualidade LTDA",
+            },
+            business: {
+              name: "Procode",
+              email: "procode@gmail.com",
+              phone: "91983958559",
+              whatsapp: "91983958559",
+              website: "procodepj.com.br",
+              external_link: {
+                link_payment: "",
+              },
+              termos: "",
+            },
+            api: {
+              base_url: "",
+            },
+          },
+          seo: {
+            title: "AQBank - whitelabel",
+            description: "Teste title",
+            locale: "pt-br",
+            "theme-color": "#0d9378",
+            "image-url":
+              "https://aqbank.com.br/wp-content/uploads/2024/07/Banner-1.png",
+            "twitter-site": "https://x.com/aqbankdigital",
+            "twitter-title": "aqbank digital",
+            "twitter-description":
+              "Aqbank é uma fintech brasileira especializada em abertura e movimentação de contas-correntes digitais e emissão de cartões de débito, crédito e pré-pago.",
+            "twitter-image-url":
+              "https://aqbank.com.br/wp-content/uploads/2024/07/Banner-1.png",
+          },
+        },
+      ],
+    };
+  },
+};
+</script>
+
+<style lang="scss" scoped></style>

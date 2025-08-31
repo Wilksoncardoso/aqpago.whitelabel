@@ -169,7 +169,7 @@ export default {
     width: 100%;
     padding: 16px;
     border-radius: 6px;
-    background: var(--primria-roxa-50, #f9f5ff);
+    background: var(--primaryop);
     margin-bottom: 0;
 
     /* These are technically the same, but use both */

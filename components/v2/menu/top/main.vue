@@ -72,7 +72,7 @@
             </div>
           </template>
 
-          <v-list>
+          <v-list class="main_top_list">
             <v-list-item v-for="(item, index) in permission__top" :key="index">
               <nuxt-link class="link__dropdown" :to="item.to">
                 <v-list-item-title>

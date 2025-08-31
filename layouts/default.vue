@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <ThemeMain />
+    <V2ThemeApiProvider />
     <div class="layout__def">
       <Nuxt />
     </div>

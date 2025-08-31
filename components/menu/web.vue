@@ -61,8 +61,8 @@
                 class="d-flex align-center item__menu"
                 @click="state__submenu()"
               >
-                <div class="icon">
-                  <component v-bind:is="M.icon"></component>
+                <div class="icon mr-2">
+                  <i :class="M.iconlib"></i>
                 </div>
                 <div class="label__menu">{{ M.label }}</div>
               </div>
@@ -81,8 +81,8 @@
               <v-expansion-panel>
                 <v-expansion-panel-header>
                   <div class="d-flex align-center item__submenu__principal">
-                    <div class="icon">
-                      <component v-bind:is="M.icon"></component>
+                    <div class="icon mr-2">
+                      <i :class="M.iconlib"></i>
                     </div>
                     <div class="label__menu">
                       {{ M.label }}
@@ -100,8 +100,8 @@
                 >
                   <nuxt-link :to="data__sub.to" class="item__submenu">
                     <div class="d-flex align-center">
-                      <div class="icon">
-                        <component v-bind:is="data__sub.icon"></component>
+                      <div class="icon mr-2">
+                        <i :class="data__sub.iconlib"></i>
                       </div>
                       <div class="label__menu">
                         {{ data__sub.label }}

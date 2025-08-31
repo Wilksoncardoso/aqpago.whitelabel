@@ -162,4 +162,39 @@ export default {
 };
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+ ::-webkit-scrollbar {
+            width: 14px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--primaryop);
+            border-radius: 10px;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 10px;
+            border: 3px solid var(--primaryop);
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary);
+        }
+        
+        /* Personalização da Scrollbar para Firefox */
+        html {
+            scrollbar-width: thin;
+            scrollbar-color: var(--primary) var(--primaryop);
+        }
+        
+        /* Estilo para navegadores mais antigos */
+        body {
+            scrollbar-face-color: var(--primary);
+            scrollbar-track-color: var(--primaryop);
+            scrollbar-arrow-color: var(--primaryop);
+            scrollbar-shadow-color: var(--primary);
+            scrollbar-dark-shadow-color: var(--primary);
+        }
+
+</style>
