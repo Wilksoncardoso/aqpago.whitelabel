@@ -34,8 +34,14 @@
         -o-border-radius: 4px;
       }
     }
-
-    .card_body_theme {
+    p {
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 28px;
+      color: var(--content-tertiary, #989898);
+      line-height: 20px;
+      letter-spacing: -0.28px;
     }
   }
   .cards_item {
@@ -45,5 +51,9 @@
     -moz-border-radius: 6px;
     -ms-border-radius: 6px;
     -o-border-radius: 6px;
+    width: calc(33% - 16px);
+    &.active {
+      border: 2px solid var(--primary);
+    }
   }
 }

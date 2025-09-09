@@ -1,22 +1,19 @@
 <template lang="html">
-  <div class="left__index">
+  <div class="left__index" :class="SetForm ? 'active' : ''">
     <div class="body">
       <div class="d-flex-inline item__">
         <div class="d-flex-inline">
           <nuxt-link to="/">
             <img
               class="size_logo"
-              :src="theme?.assets?.logotipe?.img"
+              :src="Logo_main"
               :alt="theme?.data?.initcomp?.description"
+              :width=" SetForm?.assets?.logotipe?.size || theme?.assets?.logotipe?.size || 130"
             />
           </nuxt-link>
           <div class="d-flex">
             <div class="mr-1 text_left_logo">
-              {{
-                theme?.data?.initcomp?.title +
-                " - " +
-                theme?.data?.initcomp?.description
-              }}
+              {{ title }} {{ description ? " - " + description : "" }}
             </div>
           </div>
         </div>
@@ -24,7 +21,7 @@
       <div class="d-flex-inline item__app">
         <div>
           <p>
-            {{ theme?.data?.initcomp?.bottom_text }}
+            {{ description_bottom ?  description_bottom : "" }}
           </p>
         </div>
         <div class="d-flex">
@@ -42,8 +39,8 @@
       </div>
     </div>
     <v-img
-      :src="theme?.assets?.initcomp?.img"
-      :alt="theme?.data?.initcomp?.description"
+      :src="background_main"
+      :alt="description"
       alt="Aqpago left index"
       preload
       class="img__login"
@@ -65,6 +62,12 @@ export default {
     icon_app_googlepay,
     icon_app_store,
   },
+  props: {
+    SetForm: {
+      type: Object,
+      default: () => null,
+    },
+  },
   data() {
     return {
       link: {
@@ -74,16 +77,46 @@ export default {
       },
     };
   },
+  methods:{
+    return_img(img) {
+      return URL.createObjectURL(img);
+    },
+  },
   computed: {
     theme() {
       return this.$store?.state?.theme?.data || null;
     },
+    title() {
+      let titleAPI = this.theme?.data?.initcomp?.title;
+      let SetForm = this.SetForm?.data?.initcomp?.title;
+      return SetForm ? SetForm : titleAPI;
+    },
+    description() {
+      let DescriptionAPI = this.theme?.data?.initcomp?.description;
+      let SetForm = this.SetForm?.data?.initcomp?.description;
+      return SetForm ? SetForm : DescriptionAPI;
+    },
+    description_bottom() {
+      let TxtBottom = this.theme?.data?.initcomp?.bottom_text;
+      let SetForm = this.SetForm?.data?.initcomp?.bottom_text;
+      return SetForm ? SetForm : TxtBottom;
+    },
+    background_main(){
+      let bgApi = this.theme?.assets?.initcomp?.img
+      let bgASetForm = this.SetForm?.assets?.initcomp?.img ? this.return_img(this.SetForm?.assets?.initcomp?.img) :  null
+      return bgASetForm ? bgASetForm : bgApi;
+    },
+     Logo_main(){
+      let LogoApi = this.theme?.assets?.logotipe?.img
+      let LogoForm = this.SetForm?.assets?.logotipe?.img ? this.return_img(this.SetForm.assets.logotipe.img) :  null
+      return LogoForm ? LogoForm : LogoApi;
+    }
   },
 };
 </script>
 <style lang="scss">
 .img__login {
-  position: fixed;
+  position: absolute;
   height: 100vh;
   top: 0;
   left: 0;
@@ -98,8 +131,13 @@ export default {
 }
 .left__index {
   height: 100vh;
+  &.active{
+    .img__login{
+      width: 100%;
+    }
+  }
+  
   .size_logo {
-    width: 150px;
     height: auto;
     object-fit: cover;
   }

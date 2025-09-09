@@ -1,6 +1,6 @@
 <template>
   <v-app class="bg__system">
-    <V2ThemeApiProvider />
+    <V2ThemeApiProvider ref="temapadrao"/>
 
     <V2MenuTopMain :data="data.data" :loading="loading" />
     <menu__web

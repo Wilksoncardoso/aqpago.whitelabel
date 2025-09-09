@@ -5,6 +5,7 @@
         class="size_logo mx-4 my-4"
         :src="theme?.assets?.logotipe?.img"
         :alt="theme?.data?.initcomp?.description"
+        :width="theme?.assets?.logotipe?.size || 130"
       />
     </nuxt-link>
     <v-row class="error__pagina text-center justify-center align-center">
@@ -62,7 +63,7 @@ export default {
 
 <style lang="scss">
 .size_logo {
-  width: 130px;
+
   height: auto;
   object-fit: cover;
 }

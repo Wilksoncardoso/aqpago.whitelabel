@@ -5,12 +5,13 @@
         <nuxt-link to="/painel/">
           <img
             class="size_logo"
-            :src="theme?.assets?.logotipe?.img"
+            :src=" SetFormTheme?.assets?.logotipe?.img ? return_img(SetFormTheme?.assets?.logotipe?.img) :'' || theme?.assets?.logotipe?.img"
             :alt="theme?.data?.initcomp?.description"
+            :width="SetFormTheme?.assets?.logotipe?.size || theme?.assets?.logotipe?.size || 130"
           />
         </nuxt-link>
       </div>
-
+     
       <div class="card_workspace pa-4 mb-6">
         <div>
           <div class="d-flex justify-space-between align-center">
@@ -198,6 +199,9 @@ export default {
     modal_workspace() {
       this.$refs.modalWorkspaceMain.DialogStart();
     },
+     return_img(img) {
+      return URL.createObjectURL(img);
+    },
   },
   computed: {
     theme() {
@@ -205,6 +209,10 @@ export default {
     },
     data__user() {
       return this.$store.state.user.user__data;
+    },
+    SetFormTheme(){
+      return this.$store?.state?.theme?.setform || null;
+ 
     },
     menu_all() {
       //&& (obj_in.permission === permission__cont || obj_in.permission === false)

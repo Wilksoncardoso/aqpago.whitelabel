@@ -152,7 +152,9 @@ export default {
           secondary__roxo: "#9646FE",
           danger: "#DB3B21",
           delete: "#8B352E",
-          btndelete: "#F15B50"
+          btndelete: "#F15B50",
+          Setprimary: "#521C89",
+
 
           // primary:'#28a824 '
         },

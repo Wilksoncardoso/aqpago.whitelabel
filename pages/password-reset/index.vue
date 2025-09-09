@@ -2,7 +2,7 @@
   <div class="bg__login__">
     <v-row class="pa-0 ma-0 align-center" style="height: 100vh">
       <v-col class="pa-0 ma-0" cols="12" sm="6" md="6" lg="6" xl="6">
-        <left__componente />
+        <LeftComponente />
       </v-col>
       <v-col
         class="pa-0 ma-0 item__login"
@@ -26,7 +26,7 @@
 </template>
 <script>
 import termos from "../../components/page/login/termos.vue";
-import left__componente from "../../components/page/login/left__componente.vue";
+import LeftComponente from "../../components/page/login/LeftComponente.vue";
 import logo__aqpago from "../../components/logo/aqpago.vue";
 import idioma from "../../components/page/login/idioma.vue";
 import security__card from "../../components/page/login/security__card.vue";
@@ -45,7 +45,7 @@ export default {
     token__card,
     idioma,
     passsword,
-    left__componente,
+    LeftComponente,
     termos,
   },
   created() {

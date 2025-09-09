@@ -1,6 +1,10 @@
 <template>
-  <div class="d-flex cards_items_themes">
-    <div class="cards_item mx-2" v-for="data in ListThemes">
+  <div class="d-flex flex-wrap cards_items_themes">
+    <div
+      class="cards_item mx-2 my-2"
+      :class="data.status"
+      v-for="data in ListThemes"
+    >
       <div class="card_img_main">
         <img
           :src="data.assets.initcomp.img"
@@ -44,22 +48,46 @@
         <h4>
           {{ data?.data?.initcomp?.title }}
         </h4>
-        <h5>
+        <h5 class="mb-3">
           {{ data?.data?.initcomp?.description }}
         </h5>
+
+        <p class="mb-1" v-if="data?.data?.api?.base_url">
+          <b> API :</b>
+          <span>{{ remove_links(data?.data?.api?.base_url) }}</span>
+        </p>
+
+        <p
+          class="mb-1"
+          v-if="data?.data?.business?.external_link?.link_payment"
+        >
+          <b> Link de Pagamento :</b>
+          <span>{{
+            remove_links(data?.data?.business?.external_link?.link_payment)
+          }}</span>
+        </p>
+      </div>
+      <div class="card_actions pa-2">
         <v-divider class="my-4"></v-divider>
 
         <div class="d-flex justify-space-between">
           <div class="d-flex">
             <v-btn icon color="primary" class="pa-2"
-              ><i class="ri-edit-box-line" style="font-size: 16px;"></i></v-btn>
+              ><i class="ri-edit-box-line" style="font-size: 16px"></i
+            ></v-btn>
             <v-btn icon color="delete" class="pa-2"
-              ><i class="ri-delete-bin-7-line" style="font-size: 16px;"></i
+              ><i class="ri-delete-bin-7-line" style="font-size: 16px"></i
             ></v-btn>
           </div>
           <div>
-            <v-btn color="primary" class="pa-2"
+            <v-btn
+              color="primary"
+              class="pa-2 btn_default"
+              v-if="data.status != 'active'"
               ><i class="ri-upload-line mr-2"></i> Selecionar</v-btn
+            >
+            <v-btn color="primary" disabled class="pa-2 btn_default" v-else>
+              <i class="ri-checkbox-circle-fill mr-2"></i> Selecionado</v-btn
             >
           </div>
         </div>
@@ -74,6 +102,12 @@ export default {
     ListThemes: {
       type: Array,
       default: () => [],
+    },
+  },
+  methods: {
+    remove_links(link) {
+      if (typeof link !== "string") return link;
+      return link.replace(/^(https?:\/\/)?(www\.)?/i, "");
     },
   },
 };

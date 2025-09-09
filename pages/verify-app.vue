@@ -2,7 +2,7 @@
   <div class="bg__login__">
     <v-row class="pa-0 ma-0 align-center" style="height: 100vh">
       <v-col class="pa-0 ma-0" cols="12" sm="6">
-        <left__componente />
+        <LeftComponente />
       </v-col>
       <v-col class="pa-0 ma-0 item__login" cols="12" sm="6">
         <div class="card_login dflex align-center justify-center ">
@@ -14,7 +14,7 @@
   </div>
 </template>
 <script>
-import left__componente from "../components/page/login/left__componente.vue";
+import LeftComponente from "../components/page/login/LeftComponente.vue";
 import verify__token__componente from "~/components/page/verify-app/main.vue";
 import termos from "../components/page/login/termos.vue";
 
@@ -23,7 +23,7 @@ export default {
   layout: "defaultLayout",
 
   components: {
-    left__componente,
+    LeftComponente,
     verify__token__componente,
     termos,
   },

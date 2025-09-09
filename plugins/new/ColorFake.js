@@ -8,7 +8,9 @@ export default ({ app }, inject) => {
                 "img": "https://images.pexels.com/photos/3943716/pexels-photo-3943716.jpeg"
             },
             "logotipe": {
-                "img": "https://aqbank.com.br/wp-content/uploads/2024/07/Brand.svg"
+                "img": "https://aqbank.com.br/wp-content/uploads/2024/07/Brand.svg",
+                "size":100
+
             },
             "icon": {
                 "img32x32": "https://aqbank.com.br/wp-content/uploads/2024/06/Favicon.svg",

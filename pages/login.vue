@@ -2,7 +2,7 @@
   <div class="bg__login__">
     <v-row class="pa-0 ma-0 align-center" style="height: 100vh">
       <v-col class="pa-0 ma-0" cols="12" sm="6" >
-        <left__componente />
+        <LeftComponente />
       </v-col>
       <v-col class="pa-0 ma-0 item__login " cols="12" sm="6" > 
           <div class=" card_login  d-xl-flex align-center justify-center" >
@@ -23,7 +23,7 @@
   </div>
 </template>
 <script>
-import left__componente from "~/components/page/login/left__componente.vue";
+import LeftComponente from "~/components/page/login/LeftComponente.vue";
 import login__componente from "~/components/page/login/index.vue";
 import login__componente_new from "~/components/page/login/new/index.vue";
 import manutencao from "~/components/page/login/manutencao.vue";
@@ -37,7 +37,7 @@ export default {
 
   components: {
     idioma,
-    left__componente,
+    LeftComponente,
     login__componente,
     login__componente_new,
     termos,
