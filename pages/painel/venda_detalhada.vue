@@ -1,7 +1,5 @@
 <template lang="html">
   <div>
-    <!-- {{ id__session }} -->
-    <!-- {{ result__api__vendas }} -->
     <template v-if="loading__vendas">
       <div class="d-flex align-center justify-center" style="height: 50vh">
         <v-progress-circular
@@ -11,12 +9,11 @@
         ></v-progress-circular>
       </div>
     </template>
-
     <v-btn
       color="primary"
       class="mb-10 normal"
       text
-      :to="'/painel/extrato'"
+      to="/painel/extrato-vendas"
       v-if="!loading__vendas"
     >
       <icon__return /> Voltar</v-btn

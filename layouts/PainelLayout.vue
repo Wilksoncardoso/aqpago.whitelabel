@@ -1,6 +1,6 @@
 <template>
   <v-app class="bg__system">
-    <V2ThemeApiProvider ref="temapadrao"/>
+    <V2ThemeApiProvider ref="temapadrao" />
 
     <V2MenuTopMain :data="data.data" :loading="loading" />
     <menu__web
@@ -62,7 +62,7 @@ export default {
   data() {
     return {
       widgetHeight: "43px",
-      menu__oficial: [
+       menu__oficial: [
         {
           position: "top",
           title: "",
@@ -81,15 +81,44 @@ export default {
           title: "Sua conta",
           position: "top",
           array: [
+            // {
+            //   permission: false,
+            //   label: "Extrato",
+            //   op_permission: ["digital_account", "vendas"],
+            //   to: "/painel/extrato",
+            //   icon: icon__extrato,
+            //   iconlib: "ri-file-text-line",
+            //   submenu: [],
+            // },
+
             {
               permission: false,
+              position: "top",
               label: "Extrato",
-              op_permission: ["digital_account", "vendas"],
-              to: "/painel/extrato",
-              icon: icon__extrato,
+              to: "#",
               iconlib: "ri-file-text-line",
-              submenu: [],
+
+              icon: icon__pix,
+              op_permission: ["digital_account", "vendas"],
+
+              submenu: [
+                {
+                  label: "Conta Digital",
+                  to: "/painel/extrato",
+                  icon: icon__pix__cobrar,
+                  op_permission: ["digital_account"],
+                  iconlib: "ri-arrow-up-down-line",
+                },
+                {
+                  label: "Vendas",
+                  to: "/painel/extrato-vendas",
+                  icon: icon__transfer__pix,
+                  op_permission: ["vendas"],
+                  iconlib: "ri-bank-card-line",
+                },
+              ],
             },
+
             {
               permission: false,
               position: "top",
@@ -135,12 +164,21 @@ export default {
                 },
               ],
             },
+            // {
+            //   permission: true,
+            //   label: "Theme",
+            //   op_permission: ["theme"],
+            //   to: "/painel/theme",
+            //   icon: icon__extrato,
+            //   iconlib: "ri-palette-line",
+            //   submenu: [],
+            // },
           ],
         },
         {
           position: "top",
           title: "Integração",
-          permission: false,
+          permission: true,
           array: [
             {
               permission: true,
@@ -179,6 +217,33 @@ export default {
             },
           ],
         },
+          {
+          position: "top",
+          title: "White Label ",
+          array: [
+            {
+              permission: false,
+              label: "Meus Clientes",
+              to: "/painel/meus-clientes",
+              icon: icon__link__payment,
+              iconlib: "ri-group-fill",
+
+              submenu: [],
+              op_permission: ["mkt"],
+            },
+
+            {
+              permission: true,
+              label: "Theme",
+              to: "/painel/theme",
+              icon: icon__simulador,
+              submenu: [],
+              iconlib: "ri-palette-fill",
+              op_permission: ["mkt"],
+
+            },
+          ],
+        },
       ],
       data: [],
       menssager_data: [],
@@ -192,6 +257,7 @@ export default {
   },
   methods: {
     ...mapActions("user", ["salvar"]),
+    ...mapActions("workspace", ["salvar"]),
 
     return__saldo() {
       this.$axios
@@ -207,31 +273,21 @@ export default {
           this.error = error.response.data.mensagem;
         });
     },
-    menssages_crm() {
-      this.$axios
-        .$get("/messages")
-        .then((response) => {
-          this.start_modal_mensager(response);
+       async list_workspace() {
+      this.loading = true;
+      this.error = null;
+      const response = await this.$axios
+        .$get("/aqpago-workspace?token=main")
+        .then((res) => {
+          this.workspaces = res.data || [];
+          this.$store.commit("workspace/salvar", res.data);
         })
         .catch((error) => {
-          this.error = error.response.data.mensagem;
-        });
+          this.error = error;
+        })
+        .finally(() => (this.loading = false));
     },
-    start_modal_mensager(data) {
-      this.menssager_data = data;
-      const list = this.menssager_data.filter((o) => o.exibir === 1);
-      if (list.length > 0) {
-        this.$nuxt.$emit("show_modal_crm", data); // show modal
-      }
-    },
-    startWatching() {
-      this.intervalId = setInterval(() => {
-        const activeElement = document.activeElement;
-        const widget = document.getElementById("chat-aqbank-widget");
-        const chatActive = activeElement && activeElement.id === "chat-aqbank";
-        this.widgetHeight = chatActive ? "100%" : "43px";
-      }, 100);
-    },
+
   },
   computed: {
     url() {
@@ -280,9 +336,15 @@ export default {
       return this.menu__oficial;
     },
   },
-  mounted() {
+   watch: {
+    "data__user.user_tipo"(newValue) {
+      if (newValue === "responsavel") {
+        this.list_workspace();
+      }
+    },
+  },
+  created() {
     this.return__saldo();
-    this.startWatching();
   },
 };
 </script>

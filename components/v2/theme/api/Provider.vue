@@ -63,17 +63,16 @@ export default {
     },
   },
   head() {
-    const assets = this.data?.assets || {};
     const seo = this.data?.seo || {};
-    const icon = assets.icon || {};
+   
 
     return {
-      title: seo?.title || "Título Padrão",
+      title: seo?.title || "Aguarde...",
       meta: [
         {
           name: "theme-color",
           // Use notação de colchetes para propriedades com hífen
-          content: seo?.["theme-color"] || "#521C89",
+          content: seo?.["theme-color"] || "var(--primary)",
         },
         {
           property: "og:locale",
@@ -118,36 +117,36 @@ export default {
         {
           rel: "icon",
           type: "image/x-icon",
-          href: icon?.img32x32 || "/favicon.ico",
+          href: seo?.favicon || "",
         },
         {
           rel: "icon",
           type: "image/svg+xml",
           sizes: "32x32",
-          href: icon?.img32x32 || "",
+          href:seo?.favicon|| "",
         },
         {
           rel: "icon",
           type: "image/svg+xml",
           sizes: "96x96",
-          href: icon?.img96x96 || "",
+          href: seo?.favicon || "",
         },
         {
           rel: "icon",
           type: "image/svg+xml",
           sizes: "192x192",
-          href: icon?.img192x192 || "",
+          href: seo?.favicon || "",
         },
         {
           rel: "apple-touch-icon",
           sizes: "300x300",
-          href: icon?.img300x300 || "",
+          href: seo?.favicon || "",
         },
         {
           rel: "icon",
           type: "image/svg+xml",
           sizes: "512x512",
-          href: icon?.img512x512 || "",
+          href: seo?.favicon || "",
         },
       ],
     };

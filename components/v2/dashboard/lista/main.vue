@@ -5,9 +5,11 @@
         <div v-if="!loading?.extrato && !loading?.saldo">
           <div
             v-if="
-              data_user_permission?.digital_account &&
-              !loading?.extrato &&
-              !loading?.saldo
+              (data_user_permission?.digital_account &&
+                !loading?.extrato &&
+                !loading?.saldo) ||
+              type === 'titular' ||
+              type === 'responsavel'
             "
           >
             <div class="d-flex justify-space-between align-center mb-7">
@@ -18,7 +20,7 @@
                 ></i>
                 <h2>Últimas transações</h2>
               </div>
-              <v-btn to="/painel/extrato" class="primary--text" text color="primary">Ver todas</v-btn>
+              <v-btn to="/painel/extrato" text color="primary">Ver todas</v-btn>
             </div>
             <div class="itens_list" v-if="list_conta_digital.length > 0">
               <div
@@ -37,13 +39,19 @@
                 <div class="collumn-name px-3">
                   <div
                     class="font_default_extrato bold mb-1"
-                    v-if="data?.transfer_part?.part_name || data?.payer?.name"
+                    v-if="
+                      data?.transfer_part?.part_name ||
+                      data?.payer?.name ||
+                      data?.transaction?.descripition
+                    "
                   >
                     {{
                       $textCaptalizer(
                         $ListTreeText(
                           $Name_default(
-                            data?.transfer_part?.part_name || data?.payer?.name
+                            data?.transfer_part?.part_name ||
+                              data?.payer?.name ||
+                              data?.transaction?.descripition
                           )
                         )
                       )
@@ -59,7 +67,7 @@
                     {{
                       $MascDocDefault(
                         $Doc_default(
-                            data?.transfer_part?.taxpayer_id ||
+                          data?.transfer_part?.taxpayer_id ||
                             data?.payer?.part_taxpayer_id ||
                             data?.payer?.taxpayer_id ||
                             data?.order_adjustment?.admin_origen
@@ -113,6 +121,7 @@
       </div>
       <div
         class="card_one_main cards_style pa-5 ml-2 d-flex align-center justify-center"
+        v-if="theme?.data?.initcomp?.app"
       >
         <div v-if="!loading?.extrato && !loading?.saldo">
           <h3 class="mb-1 text-center">Conheça nosso aplicativo</h3>
@@ -155,6 +164,12 @@
         </div>
         <V2DashboardListaLoadingApp v-else />
       </div>
+      <div
+        v-else
+        class="card_one_main cards_style pa-5 ml-2 d-flex align-center justify-center"
+      >
+        <V2DashboardLinkpayMain />
+      </div>
     </div>
   </div>
 </template>
@@ -178,6 +193,15 @@ export default {
     loading: {
       type: Object,
       default: {},
+    },
+    type: {
+      type: String,
+      default: "",
+    },
+  },
+  computed: {
+    theme() {
+      return this.$store?.state?.theme?.data || null;
     },
   },
 };

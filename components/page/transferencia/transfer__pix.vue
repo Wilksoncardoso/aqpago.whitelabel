@@ -1,10 +1,6 @@
 <template lang="html">
   <div class="card__pix__resumo">
-    <h1 class="titulo__resumo__pix">Transferindo</h1>
-    <p class="text__resumo__pix">
-      Para
-      <span class="primary--text font-weight-bold">{{ data__pix.name }}</span>
-    </p>
+    <h1 class="titulo__resumo__pix">Transferencia Pix</h1>
     <div class="d-flex item__value__flex">
       <div class="item__value">
         <h1 class="value__pix primary--text">R$ {{ amount | money }}</h1>
@@ -17,20 +13,18 @@
       <div class="detalhes__pix">
         <p class="titulo">Confirme os dados:</p>
 
-        <p class="label">CPF | CNPJ:</p>
-        <p class="value">{{ data__pix.taxId }}</p>
+        <p class="label">{{ type_label }}</p>
+        <p class="value">{{ $MascDocDefault(insertkey) }}</p>
 
-        <p class="label">Instituição:</p>
-        <p class="value">{{ instituicao }}</p>
 
         <div v-if="conta__escolhida == '0' && data__pix.clientCore">
           <p class="label">Dados bancários:</p>
           <p class="value">
             Agência 0001 | Conta
-            {{ data__pix.clientCorePayload[0]?.accountNumber }}
+            {{ data__pix.accountNumber }}
           </p>
         </div>
-        <div
+        <!-- <div
           v-if="
             (conta__escolhida == '1' && data__pix.clientCore) ||
             !data__pix.clientCore
@@ -38,7 +32,7 @@
         >
           <p class="label">Chave Pix:</p>
           <p class="value">{{ data__pix.id | format__documento }}</p>
-        </div>
+        </div> -->
       </div>
       <div class="detalhes__saldo">
         <div class="d-flex justify-space-between saldo__disponivel">
@@ -76,7 +70,8 @@
         </div>
       </div>
     </div>
-    <v-checkbox
+
+    <!-- <v-checkbox
       v-model="checkbox"
       off-icon="icon-checkbox-off"
       on-icon="icon-checkbox-on"
@@ -93,7 +88,7 @@
       auto-grow
       rows="1"
     >
-    </v-textarea>
+    </v-textarea> -->
     <v-divider class="my-6"></v-divider>
 
     <br />
@@ -150,7 +145,16 @@ export default {
       type: String,
       required: true,
     },
+    type: {
+      type: String,
+      required: true,
+    },
+    insertkey: {
+      type: String,
+      required: false,
+    },
   },
+ 
   data() {
     return {
       loading: false,
@@ -195,8 +199,13 @@ export default {
     },
     confirm__transferencia() {
       this.loading = true;
+      const form = this.form
+      form.method = this.conta__escolhida === "0" ? 'p2p' :'pix'
+      form.method === 'p2p' ?  (form.accredited_reciver_id = this.data__pix.id) :''
+      form.dict_key = this.insertkey
+
       this.$axios
-        .$post("/tranfer-service", this.form)
+        .$post("/tranfer-service", form)
         .then((response) => {
           this.loading = false;
           this.data = response;
@@ -220,19 +229,19 @@ export default {
     form__() {
       var amount = this.amount;
       this.form.amount = parseFloat(amount * 100);
-      if (this.data__pix.clientCore) {
-        if (this.conta__escolhida === "0") {
-          this.form.accredited_reciver_id =
-            this.data__pix.clientCorePayload[0]?.id;
-          this.form.method = "p2p";
-        } else if (this.conta__escolhida === "1") {
-          this.form.dict_key = this.data__pix.id;
-          this.form.method = "pix";
-        }
-      } else {
-        this.form.dict_key = this.data__pix.id;
-        this.form.method = "pix";
-      }
+      // if (this.data__pix.clientCore) {
+      //   if (this.conta__escolhida === "0") {
+      //     this.form.accredited_reciver_id =
+      //       this.data__pix.clientCorePayload[0]?.id;
+      //     this.form.method = "p2p";
+      //   } else if (this.conta__escolhida === "1") {
+      //     this.form.dict_key = this.data__pix.id;
+      //     this.form.method = "pix";
+      //   }
+      // } else {
+      //   this.form.dict_key = this.data__pix.id;
+      //   this.form.method = "pix";
+      // }
     },
   },
   computed: {
@@ -241,6 +250,22 @@ export default {
         this.tax.fee_plan_out.fixed_fee -
         this.form.amount * (this.tax.fee_plan_out.percentage_rate / 100)
       );
+    },
+    type_label(){
+      let type = this.type
+      let key = this.insertkey
+
+      if(type === 'doc'){
+      return  key.length === 11 ? "CPF :" : "CNPJ :"
+      }else if(type === 'phone'){
+        return  "Telefone :"
+      }else if(type === 'email'){
+        return  "E-mail :"
+      }
+      else {
+        return  "Chave Aleatório :"
+      }
+
     },
     instituicao() {
       if (this.data__pix.clientCore) {
@@ -254,7 +279,7 @@ export default {
       }
     },
     transferido() {
-      return this.amount - Math.abs(this.value__tax);
+      return  this.amount;
     },
     resultado__end() {
       // this.transferido

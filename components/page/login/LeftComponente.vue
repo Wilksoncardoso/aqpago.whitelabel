@@ -8,7 +8,11 @@
               class="size_logo"
               :src="Logo_main"
               :alt="theme?.data?.initcomp?.description"
-              :width=" SetForm?.assets?.logotipe?.size || theme?.assets?.logotipe?.size || 130"
+              :width="
+                SetForm?.assets?.logotipe?.size ||
+                theme?.assets?.logotipe?.size ||
+                130
+              "
             />
           </nuxt-link>
           <div class="d-flex">
@@ -18,20 +22,40 @@
           </div>
         </div>
       </div>
-      <div class="d-flex-inline item__app">
+      <div
+        class="d-flex-inline item__app"
+        v-if="SetForm?.data?.initcomp?.app || theme?.data.initcomp.app"
+      >
         <div>
           <p>
-            {{ description_bottom ?  description_bottom : "" }}
+            {{ description_bottom ? description_bottom : "" }}
           </p>
         </div>
         <div class="d-flex">
           <div style="margin-right: 25px">
-            <a :href="link.apple" target="_blank" rel="AQpago paybank - apple">
+            <a
+              :href="link.apple"
+              target="_blank"
+              rel="AQpago paybank - apple"
+              v-if="
+                (SetForm?.data?.initcomp?.app &&
+                  SetForm?.data?.initcomp?.appstore) ||
+                theme?.data.initcomp.appstore
+              "
+            >
               <icon_app_store />
             </a>
           </div>
           <div>
-            <a :href="link.play" target="_blank" rel="AQpago paybank - Play">
+            <a
+              :href="link.play"
+              target="_blank"
+              rel="AQpago paybank - Play"
+              v-if="
+                SetForm?.data?.initcomp?.googlepay ||
+                theme?.data.initcomp.googlepay
+              "
+            >
               <icon_app_googlepay />
             </a>
           </div>
@@ -77,7 +101,7 @@ export default {
       },
     };
   },
-  methods:{
+  methods: {
     return_img(img) {
       return URL.createObjectURL(img);
     },
@@ -101,16 +125,20 @@ export default {
       let SetForm = this.SetForm?.data?.initcomp?.bottom_text;
       return SetForm ? SetForm : TxtBottom;
     },
-    background_main(){
-      let bgApi = this.theme?.assets?.initcomp?.img
-      let bgASetForm = this.SetForm?.assets?.initcomp?.img ? this.return_img(this.SetForm?.assets?.initcomp?.img) :  null
+    background_main() {
+      let bgApi = this.theme?.assets?.initcomp?.img;
+      let bgASetForm = this.SetForm?.assets?.initcomp?.img
+        ? this.return_img(this.SetForm?.assets?.initcomp?.img)
+        : null;
       return bgASetForm ? bgASetForm : bgApi;
     },
-     Logo_main(){
-      let LogoApi = this.theme?.assets?.logotipe?.img
-      let LogoForm = this.SetForm?.assets?.logotipe?.img ? this.return_img(this.SetForm.assets.logotipe.img) :  null
+    Logo_main() {
+      let LogoApi = this.theme?.assets?.logotipe?.img;
+      let LogoForm = this.SetForm?.assets?.logotipe?.img
+        ? this.return_img(this.SetForm.assets.logotipe.img)
+        : null;
       return LogoForm ? LogoForm : LogoApi;
-    }
+    },
   },
 };
 </script>
@@ -131,12 +159,12 @@ export default {
 }
 .left__index {
   height: 100vh;
-  &.active{
-    .img__login{
+  &.active {
+    .img__login {
       width: 100%;
     }
   }
-  
+
   .size_logo {
     height: auto;
     object-fit: cover;

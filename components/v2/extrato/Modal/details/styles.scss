@@ -61,7 +61,7 @@
       color: #131313;
       background: #f1f4f9;
     }
-    &.Falha {
+    &.Falha , &.Expirado{
       color: #131313;
       background: #f1f4f9;
       opacity: 0.5;
@@ -124,7 +124,7 @@
       background: #f9f5ff;
       i {
         font-size: 20px;
-        color: var(--primary);
+        color: #521c89;
       }
     }
   }

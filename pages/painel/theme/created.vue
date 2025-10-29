@@ -19,13 +19,6 @@ export default {
             img: "", // png e svg
             size:50,
           },
-          icon: {
-            img32x32: "", // png
-            img96x96: "", // png
-            img192x192: "", // png
-            img300x300: "", // png
-            img512x512: "", // png
-          },
         },
         styles: {
           color: {
@@ -51,6 +44,9 @@ export default {
             title: "", //string
             description: "", //string
             bottom_text: "", //string
+            app:false,
+            googlepay:"",
+            appstore:"",
           },
           business: {
             name: "", //string
@@ -68,6 +64,7 @@ export default {
           },
         },
         seo: {
+          favicon:null,
           title: "", //string
           description: "", //string
           "theme-color": "", //string

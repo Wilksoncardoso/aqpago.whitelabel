@@ -244,7 +244,7 @@ export default {
       }
     },
     data__atual() {
-      const now = new Date(this.session__data?.date_now);
+      const now = new Date();
       const year = now.getFullYear();
       const month = String(now.getMonth() + 1).padStart(2, "0");
       const day = String(now.getDate()).padStart(2, "0");
@@ -399,7 +399,7 @@ export default {
         &.ANALISANDO {
           background: #f3f3f3;
         }
-        &.APROVADA {
+        &.APROVADO {
           color: #1AAA55;
           background: rgba(114, 163, 134, 0.10); 
         }

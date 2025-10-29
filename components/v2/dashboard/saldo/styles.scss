@@ -1,6 +1,15 @@
 $color_cont: #989898;
 $color_down: #f15b50;
 $color_up: #10b981;
+.description_body{
+    color: var(--content-tertiary, #989898);
+    font-size: var(--Typography-size-body-14px, 14px);
+    font-style: normal;
+    font-weight: 400;
+    line-height: var(--Typography-size-line-height-2-xs, 20px); /* 142.857% */
+    letter-spacing: -0.28px;
+    margin-bottom: 8px;
+}
 .cards_saldo_main {
   .card_main {
     border-radius: 12px;

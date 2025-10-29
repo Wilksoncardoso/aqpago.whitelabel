@@ -1,9 +1,20 @@
 <template lang="html">
-  <div >
+  <div>
     <div class="bg__transferencia">
-    <component :is="components" :amount="amount" :lista_ddd="lista_ddd"  :descripition="descripition"  :tax="tax" :data__pix="data__pix" :conta__escolhida="conta__escolhida"/>
-    <modal />
-  </div>
+      <component
+        :is="components"
+        :amount="amount"
+        :lista_ddd="lista_ddd"
+        :descripition="descripition"
+        :tax="tax"
+        :data__pix="data__pix"
+        :conta__escolhida="conta__escolhida"
+        :type="type"
+        :insertkey="insertkey"
+      />
+      <modal />
+      <PageTransferenciaSuccess ref="ModalSuccess" />
+    </div>
   </div>
 </template>
 <script>
@@ -16,16 +27,18 @@ export default {
   components: {
     index__transferencia,
     transfer,
-    modal
+    modal,
   },
   data() {
     return {
       amount: 0,
-      page_windows:1,
+      page_windows: 1,
       data__pix: [],
-      tax:[],
-      descripition:'',
-      conta__escolhida:'0',
+      tax: [],
+      type: "",
+      insertkey: "",
+      descripition: "",
+      conta__escolhida: "0",
       lista_ddd: {
         11: "SP",
         12: "SP",
@@ -101,37 +114,33 @@ export default {
     this.$nuxt.$on("dados__transferencia", ($event) =>
       this.dados__transferencia($event)
     );
-    this.$nuxt.$on("page__windows", ($event) =>
-      this.page__windows($event)
-    );
-   
+    this.$nuxt.$on("page__windows", ($event) => this.page__windows($event));
   },
   methods: {
     dados__transferencia($event) {
       this.amount = $event.valor;
       this.data__pix = $event.dados_pix;
       this.page_windows = $event.page_windows;
-      this.descripition = $event.descripition
-      this.tax = $event.tax
-      this.conta__escolhida = $event.conta__escolhida
-
-
+      this.descripition = $event.descripition;
+      this.tax = $event.tax;
+      this.conta__escolhida = $event.conta__escolhida;
+      this.type = $event.type;
+      this.insertkey = $event.key;
     },
-    page__windows($event){
+    page__windows($event) {
       this.page_windows = $event.page_windows;
     },
-    
   },
-  computed:{
-    components(){
+  computed: {
+    components() {
       switch (this.page_windows) {
         case 1:
-        return index__transferencia;
+          return index__transferencia;
         case 2:
-        return transfer;
+          return transfer;
       }
-    }
-  }
+    },
+  },
 };
 </script>
 <style lang="scss">

@@ -10,16 +10,16 @@ $media-large: "1600px";
 $media-palco-lg: 936px;
 $media-palco-xl: 1400px;
 $color-primary: var(--primary);
-$color-secondary-item:#A5A5A5;
+$color-secondary-item: #a5a5a5;
 $color-venda-online: #5094d9;
 $color-primary-50: #f9f5fd;
-$color-primary-secondary: #c2c2ff;
+$color-primary-secondary: var(--primaryop);
 $color__falha: #afafaf;
 $color-white: #fff;
 $color-black: #131313;
 $--neutro-200: #e8e8e8;
 $bg-termos: #f8f9fd;
-$color-border:#E5E5E5;
+$color-border: #e5e5e5;
 
 //Status
 
@@ -28,8 +28,6 @@ $status__failed: #afafaf;
 $status__blocked: #f14a2f;
 $status__created: #f5cd00;
 $status__pedente: #ef8a13;
-
-
 
 $color-black: #131313;
 $--neutro-200: #e8e8e8;
@@ -66,7 +64,7 @@ $alert-background-sucess-subtle: #f2f9f5;
 $alert-background-warning: #ffead1;
 $alert-background-warning-subtle: #fff5e9;
 $alert-error: #c60f21;
-$alert-content-error: #8B352E;
+$alert-content-error: #8b352e;
 $alert-content-error-accent: #f15b50;
 $alert-content-info: #2862b4;
 $alert-content-info-accent: #388bff;
@@ -96,7 +94,7 @@ $content-tertiary: #989898;
 $background-tertiary: #dcdcdc;
 $background-surface-background: #f7f7f8;
 $background-neutral: #f2f2f5;
-$background-brand-opacity: var(--primary)b2;
+$background-brand-opacity: var(--primary) b2;
 
 $radius-2xl: 20px;
 $radius-1xl: 16px;
@@ -199,7 +197,7 @@ i {
   &.content-surface-fill {
     color: $background-secondary;
   }
-  
+
   &.alert-content-sucess-accent-fill {
     color: $alert-content-sucess-accent;
   }
@@ -264,25 +262,41 @@ html {
   max-width: 100% !important;
   margin-left: auto !important;
   margin-right: auto !important;
-
+}
   .group__button__tp__conta {
-    width: 100% !important;
-    padding: 2px !important;
-    border: 3px solid #ffffff !important;
-    box-shadow:
-      0px -2px 4px rgba(0, 0, 0, 0.05),
+    padding: 4px;
+    margin-bottom: 48px;
+    background: #fff !important;
+    box-shadow: 0px -2px 4px rgba(0, 0, 0, 0.05),
       0px 2px 4px rgba(0, 0, 0, 0.05);
     .v-btn {
-      width: 50% !important;
-      .v-btn--active {
-        &::before {
-          border-radius: 30px !important;
+      border-color: none !important;
+      text-transform: none !important;
+      background: #fff !important;
+      border: 0;
+      border-radius: 30px !important;
+      width: 179px !important;
+      padding: 2px !important;
+      &.v-btn--active {
+        background: #521c89 !important;
+        border-radius: 30px !important;
+        .v-btn__content {
+          color: #fff;
         }
+      }
+      &::before {
+        opacity: 0 !important;
+      }
+      .v-btn__content {
+        font-weight: 700;
+        font-size: 14px;
+        line-height: 17px;
+        color: #521c89;
+        padding-top: 17px;
+        padding-bottom: 17px;
       }
     }
   }
-}
-
 .container__body {
   /* margin-left: auto;
    margin-right: auto;*/
@@ -349,7 +363,12 @@ html {
 }
 
 .bg__login {
-  background: linear-gradient(240.58deg, var(--primary) -29%, #1d0931 42.16%, #1d0931 57.16%);
+  background: linear-gradient(
+    240.58deg,
+    var(--primary) -29%,
+    #1d0931 42.16%,
+    #1d0931 57.16%
+  );
   height: auto;
   @media (min-width: $media-large) {
     height: 100vh;
@@ -361,8 +380,7 @@ html {
 }
 .button__login {
   height: 51px !important;
-  box-shadow:
-    0px 2px 4px rgba(136, 152, 165, 0.02),
+  box-shadow: 0px 2px 4px rgba(136, 152, 165, 0.02),
     0px 8px 16px rgba(85, 97, 108, 0.05);
   border-radius: 16px;
 
@@ -389,7 +407,7 @@ html {
       .v-input__slot {
         height: 64px;
         background: #f8f9fd;
-        border: 1px solid #c2c2ff;
+        border: 1px solid var(--primaryop);
         border-radius: 8px;
         .v-text-field__slot {
           input {
@@ -479,7 +497,7 @@ html {
   }
 }
 
-.Vue-Toastification__container{
+.Vue-Toastification__container {
   z-index: 10000000;
 }
 .Vue-Toastification__toast {
@@ -555,11 +573,10 @@ main {
   margin-right: auto;
 }
 
-.theme--light.v-btn--active::before, .theme--light.v-btn--active:hover::before {
+.theme--light.v-btn--active::before,
+.theme--light.v-btn--active:hover::before {
   opacity: 0;
 }
-
-
 
 //cores
 $color-content-tertiary: #989898;
@@ -574,7 +591,7 @@ $alert-background-sucess-subtle: #f2f9f5;
 $alert-background-warning: #ffead1;
 $alert-background-warning-subtle: #fff5e9;
 $alert-error: #c60f21;
-$alert-content-error: #8B352E;
+$alert-content-error: #8b352e;
 $alert-content-error-accent: #f15b50;
 $alert-content-info: #2862b4;
 $alert-content-info-accent: #388bff;
@@ -604,7 +621,7 @@ $content-tertiary: #989898;
 $background-tertiary: #dcdcdc;
 $background-surface-background: #f7f7f8;
 $background-neutral: #f2f2f5;
-$background-brand-opacity: var(--primary)30;
+$background-brand-opacity: var(--primary) 30;
 
 // space icon
 $space_8: 8px;
@@ -689,12 +706,11 @@ i {
   &.content-surface-fill {
     color: $background-secondary;
   }
-  
+
   &.alert-content-sucess-accent-fill {
     color: $alert-content-sucess-accent;
   }
 }
-
 
 .button_16 {
   height: $space_16;

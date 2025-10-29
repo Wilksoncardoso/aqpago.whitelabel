@@ -70,25 +70,25 @@
         </div>
         <div class="py-3 px-5 card mb-4">
           <div class="d-flex justify-space-between flex-wrap">
-            <div class="card_item">
+            <div class="card_item" v-if="recebedor[0]">
               <div class="text_label">Recebedor</div>
               <div class="text_label value">
                 {{ recebedor ? $textCaptalizer(recebedor[0]) : "" }}
               </div>
             </div>
-            <div class="card_item">
+            <div class="card_item" v-if="recebedor[1]">
               <div class="text_label">CPF/CNPJ</div>
               <div class="text_label value">
                 {{ recebedor ? $MascDocDefault(recebedor[1]) : "" }}
               </div>
             </div>
-            <div class="card_item">
+            <div class="card_item" v-if="pagador[0]">
               <div class="text_label">Pagador</div>
               <div class="text_label value">
                 {{ pagador ? $textCaptalizer(pagador[0]) : "" }}
               </div>
             </div>
-            <div class="card_item">
+            <div class="card_item" v-if="pagador[1]">
               <div class="text_label">CPF/CNPJ</div>
               <div class="text_label value">
                 {{ pagador ? $MascDocDefault(pagador[1]) : "" }}
@@ -105,46 +105,57 @@
               <div class="text_label">Descrição</div>
               <div class="text_label value">
                 {{
-                  data?.order_adjustment?.description ||
-                  data?.transaction?.descripition
+                  data?.resource === "transaction-order"
+                    ? "Ajuste Interno Tesouraria AQBank"
+                    : $textCaptalizer(
+                        $Name_default(
+                          data?.order_adjustment?.description ||
+                            data?.transaction?.descripition
+                        )
+                      )
                 }}
               </div>
             </div>
           </div>
         </div>
         <div
-          @click="return_pix = !return_pix"
-          class="card py-3 px-5 mb-4 card_pix_devolver"
-          v-if="
-            (data.transaction.type === 'pix' && data?.type === 'in') ||
-            (data.transaction.type === 'invoice-pix' && data?.type === 'in') ||
-            (data.transaction.resource === 'invoice-pix' &&
-              data?.type === 'in' &&
-              data?.status != 'created') ||
-            (data.resource === 'transfer' &&
-              data?.transaction?.type === 'manual')
-          "
+          v-if="this.$pFloat(ValorReturned) != this.$pFloat(this.data?.amount)"
         >
-          <div class="d-flex align-center justify-space-between">
-            <div class="d-flex">
-              <div class="icon_money d-flex align-center justify-center mr-3">
-                <i class="ri-refund-2-line"></i>
-              </div>
-              <div class="body">
-                <div class="text_label value">Devolver Pix</div>
-                <div class="text_label">
-                  Você pode devolver o valor total ou parcial até.
+          <div
+            @click="return_pix = !return_pix"
+            class="card py-3 px-5 mb-4 card_pix_devolver"
+            v-if="
+              (data.transaction.type === 'pix' && data?.type === 'in') ||
+              (data.transaction.type === 'invoice-pix' &&
+                data?.type === 'in') ||
+              (data.transaction.resource === 'invoice-pix' &&
+                data?.type === 'in' &&
+                data?.status != 'created') ||
+              (data.resource === 'transfer' &&
+                data?.transaction?.type === 'manual')
+            "
+          >
+            <div class="d-flex align-center justify-space-between">
+              <div class="d-flex">
+                <div class="icon_money d-flex align-center justify-center mr-3">
+                  <i class="ri-refund-2-line"></i>
+                </div>
+                <div class="body">
+                  <div class="text_label value">Devolver Pix</div>
+                  <div class="text_label">
+                    Você pode devolver o valor total ou parcial até.
+                  </div>
                 </div>
               </div>
-            </div>
-            <div>
-              <v-btn class="pa-2 primary--text" icon>
-                <i
-                  :class="
-                    return_pix ? 'ri-close-line' : 'ri-arrow-right-s-line'
-                  "
-                ></i>
-              </v-btn>
+              <div>
+                <v-btn class="pa-2 primary--text" icon>
+                  <i
+                    :class="
+                      return_pix ? 'ri-close-line' : 'ri-arrow-right-s-line'
+                    "
+                  ></i>
+                </v-btn>
+              </div>
             </div>
           </div>
         </div>
@@ -175,10 +186,20 @@
                   }}
                 </div>
               </div>
-              <div class="card_item">
-                <div class="text_label">Valor transferido</div>
+              <!-- <div class="card_item">
+                <div class="text_label">Valor Debitado</div>
                 <div class="text_label value">
                   R$ {{ $maskMoney(valor__total) }}
+                </div>
+              </div> -->
+
+              <div
+                class="card_item"
+                v-if="ValorReturned > 0 && data?.status === 'paid'"
+              >
+                <div class="text_label">Valor devolvido</div>
+                <div class="text_label value">
+                  R$ {{ $maskMoney(ValorReturned) }}
                 </div>
               </div>
             </div>
@@ -264,7 +285,12 @@
             >
           </div>
         </div>
-        <V2ExtratoModalReturnPixMain :data="data" :saldo="saldo" v-else />
+        <V2ExtratoModalReturnPixMain
+          :data="data"
+          :ValorReturned="ValorReturned"
+          :saldo="saldo"
+          v-else
+        />
       </v-card>
     </v-dialog>
   </div>
@@ -297,14 +323,12 @@ export default {
   },
 
   methods: {
-    open(id) {
+    open(data) {
       this.dialog = true;
-      this.loading.comp = true;
-      this.id = id;
       this.data = {};
+      this.data = data;
       this.return_pix = false;
-
-      this.return_consult_details();
+      this.loading.comp = false;
     },
     return_title_comp(text) {
       switch (text) {
@@ -342,24 +366,7 @@ export default {
           this.loading.webhook = false;
         });
     },
-    async return_consult_details() {
-      this.$axios
-        .$get("/user-moviments/" + this.id)
-        .then((response) => {
-          this.data = response.data;
-        })
-        .catch((error) => {
-          this.error =
-            error?.response?.data?.mensagem ||
-            error?.response?.data?.error ||
-            "ops, algo deu errado";
-          this.$toast.error(this.error);
-          this.dialog = false;
-        })
-        .finally(() => {
-          this.loading.comp = false;
-        });
-    },
+
     async copy_global(txt) {
       var m = document;
       txt = m.createTextNode(txt);
@@ -455,6 +462,15 @@ export default {
         case "in":
           return [this.$Name_default(name_in), doc_in];
       }
+    },
+    ValorReturned() {
+      let lista = this.data.history;
+
+      let totalReturned = lista
+        .filter((item) => item.status === "returned")
+        .reduce((soma, item) => soma + parseFloat(item.amount), 0);
+
+      return totalReturned.toFixed(2);
     },
   },
   filters: {

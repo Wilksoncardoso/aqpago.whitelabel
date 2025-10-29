@@ -1,0 +1,59 @@
+$size_icon_button: 30px;
+.list-main-link-payment {
+  width: 100%;
+  .title_comp_link {
+    p {
+      color: #838383 !important;
+    }
+  }
+  .list_link {
+    max-height: 300px;
+    overflow: auto;
+    .item {
+      border-bottom: 1px solid #eeeeee;
+      .name {
+        white-space: nowrap;
+        overflow: hidden;
+        max-width: 100px;
+        text-overflow: ellipsis;
+        font-size: 12px !important;
+        font-size: var(--Typography-size-body-12px, 12px) !important;
+        font-style: normal !important;
+        line-height: 16px !important;
+        line-height: var(--Typography-size-line-height-xxs, 16px) !important;
+        letter-spacing: -0.24px !important;
+        color: var(--content-primary, #131313);
+      }
+      .icon_copy {
+        min-width: $size_icon_button !important;
+        width: $size_icon_button !important;
+        height: $size_icon_button !important;
+        min-height: $size_icon_button !important;
+      }
+      .price {
+        color: var(--content-primary, #131313);
+        font-size: var(--Typography-size-body-12px, 12px) !important;
+        font-style: normal !important;
+        line-height: 16px !important;
+        line-height: var(--Typography-size-line-height-xxs, 16px) !important;
+        letter-spacing: -0.24px !important;
+      }
+      .number{
+        color: #838383 !important;
+        font-size: 12px;
+      }
+    }
+  }
+  .card_payments {
+    .group-icons {
+      color: var(--primary);
+      font-size: 18px;
+    }
+    p {
+      color: #838383 !important;
+    }
+    .group-icons{
+        max-width: 120px;
+    }
+  }
+}

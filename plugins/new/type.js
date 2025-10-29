@@ -89,6 +89,24 @@ export default ({ app }, inject) => {
     }
   }
 
+  const getTypeSeller = (type) => {
+    switch (type) {
+      case 'inactive':
+        return 'Inativo'
+      case 'active':
+        return 'Aprovado'
+      case 'analysis':
+        return 'Em análise'
+      case 'refused':
+        return 'Recusado'
+
+      case 'created':
+        return 'Criado'
+
+      default:
+        return type
+    }
+  }
 
   const ReturnTypeContDigital = (type, resource) => {
     if (type === "ted-cip") return "CIP";
@@ -113,11 +131,13 @@ export default ({ app }, inject) => {
     if (status === "created" && resource === "invoice_boleto") {
       return "Criado";
     } else if (status === "created") {
-      return "Aguardando";
+      return "Criado";
     } else if (status === "failed") {
       return "Falha";
     } else if (status === "blocked") {
       return "Bloqueado";
+    } else if (status === "expired") {
+      return "Expirado";
     } else if (status === "returned" || resource === "returned") {
       return "Devolvido";
     } else if (
@@ -138,6 +158,69 @@ export default ({ app }, inject) => {
       return [status, type, resource, input];
     }
   }
+
+  const DataTimeReturn = (input) => {
+    // Guardas
+    if (!input) return ""; // ou "—"
+
+    // Normaliza para Date
+    const parseToDate = (val) => {
+      if (val instanceof Date) return new Date(val.getTime());
+
+      if (typeof val === "number") return new Date(val); // timestamp
+
+      if (typeof val === "string") {
+        const s = val.trim();
+        // DD/MM/YYYY
+        if (/\d{2}\/\d{2}\/\d{4}/.test(s)) {
+          const [dd, mm, yyyy] = s.split("/");
+          // cria como YYYY-MM-DD para evitar locale
+          return new Date(`${yyyy}-${mm}-${dd}T00:00:00`);
+        }
+        // YYYY-MM-DD (ou ISO)
+        if (/^\d{4}-\d{2}-\d{2}/.test(s)) {
+          // deixa o Date cuidar do resto
+          return new Date(s);
+        }
+      }
+      // Falhou
+      return new Date("Invalid");
+    };
+
+    const inicio = parseToDate(input);
+    if (isNaN(inicio.getTime())) return ""; // ou "Data inválida"
+
+    const dataFim = new Date(); // agora
+
+    // Se a data de início é no futuro, você pode decidir o que fazer.
+    // Aqui, forço a diferença não-negativa (troco as datas).
+    let start = inicio;
+    let end = dataFim;
+    if (inicio > dataFim) {
+      start = dataFim;
+      end = inicio;
+    }
+
+    let anos = end.getFullYear() - start.getFullYear();
+    let meses = end.getMonth() - start.getMonth();
+    let dias = end.getDate() - start.getDate();
+
+    // Ajusta dias negativos "pegando emprestado" do mês anterior
+    if (dias < 0) {
+      meses--;
+      // último dia do mês anterior ao 'end'
+      const ultimoDiaMesAnterior = new Date(end.getFullYear(), end.getMonth(), 0).getDate();
+      dias += ultimoDiaMesAnterior;
+    }
+
+    // Ajusta meses negativos
+    if (meses < 0) {
+      anos--;
+      meses += 12;
+    }
+
+    return `${anos} ano(s), ${meses} mês(es)`;
+  };
 
   const getInputContaDigital = (input) => {
     switch (input) {
@@ -278,7 +361,9 @@ export default ({ app }, inject) => {
   ];
 
   inject('GetUFBR', GetUFBR)
+  inject('getTypeSeller', getTypeSeller)
   inject('getTerminal', getTerminal)
+  inject('DataTimeReturn', DataTimeReturn)
   inject('getStatusStore', getStatusStore)
   inject('getAntecipacao', getAntecipacao)
   inject('getFlag', getFlag)

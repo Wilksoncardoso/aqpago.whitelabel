@@ -2,7 +2,6 @@
   <div>
     <div class="card mb-0" v-show="window === 0">
       <h4 class="mb-2">Devolução Pix</h4>
-
       <div class="d-flex align-center mb-4">
         <div class="card_saldo" style="width: 392px">
           <div class="d-flex justify-space-between">
@@ -113,11 +112,16 @@ export default {
     "form.amount"(NewVal) {
       let saldo = this.$pFloat(this.saldo?.balance?.amount);
       let pix = this.$pFloat(this.data?.amount);
+      let devolvido = this.$pFloat(pix - this.ValorReturned || 0);
 
-      if (NewVal > saldo)
+      // limite é o menor entre devolvido e saldo
+      let limite = Math.min(saldo, devolvido);
+
+      if (NewVal > limite) {
         setTimeout(() => {
-          this.form.amount = saldo;
+          this.form.amount = limite;
         }, 2000);
+      }
     },
   },
   props: {
@@ -128,6 +132,10 @@ export default {
     data: {
       type: Object,
       default: () => ({}),
+    },
+    ValorReturned: {
+      type: String,
+      default: "0",
     },
   },
   components: { Money },
@@ -141,7 +149,7 @@ export default {
 
       this.$axios
         .$post(
-          "/tranfer-service/" + this.data.transfer_part.id + "/return-order",
+          "/invoice-ex/" + this.data?.transaction?.invoice_id + "/return-order",
           {
             amount: this.price,
           }
@@ -175,7 +183,7 @@ export default {
       this.error = "";
       this.$axios
         .$post(
-          "/tranfer-service/" + this.autorization + "/return-confirm",
+          "/invoice-ex/" + this.autorization + "/return-confirm",
           this.form_sms
         )
         .then((response) => {
@@ -213,13 +221,18 @@ export default {
     message() {
       let saldo = this.$pFloat(this.saldo?.balance?.amount);
       let pix = this.$pFloat(this.data?.amount);
+      let devolvido = this.$pFloat(pix - this.ValorReturned || 0);
       let input = this.$pFloat(this.form.amount);
+
+      let limite = Math.min(saldo, devolvido);
+
       let msg = "Saldo insuficiente para devolver.";
       let error = "error--text";
 
-      if (saldo < input) {
+      if (input > limite) {
         return [msg, error];
       }
+
       return ["Você pode devolver o valor total ou parcial", ""];
     },
     button_logic() {

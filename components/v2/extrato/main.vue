@@ -1,11 +1,62 @@
 <template>
   <div class="List_extrato_comp cards_style pa-6">
-    <h3 class="mb-8">Extrato</h3>
-
+    <div class="d-flex justify-space-between mb-6">
+      <div>
+        <h3 class="mb-2">Extrato</h3>
+      </div>
+      <div class="d-flex align-center" v-if="Return_Transctions_now">
+        <div>
+          <V2DashboardGraficoLinechart
+            :return_transactions_order="return_transactions_order"
+            :loading_extratoday="loading_extratoday"
+            :height_comp="'100px'"
+            style="width: 700px"
+            class="mr-4"
+          />
+          <div class="text-center description"><b>Transações do Dia</b></div>
+        </div>
+        <V2ExtratoPainelMain :Calc_saldo="Calc_saldo" />
+      </div>
+    </div>
     <div class="card_two_main align-self-start">
       <div v-if="!loading?.extrato && !loading?.saldo && !loading?.fullextrato">
-        <div class="d-flex justify-space-between mb-6" id="ListaExtrato">
-          <div class="d-flex">
+        <div
+          class="d-flex align-center justify-space-between mb-6"
+          id="ListaExtrato"
+        >
+          <div class="d-flex align-center">
+            <div
+              class="Group-workspace text-center px-2 py-1 mr-2"
+              v-if="ViewWorkspaceFilter"
+            >
+              <div class="d-flex align-center">
+                <v-switch
+                  v-model="InFiltro.clients_bass"
+                  color="primary"
+                  class="mr-2 my-0 py-0"
+                  :label="`Transações Workpaces`"
+                  @change="ActiveBassValue($event)"
+                  hide-details
+                ></v-switch>
+
+                <!-- Workspace -->
+                <FilterSimple
+                  @SetFiltro="SetFiltro"
+                  @ClearFiltro="ClearFiltro"
+                  :title="
+                    InFiltro.client_id
+                      ? TextSetWorkspace(InFiltro.client_id)
+                      : 'Lista'
+                  "
+                  :type="['client_id', 'simples']"
+                  :SetIcon="'ri-building-2-line'"
+                  :selecao="InFiltro.client_id"
+                  :list="ArrayWorkspaces"
+                  class="mr-2"
+                />
+              </div>
+            </div>
+            <!-- status -->
             <FilterSimple
               @SetFiltro="SetFiltro"
               @ClearFiltro="ClearFiltro"
@@ -18,6 +69,7 @@
               :list="ArrayStatus"
               class="mr-2"
             />
+            <!-- type -->
             <FilterSimple
               @SetFiltro="SetFiltro"
               @ClearFiltro="ClearFiltro"
@@ -30,36 +82,51 @@
               :list="ArrayType"
               class="mr-2"
             />
+            <!-- Full start end -->
             <FilterCalendarStartandEnd
               @SetFiltro="SetFiltro"
               @ClearFiltro="ClearFiltro"
-              :title="InFiltro.date ?  $moment(InFiltro.date.inicio).format('DD/MMM') + ' ~ ' + $moment(InFiltro.date.fim).format('DD/MMM')  : 'Data'"
+              :title="
+                InFiltro.date
+                  ? $moment(InFiltro.date.inicio).format('DD/MMM') +
+                    ' ~ ' +
+                    $moment(InFiltro.date.fim).format('DD/MMM')
+                  : 'Data'
+              "
               :type="['date', 'simples']"
               :SetIcon="'ri-calendar-event-line'"
               :selecao="InFiltro.date"
               class="mr-2"
             />
           </div>
-          <v-btn class="btn_default" color="primary" @click="OpenModalExport()">
-            <i class="ri-download-2-line mr-2"></i>
-            Exportar extrato</v-btn
-          >
+          <div>
+            <v-btn
+              class="btn_default"
+              color="primary"
+              @click="OpenModalExport()"
+            >
+              <i class="ri-download-2-line mr-2"></i>
+              Exportar extrato</v-btn
+            >
+          </div>
         </div>
         <div
           v-if="
-            data_user_permission?.digital_account &&
-            !loading?.extrato &&
-            !loading?.saldo
+            (data_user_permission?.digital_account &&
+              !loading?.extrato &&
+              !loading?.saldo) ||
+            type === 'titular' ||
+            type === 'responsavel'
           "
           class="table_extrato"
         >
           <v-text-field
-            label="Busca de End2End ou Reference Id "
-            placeholder="Busca de End2End ou Reference Id"
+            label="Busca por, documento, End2End ou Reference Id"
+            placeholder="Busca por, documento, End2End ou Reference Id"
             class="input_buscar mb-0"
             solo
             v-model="InFiltro.pesquisa.value"
-            @input="SetPesquisa"
+            @input="onSearchInput"
           >
             <template #prepend-inner>
               <i class="ri-search-line mr-2" style="color: #989898"></i>
@@ -71,12 +138,13 @@
                 InFiltro.pesquisa.type && InFiltro.pesquisa.value.length > 0
               "
             >
-              <div class="d-flex">
+              <div class="d-flex align-center">
                 <v-chip
                   outlined
                   color="primary"
                   v-show="InFiltro.pesquisa.type"
                   class="mr-2"
+                  small
                   >{{ InFiltro.pesquisa.type }}
 
                   <v-btn
@@ -160,15 +228,22 @@
                   <div>
                     <div
                       class="font_default_extrato bold mb-1"
-                      v-if="data?.transfer_part?.part_name || data?.payer?.name"
+                      v-if="
+                        data?.transfer_part?.part_name ||
+                        data?.payer?.name ||
+                        data?.part_reversal?.part_name ||
+                        data?.transaction?.descripition ||
+                        data?.resource
+                      "
                     >
                       {{
                         $textCaptalizer(
-                          $ListTreeText(
-                            $Name_default(
-                              data?.transfer_part?.part_name ||
-                                data?.payer?.name
-                            )
+                          $Name_default(
+                            data?.transfer_part?.part_name ||
+                              data?.payer?.name ||
+                              data?.part_reversal?.part_name ||
+                              data?.transaction?.descripition ||
+                              data?.resource
                           )
                         )
                       }}
@@ -186,6 +261,7 @@
                             data?.transfer_part?.taxpayer_id ||
                               data?.payer?.part_taxpayer_id ||
                               data?.payer?.taxpayer_id ||
+                              data?.part_reversal?.part_taxpayer_id ||
                               data?.order_adjustment?.admin_origen
                           )
                         )
@@ -237,14 +313,13 @@
                   icon
                   class="pa-2"
                   color="primary"
-                  @click="OpenModal(data.id)"
+                  @click="return_consult_details(data.id)"
                 >
                   <i class="ri-file-search-line" style="font-size: 16px"></i>
                 </v-btn>
               </div>
             </div>
           </div>
-
           <V2DashboardListaNolist v-else />
         </div>
         <V2DashboardListaNolistsecurity v-else />
@@ -288,6 +363,7 @@ export default {
       type: Object,
       default: () => ({}),
     },
+    data_user: { type: Object, default: () => ({}) },
     saldo: {
       type: Object,
       default: () => ({}),
@@ -300,15 +376,27 @@ export default {
       type: Array,
       default: () => [],
     },
+    ArrayWorkspaces: {
+      type: Array,
+      default: () => [],
+    },
+    type: {
+      type: String,
+      default: "",
+    },
   },
   data() {
     return {
       permission: false,
-
+      transactions_day: [],
+      loading_extratoday: true,
+      searchTimeout: null,
       InFiltro: {
         date: "",
         status: "",
         type: "",
+        client_id: "",
+        clients_bass: false,
         pesquisa: {
           type: "",
           value: "",
@@ -320,11 +408,23 @@ export default {
   },
   created() {
     this.api__list__production();
+    this.Return_Transctions_day();
   },
   destroyed() {
     this.api__list__production();
   },
   methods: {
+    onSearchInput(data) {
+      // Limpa o timeout anterior sempre que o usuário digitar
+      if (this.searchTimeout) {
+        clearTimeout(this.searchTimeout);
+      }
+
+      // Define um novo timeout para 4 segundos
+      this.searchTimeout = setTimeout(() => {
+        this.SetPesquisa(data);
+      }, 2000);
+    },
     SetPesquisa(data) {
       if (!this.inputStarted) {
         this.inputStarted = true;
@@ -336,20 +436,36 @@ export default {
           this.InFiltro.pesquisa.type = this.GetTypePesquisa(data);
           this.inputStarted = false;
           this.GetFilter();
-        }, 3000);
+        }, 4000);
       }
     },
+    ActiveBassValue(value) {
+      value ? this.GetFilter() : this.ClearPesquisa();
+    },
     ChangePesquisa() {
-      this.InFiltro.pesquisa.type =
-        this.InFiltro.pesquisa.type === "endtoend"
-          ? "reference_id"
-          : "endtoend";
+      // this.InFiltro.pesquisa.type =
+      //   this.InFiltro.pesquisa.type === "endtoend"
+      //     ? "reference_id"
+      //     : "endtoend";
+      // this.GetFilter();
+      const types = ["endtoend", "reference_id", "client_document"];
+
+      if (!types.includes(this.InFiltro.pesquisa.type)) {
+        this.InFiltro.pesquisa.type = "endtoend";
+      } else {
+        const currentIndex = types.indexOf(this.InFiltro.pesquisa.type);
+        this.InFiltro.pesquisa.type = types[(currentIndex + 1) % types.length];
+      }
+
       this.GetFilter();
     },
     GetTypePesquisa(text) {
       let SetText = text;
+      console.log(text);
       if (SetText.startsWith("E") && SetText.length === 32) {
         return "endtoend";
+      } else if (SetText.length === 11 || SetText.length === 14) {
+        return "client_document";
       } else {
         return "reference_id";
       }
@@ -387,6 +503,9 @@ export default {
       this.InFiltro.date = "";
       this.InFiltro.status = "";
       this.InFiltro.type = "";
+      this.InFiltro.client_id = "";
+      this.InFiltro.clients_bass = false;
+
       this.GetFilter();
     },
     GetList(value) {
@@ -412,8 +531,26 @@ export default {
     TextSetType(text) {
       return this.ArrayType.find((item) => item.value === text)?.title;
     },
-    OpenModal(id) {
-      this.$refs.Details.open(id);
+    TextSetWorkspace(text) {
+      return this.ArrayWorkspaces.find((item) => item.value === text)?.title;
+    },
+    OpenModal(data) {
+      this.$refs.Details.open(data);
+    },
+    async return_consult_details(id) {
+      this.$axios
+        .$get("/user-moviments/" + id)
+        .then((response) => {
+          if (response.data) {
+            this.OpenModal(response.data);
+          }
+        })
+        .catch((error) => {
+          if (error) {
+            this.error = "Não foi possível visualizar a transação.";
+            this.$toast.error(this.error);
+          }
+        });
     },
     OpenModalExport() {
       this.$refs.Exporte.openExporte();
@@ -428,6 +565,74 @@ export default {
           }
         })
         .catch((error) => {});
+    },
+    async Return_Transctions_day() {
+      this.$axios
+        .$get("/user-balance-half")
+        .then((response) => {
+          this.transactions_day = response.data;
+        })
+        .catch((error) => {
+          if (error?.response?.status === 504) {
+            //time out
+            setTimeout(() => {
+              this.Return_Transctions_day();
+            }, 3000);
+          } else {
+            this.error = error?.response?.data?.mensagem;
+            this.loading_extratoday = false;
+          }
+        })
+        .finally(() => (this.loading_extratoday = false));
+    },
+  },
+  computed: {
+    return_transactions_order() {
+      const transactions = this.transactions_day.map((item) => ({
+        type: item.type,
+        amount: parseFloat(item.total_amount),
+        created_at: item.bucket_end,
+      }));
+      return transactions;
+    },
+    Calc_saldo() {
+      let totalIn = 0;
+      let totalOut = 0;
+      let countIn = 0;
+      let countOut = 0;
+
+      this.transactions_day.forEach((transacao) => {
+        const amount = parseFloat(transacao.total_amount) || 0;
+
+        if (transacao.type === "in") {
+          totalIn += amount;
+          countIn += transacao.total_count;
+        } else if (transacao.type === "out") {
+          totalOut += amount;
+          countOut += transacao.total_count;
+        }
+      });
+
+      return {
+        totalIn: totalIn.toFixed(2),
+        totalOut: totalOut.toFixed(2),
+        countIn,
+        countOut,
+      };
+    },
+    Return_Transctions_now() {
+      let date_now = this.$moment(new Date()).format("YYYY-MM-DD");
+      let data = this.list_conta_digital.filter(
+        (o) =>
+          (o.created_at.split(" ")[0] === date_now && o.status === "paid") ||
+          (o.created_at.split(" ")[0] === date_now && o.status === "success")
+      );
+      return data.length > 0;
+    },
+    ViewWorkspaceFilter() {
+      let Account_type = this.data_user?.user_tipo;
+      let workspace = this.data_user?.workspace;
+      return Account_type != "titular" && !workspace;
     },
   },
 };

@@ -2,7 +2,7 @@
   <div>
     <loading v-if="loading" />
     <div id="card__link__payment__details" v-if="!loading">
-      <div class="titulo__payment">Dados do link de pagamento </div>
+      <div class="titulo__payment">Dados do link de pagamento</div>
       <v-row>
         <v-col cols="12" lg="3" xl="3">
           <div class="label__payment">Valor</div>
@@ -12,6 +12,12 @@
           <div class="label__payment">Status</div>
           <div class="value__payment data">
             {{ body.status | label__status }}
+          </div>
+        </v-col>
+        <v-col cols="4">
+          <div class="label__payment">Identificador</div>
+          <div class="value__payment data">
+            {{ body?.invoice_id }}
           </div>
         </v-col>
       </v-row>
@@ -33,7 +39,7 @@
           </div>
         </v-col>
       </v-row>
-      <v-divider class="link__payment__details__divider"></v-divider>
+      <v-divider class="my-10"></v-divider>
       <v-row>
         <v-col cols="12" lg="3" xl="3">
           <div class="label__payment">Duração</div>
@@ -53,15 +59,15 @@
           </div>
         </v-col>
       </v-row>
-      <v-divider class="link__payment__details__divider"></v-divider>
+      <v-divider class="my-10"></v-divider>
+
       <v-row>
         <v-col cols="12">
           <div class="label__payment">Forma de pagamento:</div>
           <div class="value__payment__form">
             <div v-if="body.pagamento_cartao === 1">
-              {{ body.pagamento_cartao | cartao__label }} {{
-                body.max_parcelas
-              }}x
+              {{ body.pagamento_cartao | cartao__label }}
+              {{ body.max_parcelas }}x
             </div>
             <div v-if="body.pagamento_boleto === 1">
               {{ body.pagamento_boleto | boleto__label }}
@@ -78,14 +84,39 @@
           </div>
         </v-col>
       </v-row>
-      <v-divider
-        class="link__payment__details__divider"
-        v-if="details__page.payment__object != null"
-      ></v-divider>
+      <div v-if="body.pagamento_boleto === 1">
+        <v-divider class="my-10"></v-divider>
+        <v-row>
+          <v-col cols="12" lg="3" xl="3">
+            <div class="label__payment">Desconto</div>
+            <div class="value__payment data">
+              {{ body?.boleto_discounts[0]?.percentage || "0" }}%
+            </div>
+            <div class="label__payment mt-10" v-if="body?.boleto_discounts[0]?.percentage">Data limite do desconto</div>
+            <div class="value__payment data" v-if="body?.boleto_discounts[0]?.percentage">
+              {{   $textCap($moment(body?.boleto_discounts[0]?.date).format("DD MMMM YYYY")) }}
+            </div>
+          </v-col>
+          <v-col cols="12" lg="3" xl="3">
+            <div class="label__payment">Multa</div>
+            <div class="value__payment data">
+              {{ body?.boleto_penalty || "0" }}%
+            </div>
+          </v-col>
+          <v-col cols="12" lg="3" xl="3">
+            <div class="label__payment">Juros</div>
+            <div class="value__payment data">
+              {{ body?.boleto_interest || "0" }}%
+            </div>
+          </v-col>
+        </v-row>
+      </div>
+
       <div
         class="label__payment card__princiapal__payment"
         v-if="details__page.payment__object != null"
       >
+        <v-divider class="my-10"></v-divider>
         Histórico de transações:
       </div>
       <v-row
@@ -120,7 +151,7 @@
           </div>
         </v-col>
       </v-row>
-      <v-divider class="link__payment__details__divider"></v-divider>
+      <v-divider class="my-10"></v-divider>
       <v-row class="justify-center align-center">
         <v-col class="text-center">
           <div class="label__compartilhar__negativo">
@@ -140,14 +171,13 @@
           >
 
           <!-- <v-btn color="danger" @click="excluirMeuObjeto()">deletar vuex</v-btn> -->
-          
         </v-col>
       </v-row>
     </div>
   </div>
 </template>
 <script>
-import { mapState, mapActions } from 'vuex'
+import { mapState, mapActions } from "vuex";
 
 import share__compartilhar from "./share__compartilhar.vue";
 import icon__share__compartilhar from "./icon/icon__share__compartilhar.vue";
@@ -190,7 +220,7 @@ export default {
       moment: moment,
       createdDate: "",
       expirationDate: "",
-      status:'',
+      status: "",
       data__id: "",
       link__id: "",
       loading: true,
@@ -200,25 +230,20 @@ export default {
     };
   },
   methods: {
-    ...mapActions('link', ['excluir', 'salvar']),
+    ...mapActions("link", ["excluir", "salvar"]),
 
     excluirMeuObjeto() {
-      this.excluir()
+      this.excluir();
     },
-
 
     async consult__api__link__payment() {
       this.loading = true;
       const response = await this.$axios
-        .$get(
-          "/cobranca/" +
-            this.details__page.hash__id
-        )
+        .$get("/cobranca/" + this.details__page.hash__id)
         .then((res) => {
           this.loading = false;
           this.body = res.body;
-          this.salvar(res.body)
-
+          this.salvar(res.body);
         })
         .catch((error) => {
           this.loading = false;
@@ -228,15 +253,11 @@ export default {
     async consult__api__link__payment__detalhes() {
       this.loading = true;
       const response = await this.$axios
-        .$get(
-          "/cobranca/" +
-            this.details__page.id +
-            "/detalhe/null"
-        )
+        .$get("/cobranca/" + this.details__page.id + "/detalhe/null")
         .then((res) => {
           this.loading1 = false;
           this.body__payment = res.data;
-          this.salvar(res.data)
+          this.salvar(res.data);
         })
         .catch((error) => {
           this.loading1 = false;
@@ -256,14 +277,14 @@ export default {
       }
     },
     resumo__payment() {
-      this.$nuxt.$emit("page__select", {page:2});
+      this.$nuxt.$emit("page__select", { page: 2 });
     },
   },
   computed: {
     now() {
       return moment(); // Pega a data e hora atual
     },
-    ...mapState('link', ['link__object']),
+    ...mapState("link", ["link__object"]),
 
     getTimeRemaining() {
       const expiration = moment(
@@ -393,7 +414,7 @@ export default {
       }
     },
     money(value) {
-      var value__ = parseFloat(value)
+      var value__ = parseFloat(value);
       if (!value__ || isNaN(value__)) {
         return "0,00";
       }
@@ -404,7 +425,7 @@ export default {
           maximumFractionDigits: 2,
         });
       }
-      
+
       return numberToReal(value__);
     },
   },
@@ -463,9 +484,8 @@ export default {
     }
 
     font-size: 16px;
-    margin-bottom: 55px;
   }
-  .link__payment__details__divider {
+  .my-10 {
     margin-top: 24px;
     margin-bottom: 48px;
   }

@@ -53,7 +53,6 @@
 
         <!-- Step 2 -->
         <v-stepper-step :complete="page > 2" step="2"> # Style </v-stepper-step>
-
         <v-stepper-content step="2">
           <v-card class="pa-5 created_theme">
             <div class="title mb-3 primary--text">Thema do sistema</div>
@@ -100,7 +99,6 @@
         <v-stepper-step :complete="page > 3" step="3">
           # Menu Cliente
         </v-stepper-step>
-
         <v-stepper-content step="3">
           <v-card class="pa-5 created_theme">
             <div class="title mb-3 primary--text">Cor de fundo</div>
@@ -129,19 +127,7 @@
                 ></v-color-picker>
               </div>
             </div>
-            <div class="d-flex justify-space-between">
-              <div>
-                <div class="label">1 - Background do workspace</div>
-                <v-color-picker
-                  v-model="SetForm.styles.color.secondary"
-                  class="mx-auto"
-                  mode="hexa"
-                  hide-mode-switch
-                  swatches-max-height="100"
-                  @input="validateStep(3), updateBackgroundSecondary($event)"
-                ></v-color-picker>
-              </div>
-            </div>
+            
             <div class="title mb-3 primary--text">Cor de fonte</div>
             <div class="d-flex justify-space-between">
               <div>
@@ -232,7 +218,9 @@
                 <v-btn
                   color="primary"
                   class="pa-1 primary"
-                  @click="SetForm.assets.logotipe.size -= 20, UpdateStoreSetform()"
+                  @click="
+                    (SetForm.assets.logotipe.size -= 20), UpdateStoreSetform()
+                  "
                   icon
                   :disabled="SetForm.assets.logotipe.size < 50"
                 >
@@ -240,7 +228,9 @@
                 </v-btn>
                 <v-btn
                   class="pa-1 primary"
-                  @click="SetForm.assets.logotipe.size += 20, UpdateStoreSetform()"
+                  @click="
+                    (SetForm.assets.logotipe.size += 20), UpdateStoreSetform()
+                  "
                   :disabled="SetForm.assets.logotipe.size > 300"
                   icon
                   color="primary"
@@ -249,7 +239,12 @@
                 </v-btn>
               </div>
             </div>
-            <v-slider v-model="SetForm.assets.logotipe.size" min="50" max="300" @change="UpdateStoreSetform()">
+            <v-slider
+              v-model="SetForm.assets.logotipe.size"
+              min="50"
+              max="300"
+              @change="UpdateStoreSetform()"
+            >
             </v-slider>
 
             <div class="label">3 - Titulo</div>
@@ -257,7 +252,6 @@
               solo
               label="Digite o Titulo"
               class="input_set_theme"
-              :rules="rulesStep4.title"
               v-model="SetForm.data.initcomp.title"
               @input="validateStep(4)"
             ></v-text-field>
@@ -267,18 +261,7 @@
               solo
               label="Digite sua Descrição"
               class="input_set_theme"
-              :rules="rulesStep4.description"
               v-model="SetForm.data.initcomp.description"
-              @input="validateStep(4)"
-            ></v-text-field>
-
-            <div class="label">5 - Descrição de app</div>
-            <v-text-field
-              solo
-              label="Digite descrição de app"
-              class="input_set_theme"
-              :rules="rulesStep4.bottom_text"
-              v-model="SetForm.data.initcomp.bottom_text"
               @input="validateStep(4)"
             ></v-text-field>
           </v-card>
@@ -365,7 +348,7 @@
         </v-stepper-content>
 
         <!-- Step 6 -->
-        <v-stepper-step step="6"> # SEO</v-stepper-step>
+        <v-stepper-step step="6" :complete="page > 6"> # SEO</v-stepper-step>
         <v-stepper-content step="6">
           <v-card class="pa-5 created_theme">
             <div class="label">1 - Titulo</div>
@@ -444,11 +427,66 @@
           <v-btn
             class="pa-2"
             color="primary"
-            @click="submitForm"
+            @click="page += 1"
             :disabled="!stepValid[6]"
+          >
+            Continue
+          </v-btn>
+          <v-btn class="pa-2" text @click="page -= 1"> Voltar </v-btn>
+        </v-stepper-content>
+
+        <!-- Step 6 -->
+        <v-stepper-step step="7" :complete="page > 7"> # APP</v-stepper-step>
+        <v-stepper-content step="7">
+          <v-card class="pa-5 created_theme">
+            <div class="label">1 - Você tem app ?</div>
+            <v-switch
+              class="mt-0 mb-2"
+              v-model="SetForm.data.initcomp.app"
+              :label="SetForm.data.initcomp.app ? 'Eu tenho ' : 'Não há app'"
+              color="primary"
+              hide-details
+              @change="validateStep(7)"
+            ></v-switch>
+            <div v-if="SetForm.data.initcomp.app">
+              <div class="label">2 - Descrição de app</div>
+              <v-text-field
+                solo
+                label="Digite descrição de app"
+                class="input_set_theme"
+                :rules="rulesStep7.bottom_text"
+                v-model="SetForm.data.initcomp.bottom_text"
+                @input="validateStep(7)"
+              ></v-text-field>
+
+              <div class="label">3 - GooglePay</div>
+              <v-text-field
+                solo
+                label="Coloque o link do GooglePay"
+                class="input_set_theme"
+                v-model="SetForm.data.initcomp.googlepay"
+                @input="validateStep(7)"
+              ></v-text-field>
+
+              <div class="label">4 - Descrição de app</div>
+              <v-text-field
+                solo
+                label="Coloque o link do AppStore"
+                class="input_set_theme"
+                v-model="SetForm.data.initcomp.appstore"
+                @input="validateStep(7)"
+              ></v-text-field>
+            </div>
+          </v-card>
+          <v-btn
+            class="pa-2"
+            color="primary"
+            @click="submitForm"
+            :disabled="!stepValid[7]"
           >
             Finalizar
           </v-btn>
+
           <v-btn class="pa-2" text @click="page -= 1"> Voltar </v-btn>
         </v-stepper-content>
       </v-stepper>
@@ -458,9 +496,9 @@
       <V2ThemeCreatedPreviewMain
         :SetForm="SetForm"
         :page="page"
-        v-if="page === 1"
+        v-if=" page === 2 ||page === 1"
       />
-      <div class="comppreviewright" v-if="page === 4">
+      <div class="comppreviewright" v-if=" page === 4 || page === 7">
         <PageLoginLeftComponente :SetForm="SetForm" />
       </div>
     </div>
@@ -479,7 +517,7 @@ export default {
   },
   data() {
     return {
-      page: 4,
+      page: 1,
       rules: {
         img: [
           (value) =>
@@ -501,6 +539,7 @@ export default {
         4: false,
         5: false,
         6: false,
+        7: true,
       },
       rulesStep1: {
         favicon: [
@@ -509,23 +548,17 @@ export default {
         ],
       },
       rulesStep4: {
-        title: [
-          (v) => !!v || "Título é obrigatório",
-          (v) =>
-            (v && v.length >= 3) || "Título deve ter pelo menos 3 caracteres",
-        ],
-        description: [
-          (v) => !!v || "Descrição é obrigatória",
-          (v) =>
-            (v && v.length >= 10) ||
-            "Descrição deve ter pelo menos 10 caracteres",
-        ],
-        bottom_text: [
-          (v) => !!v || "Descrição de app é obrigatória",
-          (v) =>
-            (v && v.length >= 5) ||
-            "Descrição de app deve ter pelo menos 5 caracteres",
-        ],
+        // title: [
+        //   (v) => !!v || "Título é obrigatório",
+        //   (v) =>
+        //     (v && v.length >= 3) || "Título deve ter pelo menos 3 caracteres",
+        // ],
+        // description: [
+        //   (v) => !!v || "Descrição é obrigatória",
+        //   (v) =>
+        //     (v && v.length >= 10) ||
+        //     "Descrição deve ter pelo menos 10 caracteres",
+        // ],
         logotipo: [
           (v) => !!v || "Logotipo é obrigatório",
           (v) => !v || v.size < 5000000 || "A imagem deve ter menos de 5MB",
@@ -594,6 +627,14 @@ export default {
           (v) => !v || v.size < 5000000 || "A imagem deve ter menos de 5MB",
         ],
       },
+      rulesStep7: {
+        bottom_text: [
+          (v) => !!v || "Descrição de app é obrigatória",
+          (v) =>
+            (v && v.length >= 5) ||
+            "Descrição de app deve ter pelo menos 5 caracteres",
+        ],
+      },
       SetForm: {
         assets: {
           initcomp: {
@@ -636,6 +677,9 @@ export default {
             title: "", //string
             description: "", //string
             bottom_text: "", //string
+            app: false,
+            googlepay: "",
+            appstore: "",
           },
           business: {
             name: "", //string
@@ -648,9 +692,7 @@ export default {
             },
             termos: "", //string
           },
-          api: {
-            base_url: "", //string
-          },
+         
         },
         seo: {
           title: "", //string
@@ -672,7 +714,7 @@ export default {
   },
   watch: {
     data: {
-      immediate: true, // Executa imediatamente ao criar o componente
+      immediate: true,
       handler(newVal) {
         if (newVal !== undefined) {
           setTimeout(() => {
@@ -682,20 +724,18 @@ export default {
       },
     },
     page(newVal) {
-      // Quando mudar de passo, valida o passo atual
       this.validateStep(newVal);
     },
   },
   methods: {
     ...mapActions("theme", ["salvarSetform", "deleteSetform"]),
-    UpdateStoreSetform(){
+    UpdateStoreSetform() {
       this.$store.commit("theme/salvarSetform", this.SetForm);
     },
-        DeleteStoreSetform(){
+    DeleteStoreSetform() {
       this.$store.commit("theme/deleteSetform", this.SetForm);
     },
     validateStep(step) {
-      // Validação específica para cada passo
       switch (step) {
         case 1:
           this.stepValid[1] =
@@ -717,12 +757,6 @@ export default {
         case 4:
           this.stepValid[4] =
             !!this.SetForm.assets.logotipe.img &&
-            !!this.SetForm.data.initcomp.title &&
-            this.SetForm.data.initcomp.title.length >= 3 &&
-            !!this.SetForm.data.initcomp.description &&
-            this.SetForm.data.initcomp.description.length >= 10 &&
-            !!this.SetForm.data.initcomp.bottom_text &&
-            this.SetForm.data.initcomp.bottom_text.length >= 5 &&
             !!this.SetForm.assets.initcomp.img;
           break;
         case 5:
@@ -763,6 +797,12 @@ export default {
             this.SetForm.seo["twitter-description"].length <= 200 &&
             !!this.SetForm.seo["twitter-image-url"];
           break;
+        case 7:
+          this.stepValid[7] =
+            !this.SetForm.data.initcomp.app ||
+            (this.SetForm.data.initcomp.app &&
+              !!this.SetForm.data.initcomp.bottom_text &&
+              this.SetForm.data.initcomp.bottom_text.length >= 5);
       }
     },
     createdDataUser() {

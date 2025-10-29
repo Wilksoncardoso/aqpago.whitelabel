@@ -223,7 +223,8 @@
           <p :class="data.type">R$ {{ data.amount | money }}</p>
           <p class="taxa" v-if="data.tax_value > 0 || data.fees_client > 0">
             R$ -{{
-              (data.amount * data.fees_client) / 100 || data.tax_value | money_tax
+              (data.amount * data.fees_client) / 100 ||
+              data.tax_value | money_tax
             }}
           </p>
         </div>
@@ -243,15 +244,6 @@
       v-if="loading === false && result__api.length > 0"
     >
       <div>
-        <v-btn
-          class="button__back__nav"
-          icon
-          @click="back__page({ value1: 'back' })"
-          :disabled="disabled__page__back"
-          ><icon__next__page
-        /></v-btn>
-      </div>
-      <div>
         <v-pagination
           v-model="pagination"
           :total-visible="7"
@@ -260,28 +252,18 @@
         >
         </v-pagination>
       </div>
-
-      <div>
-        <v-btn
-          class="button__next__nav"
-          icon
-          @click="next__page({ value: 'next' })"
-          :disabled="disabled__page__next"
-          ><icon__next__page class="next_nav"
-        /></v-btn>
-      </div>
     </div>
     <template v-else>
-        <div class="my-16 text-center mx-auto">
-          <icon__extrato_0 v-if="loading === false" />
-          <p
-            class="mx-auto"
-            v-if="loading === false"
-            style="width: 100%; max-width: 294px"
-          >
-            Não encontramos nenhuma movimentação nesse período
-          </p>
-        </div>
+      <div class="my-16 text-center mx-auto">
+        <icon__extrato_0 v-if="loading === false" />
+        <p
+          class="mx-auto"
+          v-if="loading === false"
+          style="width: 100%; max-width: 294px"
+        >
+          Não encontramos nenhuma movimentação nesse período
+        </p>
+      </div>
     </template>
   </div>
 </template>
@@ -289,20 +271,20 @@
 import moment from "moment";
 
 // icons extratos
-import pix__in from "./icon_extrato/pix__in.vue";
-import pix__out from "./icon_extrato/pix__out.vue";
-import icon__aqpago from "./icon_extrato/icon__aqpago.vue";
-import icon__picpay from "./icon_extrato/icon__picpay.vue";
-import icon__boleto from "./icon_extrato/icon__boleto.vue";
-import icon__up from "./icon_extrato/icon__up.vue";
-import icon__comprovante from "./icon_extrato/icon__comprovante.vue";
-import icon__view from "./icon_extrato/icon__view.vue";
-import icon__next__page from "./icon_extrato/icon__next__page.vue";
-import icon__filtro__btn from "./icon_extrato/icon__filtro__btn.vue";
-import icon__extrato_0 from "./icon_extrato/icon__extrato_0.vue";
-import pix__waiting from "./icon_extrato/icon__pix__waiting.vue";
-import icon_ted from "./icon_extrato/icon_ted.vue";
-import icon_cip from "./icon_extrato/icon_cip.vue";
+import pix__in from "~/components/page/extratos1/icon_extrato/pix__in.vue";
+import pix__out from "~/components/page/extratos1/icon_extrato/pix__out.vue";
+import icon__aqpago from "~/components/page/extratos1/icon_extrato/icon__aqpago.vue";
+import icon__picpay from "~/components/page/extratos1/icon_extrato/icon__picpay.vue";
+import icon__boleto from "~/components/page/extratos1/icon_extrato/icon__boleto.vue";
+import icon__up from "~/components/page/extratos1/icon_extrato/icon__up.vue";
+import icon__comprovante from "~/components/page/extratos1/icon_extrato/icon__comprovante.vue";
+import icon__view from "~/components/page/extratos1/icon_extrato/icon__view.vue";
+import icon__next__page from "~/components/page/extratos1/icon_extrato/icon__next__page.vue";
+import icon__filtro__btn from "~/components/page/extratos1/icon_extrato/icon__filtro__btn.vue";
+import icon__extrato_0 from "~/components/page/extratos1/icon_extrato/icon__extrato_0.vue";
+import pix__waiting from "~/components/page/extratos1/icon_extrato/icon__pix__waiting.vue";
+import icon_ted from "~/components/page/extratos1/icon_extrato/icon_ted.vue";
+import icon_cip from "~/components/page/extratos1/icon_extrato/icon_cip.vue";
 import icon_copy_list from "~/components/page/extratos1/icon_extrato/icon_copy_list.vue";
 
 export default {
@@ -659,7 +641,7 @@ export default {
       }
       return numberToReal(value);
     },
-     money_tax(value) {
+    money_tax(value) {
       if (!value || value === null || value === "") {
         return "0,00";
       }
@@ -742,7 +724,6 @@ export default {
   line-height: 24px;
   color: #131313;
   margin-bottom: 0;
-  margin-left: 8px;
 }
 .button__filtro {
   background: #e5d5f6 !important;
@@ -1072,12 +1053,12 @@ export default {
     }
   }
 }
-.prev__icon::before {
-  background: url(./icon_dialog/prev.svg);
-}
-.next__icon::before {
-  background: url(./icon_dialog/next.svg);
-}
+// .prev__icon::before {
+//   background: url('/components/page/extratos1/icon_dialog/prev.svg');
+// }
+// .next__icon::before {
+//   background: url('/components/page/extratos1/icon_dialog/next.svg');
+// }
 
 .card__data__time {
   width: 70px !important;

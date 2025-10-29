@@ -114,9 +114,6 @@ export default {
         .$get("/aqpago-workspace")
         .then((res) => {
           this.workspaces = res.data || [];
-          this.workspaces.length === 0 && !this.data?.name
-            ? (this.window = 1)
-            : (this.window = 0);
         })
         .catch((error) => {
           this.error = error;
@@ -131,6 +128,7 @@ export default {
         .$get("/dict-service?type,=cpf,cnpj,phone,email,evp&key_id=''")
         .then((res) => {
           this.key_pix = res.data || [];
+          
         })
         .catch((error) => {
           this.error = error;

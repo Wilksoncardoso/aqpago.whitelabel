@@ -1,17 +1,20 @@
 <template lang="html">
   <div>
-    <div class="d-flex justify-space-between align-center ">
-      <div class="d-flex-inline titulo__componente">
-        <div class="d-flex">
-          <div><icon__transferencia /></div>
-          <div><h3 class="titulo__card__principal">Transferência Pix</h3></div>
+    <div v-if="!loading">
+      <div class="d-flex justify-space-between align-center">
+        <div class="d-flex-inline titulo__componente">
+          <div class="d-flex">
+            <div><icon__transferencia /></div>
+            <div>
+              <h3 class="titulo__card__principal">Transferência Pix</h3>
+            </div>
+          </div>
+          <div>
+            <p>Preencha os dados abaixo para transferir:</p>
+          </div>
         </div>
-        <div>
-          <p>Preencha os dados abaixo para transferir:</p>
-        </div>
-      </div>
 
-      <!-- <v-badge color="primary" :content="Transactions.length" v-if="Transactions.length > 0">
+        <!-- <v-badge color="primary" :content="Transactions.length" v-if="Transactions.length > 0">
         <v-btn
           outlined
           color="primary"
@@ -22,110 +25,110 @@
           Autorizar pagamentos</v-btn
         >
       </v-badge> -->
-    </div>
 
-    <v-row>
-      <v-col cols="12" xl="8" lg="8">
-        <div
-          class="saldo__transferencia mb-5"
-          v-if="data_user_permission?.user_tipo === 'responsavel'"
-        >
-          <div class="d-flex justify-space-between">
-            <div>Saldo disponível</div>
-            <div class="saldo">R$ {{ body.balance?.amount | money }}</div>
+      </div>
+      <v-row>
+        <v-col cols="12" xl="8" lg="8">
+          <div
+            class="saldo__transferencia mb-5"
+            v-if="data_user_permission?.user_tipo === 'responsavel'"
+          >
+            <div class="d-flex justify-space-between">
+              <div>Saldo disponível</div>
+              <div class="saldo">R$ {{ body.balance?.amount | money }}</div>
+            </div>
           </div>
-        </div>
-        <v-row>
-          <v-col cols="12" xl="6" lg="6">
-            <p class="label__padrao">Valor:</p>
-            <v-text-field
-              v-money="money"
-              v-model="value"
-              solo
-              label="R$ 0,00"
-              type="tel"
-              class="input__padrao"
-              :rules="amountRules"
-            >
-            </v-text-field>
-          </v-col>
-          <v-col cols="12" xl="6" lg="6">
-            <p class="label__padrao">Para quem você quer transferir?</p>
-            <!-- @keyup="chavePixChange"
+          <v-row>
+            <v-col cols="12" xl="6" lg="6">
+              <p class="label__padrao">Valor:</p>
+              <v-text-field
+                v-money="money"
+                v-model="value"
+                solo
+                label="R$ 0,00"
+                type="tel"
+                class="input__padrao"
+                :rules="amountRules"
+              >
+              </v-text-field>
+            </v-col>
+            <v-col cols="12" xl="6" lg="6">
+              <p class="label__padrao">Para quem você quer transferir?</p>
+              <!-- @keyup="chavePixChange"
             @blur="chavePixChange" -->
-            <v-text-field
-              v-if="button__logic === false"
-              v-model="form.chave_pix"
-              solo
-              label="CPF/CNPJ, celular, e-mail ou aleatória"
-              class="input__padrao"
-              id="chave_pix"
-              @input="chavePixChange"
-              :error-messages="error__key"
-              :loading="loading"
-              :hint="text__chave__pix"
-              :persistent-hint="true"
-            >
-            </v-text-field>
-            <v-chip
-              v-if="button__logic"
-              class="ma-2 key__pix"
-              close
-              @click="button__logic = false"
-            >
-              {{ data_pix.id | format__documento }} <edit__chave class="ml-2" />
-            </v-chip>
-          </v-col>
-        </v-row>
-      </v-col>
-      <v-col cols="12" lg="4" xl="4">
-        <div
-          class="card__cont__select"
-          v-if="button__logic && data_pix.clientCore"
-        >
-          <h3>Escolha uma conta:</h3>
-          <v-radio-group class="cont__select" v-model="cont__select">
-            <v-radio value="0">
-              <template v-slot:label>
-                <div class="d-flex-inline">
-                  <div class="titulo__cont"><h5>Conta AQBank</h5></div>
-                  <div class="d-flex">
-                    <div></div>
-                    <div class="titulo__cont">
-                      Agência 0001 | Conta
-                      {{ data_pix.clientCorePayload[0]?.accountNumber }}
+              <v-text-field
+                v-if="button__logic === false"
+                v-model="form.chave_pix"
+                solo
+                label="CPF/CNPJ, celular, e-mail ou aleatória"
+                class="input__padrao"
+                id="chave_pix"
+                @input="chavePixChange"
+                :error-messages="error__key"
+                :loading="loading"
+                :hint="text__chave__pix"
+                :persistent-hint="true"
+              >
+              </v-text-field>
+              <v-chip
+                v-if="button__logic"
+                class="ma-2 key__pix"
+                close
+                @click="button__logic = false"
+              >
+                {{ form.chave_pix | format__documento }}
+                <edit__chave class="ml-2" />
+              </v-chip>
+            </v-col>
+          </v-row>
+        </v-col>
+        <v-col cols="12" lg="4" xl="4">
+          <div class="card__cont__select" v-if="button__logic">
+            <h3>Escolha uma conta:</h3>
+            <v-radio-group class="cont__select" v-model="cont__select">
+              <v-radio value="0">
+                <template v-slot:label>
+                  <div class="d-flex-inline">
+                    <div class="titulo__cont"><h5>Conta AQBank</h5></div>
+                    <div class="d-flex">
+                      <div></div>
+                      <div class="titulo__cont">
+                        Agência 0001 | Conta
+                        {{ data_pix.accountNumber }}
+                      </div>
                     </div>
                   </div>
-                </div>
-              </template>
-            </v-radio>
-            <v-radio value="1">
-              <template v-slot:label>
-                <div class="d-flex-inline">
-                  <div class="titulo__cont">
-                    <h5>{{ data_pix?.bankName }}</h5>
+                </template>
+              </v-radio>
+              <v-radio value="1">
+                <template v-slot:label>
+                  <div class="d-flex-inline">
+                    <div class="titulo__cont">
+                      <h5>{{ data_pix?.bankName }}</h5>
+                    </div>
+                    <div class="titulo__cont">Chave Pix</div>
                   </div>
-                  <div class="titulo__cont">Chave Pix</div>
-                </div>
-              </template>
-            </v-radio>
-          </v-radio-group>
-        </div>
-      </v-col>
-    </v-row>
+                </template>
+              </v-radio>
+            </v-radio-group>
+          </div>
+        </v-col>
+      </v-row>
 
-    <v-divider class="my-4"></v-divider>
+      <v-divider class="my-4"></v-divider>
 
-    <br />
-    <div class="d-flex justify-end">
-      <v-btn
-        color="primary"
-        class="button__default"
-        @click="next__page()"
-        :disabled="button__logic__"
-        >Transferir para {{ button__label }}</v-btn
-      >
+      <br />
+      <div class="d-flex justify-end">
+        <v-btn
+          color="primary"
+          class="button__default"
+          @click="next__page()"
+          :disabled="button__logic__"
+          >Transferir para {{ button__label }}</v-btn
+        >
+      </div>
     </div>
+    <LoadingMain v-else/>
   </div>
 </template>
 <script>
@@ -169,6 +172,9 @@ export default {
       },
     },
   },
+  created() {
+    this.button__logic = false;
+  },
   data() {
     return {
       amountRules: [
@@ -187,13 +193,13 @@ export default {
       ],
       Transactions: [],
       text__chave__pix: "Digite uma chave Pix.",
-      cont__select: "0",
+      cont__select: "1",
       button__logic: false,
       chave_telefone: false,
       chave_cpf: false,
       chave_cnpj: false,
       chave_aleatoria: true,
-      loading: false,
+      loading: true,
       checkbox: false,
       descripition__: "",
       value: "",
@@ -201,6 +207,7 @@ export default {
       form: {
         chave_pix: "",
       },
+      pesquisa_end: "",
       error__key: "",
       body: [],
       error: [],
@@ -218,7 +225,6 @@ export default {
     };
   },
   methods: {
-    
     transctions_operador() {
       this.Transactions = this.$ListFakeOperadorTransaction;
     },
@@ -257,42 +263,47 @@ export default {
       this.error__key = "";
       this.text__chave__pix = "Pesquisando...";
       this.pesquisa_end = value;
+      this.data_pix = {};
 
-      this.$axios
-        // .$get("/dict-Key/" + this.form.chave_pix)
-        .$get("/dict-Key/" + this.pesquisa_end)
-        .then((response) => {
-          this.loading = false;
-          this.data_pix = response;
-          this.button__logic = true;
-          this.text__chave__pix = "";
-        })
-        .catch((error) => {
-          const error_api = error.response.data.error;
-          const errorObj =
-            typeof error_api === "string" ? JSON.parse(error_api) : error_api;
-          if (
-            error_api ===
-            "The DICT query limit for this document has been reached"
-          ) {
-            this.error__key =
-              "Você atingiu o limite de consulta! Tente mais tarde.";
-          } else if (error_api == "Invalid pix key") {
-            this.error__key = "Chave PIX não encontrada.";
-          } else if (error_api == "Query by CPF currently unavailable") {
-            this.error__key === "Consulta por CPF atualmente indisponível";
-          } else {
-            this.error__key = errorObj?.message ?? error_api;
-          }
-          // this.error__key = error.response.data.error
+      if (this.chave_type === "doc") {
+        this.$axios
+          // .$get("/dict-Key/" + this.form.chave_pix)
+          .$get("/dict-Key/" + this.pesquisa_end)
+          .then((response) => {
+            this.loading = false;
+            this.data_pix = response;
+            this.button__logic = true;
+            this.text__chave__pix = "";
+          })
+          .catch((error) => {
+            const error_api = error.response.data.error;
+            const errorObj =
+              typeof error_api === "string" ? JSON.parse(error_api) : error_api;
+            if (
+              error_api ===
+              "The DICT query limit for this document has been reached"
+            ) {
+              this.error__key =
+                "Você atingiu o limite de consulta! Tente mais tarde.";
+            } else if (error_api == "Invalid pix key") {
+              this.error__key = "Chave PIX não encontrada.";
+            } else if (error_api == "Query by CPF currently unavailable") {
+              this.error__key === "Consulta por CPF atualmente indisponível";
+            } else {
+              this.error__key = errorObj?.message ?? error_api;
+            }
+            // this.error__key = error.response.data.error
 
-          this.text__chave__pix = "";
+            this.text__chave__pix = "";
 
-          this.data_pix = "";
-          this.loading = false;
-          this.error__api = errorObj?.message ?? error_api;
-          this.button__logic = false;
-        });
+            this.data_pix = "";
+            this.loading = false;
+            this.error__api = errorObj?.message ?? error_api;
+            this.button__logic = false;
+          });
+      } else {
+        this.next__page();
+      }
     },
     next__page() {
       const conta__escolhida = this.cont__select;
@@ -301,6 +312,9 @@ export default {
       const valor = this.value__coverte;
       const descripition = this.descripition__;
       const page_windows = 2;
+      const type = this.chave_type;
+      const key = this.pesquisa_end;
+
       this.$nuxt.$emit("dados__transferencia", {
         dados_pix,
         valor,
@@ -308,6 +322,8 @@ export default {
         page_windows,
         tax,
         conta__escolhida,
+        type,
+        key,
       });
     },
     money__mask() {
@@ -681,6 +697,7 @@ export default {
   },
   created() {
     this.transctions_operador();
+    this.cont__select = "1"
   },
   mounted() {
     this.descripition__ = this.descripition;

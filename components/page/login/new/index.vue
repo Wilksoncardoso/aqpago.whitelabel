@@ -3,20 +3,35 @@
     <div class="primary--text type_label_empresa mb-2">Para empresas</div>
     <h1 class="mb-2">Internet Banking</h1>
     <h6 class="mb-9">Acesse sua conta</h6>
-    <div class="label_login">CNPJ</div>
-    <v-text-field
-      solo
-      label="00.000.000/0000-00"
-      type="tel"
-      class="input_form_login mb-3"
-      v-model="mask.cnpj"
-      v-mask="['##.###.###/####-##']"
-      :error-messages="error.cnpj"
-      :hide-details="!error.cnpj"
-      @input="cnpj_converte_var"
-      @keyup.enter="enter__login"
-    >
-    </v-text-field>
+    <div class="d-flex justify-center" v-if="tp__conta != 'pj'">
+      <v-btn-toggle
+        v-model="tp__conta"
+        rounded
+        mandatory
+        class="group__button__tp__conta mb-0 mb-lg-6"
+        color="primary"
+      >
+        <v-btn value="pf" style="border: none"> Conta Pessoal</v-btn>
+        <v-btn value="pj" style="border: none"> Conta Empresa</v-btn>
+      </v-btn-toggle>
+    </div>
+    <div v-if="tp__conta === 'pj'">
+      <div class="label_login">CNPJ</div>
+      <v-text-field
+        solo
+        label="00.000.000/0000-00"
+        type="tel"
+        class="input_form_login mb-3"
+        v-model="mask.cnpj"
+        v-mask="['##.###.###/####-##']"
+        :error-messages="error.cnpj"
+        :hide-details="!error.cnpj"
+        @input="cnpj_converte_var"
+        @keyup.enter="enter__login"
+      >
+      </v-text-field>
+    </div>
+
     <div class="label_login">CPF</div>
     <v-text-field
       solo
@@ -66,7 +81,7 @@
     />
 
     <v-btn
-      @click="verify_workspace()"
+      @click="enter__login()"
       :disabled="button_logic"
       :loading="loading"
       class="button_login_new"
@@ -134,7 +149,9 @@ export default {
     },
     enter__login() {
       if (!this.button__logic) {
-        this.verify_workspace();
+        return this.tp__conta === "pf"
+          ? this.logar__pf()
+          : this.verify_workspace();
       }
     },
     cnpj_converte_var(value) {
@@ -149,6 +166,48 @@ export default {
         return (this.form.cpf = document);
       }
     },
+    async logar__pf() {
+      this.loading = true;
+      const form = this.form;
+      delete form.cnpj;
+      delete form.workspace_id;
+
+      setTimeout(() => {
+        this.$axios
+          .$post("/auth/login_pf", form)
+          // .$post("/auth/login0077239", form)
+          .then((response) => {
+            this.loading = !this.loading;
+            this.$toast.info(
+              "Enviamos um código de autenticação para seu e-mail e celular cadastrados !"
+            );
+            this.$router.push(
+              "/verify-token?value=" +
+                response.autorization +
+                "&type=" +
+                this.tp__conta
+            );
+
+            // this.$auth.strategies.local.token.set(response.token);
+            // localStorage.setItem("location_token", "local");
+            // this.$toast.success("Autenticação realizada com sucesso!");
+            // this.$router.push("/painel/");
+          })
+          .catch((error) => {
+            this.loading = !true;
+            this.error =
+              error.response.data.error ||
+              error.response.data.message ||
+              "ops, algo deu errado";
+            if (this.error.cpf || this.error.cnpj || this.error.senha) {
+              this.$toast.error("Preencha todos os campos");
+            } else {
+              this.$toast.error(this.error);
+            }
+          });
+      }, 1000);
+    },
+
     async logar__pj() {
       this.loading = true;
       const form = this.form;
@@ -159,23 +218,23 @@ export default {
       }
 
       this.$axios
-        .$post("/auth/login_cnpj0077239", form)
+        .$post("/auth/login_pj", form)
+        // .$post("/auth/login_cnpj0077239", form)
         .then((response) => {
-       // "Pagamento processado com sucesso!"
-          // this.$toast.info(
-          //   "Enviamos um código de autenticação para seu e-mail e celular cadastrados !"
-          // );
-          // this.$router.push(
-          //   "/verify-token?value=" +
-          //     response.autorization +
-          //     "&type=" +
-          //     this.tp__conta
-          // );
+          this.$toast.info(
+            "Enviamos um código de autenticação para seu e-mail e celular cadastrados !"
+          );
+          this.$router.push(
+            "/verify-token?value=" +
+              response.autorization +
+              "&type=" +
+              this.tp__conta
+          );
 
-          this.$auth.strategies.local.token.set(response.token)
-            localStorage.setItem('location_token', 'local')
-            this.$toast.success('Autenticação realizada com sucesso!')
-            this.$router.push("/painel/");
+          // this.$auth.strategies.local.token.set(response.token);
+          // localStorage.setItem("location_token", "local");
+          // this.$toast.success("Autenticação realizada com sucesso!");
+          // this.$router.push("/painel/");
         })
         .catch((error) => {
           this.loading = false;
@@ -194,7 +253,13 @@ export default {
       let cnpj = form.cnpj.length;
       let cpf = form.cpf.length;
       let password = form.senha.length;
-      if (cnpj === 14 && cpf === 11 && password === 6) {
+      if (
+        (this.tp__conta === "pj" &&
+          cnpj === 14 &&
+          cpf === 11 &&
+          password === 6) ||
+        (this.tp__conta === "pf" && cpf === 11 && password === 6)
+      ) {
         return false;
       }
       return true;

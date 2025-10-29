@@ -5,6 +5,7 @@
       :saldo="saldo"
       :loading="loading"
       :data_user_permission="data_user_permission"
+      :type="data_user?.user_tipo"
     />
     <V2ExtratoMain
       class="my-4"
@@ -15,7 +16,10 @@
       :page="page"
       :saldo="saldo"
       :ArrayStatus="ArrayStatus"
+      :ArrayWorkspaces="ArrayWorkspaces"
       :ArrayType="ArrayType"
+      :type="data_user?.user_tipo"
+      :data_user="data_user"
       @update:FiltroChange="Change_SetFiltros"
       @update:PageChange="Change_Setpage"
     />
@@ -36,6 +40,8 @@ export default {
         date: "",
         status: "",
         type: "",
+        client_id: "",
+        clients_bass: false,
         pesquisa: {
           type: "",
           value: "",
@@ -78,7 +84,8 @@ export default {
         if (newVal !== undefined) {
           if (
             this.data_user_permission?.balance_view ||
-            this.data_user?.user_tipo === "responsavel"
+            this.data_user?.user_tipo === "responsavel" ||
+            this.data_user?.user_tipo === "titular"
           ) {
             this.return_saldo();
           }
@@ -153,7 +160,7 @@ export default {
       return this.return_list_extrato_conta_digital();
     },
 
-    return_list_extrato_conta_digital() {
+    async return_list_extrato_conta_digital() {
       // busca por filtro
       this.loading.fullextrato = true;
 
@@ -169,12 +176,19 @@ export default {
         final_date: finalDate,
         status: this.filtro.status,
         resource: this.filtro.type,
+        client_id: this.filtro.client_id,
+        clients_bass: this.filtro.clients_bass ? this.filtro.clients_bass : "",
         e2e:
           this.filtro?.pesquisa?.type === "endtoend"
             ? this.filtro.pesquisa.value
             : "",
         reference_id:
           this.filtro?.pesquisa?.type === "reference_id"
+            ? this.filtro.pesquisa.value
+            : "",
+
+        client_document:
+          this.filtro?.pesquisa?.type === "client_document"
             ? this.filtro.pesquisa.value
             : "",
         page: this.page.to,
@@ -190,13 +204,15 @@ export default {
         queryParams.resource = "returned";
       }
 
-      if (this.filtro.status && this.filtro.status.includes("transaction-order")) {
+      if (
+        this.filtro.status &&
+        this.filtro.status.includes("transaction-order")
+      ) {
         queryParams.status = "";
         queryParams.resource = "transaction-order";
       }
 
-      
-      const url = "/user-moviments?";
+      const url = "/v2/user-moviments?";
       this.result__api = [];
       const queryString = Object.entries(queryParams)
         .filter(([key, value]) => value !== undefined && value !== "")
@@ -220,8 +236,23 @@ export default {
     },
   },
   computed: {
+    data_user() {
+      return this.$store.state?.user?.user__data;
+    },
     data_user_permission() {
-      return this.$store.state?.user?.user__data?.user_permissao;
+      return this.data_user?.user_permissao;
+    },
+    ArrayWorkspaces() {
+      const Workspaces = this.$store.state?.workspace?.data;
+
+      if (!Workspaces) return [{ title: "Todos", value: "" }];
+
+      const mappedWorkspaces = Workspaces.map((item) => ({
+        title: item.name,
+        value: item.id,
+      }));
+
+      return [{ title: "Todos", value: "" }, ...mappedWorkspaces];
     },
   },
 };

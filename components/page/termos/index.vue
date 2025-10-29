@@ -167,7 +167,7 @@ export default {
       width: 100%;
       .illustration {
         padding: 23px 50px;
-        background: #c2c2ff;
+        background: var(--primaryop);
         border-radius: 8px;
         margin-bottom: 26px;
       }

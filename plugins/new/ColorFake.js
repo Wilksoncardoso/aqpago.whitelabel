@@ -4,21 +4,14 @@ export default ({ app }, inject) => {
     const CreatedThemeColorFake = {
         "assets": {
             "initcomp": {
-                "right":true,
+                "right": true,
                 "img": "https://images.pexels.com/photos/3943716/pexels-photo-3943716.jpeg"
             },
             "logotipe": {
                 "img": "https://aqbank.com.br/wp-content/uploads/2024/07/Brand.svg",
-                "size":100
-
+                "size": 100
             },
-            "icon": {
-                "img32x32": "https://aqbank.com.br/wp-content/uploads/2024/06/Favicon.svg",
-                "img96x96": "https://aqbank.com.br/wp-content/uploads/2024/06/Favicon.svg",
-                "img192x192": "https://aqbank.com.br/wp-content/uploads/2024/06/Favicon.svg",
-                "img300x300": "https://aqbank.com.br/wp-content/uploads/2024/06/Favicon.svg",
-                "img512x512": "https://aqbank.com.br/wp-content/uploads/2024/06/Favicon.svg"
-            }
+            
         },
         "styles": {
             "color": {
@@ -34,7 +27,7 @@ export default ({ app }, inject) => {
                 "font": {
                     "color": "#ffffff",
                 },
-                "title":{
+                "title": {
                     "color": "#b3b3b3",
                 }
             }
@@ -43,7 +36,10 @@ export default ({ app }, inject) => {
             "initcomp": {
                 "title": "Procode",
                 "description": "Desenvolvimento de Software ",
-                "bottom_text": "Procode Desenvolvimento de Software de Qualidade LTDA"
+                "bottom_text": "Procode Desenvolvimento de Software de Qualidade LTDA",
+                "app": false,
+                "googlepay": "",
+                "appstore": "",
             },
             "business": {
                 "name": "Procode",
@@ -61,6 +57,7 @@ export default ({ app }, inject) => {
             }
         },
         "seo": {
+            "favicon":"https://aqbank.com.br/wp-content/uploads/2024/06/Favicon.svg",
             "title": "AQBank - whitelabel",
             "description": "Teste title",
             "locale": "pt-br",

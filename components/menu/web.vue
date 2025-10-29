@@ -12,34 +12,7 @@
         </nuxt-link>
       </div>
      
-      <div class="card_workspace pa-4 mb-6">
-        <div>
-          <div class="d-flex justify-space-between align-center">
-            <h5 class="white--text text-left">Workspace</h5>
-            <v-btn
-              outlined
-              class="change_workspace px-1 py-1"
-              v-if="permission"
-              @click="modal_workspace()"
-            >
-              <i class="ri-building-2-fill white--text"></i>
-            </v-btn>
-          </div>
-          <v-divider
-            class="my-2"
-            style="background-color: #ffffff20"
-          ></v-divider>
-          <div class="label_workspace white--text text-left" v-if="!loading">
-            {{ data__user?.workspace?.name ?? "Principal" }}
-          </div>
-          <v-skeleton-loader
-            width="200"
-            max-width="100%"
-            type="text"
-            v-else="loading"
-          ></v-skeleton-loader>
-        </div>
-      </div>
+     
       <div v-if="!loading">
         <div v-for="(data, index) in menu_all[0]" :key="index">
           <!-- item de menu, component start -->
@@ -60,7 +33,6 @@
             <nuxt-link :to="M.to" v-if="M.submenu.length === 0">
               <div
                 class="d-flex align-center item__menu"
-                @click="state__submenu()"
               >
                 <div class="icon mr-2">
                   <i :class="M.iconlib"></i>
@@ -76,7 +48,6 @@
             <v-expansion-panels
               class="menu__submanu"
               accordion
-              v-model="submenu__pix"
               v-if="M.submenu.length > 0"
             >
               <v-expansion-panel>
@@ -117,7 +88,7 @@
           <!-- submneu component end -->
         </div>
         <div class="menu_contact">
-          <div class="pa-4 card_main_contact ma-4 primary">
+          <div class="pa-4 card_main_contact ma-4 ">
             <h5 class="mb-4">Teve algum problema ou precisa de suporte?</h5>
             <div class="d-flex">
               <v-btn
@@ -185,7 +156,6 @@ export default {
   },
   data() {
     return {
-      submenu__pix: "",
       operador: false,
     };
   },
@@ -193,9 +163,7 @@ export default {
     ...mapMutations({
       toggle: "user/user__data",
     }),
-    state__submenu() {
-      this.submenu__pix = "";
-    },
+ 
     modal_workspace() {
       this.$refs.modalWorkspaceMain.DialogStart();
     },

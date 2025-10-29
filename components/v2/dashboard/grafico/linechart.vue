@@ -1,6 +1,10 @@
 <template>
   <div>
-    <LineChart :chart-data="chartData" :chart-options="chartOptions" />
+    <LineChart
+      :chart-data="chartData"
+      :chart-options="chartOptions"
+      :style="{ height: height_comp }"
+    />
   </div>
 </template>
 
@@ -28,11 +32,30 @@ export default {
     },
     loading: {
       type: Object,
-      default: {},
+      default: () => ({}), 
+      required: false,
+    },
+    loading_extratoday: {
+      type: Boolean,
+      default: false,
+    },
+    height_comp: {
+      type: String,
+      default: "230px",
     },
   },
   watch: {
     "loading.extratoday": {
+      immediate: true, // Executa imediatamente ao criar o componente
+      handler(newVal) {
+        if (newVal !== undefined) {
+          if (!newVal) {
+            this.prepareChartData();
+          }
+        }
+      },
+    },
+    loading_extratoday: {
       immediate: true, // Executa imediatamente ao criar o componente
       handler(newVal) {
         if (newVal !== undefined) {
@@ -187,7 +210,7 @@ export default {
 
       // Preencher os labels e os dados dos datasets
       this.chartData.labels = sortedDates.map((date) => {
-         return `${this.$moment(date).add(3, 'hours').format("LT")}`;
+        return `${this.$moment(date).add(3, "hours").format("LT")}`;
       });
 
       this.chartData.datasets[0].data = sortedDates.map(
@@ -201,8 +224,4 @@ export default {
 };
 </script>
 
-<style scoped>
-div {
-  height: 230px;
-}
-</style>
+<style scoped></style>

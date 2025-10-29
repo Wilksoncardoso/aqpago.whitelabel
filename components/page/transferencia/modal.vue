@@ -8,20 +8,23 @@
         </p>
         <v-otp-input
           class="input__token"
-          v-model="form.token_verificate"
+          v-model="form.token_access"
           length="6"
-          :error-messages="mensagem"
+          :error-messages="mensagem?.error ? ['Invalid token'] : []"
           @finish="onFinish"
         ></v-otp-input>
+        <PageTransferenciaSuccess ref="ModalSuccess" />
+
         <div class="text-center">
-          
-          <v-btn text
-            class="button__reenviar__token"
+          <v-btn
+            text
+            class="button__reenviar__token px-2 py-2"
             :class="button__color__reenvio"
             @click="enviar__novamente()"
+            :disabled="time != 0"
             >Reenviar código</v-btn
           >
-          <p class="contagem__seg" >{{ time }}s</p>
+          <p class="contagem__seg">{{ time }}s</p>
         </div>
         <v-btn
           class="button__login"
@@ -53,9 +56,9 @@ export default {
       loading: false,
       dialog: false,
       time: 60,
-      data: [],
+      data: {},
       form: {
-        token_verificate: "",
+        token_access: "",
       },
       response: [],
     };
@@ -63,63 +66,63 @@ export default {
   created() {
     this.$nuxt.$on("trans__token", ($event) => this.trans__token($event));
   },
-  computed:{
-    button__color__reenvio(){
-      if(this.time === 0){
-        return 'primary--text'
-      }else{
-        return ''
+  computed: {
+    button__color__reenvio() {
+      if (this.time === 0) {
+        return "primary--text";
+      } else {
+        return "";
       }
-    }
+    },
   },
   methods: {
+    openmodal() {},
     onFinish() {
       this.concluir__transacao();
     },
     concluir__transacao() {
       this.loading = true;
       this.$axios
-        .$put(
-          "/tranfer-service/" +
-            this.data.body.id,
-          this.form
-        )
+        .$put("/tranfer-service/" + this.data.autorization, this.form)
         .then((response) => {
           this.$toast.success("Pagamento realizado com sucesso!");
           this.loading = false;
-          this.$router.push("/painel/comprovante?value=" + response.body.id);
+          this.$refs.ModalSuccess.open();
+          this.dialog = false;
+          // this.$router.push("/painel/comprovante?value=" + response.body.id);
         })
         .catch((error) => {
-          this.form.token_verificate = "";
+          this.form.token_access = "";
           this.loading = false;
-          this.mensagem = error.response.data.error;
+          this.mensagem =
+            error?.response?.data ||
+            error?.response?.data?.error?.token_access[0] ||
+            "error";
           this.$toast.error("Token de verificação inválido");
         });
     },
     enviar__novamente() {
-     if(this.time === 0){
-      this.$axios
-        .$get(
-          "/tranfer-resend-token/" +
-            this.data.body.id
-        )
-        .then((response) => {
-          this.form.token_verificate = "";
-          this.time = 60;
-        })
-        .catch((error) => {
-          this.mensagem = error.response.data.error;
-        });
-     }
+      if (this.time === 0) {
+        this.$axios
+          .$get("/tranfer-resend-token/" + this.data.autorization)
+          .then((response) => {
+            this.form.token_access = "";
+            this.time = 60;
+          })
+          .catch((error) => {
+            this.mensagem = error.response.data.error;
+          });
+      }
     },
     trans__token($event) {
       this.time = 60;
-      this.form.token_verificate = "";
+      this.form.token_access = "";
       this.dialog = $event.modal;
       this.data = $event.data_pix;
+      this.mensagem = "";
     },
     iniciarContador() {
-      this.form.token_verificate = "";
+      this.form.token_access = "";
       setInterval(() => {
         if (this.time > 0) {
           this.time--;
@@ -151,7 +154,7 @@ export default {
     margin-bottom: 48px;
   }
   .button__reenviar__token {
-  //  color: var(--primary);
+    //  color: var(--primary);
     &.disabled {
       font-weight: 700;
       font-size: 16px;

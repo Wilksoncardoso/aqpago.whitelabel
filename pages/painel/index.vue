@@ -4,27 +4,27 @@
       :list_payment="list_payment"
       v-if="list_payment.length > 0 && !loading.payment"
     /> -->
-    
     <V2DashboardSaldoMain
       :list_conta_digital="list_conta_digital"
       :saldo="saldo"
       :loading="loading"
       :data_user_permission="data_user_permission"
+      :type="data_user?.user_tipo"
     />
-     <V2DashboardGraficoMain
+    <V2DashboardGraficoMain
       :loading="loading"
       :list_conta_digital_day="transactions_day"
       :page_extrato="page_extrato"
       :Calc_saldo="Calc_saldo"
-    /> 
+    />
 
     <V2DashboardListaMain
       :list_conta_digital="list_conta_digital"
       :loading="loading"
       :data_user_permission="data_user_permission"
+      :type="data_user?.user_tipo"
     />
     <V2DashboardContatoMain :loading="loading" />
-  
   </div>
 </template>
 
@@ -49,8 +49,7 @@ export default {
       list_conta_digital: [],
       list_conta_digital_day: [],
       error: "",
-      transactions_day:[]
-      
+      transactions_day: [],
     };
   },
   created() {
@@ -66,7 +65,8 @@ export default {
         if (newVal !== undefined) {
           if (
             this.data_user_permission?.balance_view ||
-            this.data_user?.user_tipo === "responsavel"
+            this.data_user?.user_tipo === "responsavel" ||
+            this.data_user?.user_tipo === "titular"
           ) {
             this.return_saldo();
           }
@@ -123,8 +123,11 @@ export default {
     },
   },
   computed: {
+    data_user() {
+      return this.$store.state?.user?.user__data;
+    },
     data_user_permission() {
-      return this.$store.state?.user?.user__data?.user_permissao;
+      return this.data_user?.user_permissao;
     },
     data_atual() {
       return this.$moment(new Date()).format("YYYY-MM-DD");

@@ -23,10 +23,33 @@ export default (context, inject) => {
         } catch (e) {
             text = decodedString; // fallback if replace fails
         }
-
         switch (true) {
+            case text === 'invoice_boleto':
+                return 'Boleto Báncario';
+
+            case text === 'transfer':
+                return 'Transferência';
+
+            case text === 'invoice_boleto':
+                return 'Boleto Báncario';
+
+            case text === 'transaction-order':
+                return 'Ajuste Tesouraria';
+
             case text === 'AQPagoGestor':
                 return 'Ajuste Tesouraria';
+
+            case text === 'Origeminterna-Chaveinformadanãocadastrada.':
+                return 'Chave Pix não existe na Dict';
+
+            case text === 'Origeminterna-Chaveinformadanãocadastrada.':
+                return 'Chave Pix não existe na Dict';
+
+            case text === 'Failuretotransactwithoutservice':
+                return 'Falha no processamento';
+
+            case text === 'Failuretotransactwithoutservice':
+                return 'Falha no processamento';
 
             case text === 'ZOOPTECNOLOGIAINST':
                 return 'Aqpago Meios de Pagamentos Ltda';
