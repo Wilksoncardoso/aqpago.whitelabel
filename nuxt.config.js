@@ -202,7 +202,6 @@ export default {
   router: {},
 
   loading: {
-    color: "#521C89",
     height: "3px",
   },
 

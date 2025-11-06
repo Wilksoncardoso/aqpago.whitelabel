@@ -87,9 +87,10 @@ export default {
         .then((response) => {
           this.$toast.success("Pagamento realizado com sucesso!");
           this.loading = false;
-          this.$refs.ModalSuccess.open();
+          // this.$refs.ModalSuccess.open();
+
           this.dialog = false;
-          // this.$router.push("/painel/comprovante?value=" + response.body.id);
+          this.$router.push("/painel/extrato");
         })
         .catch((error) => {
           this.form.token_access = "";
@@ -154,7 +155,7 @@ export default {
     margin-bottom: 48px;
   }
   .button__reenviar__token {
-    //  color: var(--primary);
+    //  color: #521c89;
     &.disabled {
       font-weight: 700;
       font-size: 16px;

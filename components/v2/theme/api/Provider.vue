@@ -1,5 +1,6 @@
 <template>
-  <div></div>
+  <div>
+  </div>
 </template>
 
 <script>
@@ -152,7 +153,7 @@ export default {
     };
   },
   created() {
-    this.data = this.$CreatedThemeColorFake;
+    this.data = this.$CreatedThemeColorFake.payload;
     setTimeout(() => {
       this.CreatedColorData();
       this.$store.commit("theme/salvar", this.data);

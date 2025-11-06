@@ -4,9 +4,6 @@
       <div class="card__left__simulador">
         <div class="card__simulador">
           <div class="d-flex">
-            <div class="mr-2">
-              <icon__simulador__principal />
-            </div>
             <div>
               <h1 style="font-size: 20px">Simulador</h1>
             </div>
@@ -18,8 +15,22 @@
         </div>
         <div class="card__plano">
           <div class="label">Plano</div>
-          <div class="d-flex">
-            <icon__logo />
+          <div class="d-flex align-center">
+            <div
+              class="px-2 py-2"
+              :style="{
+                background: theme?.styles?.menuleft?.background?.primary,
+                borderRadius: '10px',
+              }"
+            >
+              <img
+                :src="theme?.assets?.logotipe?.img"
+                :alt="theme?.data?.initcomp?.title"
+                style="width: 100px"
+                class="d-flex"
+              />
+            </div>
+
             <div class="ml-2 plano__titulo">
               {{ data__plano?.plano_assinatura }}
             </div>
@@ -44,6 +55,7 @@
             item-text="label"
             item-value="value"
             filled
+            class="input__padrao"
             label="Filled style"
             v-model="simulador.method"
             :menu-props="{ bottom: true, offsetY: true }"
@@ -59,7 +71,7 @@
 
           <v-select
             solo
-            class="bandeira__simulador"
+            class="bandeira__simulador input__padrao"
             v-model="simulador.bandeira"
             :items="bandeiras"
             return-object
@@ -68,9 +80,9 @@
             :menu-props="{ bottom: true, offsetY: true }"
             v-if="!loading"
           >
-            <template v-slot:item="{ item }" >
-              <div class="d-flex align-center flex-wrap" style="width: 412px" >
-                <div v-for="data in getFirstValue(item)" :key="data" >
+            <template v-slot:item="{ item }">
+              <div class="d-flex align-center flex-wrap" style="width: 412px">
+                <div v-for="data in getFirstValue(item)" :key="data">
                   <component
                     class="icon__select ma-2"
                     :is="getBandComponent(data)"
@@ -79,8 +91,12 @@
               </div>
             </template>
 
-            <template v-slot:selection="{ item }" >
-              <div class="d-flex align-center flex-wrap" style="width: 412px" v-if="item != 'Banescard'">
+            <template v-slot:selection="{ item }">
+              <div
+                class="d-flex align-center flex-wrap"
+                style="width: 412px"
+                v-if="item != 'Banescard'"
+              >
                 <div v-for="data in getFirstValue(item)" :key="data">
                   <component
                     class="icon__select ma-2"
@@ -135,8 +151,11 @@
             </div>
             <div class="d-flex" v-if="simulador.payment != 'debit'">
               <div>
-                <v-btn icon @click="dwon__parcela()">
-                  <button__donw />
+                <v-btn icon @click="dwon__parcela()" :disabled="simulador.parcela === 1">
+                  <i
+                    class="ri-indeterminate-circle-fill primary--text"
+                    style="font-size: 30px"
+                  ></i>
                 </v-btn>
               </div>
               <div>
@@ -163,7 +182,10 @@
               </div>
               <div>
                 <v-btn icon @click="up__parcela()">
-                  <button__up />
+                  <i
+                    class="ri-add-circle-fill primary--text"
+                    style="font-size: 30px"
+                  ></i>
                 </v-btn>
               </div>
             </div>
@@ -201,10 +223,7 @@ import Band__discover from "./bandeira/discover.vue";
 import Band__jcb from "./bandeira/jcb.vue";
 import Band__aura from "./bandeira/aura.vue";
 
-// buntton simulador
 
-import button__up from "./icon/simulador__up.vue";
-import button__donw from "./icon/simulador__donw.vue";
 
 export default {
   directives: { money: VMoney },
@@ -227,8 +246,7 @@ export default {
     Band__aura,
 
     card__calcular,
-    button__up,
-    button__donw,
+
   },
   props: {
     data__plano: {
@@ -492,7 +510,8 @@ export default {
       const plano = this.planos__unic.find(
         (item) =>
           (bandeira === "machine" ||
-            (item.card_brand !== "machine" && item.card_brand.includes(bandeira))) &&
+            (item.card_brand !== "machine" &&
+              item.card_brand.includes(bandeira))) &&
           // item.card_brand === bandeira &&
           item.payment_type === payment &&
           item.capture_mode === method &&
@@ -553,7 +572,7 @@ export default {
         (item) =>
           item.capture_mode === "machine" &&
           item.payment_type === "credit" &&
-          item.number_installments === 1 
+          item.number_installments === 1
       );
 
       const uniqueArr = bandeiras__teste.map((obj) => {
@@ -616,7 +635,7 @@ export default {
         (item) =>
           item.capture_mode === "manually_keyed" &&
           item.payment_type === "debit" &&
-          item.number_installments === 1 
+          item.number_installments === 1
       );
 
       const uniqueArr = bandeiras__teste.map((obj) => {
@@ -698,19 +717,22 @@ export default {
 
       return result;
     },
-    planos(){
-      const result = this.data__plano?.taxas_plano.flatMap(item =>
-      item.taxa.map(tax => ({
-        number_installments: tax.number_installments,
-        card_brand: item.card_brand.join(", "),
-        percent_amount: tax.percent_amount,
-        payment_type: item.payment_type,
-        capture_mode: item.capture_mode
-      }))
-    );
+    planos() {
+      const result = this.data__plano?.taxas_plano.flatMap((item) =>
+        item.taxa.map((tax) => ({
+          number_installments: tax.number_installments,
+          card_brand: item.card_brand.join(", "),
+          percent_amount: tax.percent_amount,
+          payment_type: item.payment_type,
+          capture_mode: item.capture_mode,
+        }))
+      );
 
-    return result;
-    }
+      return result;
+    },
+    theme() {
+      return this.$store?.state?.theme?.data || null;
+    },
   },
   mounted() {
     setTimeout(() => {
@@ -837,7 +859,7 @@ export default {
   padding: 0 !important;
   margin-right: 24px;
   border-radius: 6px !important;
-
+  box-shadow: none !important;
   &.v-item--active {
     background: $color-primary !important;
     color: $color-white !important;

@@ -1,7 +1,7 @@
 <template>
   <div>
     <ul class="list-group">
-      <li v-if="SetForm.styles.color.primary">
+      <li v-if="SetForm.payload.styles.color.primary">
         <div class="titlegroup">1 - Cor primary</div>
         <div class="mb-6">
           <v-menu offset-y v-model="menuOpen">

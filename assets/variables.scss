@@ -7,6 +7,12 @@ $media-medium: "1200px";
 $media-large: "1600px";
 // $media-large: "1904px";
 
+#nuxt-loading .nuxt-progress {
+  background: var(--primary) !important;
+  height: 3px !important;
+}
+
+
 $media-palco-lg: 936px;
 $media-palco-xl: 1400px;
 $color-primary: var(--primary);
@@ -448,11 +454,12 @@ html {
   }
   .v-input__control {
     .v-input__slot {
-      box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
+      // box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
+      box-shadow: none !important;
       border: 1px solid rgba(26, 26, 26, 0.1);
       border-radius: 8px !important;
       padding: 14px 16px;
-      height: 60px !important;
+      min-height: 60px !important;
       .v-text-field__slot {
         .v-label {
           font-weight: 400;
@@ -461,6 +468,51 @@ html {
           color: #c0c0c0;
         }
       }
+    }
+  }
+}
+.navigation_pagination {
+  .v-pagination__item {
+    background: transparent;
+    box-shadow: none;
+    border: none;
+
+    color: var(--content-tertiary, #989898);
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px; /* 150% */
+    letter-spacing: -0.16px;
+  }
+  .v-pagination__item--active {
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-xl, 12px);
+    background: var(--background-surface, #f8f8f8) !important;
+    color: var(--content-primary, #131313) !important;
+  }
+  .v-pagination__navigation--disabled {
+    opacity: 0.5;
+  }
+  .v-pagination__navigation {
+    background: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+
+    .mdi-chevron-left {
+      width: 13px;
+      height: 13px;
+      object-fit: contain;
+      background-repeat: none;
+
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3.52385 6.16658H13.6668V7.83325H3.52385L7.99383 12.3032L6.81533 13.4817L0.333496 6.99992L6.81533 0.518066L7.99383 1.69657L3.52385 6.16658Z" fill="%23525252"/></svg>') !important;
+    }
+    .mdi-chevron-right {
+      width: 20px;
+      height: 20px;
+      object-fit: contain;
+      background-repeat: none;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M13.4765 9.16658L9.0065 4.69657L10.185 3.51807L16.6668 9.99992L10.185 16.4817L9.0065 15.3032L13.4765 10.8332H3.3335V9.16658H13.4765Z" fill="%23525252"/></svg>') !important;
     }
   }
 }

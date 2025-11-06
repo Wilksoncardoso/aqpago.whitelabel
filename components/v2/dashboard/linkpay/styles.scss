@@ -14,13 +14,11 @@ $size_icon_button: 30px;
       .name {
         white-space: nowrap;
         overflow: hidden;
-        max-width: 100px;
+        max-width: 130px;
         text-overflow: ellipsis;
         font-size: 12px !important;
-        font-size: var(--Typography-size-body-12px, 12px) !important;
         font-style: normal !important;
         line-height: 16px !important;
-        line-height: var(--Typography-size-line-height-xxs, 16px) !important;
         letter-spacing: -0.24px !important;
         color: var(--content-primary, #131313);
       }

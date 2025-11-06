@@ -19,11 +19,11 @@ export default {
       type: Object,
     },
   },
-  methods: {
-    return_img(img) {
-      return URL.createObjectURL(img);
-    },
-  },
+  // methods: {
+  //   return_img(img) {
+  //     return URL.createObjectURL(img);
+  //   },
+  // },
 };
 </script>
 

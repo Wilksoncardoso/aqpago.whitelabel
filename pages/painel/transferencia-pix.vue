@@ -13,14 +13,13 @@
         :insertkey="insertkey"
       />
       <modal />
-      <PageTransferenciaSuccess ref="ModalSuccess" />
     </div>
   </div>
 </template>
 <script>
-import index__transferencia from "../../components/page/transferencia/index.vue";
-import transfer from "../../components/page/transferencia/transfer__pix.vue";
-import modal from "../../components/page/transferencia/modal.vue";
+import index__transferencia from "~/components/page/transferencia/index.vue";
+import transfer from "~/components/page/transferencia/transfer__pix.vue";
+import modal from "~/components/page/transferencia/modal.vue";
 export default {
   name: "transferencia-pixPage",
   layout: "PainelLayout",

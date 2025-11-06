@@ -18,27 +18,21 @@
             /></v-btn>
           </div>
         </div>
-        <V2SellerGetSaldoMain />
+        <V2SellerGetSaldoMain :status="data?.status" />
+
         <div class="d-flex align-center justify-space-between mb-2">
           <div class="d-flex primary--text">
             <i class="ri-building-line mr-2"></i>
             <h4 class="primary--text">Dados Empresariais</h4>
           </div>
         </div>
-        <div class="d-flex align-center">
+        <div class="d-flex">
           <div class="body">
             <div class="title">Status</div>
             <div>
               <span :class="data?.status" class="status px-2 py-1">{{
                 $getTypeSeller(data?.status)
               }}</span>
-            </div>
-          </div>
-          <div class="body">
-            <div class="title">Abertura de CNPJ</div>
-            <div class="description">
-              {{ $moment(data?.business_opening_date).format("DD/MM/YYYY") }},
-              {{ $DataTimeReturn(data?.business_opening_date) }}
             </div>
           </div>
           <div class="body">
@@ -65,20 +59,29 @@
             </div>
           </div>
         </div>
-        <div class="d-flex flex-wrap">
+        <div class="d-flex align-center">
           <div class="body">
             <div class="title">CNPJ</div>
             <div class="description">
               {{ $maskDoc(data?.ein) }}
             </div>
           </div>
+
           <div class="body third">
             <div class="title">Razão Social</div>
             <div class="description">
               {{ data?.business_name }}
             </div>
           </div>
-
+        </div>
+        <div class="d-flex flex-wrap">
+          <div class="body">
+            <div class="title">Abertura de CNPJ</div>
+            <div class="description">
+              {{ $moment(data?.business_opening_date).format("DD/MM/YYYY") }},
+              {{ $DataTimeReturn(data?.business_opening_date) }}
+            </div>
+          </div>
           <div class="body">
             <div class="title">CEP</div>
             <div class="description">
@@ -115,18 +118,7 @@
               {{ data?.owner?.name + " " + data?.owner?.lastname }}
             </div>
           </div>
-          <div class="body">
-            <div class="title">E-mail</div>
-            <div class="description">
-              {{ data?.owner?.email }}
-            </div>
-          </div>
-          <div class="body">
-            <div class="title">Telefone</div>
-            <div class="description">
-              {{ $maskTel(data?.owner?.phone) }}
-            </div>
-          </div>
+
           <div class="body">
             <div class="title">Data de nascimento</div>
             <div class="description">
@@ -148,6 +140,28 @@
               {{ data?.owner_address?.district }},
               {{ data?.owner_address?.city }} -
               {{ data?.owner_address?.state }}
+            </div>
+          </div>
+        </div>
+        <v-divider class="my-4"></v-divider>
+
+        <div class="d-flex align-center justify-space-between mb-2">
+          <div class="d-flex primary--text">
+            <i class="ri-contacts-book-line mr-2"></i>
+            <h4 class="primary--text">Contato</h4>
+          </div>
+        </div>
+        <div class="d-flex">
+          <div class="body">
+            <div class="title">E-mail</div>
+            <div class="description">
+              {{ data?.owner?.email }}
+            </div>
+          </div>
+          <div class="body">
+            <div class="title">Telefone</div>
+            <div class="description">
+              {{ $maskTel(data?.owner?.phone) }}
             </div>
           </div>
         </div>

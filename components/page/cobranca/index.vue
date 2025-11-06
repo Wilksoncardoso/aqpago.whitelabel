@@ -1,9 +1,6 @@
 <template lang="html">
   <div>
     <div class="d-flex align-center titulo">
-      <div class="mr-3">
-        <icon__cb__pix />
-      </div>
       <div>
         <h1 class="titulo__page">Cobrança Pix</h1>
       </div>

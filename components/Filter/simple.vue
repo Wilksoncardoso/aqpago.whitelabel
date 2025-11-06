@@ -52,7 +52,11 @@
           </div>
         </v-btn>
       </template>
-      <v-list  nav dense style="overflow-y: auto; max-height: 400px; min-width: 228px;">
+      <v-list
+        nav
+        dense
+        style="overflow-y: auto; max-height: 400px; min-width: 228px"
+      >
         <v-list-item
           v-for="(item, index) in list"
           :key="index"
@@ -173,9 +177,12 @@ export default {
   }
 
   &:focus {
+    position: relative;
+    top: 5px;
     background: $background-inverse !important;
-    border: 2px solid var(--primary) !important;
-    box-shadow: 0px 0px 0px 2px rgba(200, 178, 255, 0.5) !important;
+    border: 1px solid var(--primary) !important;
+    box-shadow: 0px 0px 0px 2px
+      color-mix(in srgb, var(--primary) 50%, transparent) !important;
     &::before {
       opacity: 0 !important;
     }
@@ -214,8 +221,10 @@ export default {
   &.ativo {
     border-radius: $radius-sm;
     background: $background-surface-background;
+    i {
+      color: var(--primary);
+    }
     margin-bottom: 0 !important;
   }
 }
-
 </style>

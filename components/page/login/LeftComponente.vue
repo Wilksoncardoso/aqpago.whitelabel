@@ -9,7 +9,7 @@
               :src="Logo_main"
               :alt="theme?.data?.initcomp?.description"
               :width="
-                SetForm?.assets?.logotipe?.size ||
+                SetForm?.payload?.assets?.logotipe?.size ||
                 theme?.assets?.logotipe?.size ||
                 130
               "
@@ -24,7 +24,7 @@
       </div>
       <div
         class="d-flex-inline item__app"
-        v-if="SetForm?.data?.initcomp?.app || theme?.data.initcomp.app"
+        v-if="SetForm?.payload?.data?.initcomp?.app || theme?.data.initcomp.app"
       >
         <div>
           <p>
@@ -38,8 +38,8 @@
               target="_blank"
               rel="AQpago paybank - apple"
               v-if="
-                (SetForm?.data?.initcomp?.app &&
-                  SetForm?.data?.initcomp?.appstore) ||
+                (SetForm?.payload?.data?.initcomp?.app &&
+                  SetForm?.payload?.data?.initcomp?.appstore) ||
                 theme?.data.initcomp.appstore
               "
             >
@@ -52,7 +52,7 @@
               target="_blank"
               rel="AQpago paybank - Play"
               v-if="
-                SetForm?.data?.initcomp?.googlepay ||
+                SetForm?.payload?.data?.initcomp?.googlepay ||
                 theme?.data.initcomp.googlepay
               "
             >
@@ -112,30 +112,30 @@ export default {
     },
     title() {
       let titleAPI = this.theme?.data?.initcomp?.title;
-      let SetForm = this.SetForm?.data?.initcomp?.title;
+      let SetForm = this.SetForm?.payload?.data?.initcomp?.title;
       return SetForm ? SetForm : titleAPI;
     },
     description() {
       let DescriptionAPI = this.theme?.data?.initcomp?.description;
-      let SetForm = this.SetForm?.data?.initcomp?.description;
+      let SetForm = this.SetForm?.payload?.data?.initcomp?.description;
       return SetForm ? SetForm : DescriptionAPI;
     },
     description_bottom() {
       let TxtBottom = this.theme?.data?.initcomp?.bottom_text;
-      let SetForm = this.SetForm?.data?.initcomp?.bottom_text;
+      let SetForm = this.SetForm?.payload?.data?.initcomp?.bottom_text;
       return SetForm ? SetForm : TxtBottom;
     },
     background_main() {
       let bgApi = this.theme?.assets?.initcomp?.img;
-      let bgASetForm = this.SetForm?.assets?.initcomp?.img
-        ? this.return_img(this.SetForm?.assets?.initcomp?.img)
+      let bgASetForm = this.SetForm?.payload?.assets?.initcomp?.img
+        ? this.return_img(this.SetForm?.payload?.assets?.initcomp?.img)
         : null;
       return bgASetForm ? bgASetForm : bgApi;
     },
     Logo_main() {
       let LogoApi = this.theme?.assets?.logotipe?.img;
-      let LogoForm = this.SetForm?.assets?.logotipe?.img
-        ? this.return_img(this.SetForm.assets.logotipe.img)
+      let LogoForm = this.SetForm?.payload?.assets?.logotipe?.img
+        ? this.return_img(this.SetForm.payload?.assets.logotipe.img)
         : null;
       return LogoForm ? LogoForm : LogoApi;
     },

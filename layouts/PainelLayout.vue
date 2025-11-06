@@ -62,7 +62,7 @@ export default {
   data() {
     return {
       widgetHeight: "43px",
-       menu__oficial: [
+      menu__oficial: [
         {
           position: "top",
           title: "",
@@ -217,7 +217,7 @@ export default {
             },
           ],
         },
-          {
+        {
           position: "top",
           title: "White Label ",
           array: [
@@ -240,7 +240,6 @@ export default {
               submenu: [],
               iconlib: "ri-palette-fill",
               op_permission: ["mkt"],
-
             },
           ],
         },
@@ -273,7 +272,7 @@ export default {
           this.error = error.response.data.mensagem;
         });
     },
-       async list_workspace() {
+    async list_workspace() {
       this.loading = true;
       this.error = null;
       const response = await this.$axios
@@ -287,7 +286,6 @@ export default {
         })
         .finally(() => (this.loading = false));
     },
-
   },
   computed: {
     url() {
@@ -336,7 +334,7 @@ export default {
       return this.menu__oficial;
     },
   },
-   watch: {
+  watch: {
     "data__user.user_tipo"(newValue) {
       if (newValue === "responsavel") {
         this.list_workspace();

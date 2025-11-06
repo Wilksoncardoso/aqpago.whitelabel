@@ -2,10 +2,8 @@
   <div class="d-flex justify-space-between">
     <!-- teste -->
     <V2ThemeApiProvider ref="temapadrao" />
-
     <div class="cards_created_theme pa-4 white">
       <h3 class="primary--text">Cadastro de Theme</h3>
-      {{ SetForm }}
       <v-stepper v-model="page" vertical>
         <!-- Step 1 -->
         <v-stepper-step :complete="page > 1" step="1">
@@ -16,7 +14,6 @@
         <v-stepper-content step="1">
           <v-card class="pa-5 created_theme">
             <div class="title mb-3 primary--text">Navbar</div>
-
             <div class="label">1 - Favicon <span>(png ou jpeg)</span></div>
             <v-file-input
               accept="image/png, image/jpeg, image/bmp"
@@ -28,7 +25,7 @@
               :rules="rulesStep1.favicon"
               hint="Favicon será renderizada no tamanho 512px por 512px"
               persistent-hint
-              @change="onChangeFavicon"
+              @change="validateStep(1)"
             ></v-file-input>
 
             <div class="label">2 - Cor de navegador</div>
@@ -42,7 +39,6 @@
               @input="validateStep(1)"
             ></v-color-picker>
           </v-card>
-
           <v-btn
             color="primary"
             class="pa-2"
@@ -66,7 +62,7 @@
                   v-model="SetForm.payload.styles.color.primary"
                   @input="
                     updateOpacityColor($event);
-                    validateStep(2)
+                    validateStep(2);
                   "
                   dot-size="3"
                   hide-mode-switch
@@ -78,7 +74,7 @@
                 <div class="label">2 - Cor Opacity</div>
                 <v-color-picker
                   v-model="SetForm.payload.styles.color.primary_op"
-                  @input="validateStep(2); updatePrimaryOp($event)"
+                  @input="validateStep(2), updatePrimaryOp($event)"
                   dot-size="3"
                   hide-mode-switch
                   mode="hexa"
@@ -87,7 +83,6 @@
               </div>
             </div>
           </v-card>
-
           <v-btn
             class="pa-2"
             color="primary"
@@ -115,7 +110,7 @@
                   mode="hexa"
                   hide-mode-switch
                   swatches-max-height="100"
-                  @input="validateStep(3); updateBackgroundFist($event)"
+                  @input="validateStep(3), updateBackgroundFist($event)"
                 ></v-color-picker>
               </div>
               <div>
@@ -127,7 +122,7 @@
                   hide-mode-switch
                   mode="hexa"
                   swatches-max-height="100"
-                  @input="validateStep(3); updateBackgroundEnd($event)"
+                  @input="validateStep(3), updateBackgroundEnd($event)"
                 ></v-color-picker>
               </div>
             </div>
@@ -143,7 +138,7 @@
                   hide-mode-switch
                   mode="hexa"
                   swatches-max-height="100"
-                  @input="validateStep(3); updateColorTitleMenu($event)"
+                  @input="validateStep(3), updateColorTitleMenu($event)"
                 ></v-color-picker>
               </div>
               <div>
@@ -155,7 +150,7 @@
                   hide-mode-switch
                   mode="hexa"
                   swatches-max-height="100"
-                  @input="validateStep(3); updateColorItemMenu($event)"
+                  @input="validateStep(3), updateColorItemMenu($event)"
                 ></v-color-picker>
               </div>
             </div>
@@ -180,7 +175,6 @@
         <v-stepper-content step="4">
           <v-card class="pa-5 created_theme">
             <div class="title mb-3 primary--text">Login | Password | Token</div>
-
             <div class="label">
               1 - Imagem esquerda background <span>(png ou jpeg)</span>
             </div>
@@ -192,7 +186,7 @@
               label="Imagem esquerda background"
               v-model="SetForm.payload.assets.initcomp.img"
               :rules="rulesStep4.image"
-              @change="onChangeInitImg"
+              @change="validateStep(4), UpdateStoreSetform()"
             ></v-file-input>
 
             <div class="label">
@@ -212,9 +206,8 @@
                 'px'
               "
               persistent-hint
-              @change="onChangeLogo"
+              @change="validateStep(4), UpdateStoreSetform()"
             ></v-file-input>
-
             <div class="d-flex justify-space-between">
               <h5 class="mt-2">
                 logo, tamanho vertical
@@ -247,7 +240,6 @@
                 </v-btn>
               </div>
             </div>
-
             <v-slider
               v-model="SetForm.payload.assets.logotipe.size"
               min="50"
@@ -274,7 +266,6 @@
               @input="validateStep(4)"
             ></v-text-field>
           </v-card>
-
           <v-btn
             class="pa-2"
             color="primary"
@@ -346,7 +337,6 @@
               @input="validateStep(5)"
             ></v-text-field>
           </v-card>
-
           <v-btn
             class="pa-2"
             color="primary"
@@ -390,7 +380,7 @@
               label="Img Url Seo"
               v-model="SetForm.payload.seo['image-url']"
               :rules="rulesStep6.image"
-              @change="onChangeSeoImage"
+              @change="validateStep(6)"
             ></v-file-input>
 
             <div class="label">4 - Twitter-site</div>
@@ -432,10 +422,9 @@
               label="Avatar"
               v-model="SetForm.payload.seo['twitter-image-url']"
               :rules="rulesStep6.twitterImage"
-              @change="onChangeTwitterImage"
+              @change="validateStep(6)"
             ></v-file-input>
           </v-card>
-
           <v-btn
             class="pa-2"
             color="primary"
@@ -447,7 +436,7 @@
           <v-btn class="pa-2" text @click="page -= 1"> Voltar </v-btn>
         </v-stepper-content>
 
-        <!-- Step 7 -->
+        <!-- Step 6 -->
         <v-stepper-step step="7" :complete="page > 7"> # APP</v-stepper-step>
         <v-stepper-content step="7">
           <v-card class="pa-5 created_theme">
@@ -462,7 +451,6 @@
               hide-details
               @change="validateStep(7)"
             ></v-switch>
-
             <div v-if="SetForm.payload.data.initcomp.app">
               <div class="label">2 - Descrição de app</div>
               <v-text-field
@@ -483,7 +471,7 @@
                 @input="validateStep(7)"
               ></v-text-field>
 
-              <div class="label">4 - AppStore</div>
+              <div class="label">4 - Descrição de app</div>
               <v-text-field
                 solo
                 label="Coloque o link do AppStore"
@@ -493,7 +481,6 @@
               ></v-text-field>
             </div>
           </v-card>
-
           <v-btn
             class="pa-2"
             color="primary"
@@ -506,11 +493,7 @@
           <v-btn class="pa-2" text @click="page -= 1"> Voltar </v-btn>
         </v-stepper-content>
       </v-stepper>
-
-      <div v-if="error" class="error red--text mt-4">{{ error }}</div>
-      <div v-if="loading" class="mt-2">Enviando... {{ progress }}%</div>
     </div>
-
     <div class="cards_created_preview">
       <v-btn @click="DeleteStoreSetform()">teste</v-btn>
       <V2ThemeCreatedPreviewMain
@@ -526,7 +509,7 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapState, mapActions } from "vuex";
 
 export default {
   props: {
@@ -538,10 +521,6 @@ export default {
   data() {
     return {
       page: 1,
-      loading: false,
-      error: null,
-      progress: 0,
-
       rules: {
         img: [
           (value) =>
@@ -572,6 +551,17 @@ export default {
         ],
       },
       rulesStep4: {
+        // title: [
+        //   (v) => !!v || "Título é obrigatório",
+        //   (v) =>
+        //     (v && v.length >= 3) || "Título deve ter pelo menos 3 caracteres",
+        // ],
+        // description: [
+        //   (v) => !!v || "Descrição é obrigatória",
+        //   (v) =>
+        //     (v && v.length >= 10) ||
+        //     "Descrição deve ter pelo menos 10 caracteres",
+        // ],
         logotipo: [
           (v) => !!v || "Logotipo é obrigatório",
           (v) => !v || v.size < 5000000 || "A imagem deve ter menos de 5MB",
@@ -591,14 +581,14 @@ export default {
         whatsapp: [
           (v) => !!v || "WhatsApp é obrigatório",
           (v) =>
-            /^(\+\d{1,3})?\d{10,11}$/.test((v || "").replace(/\D/g, "")) ||
+            /^(\+\d{1,3})?\d{10,11}$/.test(v.replace(/\D/g, "")) ||
             "WhatsApp deve ser válido",
         ],
         website: [
           (v) => !!v || "Website é obrigatório",
           (v) =>
             /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/.test(
-              v || ""
+              v
             ) || "Website deve ser válido",
         ],
       },
@@ -621,7 +611,7 @@ export default {
         ],
         twitterSite: [
           (v) => !!v || "Twitter site é obrigatório",
-          (v) => /^@\w+$/.test(v || "") || "Deve começar com @ seguido do username",
+          (v) => /^@\w+$/.test(v) || "Deve começar com @ seguido do username",
         ],
         twitterTitle: [
           (v) => !!v || "Twitter title é obrigatório",
@@ -648,89 +638,94 @@ export default {
             "Descrição de app deve ter pelo menos 5 caracteres",
         ],
       },
-
       SetForm: {
         workspaceId: "",
         payload: {
           assets: {
             initcomp: {
               right: true,
-              img: null, // File (png/jpg)
+              img: null, // png
             },
             logotipe: {
-              img: null, // File (png/svg)
+              img: null, // png e svg
               size: "50",
             },
             icon: {
-              img32x32: null,   // File
-              img96x96: null,   // File
-              img192x192: null, // File
-              img300x300: null, // File
-              img512x512: null, // File base
+              img32x32: null, // png
+              img96x96: null, // png
+              img192x192: null, // png
+              img300x300: null, // png
+              img512x512: null, // png
             },
           },
           styles: {
             color: {
-              primary: "",    // string
-              primary_op: "", // string
-              secondary: "",  // string
+              primary: "", //string
+              primary_op: "", //string
+              secondary: "", //string
             },
             menuleft: {
               background: {
-                primary: "",   // string
-                secondary: "", // string
+                primary: "", //string
+                secondary: "", //string
               },
               font: {
-                color: "", // string
+                color: "", //string
               },
               title: {
-                color: "", // string
+                color: "", //string
               },
             },
           },
           data: {
             initcomp: {
-              title: "", // string
-              description: "", // string
-              bottom_text: "", // string
+              title: "", //string
+              description: "", //string
+              bottom_text: "", //string
               app: false,
               googlepay: "",
               appstore: "",
             },
             business: {
-              name: "", // string
-              email: "", // string
-              phone: "", // string
-              whatsapp: "", // string
-              website: "", // string
+              name: "", //string
+              email: "", //string
+              phone: "", //string
+              whatsapp: "", //string
+              website: "", //string
               external_link: {
-                base_url: "",
-                link_payment: "",
-                cobram_recorrente: "",
+                base_url: "", //string
+                link_payment: "", //string
+                cobram_recorrente: "", //string
               },
-              termos: "",
+              termos: "", //string
             },
           },
           seo: {
-            title: "", // string
-            description: "", // string
-            "theme-color": "", // string
-            "image-url": null, // File
-            "twitter-site": "", // string
-            "twitter-title": "", // string
-            "twitter-description": "", // string
-            "twitter-image-url": null, // File
+            title: "", //string
+            description: "", //string
+            "theme-color": "", //string
+            "image-url": null, //string
+            "twitter-site": "", //string
+            "twitter-title": "", //string
+            "twitter-description": "", //string
+            "twitter-image-url": null, //string
           },
         },
       },
+      loading: false,
     };
   },
   computed: {
     data() {
-      return this.$store?.state?.user?.user__data;
+      return this.$store.state.user.user__data;
     },
   },
   watch: {
+    "SetForm.payload.assets.icon.img512x512"(newVal) {
+      if (newVal) {
+        this.resizeAndSetImages(newVal);
+      }
+    },
     data: {
       immediate: true,
       handler(newVal) {
@@ -744,155 +739,15 @@ export default {
     page(newVal) {
       this.validateStep(newVal);
     },
-      "SetForm.payload.assets.icon.img512x512"(newVal) {
-      if (newVal) {
-        this.resizeAndSetImages(newVal);
-      }
-    },
   },
   methods: {
     ...mapActions("theme", ["salvarSetform", "deleteSetform"]),
-
     UpdateStoreSetform() {
       this.$store.commit("theme/salvarSetform", this.SetForm);
     },
     DeleteStoreSetform() {
       this.$store.commit("theme/deleteSetform", this.SetForm);
     },
-
-    // ========= Helpers de arquivo / FormData =========
-    isFileLike(v) {
-      return (
-        (typeof File !== "undefined" && v instanceof File) ||
-        (typeof Blob !== "undefined" && v instanceof Blob)
-      );
-    },
-    objectToFormData(obj, form = new FormData(), namespace = "") {
-      if (obj === undefined || obj === null) return form;
-
-      Object.keys(obj).forEach((prop) => {
-        const key = namespace ? `${namespace}[${prop}]` : prop;
-        const value = obj[prop];
-
-        if (value === undefined || value === null) return;
-
-        if (Array.isArray(value)) {
-          value.forEach((v, i) => {
-            const arrayKey = `${key}[${i}]`;
-            if (this.isFileLike(v)) {
-              form.append(arrayKey, v, v.name || `file_${i}`);
-            } else if (typeof v === "object" && v !== null) {
-              this.objectToFormData(v, form, arrayKey);
-            } else {
-              form.append(arrayKey, v);
-            }
-          });
-          return;
-        }
-
-        if (this.isFileLike(value)) {
-          form.append(key, value, value.name || prop);
-        } else if (typeof value === "object") {
-          this.objectToFormData(value, form, key);
-        } else {
-          form.append(key, value);
-        }
-      });
-
-      return form;
-    },
-    fileToImage(file) {
-      return new Promise((resolve, reject) => {
-        const url = URL.createObjectURL(file);
-        const img = new Image();
-        img.onload = () => {
-          URL.revokeObjectURL(url);
-          resolve(img);
-        };
-        img.onerror = (e) => {
-          URL.revokeObjectURL(url);
-          reject(e);
-        };
-        img.src = url;
-      });
-    },
-    async resizeFileToPngBlob(file, width, height, nameHint = "image") {
-      const img = await this.fileToImage(file);
-      const canvas = document.createElement("canvas");
-      canvas.width = width;
-      canvas.height = height;
-      const ctx = canvas.getContext("2d");
-      ctx.imageSmoothingEnabled = true;
-      ctx.imageSmoothingQuality = "high";
-      ctx.drawImage(img, 0, 0, width, height);
-
-      return new Promise((resolve) => {
-        canvas.toBlob(
-          (blob) => {
-            const fileName = `${nameHint}_${width}x${height}.png`;
-            const result =
-              typeof File !== "undefined"
-                ? new File([blob], fileName, { type: "image/png" })
-                : blob;
-            result.name = fileName; // manter name mesmo se for Blob
-            resolve(result);
-          },
-          "image/png",
-          0.92
-        );
-      });
-    },
-
-    // ========= Handlers dos inputs de arquivo =========
-    async onChangeFavicon(file) {
-      if (!file) {
-        this.SetForm.payload.assets.icon.img32x32 = null;
-        this.SetForm.payload.assets.icon.img96x96 = null;
-        this.SetForm.payload.assets.icon.img192x192 = null;
-        this.SetForm.payload.assets.icon.img300x300 = null;
-        this.SetForm.payload.assets.icon.img512x512 = null;
-        this.validateStep(1);
-        return;
-      }
-
-      this.SetForm.payload.assets.icon.img512x512 = file;
-
-      try {
-        const sizes = [32, 96, 192, 300];
-        for (const s of sizes) {
-          const resized = await this.resizeFileToPngBlob(file, s, s, "favicon");
-          this.SetForm.payload.assets.icon[`img${s}x${s}`] = resized;
-        }
-      } catch (err) {
-        // fallback: usa o original pra todos
-        this.SetForm.payload.assets.icon.img32x32 = file;
-        this.SetForm.payload.assets.icon.img96x96 = file;
-        this.SetForm.payload.assets.icon.img192x192 = file;
-        this.SetForm.payload.assets.icon.img300x300 = file;
-      }
-
-      this.validateStep(1);
-    },
-    onChangeLogo(file) {
-      this.SetForm.payload.assets.logotipe.img = file || null;
-      this.validateStep(4);
-      this.UpdateStoreSetform();
-    },
-    onChangeInitImg(file) {
-      this.SetForm.payload.assets.initcomp.img = file || null;
-      this.validateStep(4);
-      this.UpdateStoreSetform();
-    },
-    onChangeSeoImage(file) {
-      this.SetForm.payload.seo["image-url"] = file || null;
-      this.validateStep(6);
-    },
-    onChangeTwitterImage(file) {
-      this.SetForm.payload.seo["twitter-image-url"] = file || null;
-      this.validateStep(6);
-    },
-
-    // ========= Validações por step =========
     validateStep(step) {
       switch (step) {
         case 1:
@@ -917,13 +772,16 @@ export default {
             !!this.SetForm.payload.assets.logotipe.img &&
             !!this.SetForm.payload.assets.initcomp.img;
           break;
-        case 5: {
-          const wpp = (this.SetForm.payload.data.business.whatsapp || "")
-            .replace(/\D/g, "");
-          const whatsappValid = /^(\+\d{1,3})?\d{10,11}$/.test(wpp);
-          const websiteValid = /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/.test(
-            this.SetForm.payload.data.business.website || ""
+        case 5:
+          const whatsappValid = /^(\+\d{1,3})?\d{10,11}$/.test(
+            this.SetForm.payload.data.business.whatsapp?.replace(/\D/g, "") ||
+              ""
           );
+          const websiteValid =
+            /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/.test(
+              this.SetForm.payload.data.business.website || ""
+            );
+
           this.stepValid[5] =
             !!this.SetForm.payload.data.business.name &&
             !!this.SetForm.payload.data.business.email &&
@@ -934,11 +792,11 @@ export default {
             !!this.SetForm.payload.data.business.website &&
             websiteValid;
           break;
-        }
-        case 6: {
+        case 6:
           const twitterSiteValid = /^@\w+$/.test(
             this.SetForm.payload.seo["twitter-site"] || ""
           );
+
           this.stepValid[6] =
             !!this.SetForm.payload.seo.title &&
             this.SetForm.payload.seo.title.length >= 10 &&
@@ -953,99 +811,137 @@ export default {
             this.SetForm.payload.seo["twitter-description"].length <= 200 &&
             !!this.SetForm.payload.seo["twitter-image-url"];
           break;
-        }
         case 7:
           this.stepValid[7] =
             !this.SetForm.payload.data.initcomp.app ||
             (this.SetForm.payload.data.initcomp.app &&
               !!this.SetForm.payload.data.initcomp.bottom_text &&
               this.SetForm.payload.data.initcomp.bottom_text.length >= 5);
-          break;
       }
     },
-
     createdDataUser() {
-      const Form = this.SetForm;
-      const data = this.data;
-      Form.payload.data.business.name = data?.conta?.nome_fatura || "";
-      Form.payload.data.business.email = data?.email || "";
-      Form.payload.data.business.phone = data?.telefone || "";
-      Form.payload.data.business.whatsapp = data?.telefone || "";
+      let Form = this.SetForm;
+      let data = this.data;
+      Form.payload.data.business.name = data?.conta?.nome_fatura;
+      Form.payload.data.business.email = data?.email;
+      Form.payload.data.business.phone = data?.telefone;
+      Form.payload.data.business.whatsapp = data?.telefone;
     },
-
     submitForm() {
-      if (this.stepValid[6] && this.stepValid[7]) {
+      if (this.stepValid[6]) {
         this.CreatedTheme();
       }
     },
-
-    // ========= Atualizações de cores / CSS vars =========
     getShortHex(hexCode) {
-      const cleanHex = (hexCode || "").replace("#", "");
+      const cleanHex = hexCode.replace("#", "");
       return `#${cleanHex.substring(0, 6)}`;
     },
     updateOpacityColor(primaryColor) {
-      if (!primaryColor) return;
+      if (primaryColor) {
+        // Remove o # se existir
 
-      let hexa = primaryColor.replace("#", "");
-      if (hexa.length === 3) {
-        hexa = hexa[0] + hexa[0] + hexa[1] + hexa[1] + hexa[2] + hexa[2];
+        let hexa = primaryColor.replace("#", "");
+
+        // Converte 3-digit hexa para 6-digits
+        if (hexa.length === 3) {
+          hexa = hexa[0] + hexa[0] + hexa[1] + hexa[1] + hexa[2] + hexa[2];
+        }
+
+        // Separa os componentes de cor
+        const r = parseInt(hexa.substring(0, 2), 16);
+        const g = parseInt(hexa.substring(2, 4), 16);
+        const b = parseInt(hexa.substring(4, 6), 16);
+
+        // Calcula a versão 70% mais clara (aumenta cada componente em direção a 255)
+        const lighterR = Math.min(255, Math.round(r + (255 - r) * 0.8));
+        const lighterG = Math.min(255, Math.round(g + (255 - g) * 0.8));
+        const lighterB = Math.min(255, Math.round(b + (255 - b) * 0.8));
+
+        // Converte de volta para hexadecimal
+        let colorOp =
+          "#" +
+          ((1 << 24) + (lighterR << 16) + (lighterG << 8) + lighterB)
+            .toString(16)
+            .slice(1)
+            .toUpperCase();
+
+        this.$vuetify.theme.themes.light.Setprimary =
+          this.getShortHex(primaryColor);
+
+        document.documentElement.style.setProperty("--SetPrimay", primaryColor);
+        document.documentElement.style.setProperty(
+          "--SetPrimayOpacity",
+          colorOp
+        );
+
+        this.$vuetify.theme.themes.light.primary =
+          this.getShortHex(primaryColor);
+
+        document.documentElement.style.setProperty(
+          "--primary",
+          this.getShortHex(primaryColor)
+        );
+        document.documentElement.style.setProperty(
+          "--primaryop",
+          this.getShortHex(colorOp)
+        );
+
+        this.SetForm.payload.styles.color.primary_op = colorOp;
       }
-
-      const r = parseInt(hexa.substring(0, 2), 16);
-      const g = parseInt(hexa.substring(2, 4), 16);
-      const b = parseInt(hexa.substring(4, 6), 16);
-
-      const lighterR = Math.min(255, Math.round(r + (255 - r) * 0.8));
-      const lighterG = Math.min(255, Math.round(g + (255 - g) * 0.8));
-      const lighterB = Math.min(255, Math.round(b + (255 - b) * 0.8));
-
-      const colorOp =
-        "#" +
-        ((1 << 24) + (lighterR << 16) + (lighterG << 8) + lighterB)
-          .toString(16)
-          .slice(1)
-          .toUpperCase();
-
-      this.$vuetify.theme.themes.light.Setprimary = this.getShortHex(primaryColor);
-      document.documentElement.style.setProperty("--SetPrimay", primaryColor);
-      document.documentElement.style.setProperty("--SetPrimayOpacity", colorOp);
-
-      this.$vuetify.theme.themes.light.primary = this.getShortHex(primaryColor);
-      document.documentElement.style.setProperty("--primary", this.getShortHex(primaryColor));
-      document.documentElement.style.setProperty("--primaryop", this.getShortHex(colorOp));
-
-      this.SetForm.payload.styles.color.primary_op = colorOp;
     },
     updatePrimaryOp(primaryopColor) {
-      if (!primaryopColor) return;
-      document.documentElement.style.setProperty("--SetPrimayOpacity", primaryopColor);
-      document.documentElement.style.setProperty("--primaryop", this.getShortHex(primaryopColor));
+      if (primaryopColor) {
+        document.documentElement.style.setProperty(
+          "--SetPrimayOpacity",
+          primaryopColor
+        );
+
+        document.documentElement.style.setProperty(
+          "--primaryop",
+          this.getShortHex(primaryopColor)
+        );
+      }
     },
     updateBackgroundFist(primary) {
-      if (!primary) return;
-      document.documentElement.style.setProperty("--background-primary", primary);
+      if (primary) {
+        document.documentElement.style.setProperty(
+          "--background-primary",
+          primary
+        );
+      }
     },
     updateBackgroundEnd(end) {
-      if (!end) return;
-      document.documentElement.style.setProperty("--background-secondary", end);
+      if (end) {
+        document.documentElement.style.setProperty(
+          "--background-secondary",
+          end
+        );
+      }
     },
     updateBackgroundSecondary(secondary) {
-      if (!secondary) return;
-      document.documentElement.style.setProperty("--secondary", secondary);
+      if (secondary) {
+        document.documentElement.style.setProperty("--secondary", secondary);
+      }
     },
     updateColorTitleMenu(primary) {
-      if (!primary) return;
-      document.documentElement.style.setProperty("--menu-title-color-primary", primary);
+      if (primary) {
+        document.documentElement.style.setProperty(
+          "--menu-title-color-primary",
+          primary
+        );
+      }
     },
     updateColorItemMenu(primary) {
-      if (!primary) return;
-      document.documentElement.style.setProperty("--menu-color-primary", primary);
+      if (primary) {
+        document.documentElement.style.setProperty(
+          "--menu-color-primary",
+          primary
+        );
+      }
     },
     teste() {
       this.$refs.temapadrao.CreatedColorData();
     },
-
     async resizeAndSetImages(imageSrc) {
       try {
         // Redimensiona para cada tamanho
@@ -1061,7 +957,28 @@ export default {
         this.setSameImageForAllSizes(imageSrc);
       }
     },
-
+    async CreatedTheme() {
+      this.loading = true;
+      const form = this.form
+      
+      this.$axios
+        .$post("/admin/whitelabel/configs", this.SetForm, {
+          headers: {
+            'Content-Type': 'multipart/form-data'  
+          },
+        })
+        .then((response) => {
+          console.log(1);
+          console.log(response);
+          this.$router.push("/painel/theme");
+        })
+        .catch((error) => {
+          this.error = error?.response?.data?.mensagem;
+        })
+        .finally(() => {
+          this.loading = false;
+        });
+    },
     resizeImage(src, width, height) {
       return new Promise((resolve, reject) => {
         const canvas = document.createElement("canvas");
@@ -1091,44 +1008,10 @@ export default {
       this.SetForm.payload.assets.icon.img192x192 = imageSrc;
       this.SetForm.payload.assets.icon.img300x300 = imageSrc;
     },
-
-    // ========= Envio =========
-    async CreatedTheme() {
-      this.loading = true;
-      this.error = null;
-      this.progress = 0;
-
-      try {
-        const fd = this.objectToFormData(this.SetForm);
-
-       // await this.$axios.post("/admin/whitelabel/configs", this.SetForm
-        await this.$axios.post("/admin/whitelabel/configs", fd, {
-          onUploadProgress: (e) => {
-            if (e.total) {
-              this.progress = Math.round((e.loaded * 100) / e.total);
-            }
-          },
-          transformRequest: (data) => data, // mantém o FormData intacto
-          // não defina manualmente 'Content-Type'
-      });
-
-        this.$router.push("/painel/theme");
-      } catch (error) {
-        this.error =
-          error?.response?.data?.mensagem ||
-          error?.response?.data?.message ||
-          error?.message ||
-          "Erro ao enviar";
-      } finally {
-        this.loading = false;
-      }
-    },
   },
 };
 </script>
 
 <style lang="scss">
-@import "styles.scss";
-/* opcional: estilos de feedback */
-.error { font-weight: 600; }
+// @import "styles.scss";
 </style>

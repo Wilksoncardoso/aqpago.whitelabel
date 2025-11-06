@@ -1,24 +1,24 @@
 <template>
   <div>
     <ul class="list-group">
-      <li v-if="SetForm.assets.icon.img512x512">
+      <li v-if="SetForm.payload.assets.icon.img512x512">
         <div class="titlegroup">1 - Favicon</div>
         <div>
           <img
-            :src="return_img(SetForm.assets.icon.img512x512)"
+            :src="return_img(SetForm.payload.assets.icon.img512x512)"
             alt="Preview logotipo"
             class="favicon"
           />
         </div>
       </li>
-      <li v-if="SetForm.seo['theme-color']">
+      <li v-if="SetForm.payload.seo['theme-color']">
         <div class="titlegroup">2 - Cor de navegador</div>
         <div
           class="nav-bar pa-2 d-flex align-center justify-space-between"
-          :style="{ 'background-color': SetForm.seo['theme-color'] }"
+          :style="{ 'background-color': SetForm.payload.seo['theme-color'] }"
         >
           <div class="text">
-            {{ SetForm?.data?.business.name }}
+            {{ SetForm.payload?.data?.business.name }}
           </div>
           <div class="d-flex">
             <div class="circle"></div>

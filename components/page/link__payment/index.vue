@@ -3,7 +3,6 @@
     <div class="d-flex justify-space-between item__link__payment">
       <div class="d-flex-inline">
         <div class="d-flex">
-          <div class="mr-2"><icon__principal /></div>
           <div class="titulo__link__payment">link de pagamento</div>
         </div>
         <div class="label__link__payment">
@@ -17,8 +16,6 @@
       </div>
     </div>
 
-
-
     <v-btn
       color="primary"
       class="normal"
@@ -31,6 +28,7 @@
       <div class="valor">Valor</div>
       <div class="vencimento">Vencimento</div>
       <div class="status">Status</div>
+      <div class="tipo">Tipo</div>
       <div class="acoes">Ações</div>
     </div>
     <div
@@ -46,29 +44,51 @@
         {{ moment(data.data_vencimento).format("DD/MM/YYYY") }}
       </div>
       <div class="status">
-        <span :class="status__return(data.status, data.data_vencimento, data.pagamento)">{{
-          status__return__label(data.status, data.data_vencimento, data.pagamento)
-        }}</span>
+        <span
+          :class="
+            status__return(data.status, data.data_vencimento, data.pagamento)
+          "
+          >{{
+            status__return__label(
+              data.status,
+              data.data_vencimento,
+              data.pagamento
+            )
+          }}</span
+        >
+      </div>
+      <div class="tipo d-flex align-center">
+        <div v-if="data?.pagamento_pix" class="mr-2">
+          <i class="ri-pix-fill d-flex primary--text"></i>
+        </div>
+        <div v-if="data?.pagamento_boleto" class="mr-2">
+          <i class="ri-barcode-line d-flex primary--text"></i>
+        </div>
+        <div v-if="data?.pagamento_cartao" class="d-flex align-center">
+          <i class="ri-bank-card-line d-flex mr-1 primary--text"></i>
+          <span style="font-size: 12px;" class="primary--text">{{ data?.max_parcelas + "x" }}</span>
+        </div>
       </div>
       <div class="acoes">
-    
         <v-btn
-          class="button__icon__view"
+          class="button__icon__view pa-2"
+          color="primary"
           icon
           @click="datails__object(data.hash_id, data.id, data.pagamento)"
-          ><icon__view
-        /></v-btn>
+        >
+          <i class="ri-file-search-line" style="font-size: 16px"></i>
+        </v-btn>
       </div>
     </div>
     <loading__component v-if="loading" />
     <list__null__result v-if="!loading && result__api__link.length === 0" />
     <div
-      class="d-flex mt-8 justify-center"
+      class="d-flex align-center mt-8 justify-center"
       v-if="loading === false && result__api__link.length > 0"
     >
       <div>
         <v-btn
-          class="button__back__nav"
+          class="button__back__nav mt-3"
           icon
           @click="back__page({ value: 'back' })"
           :disabled="disabled__page__back"
@@ -77,24 +97,23 @@
       </div>
       <div>
         <v-pagination
+          class="navigation_pagination mt-4"
           v-model="pagination"
-          :total-visible="7"
           :length="page__total"
+          :total-visible="7"
           @input="handlePaginationClick"
-        >
-        </v-pagination>
+        ></v-pagination>
       </div>
 
       <div>
         <v-btn
-          class="button__next__nav"
+          class="button__next__nav mt-3"
           icon
           @click="next__page({ value: 'next' })"
           :disabled="disabled__page__next"
           ><icon__next__page class="next_nav"
         /></v-btn>
       </div>
-
     </div>
   </div>
 </template>
@@ -142,10 +161,9 @@ export default {
     loading__component,
   },
   methods: {
-    ...mapActions('link', ['excluir']),
-    create__link(){
-      
-      this.excluir()
+    ...mapActions("link", ["excluir"]),
+    create__link() {
+      this.excluir();
       this.$router.push("/painel/link_payment/create");
     },
     filter__link__modal() {
@@ -156,14 +174,20 @@ export default {
       var hash_id = hash_id;
       var id = id;
       const payment__object = payment__object__data;
-      this.$nuxt.$emit("details__result", { hash_id, id, payment__object, page:1 });
+      this.$nuxt.$emit("details__result", {
+        hash_id,
+        id,
+        payment__object,
+        page: 1,
+      });
     },
     status__return__label(status, data, pagamento) {
-
-      if(pagamento?.length > 0){
-        const pagamento_busca = pagamento.filter(result => result.status === 'APROVADO')
-        if(pagamento_busca.length > 0){
-          return "Pagamento aprovado";
+      if (pagamento?.length > 0) {
+        const pagamento_busca = pagamento.filter(
+          (result) => result.status === "APROVADO"
+        );
+        if (pagamento_busca.length > 0) {
+          return "APROVADO";
         }
       }
       if (this.data__atual > data) {
@@ -173,7 +197,7 @@ export default {
       }
       switch (status) {
         case "APROVADA":
-          return "Pagamento aprovado";
+          return "APROVADO";
 
         case "PENDENTE":
           return "Pendente";
@@ -189,10 +213,12 @@ export default {
       }
     },
     status__return(status, data, pagamento) {
-      if(pagamento?.length > 0){
-        const pagamento_busca = pagamento.filter(result => result.status === 'APROVADO')
-        if(pagamento_busca.length > 0){
-          return "APROVADA";
+      if (pagamento?.length > 0) {
+        const pagamento_busca = pagamento.filter(
+          (result) => result.status === "APROVADO"
+        );
+        if (pagamento_busca.length > 0) {
+          return "APROVADO";
         }
       }
 
@@ -205,7 +231,6 @@ export default {
         case status:
           return status;
       }
-     
     },
     next__page(value) {
       this.$nuxt.$emit("page__navigation__link", {
@@ -251,7 +276,7 @@ export default {
       const data = `${year}-${month}-${day}`;
       return data;
 
-    //  const date = new Date(this.session__data.date_now);
+      //  const date = new Date(this.session__data.date_now);
     },
   },
 
@@ -323,7 +348,7 @@ export default {
     font-weight: 500;
     line-height: normal;
     .descricao {
-      width: 200px;
+      width: 250px;
     }
     .valor {
       width: 160px;
@@ -339,6 +364,9 @@ export default {
       width: 164px;
       text-align: center;
     }
+    .tipo {
+      width: 164px;
+    }
   }
   .value__link {
     padding-top: 24px;
@@ -349,10 +377,10 @@ export default {
       font-style: normal;
       font-weight: 600;
       line-height: normal;
-      width: 200px;
+      width: 250px;
 
       word-break: break-all;
-      word-wrap: break-word; 
+      word-wrap: break-word;
       overflow-wrap: break-word;
     }
     .valor {
@@ -388,7 +416,8 @@ export default {
           color: #f14a2f;
           background: rgba(195, 27, 0, 0.1);
         }
-        &.EXPIRADO, &.FALHADA{
+        &.EXPIRADO,
+        &.FALHADA {
           color: rgba(26, 26, 26, 0.5);
           background: rgba(26, 26, 26, 0.1);
         }
@@ -400,14 +429,17 @@ export default {
           background: #f3f3f3;
         }
         &.APROVADO {
-          color: #1AAA55;
-          background: rgba(114, 163, 134, 0.10); 
+          color: #1aaa55;
+          background: rgba(114, 163, 134, 0.1);
         }
       }
     }
     .acoes {
       width: 164px;
       text-align: center;
+    }
+    .tipo {
+      width: 164px;
     }
   }
   .button__icon__view.v-btn--disabled {
@@ -425,8 +457,7 @@ export default {
     padding-right: 13px;
     height: 35px !important;
     background: #fff;
-    box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2),
-      0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12) !important;
+    box-shadow: none !important;
     border-radius: 8px;
     .next_nav {
       transform: rotate(180deg);
@@ -443,8 +474,7 @@ export default {
     padding-left: 13px;
     padding-right: 13px;
     background: #fff;
-    box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2),
-      0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12) !important;
+    box-shadow: none !important;
     border-radius: 8px;
     &.v-btn--disabled {
       opacity: 0.4;

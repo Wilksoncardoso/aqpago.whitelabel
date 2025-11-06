@@ -1,11 +1,11 @@
 <template lang="html">
   <div class="menu__web">
     <div class="d-flex-inline text-center">
-      <div class="logo__">
+      <div class="logo__ my-10">
         <nuxt-link to="/painel/">
           <img
             class="size_logo"
-            :src=" SetFormTheme?.assets?.logotipe?.img ? return_img(SetFormTheme?.assets?.logotipe?.img) :'' || theme?.assets?.logotipe?.img"
+            :src=" SetFormTheme?.payload?.assets?.logotipe?.img ? return_img(SetFormTheme?.payload?.assets?.logotipe?.img) :'' || theme?.assets?.logotipe?.img"
             :alt="theme?.data?.initcomp?.description"
             :width="SetFormTheme?.assets?.logotipe?.size || theme?.assets?.logotipe?.size || 130"
           />

@@ -136,6 +136,7 @@ export default {
     border-radius: 15px; 
     background: #F1F4F9;
     margin-bottom: 24px;
+    
 }
 .body__simulador{
     margin-bottom: 10px;

@@ -9,70 +9,77 @@ export default {
   layout: "PainelLayout",
   data() {
     return {
-      form: {
-        assets: {
-          initcomp: {
-            right: true,
-            img: "", // png
+    form: {
+        payload: {
+          assets: {
+            initcomp: {
+              right: true,
+              img: null, // png
+            },
+            logotipe: {
+              img: null, // png e svg
+              size: "50",
+            },
+            icon: {
+              img32x32: null, // png
+              img96x96: null, // png
+              img192x192: null, // png
+              img300x300: null, // png
+              img512x512: null, // png
+            },
           },
-          logotipe: {
-            img: "", // png e svg
-            size:50,
-          },
-        },
-        styles: {
-          color: {
-            primary: "", //string
-            primary_op: "", //string
-            secondary: "", //string
-          },
-          menuleft: {
-            background: {
+          styles: {
+            color: {
               primary: "", //string
+              primary_op: "", //string
               secondary: "", //string
             },
-            font: {
-              color: "", //string
-            },
-            title: {
-              color: "", //string
+            menuleft: {
+              background: {
+                primary: "", //string
+                secondary: "", //string
+              },
+              font: {
+                color: "", //string
+              },
+              title: {
+                color: "", //string
+              },
             },
           },
-        },
-        data: {
-          initcomp: {
+          data: {
+            initcomp: {
+              title: "", //string
+              description: "", //string
+              bottom_text: "", //string
+              app: false,
+              googlepay: "",
+              appstore: "",
+            },
+            business: {
+              name: "", //string
+              email: "", //string
+              phone: "", //string
+              whatsapp: "", //string
+              website: "", //string
+              external_link: {
+                base_url: "", //string
+                link_payment: "", //string
+                cobram_recorrente: "", //string
+              },
+              termos: "", //string
+            },
+          },
+          seo: {
             title: "", //string
             description: "", //string
-            bottom_text: "", //string
-            app:false,
-            googlepay:"",
-            appstore:"",
+            "theme-color": "", //string
+            "image-url": null, //string
+            "twitter-site": "", //string
+            "twitter-title": "", //string
+            "twitter-description": "", //string
+            "twitter-image-url": null, //string
           },
-          business: {
-            name: "", //string
-            email: "", //string
-            phone: "", //string
-            whatsapp: "", //string
-            website: "", //string
-            external_link: {
-              link_payment: "", //string
-            },
-            termos: "", //string
-          },
-          api: {
-            base_url: "", //string
-          },
-        },
-        seo: {
-          favicon:null,
-          title: "", //string
-          description: "", //string
-          "theme-color": "", //string
-          "image-url": "", //string
-          "twitter-site": "", //string
-          "twitter-title": "", //string
-          "twitter-description": "", //string
-          "twitter-image-url": "", //string
         },
       },
     };

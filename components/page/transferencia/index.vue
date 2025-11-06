@@ -4,9 +4,8 @@
       <div class="d-flex justify-space-between align-center">
         <div class="d-flex-inline titulo__componente">
           <div class="d-flex">
-            <div><icon__transferencia /></div>
             <div>
-              <h3 class="titulo__card__principal">Transferência Pix</h3>
+              <h3 class="titulo__card__principal ml-0">Transferência Pix</h3>
             </div>
           </div>
           <div>
