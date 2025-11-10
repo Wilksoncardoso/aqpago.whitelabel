@@ -5,7 +5,7 @@
         <div class="titlegroup">1 - Favicon</div>
         <div>
           <img
-            :src="return_img(SetForm.payload.assets.icon.img512x512)"
+            :src="SetForm.payload.assets.icon.img512x512"
             alt="Preview logotipo"
             class="favicon"
           />
@@ -41,11 +41,7 @@ export default {
       type: Object,
     },
   },
-  methods: {
-    return_img(img) {
-      return URL.createObjectURL(img);
-    },
-  },
+
 };
 </script>
 

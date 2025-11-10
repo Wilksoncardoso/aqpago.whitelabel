@@ -111,11 +111,7 @@ export default {
       menuOpen: false,
     };
   },
-  methods: {
-    return_img(img) {
-      return URL.createObjectURL(img);
-    },
-  },
+ 
   computed: {
     data() {
       return this.$store?.state?.user?.user__data;

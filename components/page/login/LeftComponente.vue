@@ -101,11 +101,7 @@ export default {
       },
     };
   },
-  methods: {
-    return_img(img) {
-      return URL.createObjectURL(img);
-    },
-  },
+ 
   computed: {
     theme() {
       return this.$store?.state?.theme?.data || null;
@@ -128,14 +124,14 @@ export default {
     background_main() {
       let bgApi = this.theme?.assets?.initcomp?.img;
       let bgASetForm = this.SetForm?.payload?.assets?.initcomp?.img
-        ? this.return_img(this.SetForm?.payload?.assets?.initcomp?.img)
+        ? this.SetForm?.payload?.assets?.initcomp?.img
         : null;
       return bgASetForm ? bgASetForm : bgApi;
     },
     Logo_main() {
       let LogoApi = this.theme?.assets?.logotipe?.img;
       let LogoForm = this.SetForm?.payload?.assets?.logotipe?.img
-        ? this.return_img(this.SetForm.payload?.assets.logotipe.img)
+        ? this.SetForm.payload?.assets.logotipe.img
         : null;
       return LogoForm ? LogoForm : LogoApi;
     },

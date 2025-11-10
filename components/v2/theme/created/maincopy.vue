@@ -1,42 +1,36 @@
 <template>
   <div class="d-flex justify-space-between">
-    <!-- Provider externo -->
+    <!-- teste -->
     <V2ThemeApiProvider ref="temapadrao" />
 
-    <!-- FORM PRINCIPAL -->
     <div class="cards_created_theme pa-4 white">
       <h3 class="primary--text">Cadastro de Theme</h3>
-      <!-- debug -->
       {{ SetForm }}
-   
-
       <v-stepper v-model="page" vertical>
-        <!-- STEP 1 - ASSETS & ICONS -->
+        <!-- Step 1 -->
         <v-stepper-step :complete="page > 1" step="1">
           # Assets & Icons
-          <small>Página inicial e assets da aplicação</small>
+          <small>Pagina Inicial e Assets da aplicação</small>
         </v-stepper-step>
 
         <v-stepper-content step="1">
           <v-card class="pa-5 created_theme">
             <div class="title mb-3 primary--text">Navbar</div>
 
-            <!-- Favicon -->
             <div class="label">1 - Favicon <span>(png ou jpeg)</span></div>
             <v-file-input
-              accept="image/png, image/svg"
+              accept="image/png, image/jpeg, image/bmp"
               placeholder="ex : Navbar.png"
               solo
               label="ex : Navbar.png"
               class="input_set_theme"
-              v-model="localFiles.favicon"
+              v-model="SetForm.payload.assets.icon.img512x512"
               :rules="rulesStep1.favicon"
-              hint="Favicon será renderizado em 512px (gerando derivativos)"
+              hint="Favicon será renderizada no tamanho 512px por 512px"
               persistent-hint
               @change="onChangeFavicon"
             ></v-file-input>
 
-            <!-- Theme Color -->
             <div class="label">2 - Cor de navegador</div>
             <v-color-picker
               v-model="SetForm.payload.seo['theme-color']"
@@ -57,15 +51,14 @@
           >
             Continue
           </v-btn>
-          <v-btn text class="pa-2" to="/painel/theme">Voltar</v-btn>
+          <v-btn text class="pa-2" to="/painel/theme"> Voltar </v-btn>
         </v-stepper-content>
 
-        <!-- STEP 2 - STYLE -->
+        <!-- Step 2 -->
         <v-stepper-step :complete="page > 2" step="2"> # Style </v-stepper-step>
-
         <v-stepper-content step="2">
           <v-card class="pa-5 created_theme">
-            <div class="title mb-3 primary--text">Tema do sistema</div>
+            <div class="title mb-3 primary--text">Thema do sistema</div>
             <div class="d-flex justify-space-between">
               <div>
                 <div class="label">1 - Cor primary</div>
@@ -73,7 +66,7 @@
                   v-model="SetForm.payload.styles.color.primary"
                   @input="
                     updateOpacityColor($event);
-                    validateStep(2);
+                    validateStep(2)
                   "
                   dot-size="3"
                   hide-mode-switch
@@ -85,10 +78,7 @@
                 <div class="label">2 - Cor Opacity</div>
                 <v-color-picker
                   v-model="SetForm.payload.styles.color.primary_op"
-                  @input="
-                    updatePrimaryOp($event);
-                    validateStep(2);
-                  "
+                  @input="validateStep(2); updatePrimaryOp($event)"
                   dot-size="3"
                   hide-mode-switch
                   mode="hexa"
@@ -106,14 +96,13 @@
           >
             Continue
           </v-btn>
-          <v-btn class="pa-2" text @click="page -= 1">Voltar</v-btn>
+          <v-btn class="pa-2" text @click="page -= 1"> Voltar </v-btn>
         </v-stepper-content>
 
-        <!-- STEP 3 - MENU CLIENTE -->
+        <!-- Step 3 -->
         <v-stepper-step :complete="page > 3" step="3">
           # Menu Cliente
         </v-stepper-step>
-
         <v-stepper-content step="3">
           <v-card class="pa-5 created_theme">
             <div class="title mb-3 primary--text">Cor de fundo</div>
@@ -126,10 +115,7 @@
                   mode="hexa"
                   hide-mode-switch
                   swatches-max-height="100"
-                  @input="
-                    updateBackgroundFist($event);
-                    validateStep(3);
-                  "
+                  @input="validateStep(3); updateBackgroundFist($event)"
                 ></v-color-picker>
               </div>
               <div>
@@ -141,10 +127,7 @@
                   hide-mode-switch
                   mode="hexa"
                   swatches-max-height="100"
-                  @input="
-                    updateBackgroundEnd($event);
-                    validateStep(3);
-                  "
+                  @input="validateStep(3); updateBackgroundEnd($event)"
                 ></v-color-picker>
               </div>
             </div>
@@ -160,10 +143,7 @@
                   hide-mode-switch
                   mode="hexa"
                   swatches-max-height="100"
-                  @input="
-                    updateColorTitleMenu($event);
-                    validateStep(3);
-                  "
+                  @input="validateStep(3); updateColorTitleMenu($event)"
                 ></v-color-picker>
               </div>
               <div>
@@ -175,10 +155,7 @@
                   hide-mode-switch
                   mode="hexa"
                   swatches-max-height="100"
-                  @input="
-                    updateColorItemMenu($event);
-                    validateStep(3);
-                  "
+                  @input="validateStep(3); updateColorItemMenu($event)"
                 ></v-color-picker>
               </div>
             </div>
@@ -187,49 +164,47 @@
           <v-btn
             class="pa-2"
             color="primary"
-            @click="page = 4"
+            @click="page += 1"
             :disabled="!stepValid[3]"
           >
             Continue
           </v-btn>
-          <v-btn class="pa-2" text @click="page -= 1">Voltar</v-btn>
+          <v-btn class="pa-2" text @click="page -= 1"> Voltar </v-btn>
         </v-stepper-content>
 
-        <!-- STEP 4 - COMPONENTE ESQUERDO -->
+        <!-- Step 4 -->
         <v-stepper-step :complete="page > 4" step="4">
-          # Componente esquerdo , início
+          # Componente esquerdo , inicio
         </v-stepper-step>
 
         <v-stepper-content step="4">
           <v-card class="pa-5 created_theme">
             <div class="title mb-3 primary--text">Login | Password | Token</div>
 
-            <!-- BG esquerdo -->
             <div class="label">
               1 - Imagem esquerda background <span>(png ou jpeg)</span>
             </div>
             <v-file-input
-              accept="image/png, image/svg"
+              accept="image/png, image/jpeg, image/bmp"
               class="input_set_theme"
               placeholder="ex : Background.png"
               solo
               label="Imagem esquerda background"
-              v-model="localFiles.initBg"
+              v-model="SetForm.payload.assets.initcomp.img"
               :rules="rulesStep4.image"
               @change="onChangeInitImg"
             ></v-file-input>
 
-            <!-- Logotipo -->
             <div class="label">
               2 - Logotipo <span>(svg, png ou jpeg)</span>
             </div>
             <v-file-input
-              accept="image/png, image/svg"
+              accept="image/png, image/jpeg, image/svg"
               placeholder="ex : Logotipo.png"
               solo
               label="ex : Logotipo.png"
               class="input_set_theme"
-              v-model="localFiles.logo"
+              v-model="SetForm.payload.assets.logotipe.img"
               :rules="rulesStep4.logotipo"
               :hint="
                 'Logo será renderizada no tamanho ' +
@@ -240,8 +215,7 @@
               @change="onChangeLogo"
             ></v-file-input>
 
-            <!-- Controle tamanho logo -->
-            <div class="d-flex justify-space-between align-center mt-2">
+            <div class="d-flex justify-space-between">
               <h5 class="mt-2">
                 logo, tamanho vertical
                 <span>{{ SetForm.payload.assets.logotipe.size + "px" }}</span>
@@ -249,31 +223,25 @@
               <div>
                 <v-btn
                   color="primary"
-                  class="pa-1"
-                  icon
+                  class="pa-1 primary"
                   @click="
-                    SetForm.payload.assets.logotipe.size = Math.max(
-                      50,
-                      SetForm.payload.assets.logotipe.size - 20
-                    );
-                    UpdateStoreSetform();
+                    (SetForm.payload.assets.logotipe.size -= 20),
+                      UpdateStoreSetform()
                   "
-                  :disabled="SetForm.payload.assets.logotipe.size <= 50"
+                  icon
+                  :disabled="SetForm.payload.assets.logotipe.size < 50"
                 >
                   <i class="ri-subtract-fill white--text"></i>
                 </v-btn>
                 <v-btn
-                  color="primary"
-                  class="pa-1"
-                  icon
+                  class="pa-1 primary"
                   @click="
-                    SetForm.payload.assets.logotipe.size = Math.min(
-                      300,
-                      SetForm.payload.assets.logotipe.size + 20
-                    );
-                    UpdateStoreSetform();
+                    (SetForm.payload.assets.logotipe.size += 20),
+                      UpdateStoreSetform()
                   "
-                  :disabled="SetForm.payload.assets.logotipe.size >= 300"
+                  :disabled="SetForm.payload.assets.logotipe.size > 300"
+                  icon
+                  color="primary"
                 >
                   <i class="ri-add-line white--text"></i>
                 </v-btn>
@@ -284,20 +252,17 @@
               v-model="SetForm.payload.assets.logotipe.size"
               min="50"
               max="300"
-              @change="UpdateStoreSetform"
-            ></v-slider>
+              @change="UpdateStoreSetform()"
+            >
+            </v-slider>
 
-            <!-- Textos -->
-            <div class="label">3 - Título</div>
+            <div class="label">3 - Titulo</div>
             <v-text-field
               solo
-              label="Digite o Título"
+              label="Digite o Titulo"
               class="input_set_theme"
               v-model="SetForm.payload.data.initcomp.title"
-              @input="
-                validateStep(4);
-                UpdateStoreSetform();
-              "
+              @input="validateStep(4)"
             ></v-text-field>
 
             <div class="label">4 - Descrição</div>
@@ -306,25 +271,22 @@
               label="Digite sua Descrição"
               class="input_set_theme"
               v-model="SetForm.payload.data.initcomp.description"
-              @input="
-                validateStep(4);
-                UpdateStoreSetform();
-              "
+              @input="validateStep(4)"
             ></v-text-field>
           </v-card>
 
           <v-btn
             class="pa-2"
             color="primary"
-            @click="page = 5"
+            @click="page += 1"
             :disabled="!stepValid[4]"
           >
             Continue
           </v-btn>
-          <v-btn class="pa-2" text @click="page -= 1">Voltar</v-btn>
+          <v-btn class="pa-2" text @click="page -= 1"> Voltar </v-btn>
         </v-stepper-content>
 
-        <!-- STEP 5 - BUSINESS INFO -->
+        <!-- Step 5 -->
         <v-stepper-step :complete="page > 5" step="5">
           # Informações Business
         </v-stepper-step>
@@ -377,7 +339,7 @@
             <div class="label">5 - Website</div>
             <v-text-field
               solo
-              label="Digite o site"
+              label="Digite o site "
               v-model="SetForm.payload.data.business.website"
               class="input_set_theme"
               :rules="rulesStep5.website"
@@ -388,23 +350,22 @@
           <v-btn
             class="pa-2"
             color="primary"
-            @click="page = 6"
+            @click="page += 1"
             :disabled="!stepValid[5]"
           >
             Continue
           </v-btn>
-          <v-btn class="pa-2" text @click="page -= 1">Voltar</v-btn>
+          <v-btn class="pa-2" text @click="page -= 1"> Voltar </v-btn>
         </v-stepper-content>
 
-        <!-- STEP 6 - SEO -->
-        <v-stepper-step :complete="page > 6" step="6"> # SEO </v-stepper-step>
-
+        <!-- Step 6 -->
+        <v-stepper-step step="6" :complete="page > 6"> # SEO</v-stepper-step>
         <v-stepper-content step="6">
           <v-card class="pa-5 created_theme">
-            <div class="label">1 - Título</div>
+            <div class="label">1 - Titulo</div>
             <v-text-field
               solo
-              label="Título de SEO"
+              label="Titulo de SEO"
               class="input_set_theme"
               :rules="rulesStep6.title"
               v-model="SetForm.payload.seo.title"
@@ -423,11 +384,11 @@
 
             <div class="label">3 - Imagem</div>
             <v-file-input
-              accept="image/png, image/svg"
+              accept="image/png, image/jpeg, image/bmp"
+              placeholder="Pick an avatar"
               solo
-              label="Imagem SEO"
-              class="input_set_theme"
-              v-model="localFiles.seoImage"
+              label="Img Url Seo"
+              v-model="SetForm.payload.seo['image-url']"
               :rules="rulesStep6.image"
               @change="onChangeSeoImage"
             ></v-file-input>
@@ -464,11 +425,12 @@
 
             <div class="label">7 - Twitter-img</div>
             <v-file-input
-              accept="image/png, image/svg"
-              solo
-              label="Twitter image"
+              accept="image/png, image/jpeg, image/bmp"
               class="input_set_theme"
-              v-model="localFiles.twitterImage"
+              placeholder="Pick an avatar"
+              solo
+              label="Avatar"
+              v-model="SetForm.payload.seo['twitter-image-url']"
               :rules="rulesStep6.twitterImage"
               @change="onChangeTwitterImage"
             ></v-file-input>
@@ -477,25 +439,24 @@
           <v-btn
             class="pa-2"
             color="primary"
-            @click="page = 7"
+            @click="page += 1"
             :disabled="!stepValid[6]"
           >
             Continue
           </v-btn>
-          <v-btn class="pa-2" text @click="page -= 1">Voltar</v-btn>
+          <v-btn class="pa-2" text @click="page -= 1"> Voltar </v-btn>
         </v-stepper-content>
 
-        <!-- STEP 7 - APP -->
-        <v-stepper-step :complete="page > 7" step="7"> # APP </v-stepper-step>
-
+        <!-- Step 7 -->
+        <v-stepper-step step="7" :complete="page > 7"> # APP</v-stepper-step>
         <v-stepper-content step="7">
           <v-card class="pa-5 created_theme">
-            <div class="label">1 - Você tem app?</div>
+            <div class="label">1 - Você tem app ?</div>
             <v-switch
               class="mt-0 mb-2"
               v-model="SetForm.payload.data.initcomp.app"
               :label="
-                SetForm.payload.data.initcomp.app ? 'Eu tenho' : 'Não há app'
+                SetForm.payload.data.initcomp.app ? 'Eu tenho ' : 'Não há app'
               "
               color="primary"
               hide-details
@@ -513,38 +474,24 @@
                 @input="validateStep(7)"
               ></v-text-field>
 
-              <div class="label">3 - GooglePlay</div>
+              <div class="label">3 - GooglePay</div>
               <v-text-field
                 solo
-                label="Link do GooglePlay"
+                label="Coloque o link do GooglePay"
                 class="input_set_theme"
                 v-model="SetForm.payload.data.initcomp.googlepay"
+                @input="validateStep(7)"
               ></v-text-field>
 
               <div class="label">4 - AppStore</div>
               <v-text-field
                 solo
-                label="Link do AppStore"
+                label="Coloque o link do AppStore"
                 class="input_set_theme"
                 v-model="SetForm.payload.data.initcomp.appstore"
+                @input="validateStep(7)"
               ></v-text-field>
             </div>
-
-            <div class="label">Dominio da sua aplicação?</div>
-            <v-text-field
-              solo
-              label="ex: aqpago.app"
-              class="input_set_theme"
-              v-model="SetForm.payload.data.business.external_link.base_url"
-            ></v-text-field>
-
-            <div class="label">Dominio do seu link de pagamento?</div>
-            <v-text-field
-              solo
-              label="ex: link.aqpago.app"
-              class="input_set_theme"
-              v-model="SetForm.payload.data.business.external_link.link_payment"
-            ></v-text-field>
           </v-card>
 
           <v-btn
@@ -555,7 +502,8 @@
           >
             Finalizar
           </v-btn>
-          <v-btn class="pa-2" text @click="page -= 1">Voltar</v-btn>
+
+          <v-btn class="pa-2" text @click="page -= 1"> Voltar </v-btn>
         </v-stepper-content>
       </v-stepper>
 
@@ -563,16 +511,13 @@
       <div v-if="loading" class="mt-2">Enviando... {{ progress }}%</div>
     </div>
 
-    <!-- PREVIEW -->
     <div class="cards_created_preview">
       <v-btn @click="DeleteStoreSetform()">teste</v-btn>
-
       <V2ThemeCreatedPreviewMain
         :SetForm="SetForm"
         :page="page"
-        v-if="page === 1 || page === 2"
+        v-if="page === 2 || page === 1"
       />
-
       <div class="comppreviewright" v-if="page === 4 || page === 7">
         <PageLoginLeftComponente :SetForm="SetForm" />
       </div>
@@ -584,12 +529,10 @@
 import { mapActions } from "vuex";
 
 export default {
-  name: "ThemeWizard",
   props: {
     form: {
       type: Object,
-      required: false,
-      default: () => ({}),
+      required: true,
     },
   },
   data() {
@@ -599,24 +542,29 @@ export default {
       error: null,
       progress: 0,
 
-      localFiles: {
-        favicon: null,
-        logo: null,
-        initBg: null,
-        seoImage: null,
-        twitterImage: null,
+      rules: {
+        img: [
+          (value) =>
+            !value ||
+            value.size < 2000000 ||
+            "Avatar size should be less than 2 MB!",
+        ],
+        name: [
+          (value) => !!value || "Digite o seu nome.",
+          (value) =>
+            (value && value.split(" ").length >= 2) ||
+            "Digite o seu nome completo.",
+        ],
       },
-
       stepValid: {
         1: false,
         2: false,
         3: false,
         4: false,
         5: false,
-        6: true,
+        6: false,
         7: true,
       },
-
       rulesStep1: {
         favicon: [
           (v) => !!v || "Favicon é obrigatório",
@@ -637,7 +585,7 @@ export default {
         name: [(v) => !!v || "Nome é obrigatório"],
         email: [
           (v) => !!v || "E-mail é obrigatório",
-          (v) => /.+@.+\..+/.test(v || "") || "E-mail deve ser válido",
+          (v) => /.+@.+\..+/.test(v) || "E-mail deve ser válido",
         ],
         phone: [(v) => !!v || "Telefone é obrigatório"],
         whatsapp: [
@@ -673,7 +621,7 @@ export default {
         ],
         twitterSite: [
           (v) => !!v || "Twitter site é obrigatório",
-          (v) => /^@\w+$/.test(v || "") || "Deve começar com @username",
+          (v) => /^@\w+$/.test(v || "") || "Deve começar com @ seguido do username",
         ],
         twitterTitle: [
           (v) => !!v || "Twitter title é obrigatório",
@@ -700,62 +648,61 @@ export default {
             "Descrição de app deve ter pelo menos 5 caracteres",
         ],
       },
+
       SetForm: {
-        themeId: "",
-        configId: "",
         workspaceId: "",
         payload: {
           assets: {
             initcomp: {
               right: true,
-              img: "", // URL
+              img: null, // File (png/jpg)
             },
             logotipe: {
-              img: "", // URL
-              size: 50,
+              img: null, // File (png/svg)
+              size: "50",
             },
             icon: {
-              img32x32: "",
-              img96x96: "",
-              img192x192: "",
-              img300x300: "",
-              img512x512: "",
+              img32x32: null,   // File
+              img96x96: null,   // File
+              img192x192: null, // File
+              img300x300: null, // File
+              img512x512: null, // File base
             },
           },
           styles: {
             color: {
-              primary: "",
-              primary_op: "",
-              secondary: "",
+              primary: "",    // string
+              primary_op: "", // string
+              secondary: "",  // string
             },
             menuleft: {
               background: {
-                primary: "",
-                secondary: "",
+                primary: "",   // string
+                secondary: "", // string
               },
               font: {
-                color: "",
+                color: "", // string
               },
               title: {
-                color: "",
+                color: "", // string
               },
             },
           },
           data: {
             initcomp: {
-              title: "",
-              description: "",
-              bottom_text: "",
+              title: "", // string
+              description: "", // string
+              bottom_text: "", // string
               app: false,
               googlepay: "",
               appstore: "",
             },
             business: {
-              name: "",
-              email: "",
-              phone: "",
-              whatsapp: "",
-              website: "",
+              name: "", // string
+              email: "", // string
+              phone: "", // string
+              whatsapp: "", // string
+              website: "", // string
               external_link: {
                 base_url: "",
                 link_payment: "",
@@ -765,26 +712,24 @@ export default {
             },
           },
           seo: {
-            title: "",
-            description: "",
-            "theme-color": "",
-            "image-url": "",
-            "twitter-site": "",
-            "twitter-title": "",
-            "twitter-description": "",
-            "twitter-image-url": "",
+            title: "", // string
+            description: "", // string
+            "theme-color": "", // string
+            "image-url": null, // File
+            "twitter-site": "", // string
+            "twitter-title": "", // string
+            "twitter-description": "", // string
+            "twitter-image-url": null, // File
           },
         },
       },
     };
   },
-
   computed: {
     data() {
       return this.$store?.state?.user?.user__data;
     },
   },
-
   watch: {
     data: {
       immediate: true,
@@ -796,21 +741,14 @@ export default {
         }
       },
     },
-    "SetForm.payload.assets.icon.img512x512"(newVal) {
-      this.SetForm.payload.assets.icon.img32x32 = newVal;
-      this.SetForm.payload.assets.icon.img96x96 = newVal;
-      this.SetForm.payload.assets.icon.img192x192 = newVal;
-      this.SetForm.payload.assets.icon.img300x300 = newVal;
-      this.SetForm.payload.assets.icon.img512x512 = newVal;
-    },
     page(newVal) {
       this.validateStep(newVal);
     },
-  },
-  created() {
-    this.CreatedThemeID();
-    this.SetForm.themeId = "";
-    this.SetForm.configId = "";
+      "SetForm.payload.assets.icon.img512x512"(newVal) {
+      if (newVal) {
+        this.resizeAndSetImages(newVal);
+      }
+    },
   },
   methods: {
     ...mapActions("theme", ["salvarSetform", "deleteSetform"]),
@@ -822,145 +760,139 @@ export default {
       this.$store.commit("theme/deleteSetform", this.SetForm);
     },
 
-    // =========== UPLOAD GENÉRICO ===========
-    async uploadAsset(key, file) {
-      if (!file) return;
+    // ========= Helpers de arquivo / FormData =========
+    isFileLike(v) {
+      return (
+        (typeof File !== "undefined" && v instanceof File) ||
+        (typeof Blob !== "undefined" && v instanceof Blob)
+      );
+    },
+    objectToFormData(obj, form = new FormData(), namespace = "") {
+      if (obj === undefined || obj === null) return form;
 
-      if (!this.SetForm.themeId || !this.SetForm.configId) {
-        this.error = "themeId/configId não encontrados para upload de assets.";
-        return;
-      }
+      Object.keys(obj).forEach((prop) => {
+        const key = namespace ? `${namespace}[${prop}]` : prop;
+        const value = obj[prop];
 
-      const fd = new FormData();
-      fd.append("themeId", this.SetForm.themeId);
-      fd.append("configId", this.SetForm.configId);
-      fd.append("file", file);
+        if (value === undefined || value === null) return;
 
-      try {
-        this.loading = true;
-        this.error = null;
+        if (Array.isArray(value)) {
+          value.forEach((v, i) => {
+            const arrayKey = `${key}[${i}]`;
+            if (this.isFileLike(v)) {
+              form.append(arrayKey, v, v.name || `file_${i}`);
+            } else if (typeof v === "object" && v !== null) {
+              this.objectToFormData(v, form, arrayKey);
+            } else {
+              form.append(arrayKey, v);
+            }
+          });
+          return;
+        }
 
-        const { data } = await this.$axios.post(
-          `/admin/whitelabel/assets/upload?key=${encodeURIComponent(key)}`,
-          fd,
-          {
-            headers: { "Content-Type": "multipart/form-data" },
-            onUploadProgress: (e) => {
-              if (e.total) {
-                this.progress = Math.round((e.loaded * 100) / e.total);
-              }
-            },
-          }
-        );
-
-        // Pega a URL padrão do novo padrão de resposta
-        const urlFromBody = data?.body?.urls?.url;
-
-        if (urlFromBody) {
-          // Usa a key enviada na requisição para setar no SetForm
-          this.setAssetUrlByKey(key, urlFromBody);
+        if (this.isFileLike(value)) {
+          form.append(key, value, value.name || prop);
+        } else if (typeof value === "object") {
+          this.objectToFormData(value, form, key);
         } else {
-          // Fallback defensivo se um dia voltar com outro formato
-          const urls = data?.body?.urls || data?.urls;
-          if (urls && typeof urls === "object") {
-            Object.keys(urls).forEach((assetKey) => {
-              this.setAssetUrlByKey(assetKey, urls[assetKey]);
-            });
-          } else if (data?.body?.url || data?.url) {
-            this.setAssetUrlByKey(key, data.body?.url || data.url);
-          }
+          form.append(key, value);
         }
+      });
 
-        this.UpdateStoreSetform();
-      } catch (err) {
-        this.error =
-          err?.response?.data?.mensagem ||
-          err?.response?.data?.message ||
-          err?.message ||
-          "Erro ao enviar arquivo";
-      } finally {
-        this.loading = false;
-        this.progress = 0;
-      }
+      return form;
+    },
+    fileToImage(file) {
+      return new Promise((resolve, reject) => {
+        const url = URL.createObjectURL(file);
+        const img = new Image();
+        img.onload = () => {
+          URL.revokeObjectURL(url);
+          resolve(img);
+        };
+        img.onerror = (e) => {
+          URL.revokeObjectURL(url);
+          reject(e);
+        };
+        img.src = url;
+      });
+    },
+    async resizeFileToPngBlob(file, width, height, nameHint = "image") {
+      const img = await this.fileToImage(file);
+      const canvas = document.createElement("canvas");
+      canvas.width = width;
+      canvas.height = height;
+      const ctx = canvas.getContext("2d");
+      ctx.imageSmoothingEnabled = true;
+      ctx.imageSmoothingQuality = "high";
+      ctx.drawImage(img, 0, 0, width, height);
+
+      return new Promise((resolve) => {
+        canvas.toBlob(
+          (blob) => {
+            const fileName = `${nameHint}_${width}x${height}.png`;
+            const result =
+              typeof File !== "undefined"
+                ? new File([blob], fileName, { type: "image/png" })
+                : blob;
+            result.name = fileName; // manter name mesmo se for Blob
+            resolve(result);
+          },
+          "image/png",
+          0.92
+        );
+      });
     },
 
-    setAssetUrlByKey(assetKey, url) {
-      if (!this.SetForm) return;
-
-      // Se seus assets ficam dentro de payload; ajuste se for direto no SetForm
-      const root = this.SetForm.payload || this.SetForm;
-
-      const parts = assetKey.split(".");
-      let target = root;
-
-      for (let i = 0; i < parts.length - 1; i++) {
-        const p = parts[i];
-        if (!target[p]) {
-          this.$set(target, p, {});
-        }
-        target = target[p];
-      }
-
-      const lastKey = parts[parts.length - 1];
-      this.$set(target, lastKey, url);
-    },
-
-    // =========== HANDLERS FILE INPUTS ===========
+    // ========= Handlers dos inputs de arquivo =========
     async onChangeFavicon(file) {
-      console.log(1);
       if (!file) {
-        this.SetForm.payload.assets.icon.img512x512 = "";
+        this.SetForm.payload.assets.icon.img32x32 = null;
+        this.SetForm.payload.assets.icon.img96x96 = null;
+        this.SetForm.payload.assets.icon.img192x192 = null;
+        this.SetForm.payload.assets.icon.img300x300 = null;
+        this.SetForm.payload.assets.icon.img512x512 = null;
         this.validateStep(1);
         return;
       }
-      // key oficial: assets.icon.img512x512 (gera derivativos)
-      await this.uploadAsset("assets.icon.img512x512", file);
+
+      this.SetForm.payload.assets.icon.img512x512 = file;
+
+      try {
+        const sizes = [32, 96, 192, 300];
+        for (const s of sizes) {
+          const resized = await this.resizeFileToPngBlob(file, s, s, "favicon");
+          this.SetForm.payload.assets.icon[`img${s}x${s}`] = resized;
+        }
+      } catch (err) {
+        // fallback: usa o original pra todos
+        this.SetForm.payload.assets.icon.img32x32 = file;
+        this.SetForm.payload.assets.icon.img96x96 = file;
+        this.SetForm.payload.assets.icon.img192x192 = file;
+        this.SetForm.payload.assets.icon.img300x300 = file;
+      }
+
       this.validateStep(1);
     },
-
-    async onChangeLogo(file) {
-      if (!file) {
-        this.SetForm.payload.assets.logotipe.img = "";
-        this.validateStep(4);
-        return;
-      }
-      await this.uploadAsset("assets.logotipe.img", file);
+    onChangeLogo(file) {
+      this.SetForm.payload.assets.logotipe.img = file || null;
       this.validateStep(4);
+      this.UpdateStoreSetform();
     },
-
-    async onChangeInitImg(file) {
-      if (!file) {
-        this.SetForm.payload.assets.initcomp.img = "";
-        this.validateStep(4);
-        return;
-      }
-      await this.uploadAsset("assets.initcomp.img", file);
+    onChangeInitImg(file) {
+      this.SetForm.payload.assets.initcomp.img = file || null;
       this.validateStep(4);
+      this.UpdateStoreSetform();
     },
-
-    async onChangeSeoImage(file) {
-      if (!file) {
-        this.SetForm.payload.seo["image-url"] = "";
-        this.validateStep(6);
-        return;
-      }
-      // Se backend tiver key própria, ajuste aqui:
-      await this.uploadAsset("seo.image-url", file);
+    onChangeSeoImage(file) {
+      this.SetForm.payload.seo["image-url"] = file || null;
+      this.validateStep(6);
+    },
+    onChangeTwitterImage(file) {
+      this.SetForm.payload.seo["twitter-image-url"] = file || null;
       this.validateStep(6);
     },
 
-    async onChangeTwitterImage(file) {
-      if (!file) {
-        this.SetForm.payload.seo["twitter-image-url"] = "";
-        this.validateStep(6);
-        return;
-      }
-      // Se backend tiver key própria, ajuste aqui:
-      await this.uploadAsset("seo.twitter-image-url", file);
-      this.validateStep(6);
-    },
-
-    // =========== VALIDAÇÃO POR STEP ===========
+    // ========= Validações por step =========
     validateStep(step) {
       switch (step) {
         case 1:
@@ -986,18 +918,16 @@ export default {
             !!this.SetForm.payload.assets.initcomp.img;
           break;
         case 5: {
-          const wpp = (
-            this.SetForm.payload.data.business.whatsapp || ""
-          ).replace(/\D/g, "");
+          const wpp = (this.SetForm.payload.data.business.whatsapp || "")
+            .replace(/\D/g, "");
           const whatsappValid = /^(\+\d{1,3})?\d{10,11}$/.test(wpp);
-          const websiteValid =
-            /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/.test(
-              this.SetForm.payload.data.business.website || ""
-            );
+          const websiteValid = /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/.test(
+            this.SetForm.payload.data.business.website || ""
+          );
           this.stepValid[5] =
             !!this.SetForm.payload.data.business.name &&
             !!this.SetForm.payload.data.business.email &&
-            /.+@.+\..+/.test(this.SetForm.payload.data.business.email || "") &&
+            /.+@.+\..+/.test(this.SetForm.payload.data.business.email) &&
             !!this.SetForm.payload.data.business.phone &&
             !!this.SetForm.payload.data.business.whatsapp &&
             whatsappValid &&
@@ -1034,111 +964,26 @@ export default {
       }
     },
 
-    // =========== DADOS INICIAIS ===========
     createdDataUser() {
-      const d = this.data || {};
       const Form = this.SetForm;
-
-      Form.payload.data.business.name = d?.conta?.nome_fatura || "";
-      Form.payload.data.business.email = d?.email || "";
-      Form.payload.data.business.phone = d?.telefone || "";
-      Form.payload.data.business.whatsapp = d?.telefone || "";
-
-      // Ajuste aqui se seu backend já retorna draft/theme:
-      Form.themeId = this.form?.themeId || Form.themeId;
-      Form.configId = this.form?.configId || Form.configId;
-      Form.workspaceId = d?.workspace_id || Form.workspaceId;
-
-      this.UpdateStoreSetform();
-      this.validateStep(5);
+      const data = this.data;
+      Form.payload.data.business.name = data?.conta?.nome_fatura || "";
+      Form.payload.data.business.email = data?.email || "";
+      Form.payload.data.business.phone = data?.telefone || "";
+      Form.payload.data.business.whatsapp = data?.telefone || "";
     },
 
-    // =========== SUBMIT FINAL ===========
     submitForm() {
       if (this.stepValid[6] && this.stepValid[7]) {
         this.CreatedTheme();
       }
     },
 
-    async CreatedTheme() {
-      this.loading = true;
-      this.error = null;
-      this.progress = 0;
-
-      try {
-        const data = await this.$axios.post(
-          "/admin/whitelabel/configs",
-          this.SetForm
-        );
-        this.PublicThemeRegisted();
-      } catch (err) {
-        this.error =
-          err?.response?.data?.mensagem ||
-          err?.response?.data?.message ||
-          err?.message ||
-          "Erro ao enviar";
-      } finally {
-        this.loading = false;
-      }
-    },
-
-    async PublicThemeRegisted() {
-      this.loading = true;
-      this.error = null;
-      this.progress = 0;
-
-      try {
-        const data = await this.$axios.post(
-          "/admin/whitelabel/configs/" + this.SetForm.configId + "/publish", this.SetForm
-        );
-        this.$router.push("/painel/theme");
-      } catch (err) {
-        this.error =
-          err?.response?.data?.mensagem ||
-          err?.response?.data?.message ||
-          err?.message ||
-          "Erro ao enviar";
-      } finally {
-        this.loading = false;
-      }
-    },
-
-    async CreatedThemeID() {
-      this.loading = true;
-      this.error = null;
-      this.progress = 0;
-
-      try {
-        const response = await this.$axios.post(
-          "/admin/whitelabel/configs",
-          this.SetForm
-        );
-        const data = response.data;
-
-        if (data.body.theme_id && data.body.id) {
-          this.SetForm.themeId = data.body.theme_id;
-          this.SetForm.configId = data.body.id;
-        } else {
-          this.$router.push("/painel/theme");
-          this.$toast.error("Ops ! não foi possivel carregar no momento.");
-        }
-      } catch (err) {
-        this.error =
-          err?.response?.data?.mensagem ||
-          err?.response?.data?.message ||
-          err?.message ||
-          "Erro ao enviar";
-      } finally {
-        this.loading = false;
-      }
-    },
-
-    // =========== CORES / CSS VARS ===========
+    // ========= Atualizações de cores / CSS vars =========
     getShortHex(hexCode) {
       const cleanHex = (hexCode || "").replace("#", "");
       return `#${cleanHex.substring(0, 6)}`;
     },
-
     updateOpacityColor(primaryColor) {
       if (!primaryColor) return;
 
@@ -1162,75 +1007,121 @@ export default {
           .slice(1)
           .toUpperCase();
 
-      this.$vuetify.theme.themes.light.Setprimary =
-        this.getShortHex(primaryColor);
+      this.$vuetify.theme.themes.light.Setprimary = this.getShortHex(primaryColor);
       document.documentElement.style.setProperty("--SetPrimay", primaryColor);
       document.documentElement.style.setProperty("--SetPrimayOpacity", colorOp);
 
       this.$vuetify.theme.themes.light.primary = this.getShortHex(primaryColor);
-      document.documentElement.style.setProperty(
-        "--primary",
-        this.getShortHex(primaryColor)
-      );
-      document.documentElement.style.setProperty(
-        "--primaryop",
-        this.getShortHex(colorOp)
-      );
+      document.documentElement.style.setProperty("--primary", this.getShortHex(primaryColor));
+      document.documentElement.style.setProperty("--primaryop", this.getShortHex(colorOp));
 
-      this.SetForm.payload.styles.color.primary = primaryColor;
       this.SetForm.payload.styles.color.primary_op = colorOp;
-      this.UpdateStoreSetform();
     },
-
     updatePrimaryOp(primaryopColor) {
       if (!primaryopColor) return;
-      document.documentElement.style.setProperty(
-        "--SetPrimayOpacity",
-        primaryopColor
-      );
-      document.documentElement.style.setProperty(
-        "--primaryop",
-        this.getShortHex(primaryopColor)
-      );
-      this.SetForm.payload.styles.color.primary_op = primaryopColor;
-      this.UpdateStoreSetform();
+      document.documentElement.style.setProperty("--SetPrimayOpacity", primaryopColor);
+      document.documentElement.style.setProperty("--primaryop", this.getShortHex(primaryopColor));
     },
-
     updateBackgroundFist(primary) {
       if (!primary) return;
-      document.documentElement.style.setProperty(
-        "--background-primary",
-        primary
-      );
-      this.SetForm.payload.styles.menuleft.background.primary = primary;
-      this.UpdateStoreSetform();
+      document.documentElement.style.setProperty("--background-primary", primary);
     },
-
     updateBackgroundEnd(end) {
       if (!end) return;
       document.documentElement.style.setProperty("--background-secondary", end);
-      this.SetForm.payload.styles.menuleft.background.secondary = end;
-      this.UpdateStoreSetform();
     },
-
+    updateBackgroundSecondary(secondary) {
+      if (!secondary) return;
+      document.documentElement.style.setProperty("--secondary", secondary);
+    },
     updateColorTitleMenu(primary) {
       if (!primary) return;
-      document.documentElement.style.setProperty(
-        "--menu-title-color-primary",
-        primary
-      );
-      this.SetForm.payload.styles.menuleft.title.color = primary;
-      this.UpdateStoreSetform();
+      document.documentElement.style.setProperty("--menu-title-color-primary", primary);
     },
-
     updateColorItemMenu(primary) {
       if (!primary) return;
-      document.documentElement.style.setProperty(
-        "--menu-color-primary",
-        primary
-      );
-      this.SetForm.payload.styles.menuleft.font.color = primary;
-      this.UpdateStoreSetform();
+      document.documentElement.style.setProperty("--menu-color-primary", primary);
+    },
+    teste() {
+      this.$refs.temapadrao.CreatedColorData();
+    },
+
+    async resizeAndSetImages(imageSrc) {
+      try {
+        // Redimensiona para cada tamanho
+        const sizes = [32, 96, 192, 300];
+
+        for (const size of sizes) {
+          const resizedImage = await this.resizeImage(imageSrc, size, size);
+          this.SetForm.payload.assets.icon[`img${size}x${size}`] = resizedImage;
+        }
+
+        this.SetForm.payload.assets.icon.img512x512 = imageSrc;
+      } catch (error) {
+        this.setSameImageForAllSizes(imageSrc);
+      }
+    },
+
+    resizeImage(src, width, height) {
+      return new Promise((resolve, reject) => {
+        const canvas = document.createElement("canvas");
+        const ctx = canvas.getContext("2d");
+        const img = new Image();
+
+        img.onload = () => {
+          canvas.width = width;
+          canvas.height = height;
+
+          // Usa alta qualidade para o redimensionamento
+          ctx.imageSmoothingEnabled = true;
+          ctx.imageSmoothingQuality = "high";
+          ctx.drawImage(img, 0, 0, width, height);
+
+          resolve(canvas.toDataURL("image/png"));
+        };
+
+        img.onerror = reject;
+        img.src = src;
+      });
+    },
+
+    setSameImageForAllSizes(imageSrc) {
+      this.SetForm.payload.assets.icon.img32x32 = imageSrc;
+      this.SetForm.payload.assets.icon.img96x96 = imageSrc;
+      this.SetForm.payload.assets.icon.img192x192 = imageSrc;
+      this.SetForm.payload.assets.icon.img300x300 = imageSrc;
+    },
+
+    // ========= Envio =========
+    async CreatedTheme() {
+      this.loading = true;
+      this.error = null;
+      this.progress = 0;
+
+      try {
+        const fd = this.objectToFormData(this.SetForm);
+
+       // await this.$axios.post("/admin/whitelabel/configs", this.SetForm
+        await this.$axios.post("/admin/whitelabel/configs", fd, {
+          onUploadProgress: (e) => {
+            if (e.total) {
+              this.progress = Math.round((e.loaded * 100) / e.total);
+            }
+          },
+          transformRequest: (data) => data, // mantém o FormData intacto
+          // não defina manualmente 'Content-Type'
+      });
+
+        this.$router.push("/painel/theme");
+      } catch (error) {
+        this.error =
+          error?.response?.data?.mensagem ||
+          error?.response?.data?.message ||
+          error?.message ||
+          "Erro ao enviar";
+      } finally {
+        this.loading = false;
+      }
     },
   },
 };
@@ -1238,8 +1129,6 @@ export default {
 
 <style lang="scss">
 @import "styles.scss";
-
-.error {
-  font-weight: 600;
-}
+/* opcional: estilos de feedback */
+.error { font-weight: 600; }
 </style>

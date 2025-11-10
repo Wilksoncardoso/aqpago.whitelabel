@@ -5,9 +5,9 @@
         <nuxt-link to="/painel/">
           <img
             class="size_logo"
-            :src=" SetFormTheme?.payload?.assets?.logotipe?.img ? return_img(SetFormTheme?.payload?.assets?.logotipe?.img) :'' || theme?.assets?.logotipe?.img"
+            :src=" SetFormTheme?.payload?.assets?.logotipe?.img ? SetFormTheme?.payload?.assets?.logotipe?.img :'' || theme?.assets?.logotipe?.img"
             :alt="theme?.data?.initcomp?.description"
-            :width="SetFormTheme?.assets?.logotipe?.size || theme?.assets?.logotipe?.size || 130"
+            :width="SetFormTheme?.payload?.assets?.logotipe?.size || theme?.assets?.logotipe?.size || 130"
           />
         </nuxt-link>
       </div>
@@ -167,9 +167,7 @@ export default {
     modal_workspace() {
       this.$refs.modalWorkspaceMain.DialogStart();
     },
-     return_img(img) {
-      return URL.createObjectURL(img);
-    },
+   
   },
   computed: {
     theme() {

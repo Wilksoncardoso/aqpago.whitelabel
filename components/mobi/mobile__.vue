@@ -56,11 +56,7 @@ export default {
     icon__googlepay,
     logo,
   },
-  methods: {
-    return_img(img) {
-      return URL.createObjectURL(img);
-    },
-  },
+
   computed: {
     theme() {
       return this.$store?.state?.theme?.data || null;
