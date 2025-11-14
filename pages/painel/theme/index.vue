@@ -23,7 +23,11 @@
           >Criar theme</v-btn
         >
       </div>
-      <V2ThemeListaMain :ListThemes="ListThemes" v-if="ListThemes.length > 0" />
+      <V2ThemeListaMain
+        :ListThemes="ListThemes"
+        :ArrayListThemes="ArrayListThemes"
+        v-if="ArrayListThemes.length > 0"
+      />
       <V2ThemeListaNolistMain v-else />
     </div>
   </div>
@@ -436,7 +440,60 @@ export default {
           },
         },
       ],
+      ArrayListThemes: [],
+      loading: false,
+      filtro: {},
+      page: {
+        to: 1,
+        last_page: null,
+      },
     };
+  },
+  created() {
+    this.ReturnListTheme();
+  },
+  methods: {
+    ReturnListTheme() {
+      this.loading = true;
+
+      const initialDate = this.filtro.date
+        ? encodeURIComponent(this.filtro.date.inicio)
+        : "";
+      const finalDate = this.filtro.date
+        ? encodeURIComponent(this.filtro.date.fim || this.filtro.date.inicio)
+        : "";
+
+      const queryParams = {
+        initial_date: initialDate,
+        final_date: finalDate,
+        status: this.filtro.status,
+        resource: this.filtro.type,
+        client_id: this.filtro.client_id,
+        page: this.page.to,
+      };
+
+      const url = "/admin/themes?";
+      this.result__api = [];
+      const queryString = Object.entries(queryParams)
+        .filter(([key, value]) => value !== undefined && value !== "")
+        .map(([key, value]) => `${key}=${encodeURIComponent(value)}`)
+        .join("&");
+
+      const finalUrl = url + queryString + "&limit=20";
+      this.$axios
+        .$get(finalUrl)
+        .then((response) => {
+          this.ArrayListThemes = response.body.data || [];
+          this.page.last_page = response.body.meta.last_page || 1;
+          this.page.to = response.body.meta.current_page || 1;
+        })
+        .catch((error) => {
+          this.mensagem = error?.response?.data?.mensagem;
+        })
+        .finally(() => {
+          this.loading = false;
+        });
+    },
   },
 };
 </script>

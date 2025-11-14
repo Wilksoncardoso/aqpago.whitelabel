@@ -257,7 +257,20 @@ export default {
   methods: {
     ...mapActions("user", ["salvar"]),
     ...mapActions("workspace", ["salvar"]),
-
+   async list_workspace() {
+      this.loading = true;
+      this.error = null;
+      const response = await this.$axios
+        .$get("/aqpago-workspace?token=main")
+        .then((res) => {
+          this.workspaces = res.data || [];
+          this.$store.commit("workspace/salvar", res.data);
+        })
+        .catch((error) => {
+          this.error = error;
+        })
+        .finally(() => (this.loading = false));
+    },
     return__saldo() {
       this.$axios
         .$get("/user_data")
@@ -272,20 +285,7 @@ export default {
           this.error = error.response.data.mensagem;
         });
     },
-    async list_workspace() {
-      this.loading = true;
-      this.error = null;
-      const response = await this.$axios
-        .$get("/aqpago-workspace?token=main")
-        .then((res) => {
-          this.workspaces = res.data || [];
-          this.$store.commit("workspace/salvar", res.data);
-        })
-        .catch((error) => {
-          this.error = error;
-        })
-        .finally(() => (this.loading = false));
-    },
+    
   },
   computed: {
     url() {

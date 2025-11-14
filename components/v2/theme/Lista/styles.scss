@@ -4,6 +4,7 @@
       position: relative;
       .background {
         width: 100%;
+        min-height: 300px;
         object-fit: cover;
         border-radius: 6px;
         -webkit-border-radius: 6px;
@@ -24,15 +25,15 @@
         width: 25px;
         height: 25px;
       }
-      .color {
-        width: 24px;
-        height: 24px;
-        border-radius: 4px;
-        -webkit-border-radius: 4px;
-        -moz-border-radius: 4px;
-        -ms-border-radius: 4px;
-        -o-border-radius: 4px;
-      }
+    }
+    .color {
+      width: 24px;
+      height: 24px;
+      border-radius: 4px;
+      -webkit-border-radius: 4px;
+      -moz-border-radius: 4px;
+      -ms-border-radius: 4px;
+      -o-border-radius: 4px;
     }
     p {
       font-size: 12px;
@@ -42,6 +43,12 @@
       color: var(--content-tertiary, #989898);
       line-height: 20px;
       letter-spacing: -0.28px;
+    }
+  }
+  .main_card{
+    .label{
+      font-size: 12px;
+      font-weight: 500;
     }
   }
   .cards_item {

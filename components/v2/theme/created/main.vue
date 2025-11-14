@@ -5,11 +5,16 @@
 
     <!-- FORM PRINCIPAL -->
     <div class="cards_created_theme pa-4 white">
-      <h3 class="primary--text">Cadastro de Theme</h3>
-      <!-- debug -->
-      {{ SetForm }}
-   
-
+      <div class="d-flex justify-space-between">
+        <h3 class="primary--text">Cadastro de Theme</h3>
+        <v-btn
+          color="primary"
+          text
+          class="pa-2"
+          @click="RemoverItemTheme(SetForm.themeId)"
+          >Voltar</v-btn
+        >
+      </div>
       <v-stepper v-model="page" vertical>
         <!-- STEP 1 - ASSETS & ICONS -->
         <v-stepper-step :complete="page > 1" step="1">
@@ -22,7 +27,7 @@
             <div class="title mb-3 primary--text">Navbar</div>
 
             <!-- Favicon -->
-            <div class="label">1 - Favicon <span>(png ou jpeg)</span></div>
+            <div class="label">1 - Favicon <span>(png ou svg)</span></div>
             <v-file-input
               accept="image/png, image/svg"
               placeholder="ex : Navbar.png"
@@ -57,7 +62,6 @@
           >
             Continue
           </v-btn>
-          <v-btn text class="pa-2" to="/painel/theme">Voltar</v-btn>
         </v-stepper-content>
 
         <!-- STEP 2 - STYLE -->
@@ -565,7 +569,7 @@
 
     <!-- PREVIEW -->
     <div class="cards_created_preview">
-      <v-btn @click="DeleteStoreSetform()">teste</v-btn>
+      <!-- <v-btn @click="DeleteStoreSetform()">teste</v-btn> -->
 
       <V2ThemeCreatedPreviewMain
         :SetForm="SetForm"
@@ -776,6 +780,7 @@ export default {
           },
         },
       },
+      error: "",
     };
   },
 
@@ -820,6 +825,22 @@ export default {
     },
     DeleteStoreSetform() {
       this.$store.commit("theme/deleteSetform", this.SetForm);
+    },
+    async RemoverItemTheme(id) {
+      this.loading = true;
+      this.error = null;
+      try {
+        const response = await this.$axios.delete(`/admin/themes/${id}`);
+        this.$router.push("/painel/theme");
+      } catch (err) {
+        this.error =
+          err?.response?.data?.mensagem ||
+          err?.response?.data?.error ||
+          "Erro ao carregar os dados do cliente.";
+        this.$toast.error(this.error);
+      } finally {
+        this.loading = false;
+      }
     },
 
     // =========== UPLOAD GENÉRICO ===========
@@ -878,6 +899,7 @@ export default {
           err?.response?.data?.message ||
           err?.message ||
           "Erro ao enviar arquivo";
+        this.$toast.error(this.error);
       } finally {
         this.loading = false;
         this.progress = 0;
@@ -907,7 +929,6 @@ export default {
 
     // =========== HANDLERS FILE INPUTS ===========
     async onChangeFavicon(file) {
-      console.log(1);
       if (!file) {
         this.SetForm.payload.assets.icon.img512x512 = "";
         this.validateStep(1);
@@ -960,6 +981,10 @@ export default {
       this.validateStep(6);
     },
 
+    remove_links(link) {
+      if (typeof link !== "string") return link;
+      return link.replace(/^(https?:\/\/)?(www\.)?/i, "");
+    },
     // =========== VALIDAÇÃO POR STEP ===========
     validateStep(step) {
       switch (step) {
@@ -1064,7 +1089,10 @@ export default {
       this.loading = true;
       this.error = null;
       this.progress = 0;
+      const form = this.SetForm;
 
+      this.remove_links(form.payload.data.business.external_link.base_url);
+      this.remove_links(form.payload.data.business.external_link.link_payment);
       try {
         const data = await this.$axios.post(
           "/admin/whitelabel/configs",
@@ -1089,7 +1117,8 @@ export default {
 
       try {
         const data = await this.$axios.post(
-          "/admin/whitelabel/configs/" + this.SetForm.configId + "/publish", this.SetForm
+          "/admin/whitelabel/configs/" + this.SetForm.configId + "/publish",
+          { themeId: this.SetForm.themeId }
         );
         this.$router.push("/painel/theme");
       } catch (err) {
