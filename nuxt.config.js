@@ -145,7 +145,7 @@ export default {
           success: colors.green.accent3,
         },
         light: {
-          primary: "#521C89",
+          primary: "",
           black: "#000000",
           primary__sec: "#E5D5F6",
           pimary__central__ajuda: "#CCAAEE",

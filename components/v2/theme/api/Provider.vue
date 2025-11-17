@@ -1,5 +1,16 @@
 <template>
   <div>
+    <div
+      class="loader_main_theme d-flex justify-center align-center"
+      v-if="loading"
+    >
+      <v-progress-circular
+        :size="70"
+        :width="7"
+        color="#000000"
+        indeterminate
+      ></v-progress-circular>
+    </div>
   </div>
 </template>
 
@@ -10,6 +21,8 @@ export default {
   data() {
     return {
       data: {},
+      error: null,
+      loading: true,
     };
   },
   methods: {
@@ -19,60 +32,119 @@ export default {
       let color = this.data?.styles?.color;
       let menu_background = this.data?.styles?.menuleft?.background;
       let menu_Color = this.data?.styles?.menuleft;
-
-
-      this.$vuetify.theme.themes.light.primary = color.primary;
-      this.$vuetify.theme.themes.dark.primary = color.primary;
-      this.$vuetify.theme.themes.light.secondary = color.secondary;
-      this.$vuetify.theme.themes.dark.secondary = color.secondary;
-
+      this.$vuetify.theme.themes.light.primary = this.normalizeColor(
+        color.primary
+      );
+      this.$vuetify.theme.themes.dark.primary = this.normalizeColor(
+        color.primary
+      );
+      // this.$vuetify.theme.themes.light.secondary = this.normalizeColor(
+      //   color.secondary
+      // );
+      // this.$vuetify.theme.themes.dark.secondary = this.normalizeColor(
+      //   color.secondary
+      // );
       if (process.client) {
-
         // css
-        document.documentElement.style.setProperty("--primary", color.primary);
+        document.documentElement.style.setProperty(
+          "--primary",
+          this.normalizeColor(color.primary)
+        );
         document.documentElement.style.setProperty(
           "--primary_svg",
-          color.primary
+          this.normalizeColor(color.primary)
         );
 
         document.documentElement.style.setProperty(
           "--primaryop",
-          color.primary_op
+          this.normalizeColor(color.primary_op)
         );
         document.documentElement.style.setProperty(
           "--secondary",
-          color.secondary
+          this.normalizeColor(color.secondary)
         );
 
         document.documentElement.style.setProperty(
           "--menu-color-primary",
-          menu_Color?.font?.color
+          this.normalizeColor(menu_Color?.font?.color)
         );
         document.documentElement.style.setProperty(
           "--menu-title-color-primary",
-          menu_Color?.title?.color
+          this.normalizeColor(menu_Color?.title?.color)
         );
         document.documentElement.style.setProperty(
           "--background-primary",
-          menu_background.primary
+          this.normalizeColor(menu_background.primary)
         );
         document.documentElement.style.setProperty(
           "--background-secondary",
-          menu_background.secondary
+          this.normalizeColor(menu_background.secondary)
         );
       }
+    },
+
+    async GetThemeId() {
+      this.loading = true;
+      this.error = null;
+
+      try {
+        const response = await this.$axios.get(
+          "/public/whitelabel/theme?domain=aqpago-whitelabel.vercel.app"
+        );
+        this.GetThemeResgisted(response.data.body.theme_id);
+      } catch (err) {
+        this.error =
+          err?.response?.data?.mensagem ||
+          err?.response?.data?.message ||
+          err?.message ||
+          "Erro ao enviar";
+      } finally {
+        this.loading = false;
+      }
+    },
+    async GetThemeResgisted(hash) {
+      this.loading = true;
+      this.error = null;
+      try {
+        const response = await this.$axios.get("/public/whitelabel/config", {
+          headers: {
+            "X-Theme-Id": hash,
+          },
+        });
+
+        this.data = response.data;
+        setTimeout(() => {
+          this.CreatedColorData();
+          this.$store.commit("theme/salvar", this.data);
+        }, 100);
+      } catch (err) {
+        this.error =
+          err?.response?.data?.mensagem ||
+          err?.response?.data?.message ||
+          err?.message ||
+          "Erro ao enviar";
+
+        console.error("Erro GetThemeResgisted:", err);
+      } finally {
+        this.loading = false;
+      }
+    },
+    normalizeColor(hex) {
+      if (hex?.length === 9) {
+        return hex.substring(0, 7); // remove o AA
+      }
+      return hex;
     },
   },
   head() {
     const seo = this.data?.seo || {};
-   
+    const assets = this.data?.assets || {};
 
     return {
       title: seo?.title || "Aguarde...",
       meta: [
         {
           name: "theme-color",
-          // Use notação de colchetes para propriedades com hífen
           content: seo?.["theme-color"] || "var(--primary)",
         },
         {
@@ -89,16 +161,11 @@ export default {
         },
         {
           property: "og:image",
-          // Use a propriedade correta da sua API
           content: seo?.["image-url"] || "",
         },
         {
           name: "twitter:site",
           content: seo?.["twitter-site"] || "",
-        },
-        {
-          name: "twitter:creator",
-          content: seo?.["twitter-creator"] || "@aqbankdigital",
         },
         {
           name: "twitter:title",
@@ -110,7 +177,6 @@ export default {
         },
         {
           property: "twitter:image",
-          // Use a propriedade correta da sua API
           content: seo?.["twitter-image-url"] || seo?.["image-url"] || "",
         },
       ],
@@ -118,83 +184,91 @@ export default {
         {
           rel: "icon",
           type: "image/x-icon",
-          href: seo?.favicon || "",
+          href: assets?.icon?.img32x32 || "",
+        }, {
+          rel: "icon",
+          type: "image/x-icon",
+          href: assets?.icon?.img32x32 || "",
         },
         {
           rel: "icon",
           type: "image/svg+xml",
           sizes: "32x32",
-          href:seo?.favicon|| "",
+          href: assets?.icon?.img32x32 || "",
         },
         {
           rel: "icon",
           type: "image/svg+xml",
           sizes: "96x96",
-          href: seo?.favicon || "",
+          href: assets?.icon?.img96x96 || "",
         },
         {
           rel: "icon",
           type: "image/svg+xml",
           sizes: "192x192",
-          href: seo?.favicon || "",
+          href: assets?.icon?.img192x192 || "",
         },
         {
           rel: "apple-touch-icon",
           sizes: "300x300",
-          href: seo?.favicon || "",
+          href: assets?.icon?.img300x300 || "",
         },
         {
           rel: "icon",
           type: "image/svg+xml",
           sizes: "512x512",
-          href: seo?.favicon || "",
+          href: assets?.icon?.img512x512 || "",
         },
       ],
     };
   },
+
   created() {
-    this.data = this.$CreatedThemeColorFake.payload;
-    setTimeout(() => {
-      this.CreatedColorData();
-      this.$store.commit("theme/salvar", this.data);
-    }, 100);
+    this.GetThemeId();
   },
 };
 </script>
 
 <style lang="scss">
- ::-webkit-scrollbar {
-            width: 14px;
-        }
-        
-        ::-webkit-scrollbar-track {
-            background: var(--primaryop);
-            border-radius: 10px;
-        }
-        
-        ::-webkit-scrollbar-thumb {
-            background: var(--primary);
-            border-radius: 10px;
-            border: 3px solid var(--primaryop);
-        }
-        
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--primary);
-        }
-        
-        /* Personalização da Scrollbar para Firefox */
-        html {
-            scrollbar-width: thin;
-            scrollbar-color: var(--primary) var(--primaryop);
-        }
-        
-        /* Estilo para navegadores mais antigos */
-        body {
-            scrollbar-face-color: var(--primary);
-            scrollbar-track-color: var(--primaryop);
-            scrollbar-arrow-color: var(--primaryop);
-            scrollbar-shadow-color: var(--primary);
-            scrollbar-dark-shadow-color: var(--primary);
-        }
+::-webkit-scrollbar {
+  width: 14px;
+}
 
+::-webkit-scrollbar-track {
+  background: var(--primaryop);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: 10px;
+  border: 3px solid var(--primaryop);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary);
+}
+
+/* Personalização da Scrollbar para Firefox */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: var(--primary) var(--primaryop);
+}
+
+/* Estilo para navegadores mais antigos */
+body {
+  scrollbar-face-color: var(--primary);
+  scrollbar-track-color: var(--primaryop);
+  scrollbar-arrow-color: var(--primaryop);
+  scrollbar-shadow-color: var(--primary);
+  scrollbar-dark-shadow-color: var(--primary);
+}
+
+.loader_main_theme {
+  position: fixed;
+  z-index: 100000;
+  width: 100%;
+  height: 100%;
+  background: #ffffff;
+}
 </style>

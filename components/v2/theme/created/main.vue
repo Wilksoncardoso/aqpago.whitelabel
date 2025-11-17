@@ -2,7 +2,6 @@
   <div class="d-flex justify-space-between">
     <!-- Provider externo -->
     <V2ThemeApiProvider ref="temapadrao" />
-    {{ SetForm }}
     <!-- FORM PRINCIPAL -->
     <div class="cards_created_theme pa-4 white">
       <div class="d-flex justify-space-between">

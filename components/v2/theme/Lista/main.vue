@@ -1,6 +1,5 @@
 <template>
   <div>
-    {{ ArrayListThemes.length }}
     <div class="d-flex flex-wrap cards_items_themes">
       <div
         class="cards_item mx-2 my-2"
@@ -10,7 +9,10 @@
         {{ data.status }}
         <div class="card_img_main">
           <img
-            :src="data.config?.payload?.assets?.initcomp?.img || '/img/theme/main.jpeg'"
+            :src="
+              data.config?.payload?.assets?.initcomp?.img ||
+              '/img/theme/main.jpeg'
+            "
             :alt="data.config?.payload?.data?.initcomp?.description"
             width="100%"
             class="background"
@@ -20,7 +22,7 @@
           >
             <div v-if="data?.config?.payload?.assets?.logotipe?.img">
               <img
-                :src="data?.config?.payload?.assets?.logotipe?.img "
+                :src="data?.config?.payload?.assets?.logotipe?.img"
                 :alt="data?.config?.payload?.data?.initcomp?.description"
                 class="logo mr-2"
               />
@@ -96,7 +98,10 @@
             </p>
           </div>
 
-          <div class="main_card" v-if="data?.config?.payload?.styles?.color?.primary">
+          <div
+            class="main_card"
+            v-if="data?.config?.payload?.styles?.color?.primary"
+          >
             <p class="mr-1 mb-0">Cor</p>
             <div class="d-flex">
               <div
@@ -131,6 +136,14 @@
                 @click="RemoverItemTheme(data.id)"
                 ><i class="ri-delete-bin-7-line" style="font-size: 16px"></i
               ></v-btn>
+
+              <v-btn
+                icon
+                color="delete"
+                class="pa-2"
+                @click="ActiveItemTheme(data.id)"
+                >oi</v-btn
+              >
             </div>
             <div>
               <v-btn
@@ -194,10 +207,30 @@ export default {
     async PublishItemTheme(id, themeId) {
       this.loading = true;
       this.error = null;
+
       try {
         const data = await this.$axios.post(
-          "/admin/whitelabel/configs/" + id + "/publish",
+          "/admin/whitelabel/configs/" + id + "/publish ",
           { themeId: themeId }
+        );
+
+        this.$toast.success("Thema modificado!");
+        this.$router.go(0);
+      } catch (err) {
+        this.error = "Não foi possível concluir a publicação.";
+        this.$toast.error(this.error);
+      } finally {
+        this.loading = false;
+      }
+    },
+
+    async ActiveItemTheme(id) {
+      this.loading = true;
+      this.error = null;
+
+      try {
+        const data = await this.$axios.post(
+          "/admin/themes/" + id + "/activate"
         );
 
         this.$toast.success("Thema modificado!");
