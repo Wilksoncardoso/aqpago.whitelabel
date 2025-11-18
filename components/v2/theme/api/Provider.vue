@@ -11,6 +11,9 @@
         indeterminate
       ></v-progress-circular>
     </div>
+    <div class="d-flex justify-end">
+      {{ HostName }}
+    </div>
   </div>
 </template>
 
@@ -89,7 +92,7 @@ export default {
 
       try {
         const response = await this.$axios.get(
-          "/public/whitelabel/theme?domain=aqpago-whitelabel.vercel.app"
+          "/public/whitelabel/theme?domain=" + this.HostName
         );
         this.GetThemeResgisted(response.data.body.theme_id);
       } catch (err) {
@@ -185,7 +188,8 @@ export default {
           rel: "icon",
           type: "image/x-icon",
           href: assets?.icon?.img32x32 || "",
-        }, {
+        },
+        {
           rel: "icon",
           type: "image/x-icon",
           href: assets?.icon?.img32x32 || "",
@@ -222,7 +226,12 @@ export default {
       ],
     };
   },
-
+  computed: {
+    HostName() {
+      // return "aqpago-whitelabel.vercel.app";
+      return process.client ? window.location.host : null;
+    },
+  },
   created() {
     this.GetThemeId();
   },

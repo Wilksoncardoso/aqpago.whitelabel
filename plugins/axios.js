@@ -72,7 +72,7 @@ export default function ({ $axios, redirect, app, $auth }, inject) {
     const message = error.response?.data?.message ||
       error.response?.data?.mensagem ||
       error.response?.data?.error ||
-      "Ocorreu um erro inesperado.";
+      "Aconteceu um erro inesperado. Por favor, tente novamente mais tarde.";
 
     if (!toastCooldown) {
       app.$toast.error(message, {
@@ -87,6 +87,7 @@ export default function ({ $axios, redirect, app, $auth }, inject) {
   };
 
   $axios.onError((error) => {
+    console.log(error.response)
     const code = parseInt(error.response && error.response.status);
     if (code === 401) {
       app.$errorHandler(error);
@@ -99,6 +100,9 @@ export default function ({ $axios, redirect, app, $auth }, inject) {
       localStorage.removeItem('location_token');
 
       redirect("/login");
+    }
+    if(code === 500){
+      app.$errorHandler('Aconteceu um erro inesperado. Por favor, tente novamente mais tarde.');
     }
   });
 }
