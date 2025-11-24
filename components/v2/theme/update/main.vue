@@ -6,11 +6,7 @@
     <div class="cards_created_theme pa-4 white">
       <div class="d-flex justify-space-between">
         <h3 class="primary--text">Cadastro de Theme</h3>
-        <v-btn
-          color="primary"
-          text
-          class="pa-2"
-          @click="RemoverItemTheme(SetForm.themeId)"
+        <v-btn color="primary" text class="pa-2" to="/painel/theme"
           >Voltar</v-btn
         >
       </div>
@@ -26,17 +22,20 @@
             <div class="title mb-3 primary--text">Navbar</div>
 
             <!-- Favicon -->
-            <div class="label">1 - Favicon <span>(png ou svg)</span></div>
+            <div class="label disabled">
+              1 - Favicon <span>(png ou svg)</span>
+            </div>
             <v-file-input
               accept="image/png, image/svg"
               placeholder="ex : Navbar.png"
               solo
               label="ex : Navbar.png"
-              class="input_set_theme"
+              class="input_set_theme disabled"
               v-model="localFiles.favicon"
               :rules="rulesStep1.favicon"
               hint="Favicon será renderizado em 512px (gerando derivativos)"
               persistent-hint
+              disabled
               @change="onChangeFavicon"
             ></v-file-input>
 
@@ -208,7 +207,7 @@
             <div class="title mb-3 primary--text">Login | Password | Token</div>
 
             <!-- BG esquerdo -->
-            <div class="label">
+            <div class="label disabled">
               1 - Imagem esquerda background <span>(png ou jpeg)</span>
             </div>
             <v-file-input
@@ -220,16 +219,18 @@
               v-model="localFiles.initBg"
               :rules="rulesStep4.image"
               @change="onChangeInitImg"
+              disabled
             ></v-file-input>
 
             <!-- Logotipo -->
-            <div class="label">
+            <div class="label disabled">
               2 - Logotipo <span>(svg, png ou jpeg)</span>
             </div>
             <v-file-input
               accept="image/png, image/svg"
               placeholder="ex : Logotipo.png"
               solo
+              disabled
               label="ex : Logotipo.png"
               class="input_set_theme"
               v-model="localFiles.logo"
@@ -263,7 +264,7 @@
                   "
                   :disabled="SetForm.payload.assets.logotipe.size <= 50"
                 >
-                  <i class="ri-subtract-fill white--text"></i>
+                  <i class="ri-subtract-fill primary--text"></i>
                 </v-btn>
                 <v-btn
                   color="primary"
@@ -278,7 +279,7 @@
                   "
                   :disabled="SetForm.payload.assets.logotipe.size >= 296"
                 >
-                  <i class="ri-add-line white--text"></i>
+                  <i class="ri-add-line primary--text"></i>
                 </v-btn>
               </div>
             </div>
@@ -424,7 +425,7 @@
               @input="validateStep(6)"
             ></v-text-field>
 
-            <div class="label">3 - Imagem</div>
+            <div class="label disabled">3 - Imagem</div>
             <v-file-input
               accept="image/png, image/svg"
               solo
@@ -433,6 +434,7 @@
               v-model="localFiles.seoImage"
               :rules="rulesStep6.image"
               @change="onChangeSeoImage"
+              disabled
             ></v-file-input>
 
             <div class="label">4 - Twitter-site</div>
@@ -465,12 +467,13 @@
               @input="validateStep(6)"
             ></v-text-field>
 
-            <div class="label">7 - Twitter-img</div>
+            <div class="label disabled">7 - Twitter-img</div>
             <v-file-input
               accept="image/png, image/svg"
               solo
               label="Twitter image"
               class="input_set_theme"
+              disabled
               v-model="localFiles.twitterImage"
               :rules="rulesStep6.twitterImage"
               @change="onChangeTwitterImage"
@@ -565,11 +568,9 @@
       <div v-if="error" class="error red--text mt-4">{{ error }}</div>
       <div v-if="loading" class="mt-2">Enviando... {{ progress }}%</div>
     </div>
-
     <!-- PREVIEW -->
     <div class="cards_created_preview">
       <!-- <v-btn @click="DeleteStoreSetform()">teste</v-btn> -->
-
       <V2ThemeCreatedPreviewMain
         :SetForm="SetForm"
         :page="page"
@@ -601,7 +602,7 @@ export default {
       loading: false,
       error: null,
       progress: 0,
-
+      id: "",
       localFiles: {
         favicon: null,
         logo: null,
@@ -779,6 +780,92 @@ export default {
           },
         },
       },
+      body: {
+        id: "cef3a4f6-11d0-449e-a78f-3eb13fc5d1cc",
+        name: "Tema cef3a4",
+        slug: "tema-cef3a4",
+        status: "active",
+        primary_domain: null,
+        created_at: "2025-11-17T12:00:37.000000Z",
+        updated_at: "2025-11-21T12:34:08.000000Z",
+        config: {
+          id: "c4079fd7-09e3-4695-a418-1bd589c1b54b",
+          state: "published",
+          version: 2,
+          updated_at: "2025-11-21T12:34:08.000000Z",
+          payload: {
+            seo: {
+              title: "white label",
+              "image-url":
+                "https://apiaqpago.aqbank.com.br/public/whitelabel/assets/882becab-9a55-46cc-b9ed-2f7ba169f141",
+              description: "white label payments todos",
+              "theme-color": "#FF7E00FF",
+              "twitter-site": "@testeste",
+              "twitter-title": "white label payments",
+              "twitter-image-url":
+                "https://apiaqpago.aqbank.com.br/public/whitelabel/assets/4cfe7ab8-51e3-4a74-99da-b69246601c7f",
+              "twitter-description": "white label payments descrição",
+            },
+            data: {
+              business: {
+                name: "PROCODE",
+                email: "procodeltda@gmail.com",
+                phone: "91993373726",
+                termos: "",
+                website: "https://wilksoncardoso.com.br",
+                whatsapp: "91993373726",
+                external_link: {
+                  base_url: "https://aqpago-whitelabel.vercel.app",
+                  link_payment: "https://aqpago-link-payment.vercel.app",
+                  cobram_recorrente: "",
+                },
+              },
+              initcomp: {
+                app: false,
+                title: "white label paymentes",
+                appstore: "",
+                googlepay: "",
+                bottom_text: "",
+                description: "",
+              },
+            },
+            assets: {
+              icon: {
+                img32x32:
+                  "https://apiaqpago.aqbank.com.br/public/whitelabel/assets/6ebcd30b-a737-4bdc-8b65-5c8a3b45c489",
+                img96x96:
+                  "https://apiaqpago.aqbank.com.br/public/whitelabel/assets/6ebcd30b-a737-4bdc-8b65-5c8a3b45c489",
+                img192x192:
+                  "https://apiaqpago.aqbank.com.br/public/whitelabel/assets/6ebcd30b-a737-4bdc-8b65-5c8a3b45c489",
+                img300x300:
+                  "https://apiaqpago.aqbank.com.br/public/whitelabel/assets/6ebcd30b-a737-4bdc-8b65-5c8a3b45c489",
+                img512x512:
+                  "https://apiaqpago.aqbank.com.br/public/whitelabel/assets/6ebcd30b-a737-4bdc-8b65-5c8a3b45c489",
+              },
+              initcomp: {
+                img: "https://apiaqpago.aqbank.com.br/public/whitelabel/assets/c626eac0-4919-4946-b397-ed48d1f85b77",
+                right: true,
+              },
+              logotipe: {
+                img: "https://apiaqpago.aqbank.com.br/public/whitelabel/assets/60693e31-31c0-4503-8dcd-2f0b042c1a05",
+                size: 105,
+              },
+            },
+            styles: {
+              color: {
+                primary: "#FF6700FF",
+                secondary: "",
+                primary_op: "#FFE1CC",
+              },
+              menuleft: {
+                font: { color: "#FFFFFFFF" },
+                title: { color: "#D6D0D0FF" },
+                background: { primary: "#FFCD30FF", secondary: "#FF6700FF" },
+              },
+            },
+          },
+        },
+      },
       error: "",
     };
   },
@@ -812,13 +899,25 @@ export default {
     },
   },
   created() {
-    this.CreatedThemeID();
+    // this.CreatedThemeID();
+    this.id = this.$route.params.id;
     this.SetForm.themeId = "";
     this.SetForm.configId = "";
+    this.VariableInitUpdate();
   },
   methods: {
     ...mapActions("theme", ["salvarSetform", "deleteSetform"]),
-
+    VariableInitUpdate() {
+      this.SetForm.themeId = this.body.id;
+      this.SetForm.configId = this.body.config.id;
+      this.SetForm.payload.assets = this.body.config.payload.assets;
+      this.SetForm.payload.styles = this.body.config.payload.styles;
+      this.SetForm.payload.data = this.body.config.payload.data;
+      this.SetForm.payload.seo = this.body.config.payload.seo;
+      this.validateStep(1);
+      this.UpdateStoreSetform();
+      this.updateOpacityColor(this.SetForm.payload.styles.color.primary);
+    },
     UpdateStoreSetform() {
       this.$store.commit("theme/salvarSetform", this.SetForm);
     },
@@ -841,7 +940,6 @@ export default {
         this.loading = false;
       }
     },
-
     // =========== UPLOAD GENÉRICO ===========
     async uploadAsset(key, file) {
       if (!file) return;
@@ -860,7 +958,7 @@ export default {
         this.loading = true;
         this.error = null;
 
-        const { data } = await this.$axios.post(
+        const { data } = await this.$axios.put(
           `/admin/whitelabel/assets/upload?key=${encodeURIComponent(key)}`,
           fd,
           {

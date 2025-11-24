@@ -87,7 +87,6 @@ export default function ({ $axios, redirect, app, $auth }, inject) {
   };
 
   $axios.onError((error) => {
-    console.log(error.response)
     const code = parseInt(error.response && error.response.status);
     if (code === 401) {
       app.$errorHandler(error);

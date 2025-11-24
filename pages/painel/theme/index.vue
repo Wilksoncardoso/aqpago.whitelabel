@@ -23,12 +23,19 @@
           >Criar theme</v-btn
         >
       </div>
-      <V2ThemeListaMain
-        :ListThemes="ListThemes"
-        :ArrayListThemes="ArrayListThemes"
-        v-if="ArrayListThemes.length > 0"
-      />
-      <V2ThemeListaNolistMain v-else />
+      <div>
+        <div v-if="!loading">
+          <V2ThemeListaMain
+            :ListThemes="ListThemes"
+            :ArrayListThemes="ArrayListThemes"
+            :page="page"
+            @update:PageChange="Change_Setpage"
+            v-if="ArrayListThemes.length > 0"
+          />
+          <V2ThemeListaNolistMain v-else />
+        </div>
+        <V2DashboardListaLoadingMain v-else />
+      </div>
     </div>
   </div>
 </template>
@@ -441,7 +448,7 @@ export default {
         },
       ],
       ArrayListThemes: [],
-      loading: false,
+      loading: true,
       filtro: {},
       page: {
         to: 1,
@@ -493,6 +500,10 @@ export default {
         .finally(() => {
           this.loading = false;
         });
+    },
+    Change_Setpage(data) {
+      this.page.to = data.page;
+      return this.ReturnListTheme();
     },
   },
 };

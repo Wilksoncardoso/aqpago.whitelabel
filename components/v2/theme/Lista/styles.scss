@@ -46,22 +46,28 @@
       letter-spacing: -0.28px;
     }
   }
-  .main_card{
-    .label{
+  .main_card {
+    .label {
       font-size: 12px;
       font-weight: 500;
     }
   }
   .cards_item {
     border: 1px solid #eee;
+    width: calc(33% - 16px);
     border-radius: 6px;
     -webkit-border-radius: 6px;
     -moz-border-radius: 6px;
     -ms-border-radius: 6px;
     -o-border-radius: 6px;
-    width: calc(33% - 16px);
     &.active {
-      border: 2px solid var(--primary);
+      border: 2px solid; /* necessário para border-image */
+      border-image: linear-gradient(160deg, var(--primaryop), var(--primary) ) 1;
+      border-radius: 6px;
+      -webkit-border-radius: 6px;
+      -moz-border-radius: 6px;
+      -ms-border-radius: 6px;
+      -o-border-radius: 6px;
     }
   }
 }

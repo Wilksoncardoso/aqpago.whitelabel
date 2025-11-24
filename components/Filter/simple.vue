@@ -179,10 +179,9 @@ export default {
   &:focus {
     position: relative;
     top: 5px;
-    background: $background-inverse !important;
-    border: 1px solid var(--primary) !important;
-    box-shadow: 0px 0px 0px 2px
-      color-mix(in srgb, var(--primary) 50%, transparent) !important;
+    border: 2px solid var(--primary) !important;
+    box-shadow: 0px 0px 0px 2px var(--primary) ;
+      // color-mix(in srgb, 50%, transparent) !important;
     &::before {
       opacity: 0 !important;
     }

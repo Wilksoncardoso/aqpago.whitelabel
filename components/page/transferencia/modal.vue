@@ -4,11 +4,11 @@
       <v-card class="token__transacao">
         <h2 class="titulo__token">Autenticação de segurança</h2>
         <p class="text__token">
-          Digite o código que foi enviado para seu celular e e-mail
+          Digite o código que foi enviado para seu celular e e-mail 
         </p>
         <v-otp-input
           class="input__token"
-          v-model="form.token_access"
+          v-model="form.token_verificate"
           length="6"
           :error-messages="mensagem?.error ? ['Invalid token'] : []"
           @finish="onFinish"
@@ -58,7 +58,7 @@ export default {
       time: 60,
       data: {},
       form: {
-        token_access: "",
+        token_verificate: "",
       },
       response: [],
     };
@@ -93,11 +93,11 @@ export default {
           this.$router.push("/painel/extrato");
         })
         .catch((error) => {
-          this.form.token_access = "";
+          this.form.token_verificate = "";
           this.loading = false;
           this.mensagem =
             error?.response?.data ||
-            error?.response?.data?.error?.token_access[0] ||
+            error?.response?.data?.error?.token_verificate[0] ||
             "error";
           this.$toast.error("Token de verificação inválido");
         });
@@ -107,7 +107,7 @@ export default {
         this.$axios
           .$get("/tranfer-resend-token/" + this.data.autorization)
           .then((response) => {
-            this.form.token_access = "";
+            this.form.token_verificate = "";
             this.time = 60;
           })
           .catch((error) => {
@@ -117,13 +117,13 @@ export default {
     },
     trans__token($event) {
       this.time = 60;
-      this.form.token_access = "";
+      this.form.token_verificate = "";
       this.dialog = $event.modal;
       this.data = $event.data_pix;
       this.mensagem = "";
     },
     iniciarContador() {
-      this.form.token_access = "";
+      this.form.token_verificate = "";
       setInterval(() => {
         if (this.time > 0) {
           this.time--;

@@ -6,6 +6,8 @@
         :class="data.status"
         v-for="data in ArrayListThemes"
       >
+        <!-- {{ data }} -->
+        {{ data.id }}
         {{ data.status }}
         <div class="card_img_main">
           <img
@@ -126,7 +128,7 @@
 
           <div class="d-flex justify-space-between">
             <div class="d-flex">
-              <v-btn icon color="primary" class="pa-2"
+              <v-btn icon color="primary" class="pa-2" :to="'/painel/theme/update/'+data.id"
                 ><i class="ri-edit-box-line" style="font-size: 16px"></i
               ></v-btn>
               <v-btn
@@ -161,6 +163,14 @@
         </div>
       </div>
     </div>
+    <v-pagination
+          class="navigation_pagination mt-4"
+          v-if="page.last_page > 1"
+          v-model="page.to"
+          :length="page.last_page"
+          :total-visible="7"
+          @input="GetList"
+        ></v-pagination>
   </div>
 </template>
 
@@ -174,6 +184,10 @@ export default {
     ArrayListThemes: {
       type: Array,
       default: () => [],
+    },
+    page: {
+      type: Object,
+      default: () => ({}),
     },
   },
   data() {
@@ -240,6 +254,13 @@ export default {
         this.$toast.error(this.error);
       } finally {
         this.loading = false;
+      }
+    },
+     GetList(value) {
+      this.$emit("update:PageChange", { page: value }); // set
+      const element = document.getElementById("ListaExtrato");
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
       }
     },
   },

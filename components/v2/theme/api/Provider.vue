@@ -1,20 +1,15 @@
 <template>
-  <div>
     <div
       class="loader_main_theme d-flex justify-center align-center"
       v-if="loading"
     >
-      <v-progress-circular
+      <!-- <v-progress-circular
         :size="70"
         :width="7"
         color="#000000"
         indeterminate
-      ></v-progress-circular>
+      ></v-progress-circular> -->
     </div>
-    <div class="d-flex justify-end">
-      {{ HostName }}
-    </div>
-  </div>
 </template>
 
 <script>
@@ -28,6 +23,17 @@ export default {
       loading: true,
     };
   },
+//   watch: {
+//   data: {
+//     deep: true,
+//     handler(val) {
+//       if (val?.styles?.color?.primary) {
+//         this.CreatedColorData();
+//         this.$store.commit("theme/salvar", val);
+//       }
+//     }
+//   }
+// },
   methods: {
     ...mapActions("theme", ["salvar"]),
 
@@ -41,12 +47,6 @@ export default {
       this.$vuetify.theme.themes.dark.primary = this.normalizeColor(
         color.primary
       );
-      // this.$vuetify.theme.themes.light.secondary = this.normalizeColor(
-      //   color.secondary
-      // );
-      // this.$vuetify.theme.themes.dark.secondary = this.normalizeColor(
-      //   color.secondary
-      // );
       if (process.client) {
         // css
         document.documentElement.style.setProperty(
@@ -85,7 +85,6 @@ export default {
         );
       }
     },
-
     async GetThemeId() {
       this.loading = true;
       this.error = null;
@@ -94,7 +93,10 @@ export default {
         const response = await this.$axios.get(
           "/public/whitelabel/theme?domain=" + this.HostName
         );
-        this.GetThemeResgisted(response.data.body.theme_id);
+        console.log(response.data.body.theme_id)
+        setTimeout(() => {
+         this.GetThemeResgisted(response.data.body.theme_id);
+        }, 5000);
       } catch (err) {
         this.error =
           err?.response?.data?.mensagem ||
@@ -228,8 +230,8 @@ export default {
   },
   computed: {
     HostName() {
-      // return "aqpago-whitelabel.vercel.app";
-      return process.client ? window.location.host : null;
+      return "aqpago-whitelabel.vercel.app";
+      // return process.client ? window.location.host : null;
     },
   },
   created() {
@@ -274,10 +276,10 @@ body {
 }
 
 .loader_main_theme {
-  position: fixed;
+  position: fixed !important;
   z-index: 100000;
   width: 100%;
   height: 100%;
-  background: #ffffff;
+  background: white;
 }
 </style>
