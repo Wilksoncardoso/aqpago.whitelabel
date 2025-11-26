@@ -1,21 +1,6 @@
 export default function ({ $axios, redirect, app, $auth }, inject) {
   let toastCooldown = false;
 
-  // $axios.onRequest((config) => {
-  //     if (process.client) {
-  //         const location = localStorage.getItem('location_token') ; // 'local' ou 'workspace'
-  //         const tokenKey = `auth._token.${location}`;
-  //         const token = localStorage.getItem(tokenKey);
-
-  //         if (token) {
-  //             config.headers.common['Authorization'] = token; // o token já vem com 'Bearer '
-  //         }
-  //     }
-
-  //     return config;
-  // });
-
-
   $axios.onRequest((config) => {
 
     if (process.client && config.url.includes('token=main')) {
@@ -28,6 +13,13 @@ export default function ({ $axios, redirect, app, $auth }, inject) {
         config.headers.common.Authorization = token;
         config.headers.Authorization = token; // Dupla garantia
       }
+    }
+    else if (process.client && config.url.includes('token=none')) {
+      delete config.headers.common.Authorization;
+      delete config.headers.Authorization;
+      config.headers.common.Authorization = "";
+      config.headers.Authorization = "";
+
     }
     else if (process.client) {
       // 1. Crie um mecanismo à prova de falhas para ler o localStorage
@@ -100,7 +92,7 @@ export default function ({ $axios, redirect, app, $auth }, inject) {
 
       redirect("/login");
     }
-    if(code === 500){
+    if (code === 500) {
       app.$errorHandler('Aconteceu um erro inesperado. Por favor, tente novamente mais tarde.');
     }
   });

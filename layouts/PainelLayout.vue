@@ -257,7 +257,7 @@ export default {
   methods: {
     ...mapActions("user", ["salvar"]),
     ...mapActions("workspace", ["salvar"]),
-   async list_workspace() {
+    async list_workspace() {
       this.loading = true;
       this.error = null;
       const response = await this.$axios
@@ -271,8 +271,8 @@ export default {
         })
         .finally(() => (this.loading = false));
     },
-    return__saldo() {
-      this.$axios
+    async return__saldo() {
+      await this.$axios
         .$get("/user_data")
         .then((response) => {
           this.loading = false;
@@ -285,7 +285,6 @@ export default {
           this.error = error.response.data.mensagem;
         });
     },
-    
   },
   computed: {
     url() {

@@ -66,10 +66,20 @@
         </div>
         <div v-if="data?.pagamento_cartao" class="d-flex align-center">
           <i class="ri-bank-card-line d-flex mr-1 primary--text"></i>
-          <span style="font-size: 12px;" class="primary--text">{{ data?.max_parcelas + "x" }}</span>
+          <span style="font-size: 12px" class="primary--text">{{
+            data?.max_parcelas + "x"
+          }}</span>
         </div>
       </div>
       <div class="acoes">
+        <v-btn
+          icon
+          class="pa-2 icon_copy"
+          @click="copy(link + '/linkpay/?value=' + data.hash_id)"
+          color="primary"
+        >
+          <i class="ri-file-copy-line"></i>
+        </v-btn>
         <v-btn
           class="button__icon__view pa-2"
           color="primary"
@@ -166,6 +176,28 @@ export default {
       this.excluir();
       this.$router.push("/painel/link_payment/create");
     },
+    copy(txt) {
+      var m = document;
+      txt = m.createTextNode(txt);
+      var w = window;
+      var b = m.body;
+      b.appendChild(txt);
+      if (b.createTextRange) {
+        var d = b.createTextRange();
+        d.moveToElementText(txt);
+        d.select();
+        m.execCommand("copy");
+      } else {
+        var d = m.createRange();
+        var g = w.getSelection;
+        d.selectNodeContents(txt);
+        g().removeAllRanges();
+        g().addRange(d);
+        m.execCommand("copy");
+        g().removeAllRanges();
+      }
+      txt.remove();
+    },
     filter__link__modal() {
       //
       this.$nuxt.$emit("modal__filtro__link", true);
@@ -250,7 +282,9 @@ export default {
   },
   computed: {
     ...mapState("load_session", ["session__data"]),
-
+    link() {
+      return this.$store?.state?.theme?.link || null;
+    },
     page__total() {
       return this.page_info__link.last_page;
     },

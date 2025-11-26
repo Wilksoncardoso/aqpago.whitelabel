@@ -6,9 +6,6 @@
         :class="data.status"
         v-for="data in ArrayListThemes"
       >
-        <!-- {{ data }} -->
-        {{ data.id }}
-        {{ data.status }}
         <div class="card_img_main">
           <img
             :src="
@@ -38,16 +35,15 @@
           </div>
         </div>
         <div class="card_body_theme pa-2">
-          <div
-            class="main_card mt-2"
-            v-if="data?.config?.payload?.data?.initcomp?.title"
-          >
+          <div class="main_card mt-2">
             <div class="mr-1 mb-0 label">Titulo e descrição</div>
             <p class="mb-2 d-flex" style="font-size: 13px">
               {{
-                data?.config?.payload?.data?.initcomp?.title +
-                " " +
-                data?.config?.payload?.data?.initcomp?.description
+                data?.config?.payload?.data?.initcomp?.title
+                  ? data?.config?.payload?.data?.initcomp?.title +
+                    " " +
+                    data?.config?.payload?.data?.initcomp?.description
+                  : "Sem titulo"
               }}
             </p>
           </div>
@@ -128,7 +124,11 @@
 
           <div class="d-flex justify-space-between">
             <div class="d-flex">
-              <v-btn icon color="primary" class="pa-2" :to="'/painel/theme/update/'+data.id"
+              <v-btn
+                icon
+                color="primary"
+                class="pa-2"
+                :to="'/painel/theme/update/' + data.id"
                 ><i class="ri-edit-box-line" style="font-size: 16px"></i
               ></v-btn>
               <v-btn
@@ -138,14 +138,6 @@
                 @click="RemoverItemTheme(data.id)"
                 ><i class="ri-delete-bin-7-line" style="font-size: 16px"></i
               ></v-btn>
-
-              <v-btn
-                icon
-                color="delete"
-                class="pa-2"
-                @click="ActiveItemTheme(data.id)"
-                >oi</v-btn
-              >
             </div>
             <div>
               <v-btn
@@ -164,13 +156,13 @@
       </div>
     </div>
     <v-pagination
-          class="navigation_pagination mt-4"
-          v-if="page.last_page > 1"
-          v-model="page.to"
-          :length="page.last_page"
-          :total-visible="7"
-          @input="GetList"
-        ></v-pagination>
+      class="navigation_pagination mt-4"
+      v-if="page.last_page > 1"
+      v-model="page.to"
+      :length="page.last_page"
+      :total-visible="7"
+      @input="GetList"
+    ></v-pagination>
   </div>
 </template>
 
@@ -201,21 +193,24 @@ export default {
       return link.replace(/^(https?:\/\/)?(www\.)?/i, "");
     },
     async RemoverItemTheme(id) {
-      this.loading = true;
-      this.error = null;
-      try {
-        const response = await this.$axios.delete(`/admin/themes/${id}`);
-        this.$toast.success("Thema removido!");
-        this.$router.go(0);
-      } catch (err) {
-        this.error =
-          err?.response?.data?.mensagem ||
-          err?.response?.data?.error ||
-          "Erro ao carregar os dados do cliente.";
-        this.$toast.error(this.error);
-      } finally {
-        this.loading = false;
+      if (this.ArrayListThemes.length > 1) {
+        this.loading = true;
+        this.error = null;
+        try {
+          const response = await this.$axios.delete(`/admin/themes/${id}`);
+          this.$toast.success("Thema removido!");
+          this.$router.go(0);
+        } catch (err) {
+          this.error =
+            err?.response?.data?.mensagem ||
+            err?.response?.data?.error ||
+            "Erro ao carregar os dados do cliente.";
+          this.$toast.error(this.error);
+        } finally {
+          this.loading = false;
+        }
       }
+      this.$toast.error("Você não pode remover, o último tema.");
     },
 
     async PublishItemTheme(id, themeId) {
@@ -238,25 +233,7 @@ export default {
       }
     },
 
-    async ActiveItemTheme(id) {
-      this.loading = true;
-      this.error = null;
-
-      try {
-        const data = await this.$axios.post(
-          "/admin/themes/" + id + "/activate"
-        );
-
-        this.$toast.success("Thema modificado!");
-        this.$router.go(0);
-      } catch (err) {
-        this.error = "Não foi possível concluir a publicação.";
-        this.$toast.error(this.error);
-      } finally {
-        this.loading = false;
-      }
-    },
-     GetList(value) {
+    GetList(value) {
       this.$emit("update:PageChange", { page: value }); // set
       const element = document.getElementById("ListaExtrato");
       if (element) {

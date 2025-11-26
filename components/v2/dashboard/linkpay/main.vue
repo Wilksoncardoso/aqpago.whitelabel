@@ -1,5 +1,5 @@
 <template>
-  <div style="width: 100%;">
+  <div style="width: 100%">
     <div class="list-main-link-payment" v-if="!loading">
       <div v-if="ListPaymentLink.length > 0">
         <div class="d-flex justify-space-between align-center">
@@ -21,7 +21,12 @@
           >
             <div class="prefix d-flex align-center">
               <div class="number"># {{ index + 1 }}</div>
-              <v-btn icon class="pa-1 icon_copy mx-2" color="primary">
+              <v-btn
+                icon
+                class="pa-1 icon_copy mx-2"
+                @click="copy(link + '/linkpay/?value=' + data.hash_id)"
+                color="primary"
+              >
                 <i class="ri-file-copy-line"></i>
               </v-btn>
               <div class="name">{{ data.produto_nome }}</div>
@@ -77,6 +82,11 @@ export default {
       loading: true,
     };
   },
+  computed: {
+    link() {
+      return this.$store?.state?.theme?.link || null;
+    },
+  },
   created() {
     this.return_list_link_payment();
   },
@@ -94,6 +104,28 @@ export default {
         .finally(() => {
           this.loading = false;
         });
+    },
+    copy(txt) {
+      var m = document;
+      txt = m.createTextNode(txt);
+      var w = window;
+      var b = m.body;
+      b.appendChild(txt);
+      if (b.createTextRange) {
+        var d = b.createTextRange();
+        d.moveToElementText(txt);
+        d.select();
+        m.execCommand("copy");
+      } else {
+        var d = m.createRange();
+        var g = w.getSelection;
+        d.selectNodeContents(txt);
+        g().removeAllRanges();
+        g().addRange(d);
+        m.execCommand("copy");
+        g().removeAllRanges();
+      }
+      txt.remove();
     },
   },
 };

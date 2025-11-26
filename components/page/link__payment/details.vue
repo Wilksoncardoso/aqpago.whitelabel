@@ -161,8 +161,8 @@
             <div><icon__share__compartilhar /></div>
             <div class="label__compartilhar">Compartilhar</div>
           </div>
-          <share__compartilhar :link="body.url" :value="body.valor" />
-
+          <share__compartilhar :link="linkpayment + '/linkpay/?value=' + body.hash_id" :value="body.valor" />
+          {{ body.hash_id }}
           <v-btn
             color="primary"
             to="/painel/link_payment/create"
@@ -285,7 +285,9 @@ export default {
       return moment(); // Pega a data e hora atual
     },
     ...mapState("link", ["link__object"]),
-
+ linkpayment() {
+      return this.$store?.state?.theme?.link || null;
+    },
     getTimeRemaining() {
       const expiration = moment(
         this.body.data_vencimento + " 23:59:59",

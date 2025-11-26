@@ -3,6 +3,7 @@ export const namespaced = true;
 export const state = () => ({
   data: null,
   setform: null,
+  link:null,
 })
 
 export const mutations = {
@@ -15,6 +16,9 @@ export const mutations = {
   deleteSetform(state, objeto) {
     state.setform = null;
   },
+  salvarLink(state, string) {
+    state.link = string;
+  },
 };
 
 export const actions = {
@@ -23,6 +27,9 @@ export const actions = {
   },
   salvarSetform({ commit }, objeto) {
     commit('salvarSetform', objeto)
+  },
+   salvarLink({ commit }, string) {
+    commit('salvarLink', string)
   },
   deleteSetform({ commit }) {
     commit('deleteSetform')

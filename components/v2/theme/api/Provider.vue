@@ -1,15 +1,15 @@
 <template>
-    <div
-      class="loader_main_theme d-flex justify-center align-center"
-      v-if="loading"
-    >
-      <!-- <v-progress-circular
+  <div
+    class="loader_main_theme d-flex justify-center align-center"
+    v-if="loading"
+  >
+    <!-- <v-progress-circular
         :size="70"
         :width="7"
         color="#000000"
         indeterminate
       ></v-progress-circular> -->
-    </div>
+  </div>
 </template>
 
 <script>
@@ -23,19 +23,19 @@ export default {
       loading: true,
     };
   },
-//   watch: {
-//   data: {
-//     deep: true,
-//     handler(val) {
-//       if (val?.styles?.color?.primary) {
-//         this.CreatedColorData();
-//         this.$store.commit("theme/salvar", val);
-//       }
-//     }
-//   }
-// },
+  //   watch: {
+  //   data: {
+  //     deep: true,
+  //     handler(val) {
+  //       if (val?.styles?.color?.primary) {
+  //         this.CreatedColorData();
+  //         this.$store.commit("theme/salvar", val);
+  //       }
+  //     }
+  //   }
+  // },
   methods: {
-    ...mapActions("theme", ["salvar"]),
+    ...mapActions("theme", ["salvar", "salvarLink"]),
 
     CreatedColorData() {
       let color = this.data?.styles?.color;
@@ -91,12 +91,9 @@ export default {
 
       try {
         const response = await this.$axios.get(
-          "/public/whitelabel/theme?domain=" + this.HostName
+          "/public/whitelabel/theme?domain=" + this.HostName + "&token=none"
         );
-        console.log(response.data.body.theme_id)
-        setTimeout(() => {
-         this.GetThemeResgisted(response.data.body.theme_id);
-        }, 5000);
+        this.GetThemeResgisted(response.data.body.theme_id);
       } catch (err) {
         this.error =
           err?.response?.data?.mensagem ||
@@ -111,17 +108,20 @@ export default {
       this.loading = true;
       this.error = null;
       try {
-        const response = await this.$axios.get("/public/whitelabel/config", {
-          headers: {
-            "X-Theme-Id": hash,
-          },
-        });
+        const response = await this.$axios.get(
+          "/public/whitelabel/config?token=none",
+          {
+            headers: {
+              "X-Theme-Id": hash,
+            },
+          }
+        );
 
         this.data = response.data;
-        setTimeout(() => {
-          this.CreatedColorData();
-          this.$store.commit("theme/salvar", this.data);
-        }, 100);
+        this.CreatedColorData();
+        this.$store.commit("theme/salvar", this.data);
+        this.$store.commit("theme/salvarLink", this.data?.data?.business?.external_link?.link_payment || "https://aqbank.online/");
+
       } catch (err) {
         this.error =
           err?.response?.data?.mensagem ||

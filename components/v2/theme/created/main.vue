@@ -982,7 +982,8 @@ export default {
 
     remove_links(link) {
       if (typeof link !== "string") return link;
-      return link.replace(/^(https?:\/\/)?(www\.)?/i, "");
+
+      return link.replace(/^(https?:\/\/)?(www\.)?/i, "").replace(/\/+$/, ""); // remove 1 ou mais barras finais
     },
     // =========== VALIDAÇÃO POR STEP ===========
     validateStep(step) {

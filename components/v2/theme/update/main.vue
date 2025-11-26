@@ -212,7 +212,7 @@
             </div>
             <v-file-input
               accept="image/png, image/svg"
-              class="input_set_theme"
+              class="input_set_theme disabled"
               placeholder="ex : Background.png"
               solo
               label="Imagem esquerda background"
@@ -232,7 +232,7 @@
               solo
               disabled
               label="ex : Logotipo.png"
-              class="input_set_theme"
+              class="input_set_theme disabled"
               v-model="localFiles.logo"
               :rules="rulesStep4.logotipo"
               :hint="
@@ -430,7 +430,7 @@
               accept="image/png, image/svg"
               solo
               label="Imagem SEO"
-              class="input_set_theme"
+              class="input_set_theme disabled"
               v-model="localFiles.seoImage"
               :rules="rulesStep6.image"
               @change="onChangeSeoImage"
@@ -472,7 +472,7 @@
               accept="image/png, image/svg"
               solo
               label="Twitter image"
-              class="input_set_theme"
+              class="input_set_theme disabled"
               disabled
               v-model="localFiles.twitterImage"
               :rules="rulesStep6.twitterImage"
@@ -780,92 +780,7 @@ export default {
           },
         },
       },
-      body: {
-        id: "cef3a4f6-11d0-449e-a78f-3eb13fc5d1cc",
-        name: "Tema cef3a4",
-        slug: "tema-cef3a4",
-        status: "active",
-        primary_domain: null,
-        created_at: "2025-11-17T12:00:37.000000Z",
-        updated_at: "2025-11-21T12:34:08.000000Z",
-        config: {
-          id: "c4079fd7-09e3-4695-a418-1bd589c1b54b",
-          state: "published",
-          version: 2,
-          updated_at: "2025-11-21T12:34:08.000000Z",
-          payload: {
-            seo: {
-              title: "white label",
-              "image-url":
-                "https://apiaqpago.aqbank.com.br/public/whitelabel/assets/882becab-9a55-46cc-b9ed-2f7ba169f141",
-              description: "white label payments todos",
-              "theme-color": "#FF7E00FF",
-              "twitter-site": "@testeste",
-              "twitter-title": "white label payments",
-              "twitter-image-url":
-                "https://apiaqpago.aqbank.com.br/public/whitelabel/assets/4cfe7ab8-51e3-4a74-99da-b69246601c7f",
-              "twitter-description": "white label payments descrição",
-            },
-            data: {
-              business: {
-                name: "PROCODE",
-                email: "procodeltda@gmail.com",
-                phone: "91993373726",
-                termos: "",
-                website: "https://wilksoncardoso.com.br",
-                whatsapp: "91993373726",
-                external_link: {
-                  base_url: "https://aqpago-whitelabel.vercel.app",
-                  link_payment: "https://aqpago-link-payment.vercel.app",
-                  cobram_recorrente: "",
-                },
-              },
-              initcomp: {
-                app: false,
-                title: "white label paymentes",
-                appstore: "",
-                googlepay: "",
-                bottom_text: "",
-                description: "",
-              },
-            },
-            assets: {
-              icon: {
-                img32x32:
-                  "https://apiaqpago.aqbank.com.br/public/whitelabel/assets/6ebcd30b-a737-4bdc-8b65-5c8a3b45c489",
-                img96x96:
-                  "https://apiaqpago.aqbank.com.br/public/whitelabel/assets/6ebcd30b-a737-4bdc-8b65-5c8a3b45c489",
-                img192x192:
-                  "https://apiaqpago.aqbank.com.br/public/whitelabel/assets/6ebcd30b-a737-4bdc-8b65-5c8a3b45c489",
-                img300x300:
-                  "https://apiaqpago.aqbank.com.br/public/whitelabel/assets/6ebcd30b-a737-4bdc-8b65-5c8a3b45c489",
-                img512x512:
-                  "https://apiaqpago.aqbank.com.br/public/whitelabel/assets/6ebcd30b-a737-4bdc-8b65-5c8a3b45c489",
-              },
-              initcomp: {
-                img: "https://apiaqpago.aqbank.com.br/public/whitelabel/assets/c626eac0-4919-4946-b397-ed48d1f85b77",
-                right: true,
-              },
-              logotipe: {
-                img: "https://apiaqpago.aqbank.com.br/public/whitelabel/assets/60693e31-31c0-4503-8dcd-2f0b042c1a05",
-                size: 105,
-              },
-            },
-            styles: {
-              color: {
-                primary: "#FF6700FF",
-                secondary: "",
-                primary_op: "#FFE1CC",
-              },
-              menuleft: {
-                font: { color: "#FFFFFFFF" },
-                title: { color: "#D6D0D0FF" },
-                background: { primary: "#FFCD30FF", secondary: "#FF6700FF" },
-              },
-            },
-          },
-        },
-      },
+      body: {},
       error: "",
     };
   },
@@ -899,21 +814,21 @@ export default {
     },
   },
   created() {
-    // this.CreatedThemeID();
+    // this.UptadetThemeFormID();
     this.id = this.$route.params.id;
     this.SetForm.themeId = "";
     this.SetForm.configId = "";
-    this.VariableInitUpdate();
+    this.GetThemeId();
   },
   methods: {
     ...mapActions("theme", ["salvarSetform", "deleteSetform"]),
     VariableInitUpdate() {
-      this.SetForm.themeId = this.body.id;
-      this.SetForm.configId = this.body.config.id;
-      this.SetForm.payload.assets = this.body.config.payload.assets;
-      this.SetForm.payload.styles = this.body.config.payload.styles;
-      this.SetForm.payload.data = this.body.config.payload.data;
-      this.SetForm.payload.seo = this.body.config.payload.seo;
+      this.SetForm.themeId = this.body.theme_id;
+      this.SetForm.configId = this.body.id;
+      this.SetForm.payload.assets = this.body.payload.assets;
+      this.SetForm.payload.styles = this.body.payload.styles;
+      this.SetForm.payload.data = this.body.payload.data;
+      this.SetForm.payload.seo = this.body.payload.seo;
       this.validateStep(1);
       this.UpdateStoreSetform();
       this.updateOpacityColor(this.SetForm.payload.styles.color.primary);
@@ -1078,9 +993,9 @@ export default {
       this.validateStep(6);
     },
 
-    remove_links(link) {
+     remove_links(link) {
       if (typeof link !== "string") return link;
-      return link.replace(/^(https?:\/\/)?(www\.)?/i, "");
+      return link.replace(/^(https?:\/\/)?(www\.)?/i, "").replace(/\/+$/, "");
     },
     // =========== VALIDAÇÃO POR STEP ===========
     validateStep(step) {
@@ -1178,24 +1093,44 @@ export default {
     // =========== SUBMIT FINAL ===========
     submitForm() {
       if (this.stepValid[6] && this.stepValid[7]) {
-        this.CreatedTheme();
+        this.UptadetThemeForm();
       }
     },
 
-    async CreatedTheme() {
+    async GetThemeId() {
+      this.loading = true;
+      this.error = null;
+      try {
+        const response = await this.$axios.get(
+          "/admin/whitelabel/configs/" + this.id
+        );
+        this.body = response.data.body;
+        this.VariableInitUpdate();
+      } catch (err) {
+        this.error =
+          err?.response?.data?.mensagem ||
+          err?.response?.data?.message ||
+          err?.message ||
+          "Erro ao enviar";
+        // this.$router.push("/painel/theme");
+      } finally {
+        this.loading = false;
+      }
+    },
+
+    async UptadetThemeForm() {
       this.loading = true;
       this.error = null;
       this.progress = 0;
       const form = this.SetForm;
-
       this.remove_links(form.payload.data.business.external_link.base_url);
       this.remove_links(form.payload.data.business.external_link.link_payment);
       try {
-        const data = await this.$axios.post(
-          "/admin/whitelabel/configs",
-          this.SetForm
+        const data = await this.$axios.put(
+          "/admin/whitelabel/configs/" + form.configId,
+          form
         );
-        this.PublicThemeRegisted();
+         this.PublicThemeRegisted();
       } catch (err) {
         this.error =
           err?.response?.data?.mensagem ||
@@ -1206,7 +1141,6 @@ export default {
         this.loading = false;
       }
     },
-
     async PublicThemeRegisted() {
       this.loading = true;
       this.error = null;
@@ -1229,7 +1163,7 @@ export default {
       }
     },
 
-    async CreatedThemeID() {
+    async UptadetThemeFormID() {
       this.loading = true;
       this.error = null;
       this.progress = 0;

@@ -18,7 +18,7 @@
             /></v-btn>
           </div>
         </div>
-        <V2SellerGetSaldoMain :status="data?.status" />
+        <!-- <V2SellerGetSaldoMain :status="data?.status" /> -->
 
         <div class="d-flex align-center justify-space-between mb-2">
           <div class="d-flex primary--text">

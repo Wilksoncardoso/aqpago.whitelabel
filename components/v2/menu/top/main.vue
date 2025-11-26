@@ -282,7 +282,7 @@ export default {
       if (!Array.isArray(workspaceData)) {
         return [];
       }
-      return workspaceData.filter((o) => o.status === "active");
+      return workspaceData;
     },
     UserStage() {
       return this.$store?.state?.user?.user__data || null;
