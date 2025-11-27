@@ -5,7 +5,7 @@
     <!-- FORM PRINCIPAL -->
     <div class="cards_created_theme pa-4 white">
       <div class="d-flex justify-space-between">
-        <h3 class="primary--text">Cadastro de Theme</h3>
+        <h3 class="primary--text">Editar de Thema</h3>
         <v-btn color="primary" text class="pa-2" to="/painel/theme"
           >Voltar</v-btn
         >

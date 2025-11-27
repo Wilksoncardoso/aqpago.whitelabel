@@ -130,7 +130,7 @@
         <v-divider class="divider__comprovante"></v-divider>
         <div class="text-center" style="margin-bottom: 48px">
           <logo__aqpago />
-          <p>ID de transação</p>
+          <p>ID de transação </p>
           <v-tooltip bottom>
             <template v-slot:activator="{ on, attrs }">
               <div
@@ -259,6 +259,7 @@ export default {
     },
   },
   computed: {
+    
     valor__() {
       // Multiplica o valor por 100 para obter centavos
       const centavos = this.body?.amount * 1;

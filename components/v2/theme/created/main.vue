@@ -251,7 +251,6 @@
               </h5>
               <div>
                 <v-btn
-                  color="primary"
                   class="pa-1"
                   icon
                   @click="
@@ -263,10 +262,9 @@
                   "
                   :disabled="SetForm.payload.assets.logotipe.size <= 50"
                 >
-                  <i class="ri-subtract-fill white--text"></i>
+                  <i class="ri-subtract-fill primary--text"></i>
                 </v-btn>
                 <v-btn
-                  color="primary"
                   class="pa-1"
                   icon
                   @click="
@@ -278,7 +276,7 @@
                   "
                   :disabled="SetForm.payload.assets.logotipe.size >= 296"
                 >
-                  <i class="ri-add-line white--text"></i>
+                  <i class="ri-add-line primary--text"></i>
                 </v-btn>
               </div>
             </div>
@@ -733,14 +731,14 @@ export default {
             },
             menuleft: {
               background: {
-                primary: "",
-                secondary: "",
+                primary: "#000000",
+                secondary: "#000000",
               },
               font: {
-                color: "",
+                color: "#ffffff",
               },
               title: {
-                color: "",
+                color: "#b3b3b3",
               },
             },
           },
@@ -812,7 +810,7 @@ export default {
     },
   },
   created() {
-    this.CreatedThemeID();
+    this.CreatedThemeIDRegited();
     this.SetForm.themeId = "";
     this.SetForm.configId = "";
   },
@@ -1098,7 +1096,8 @@ export default {
           "/admin/whitelabel/configs",
           this.SetForm
         );
-        this.PublicThemeRegisted();
+        this.PublicThemeRegisted(data.data.body.id, data.data.body.theme_id);
+        // this.$router.push("/painel/theme?created=true&configId="+this.SetForm.configId+"&theme="+this.SetForm.themeId);
       } catch (err) {
         this.error =
           err?.response?.data?.mensagem ||
@@ -1109,16 +1108,15 @@ export default {
         this.loading = false;
       }
     },
-
-    async PublicThemeRegisted() {
+    async PublicThemeRegisted(id, themeId) {
       this.loading = true;
       this.error = null;
       this.progress = 0;
 
       try {
         const data = await this.$axios.post(
-          "/admin/whitelabel/configs/" + this.SetForm.configId + "/publish",
-          { themeId: this.SetForm.themeId }
+          "/admin/whitelabel/configs/" + id + "/publish",
+          { themeId: themeId}
         );
         this.$router.push("/painel/theme");
       } catch (err) {
@@ -1132,7 +1130,8 @@ export default {
       }
     },
 
-    async CreatedThemeID() {
+
+    async CreatedThemeIDRegited() {
       this.loading = true;
       this.error = null;
       this.progress = 0;

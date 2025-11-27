@@ -29,6 +29,7 @@
             :ListThemes="ListThemes"
             :ArrayListThemes="ArrayListThemes"
             :page="page"
+            :loadingList="loading"
             @update:PageChange="Change_Setpage"
             v-if="ArrayListThemes.length > 0"
           />

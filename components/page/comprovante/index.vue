@@ -182,7 +182,7 @@
         </div>
         <v-divider class="divider__comprovante"></v-divider>
         <div class="text-center" style="margin-bottom: 48px">
-          <logo__aqpago />
+          <img :src="theme?.assets?.logotipe?.img" alt="Logotipo" width="250">
           <p>ID de transação</p>
           <v-tooltip bottom>
             <template v-slot:activator="{ on, attrs }">
@@ -656,6 +656,9 @@ export default {
     },
   },
   computed: {
+     theme() {
+      return this.$store?.state?.theme?.data || null;
+    },
     pagador() {
       if (
         !this.data__user?.conta.empresa?.razao_social ||

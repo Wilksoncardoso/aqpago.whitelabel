@@ -181,12 +181,18 @@ export default {
       type: Object,
       default: () => ({}),
     },
+    loadingList: {
+      type: Boolean,
+    },
   },
+
   data() {
     return {
       error: "",
+      loading: false,
     };
   },
+
   methods: {
     remove_links(link) {
       if (typeof link !== "string") return link;
@@ -212,7 +218,6 @@ export default {
       }
       this.$toast.error("Você não pode remover, o último tema.");
     },
-
     async PublishItemTheme(id, themeId) {
       this.loading = true;
       this.error = null;
@@ -232,7 +237,34 @@ export default {
         this.loading = false;
       }
     },
+    async checkAndPublishDefaultTheme() {
+      if (
+        !Array.isArray(this.ArrayListThemes) ||
+        !this.ArrayListThemes.length
+      ) {
+        return;
+      }
 
+      // verifica se já existe tema ativo
+      const hasActive = this.ArrayListThemes.some(
+        (theme) => theme.status === "active"
+      );
+
+      if (hasActive) return;
+
+      // se não tiver active, publica o primeiro da lista
+      const firstTheme = this.ArrayListThemes[0];
+
+      const configId = firstTheme?.config?.id;
+      const themeId = firstTheme?.id;
+
+      if (!configId || !themeId) {
+        console.error("configId ou themeId não encontrados no primeiro tema.");
+        return;
+      }
+
+      await this.PublishItemTheme(configId, themeId);
+    },
     GetList(value) {
       this.$emit("update:PageChange", { page: value }); // set
       const element = document.getElementById("ListaExtrato");
@@ -241,6 +273,21 @@ export default {
       }
     },
   },
+
+watch: {
+  loadingList: {
+    immediate: true, // 👈 roda uma vez na criação com o valor atual
+    handler(newVal) {
+      if (newVal === false) {
+        this.$nextTick(() => {
+          if (this.ArrayListThemes && this.ArrayListThemes.length > 0) {
+            this.checkAndPublishDefaultTheme();
+          }
+        });
+      }
+    },
+  },
+},
 };
 </script>
 
