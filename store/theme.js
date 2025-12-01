@@ -4,6 +4,7 @@ export const state = () => ({
   data: null,
   setform: null,
   link:null,
+  id_theme:null,
 })
 
 export const mutations = {
@@ -18,6 +19,9 @@ export const mutations = {
   },
   salvarLink(state, string) {
     state.link = string;
+  },
+  salvarIdTheme(state, id) {
+    state.id_theme = id;
   },
 };
 
@@ -34,4 +38,8 @@ export const actions = {
   deleteSetform({ commit }) {
     commit('deleteSetform')
   },
+    salvarIdTheme({ commit }, id) {
+    commit('salvarIdTheme', id);
+  },
+
 }

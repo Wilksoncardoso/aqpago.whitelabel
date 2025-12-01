@@ -6,13 +6,7 @@
     <div class="cards_created_theme pa-4 white">
       <div class="d-flex justify-space-between">
         <h3 class="primary--text">Cadastro de Theme</h3>
-        <v-btn
-          color="primary"
-          text
-          class="pa-2"
-          @click="RemoverItemTheme(SetForm.themeId)"
-          >Voltar</v-btn
-        >
+        <v-btn color="primary" text class="pa-2" @click="RemoverItemTheme(SetForm.themeId)">Voltar</v-btn>
       </div>
       <v-stepper v-model="page" vertical>
         <!-- STEP 1 - ASSETS & ICONS -->
@@ -27,38 +21,18 @@
 
             <!-- Favicon -->
             <div class="label">1 - Favicon <span>(png ou svg)</span></div>
-            <v-file-input
-              accept="image/png, image/svg"
-              placeholder="ex : Navbar.png"
-              solo
-              label="ex : Navbar.png"
-              class="input_set_theme"
-              v-model="localFiles.favicon"
-              :rules="rulesStep1.favicon"
-              hint="Favicon será renderizado em 512px (gerando derivativos)"
-              persistent-hint
-              @change="onChangeFavicon"
-            ></v-file-input>
+            <v-file-input accept="image/png, image/svg" placeholder="ex : Navbar.png" solo label="ex : Navbar.png"
+              class="input_set_theme" v-model="localFiles.favicon" :rules="rulesStep1.favicon"
+              hint="Favicon será renderizado em 512px (gerando derivativos)" persistent-hint
+              @change="onChangeFavicon"></v-file-input>
 
             <!-- Theme Color -->
             <div class="label">2 - Cor de navegador</div>
-            <v-color-picker
-              v-model="SetForm.payload.seo['theme-color']"
-              class="mx-auto"
-              dot-size="3"
-              hide-mode-switch
-              mode="hexa"
-              swatches-max-height="100"
-              @input="validateStep(1)"
-            ></v-color-picker>
+            <v-color-picker v-model="SetForm.payload.seo['theme-color']" class="mx-auto" dot-size="3" hide-mode-switch
+              mode="hexa" swatches-max-height="100" @input="validateStep(1)"></v-color-picker>
           </v-card>
 
-          <v-btn
-            color="primary"
-            class="pa-2"
-            @click="page = 2"
-            :disabled="!stepValid[1]"
-          >
+          <v-btn color="primary" class="pa-2" @click="page = 2" :disabled="!stepValid[1]">
             Continue
           </v-btn>
         </v-stepper-content>
@@ -72,41 +46,22 @@
             <div class="d-flex justify-space-between">
               <div>
                 <div class="label">1 - Cor primary</div>
-                <v-color-picker
-                  v-model="SetForm.payload.styles.color.primary"
-                  @input="
-                    updateOpacityColor($event);
-                    validateStep(2);
-                  "
-                  dot-size="3"
-                  hide-mode-switch
-                  mode="hexa"
-                  swatches-max-height="100"
-                ></v-color-picker>
+                <v-color-picker v-model="SetForm.payload.styles.color.primary" @input="
+                  updateOpacityColor($event);
+                validateStep(2);
+                " dot-size="3" hide-mode-switch mode="hexa" swatches-max-height="100"></v-color-picker>
               </div>
               <div>
                 <div class="label">2 - Cor Opacity</div>
-                <v-color-picker
-                  v-model="SetForm.payload.styles.color.primary_op"
-                  @input="
-                    updatePrimaryOp($event);
-                    validateStep(2);
-                  "
-                  dot-size="3"
-                  hide-mode-switch
-                  mode="hexa"
-                  swatches-max-height="100"
-                ></v-color-picker>
+                <v-color-picker v-model="SetForm.payload.styles.color.primary_op" @input="
+                  updatePrimaryOp($event);
+                validateStep(2);
+                " dot-size="3" hide-mode-switch mode="hexa" swatches-max-height="100"></v-color-picker>
               </div>
             </div>
           </v-card>
 
-          <v-btn
-            class="pa-2"
-            color="primary"
-            @click="page = 3"
-            :disabled="!stepValid[2]"
-          >
+          <v-btn class="pa-2" color="primary" @click="page = 3" :disabled="!stepValid[2]">
             Continue
           </v-btn>
           <v-btn class="pa-2" text @click="page -= 1">Voltar</v-btn>
@@ -123,32 +78,19 @@
             <div class="d-flex justify-space-between">
               <div>
                 <div class="label">1 - Cor Background Menu</div>
-                <v-color-picker
-                  v-model="SetForm.payload.styles.menuleft.background.primary"
-                  class="mx-auto"
-                  mode="hexa"
-                  hide-mode-switch
-                  swatches-max-height="100"
-                  @input="
+                <v-color-picker v-model="SetForm.payload.styles.menuleft.background.primary" class="mx-auto" mode="hexa"
+                  hide-mode-switch swatches-max-height="100" @input="
                     updateBackgroundFist($event);
-                    validateStep(3);
-                  "
-                ></v-color-picker>
+                  validateStep(3);
+                  "></v-color-picker>
               </div>
               <div>
                 <div class="label">2 - Cor Background Menu</div>
-                <v-color-picker
-                  v-model="SetForm.payload.styles.menuleft.background.secondary"
-                  class="mx-auto"
-                  dot-size="3"
-                  hide-mode-switch
-                  mode="hexa"
-                  swatches-max-height="100"
-                  @input="
+                <v-color-picker v-model="SetForm.payload.styles.menuleft.background.secondary" class="mx-auto"
+                  dot-size="3" hide-mode-switch mode="hexa" swatches-max-height="100" @input="
                     updateBackgroundEnd($event);
-                    validateStep(3);
-                  "
-                ></v-color-picker>
+                  validateStep(3);
+                  "></v-color-picker>
               </div>
             </div>
 
@@ -156,43 +98,24 @@
             <div class="d-flex justify-space-between">
               <div>
                 <div class="label">Titulo do menu</div>
-                <v-color-picker
-                  v-model="SetForm.payload.styles.menuleft.title.color"
-                  class="mx-auto"
-                  dot-size="3"
-                  hide-mode-switch
-                  mode="hexa"
-                  swatches-max-height="100"
-                  @input="
+                <v-color-picker v-model="SetForm.payload.styles.menuleft.title.color" class="mx-auto" dot-size="3"
+                  hide-mode-switch mode="hexa" swatches-max-height="100" @input="
                     updateColorTitleMenu($event);
-                    validateStep(3);
-                  "
-                ></v-color-picker>
+                  validateStep(3);
+                  "></v-color-picker>
               </div>
               <div>
                 <div class="label">Item de menu</div>
-                <v-color-picker
-                  v-model="SetForm.payload.styles.menuleft.font.color"
-                  class="mx-auto"
-                  dot-size="3"
-                  hide-mode-switch
-                  mode="hexa"
-                  swatches-max-height="100"
-                  @input="
+                <v-color-picker v-model="SetForm.payload.styles.menuleft.font.color" class="mx-auto" dot-size="3"
+                  hide-mode-switch mode="hexa" swatches-max-height="100" @input="
                     updateColorItemMenu($event);
-                    validateStep(3);
-                  "
-                ></v-color-picker>
+                  validateStep(3);
+                  "></v-color-picker>
               </div>
             </div>
           </v-card>
 
-          <v-btn
-            class="pa-2"
-            color="primary"
-            @click="page = 4"
-            :disabled="!stepValid[3]"
-          >
+          <v-btn class="pa-2" color="primary" @click="page = 4" :disabled="!stepValid[3]">
             Continue
           </v-btn>
           <v-btn class="pa-2" text @click="page -= 1">Voltar</v-btn>
@@ -211,37 +134,19 @@
             <div class="label">
               1 - Imagem esquerda background <span>(png ou jpeg)</span>
             </div>
-            <v-file-input
-              accept="image/png, image/svg"
-              class="input_set_theme"
-              placeholder="ex : Background.png"
-              solo
-              label="Imagem esquerda background"
-              v-model="localFiles.initBg"
-              :rules="rulesStep4.image"
-              @change="onChangeInitImg"
-            ></v-file-input>
+            <v-file-input accept="image/png, image/svg" class="input_set_theme" placeholder="ex : Background.png" solo
+              label="Imagem esquerda background" v-model="localFiles.initBg" :rules="rulesStep4.image"
+              @change="onChangeInitImg"></v-file-input>
 
             <!-- Logotipo -->
             <div class="label">
               2 - Logotipo <span>(svg, png ou jpeg)</span>
             </div>
-            <v-file-input
-              accept="image/png, image/svg"
-              placeholder="ex : Logotipo.png"
-              solo
-              label="ex : Logotipo.png"
-              class="input_set_theme"
-              v-model="localFiles.logo"
-              :rules="rulesStep4.logotipo"
-              :hint="
-                'Logo será renderizada no tamanho ' +
+            <v-file-input accept="image/png, image/svg" placeholder="ex : Logotipo.png" solo label="ex : Logotipo.png"
+              class="input_set_theme" v-model="localFiles.logo" :rules="rulesStep4.logotipo" :hint="'Logo será renderizada no tamanho ' +
                 SetForm.payload.assets.logotipe.size +
                 'px'
-              "
-              persistent-hint
-              @change="onChangeLogo"
-            ></v-file-input>
+                " persistent-hint @change="onChangeLogo"></v-file-input>
 
             <!-- Controle tamanho logo -->
             <div class="d-flex justify-space-between align-center mt-2">
@@ -250,76 +155,47 @@
                 <span>{{ SetForm.payload.assets.logotipe.size + "px" }}</span>
               </h5>
               <div>
-                <v-btn
-                  class="pa-1"
-                  icon
-                  @click="
-                    SetForm.payload.assets.logotipe.size = Math.max(
-                      50,
-                      SetForm.payload.assets.logotipe.size - 20
-                    );
-                    UpdateStoreSetform();
-                  "
-                  :disabled="SetForm.payload.assets.logotipe.size <= 50"
-                >
+                <v-btn class="pa-1" icon @click="
+                  SetForm.payload.assets.logotipe.size = Math.max(
+                    50,
+                    SetForm.payload.assets.logotipe.size - 20
+                  );
+                UpdateStoreSetform();
+                " :disabled="SetForm.payload.assets.logotipe.size <= 50">
                   <i class="ri-subtract-fill primary--text"></i>
                 </v-btn>
-                <v-btn
-                  class="pa-1"
-                  icon
-                  @click="
-                    SetForm.payload.assets.logotipe.size = Math.min(
-                      296,
-                      SetForm.payload.assets.logotipe.size + 20
-                    );
-                    UpdateStoreSetform();
-                  "
-                  :disabled="SetForm.payload.assets.logotipe.size >= 296"
-                >
+                <v-btn class="pa-1" icon @click="
+                  SetForm.payload.assets.logotipe.size = Math.min(
+                    296,
+                    SetForm.payload.assets.logotipe.size + 20
+                  );
+                UpdateStoreSetform();
+                " :disabled="SetForm.payload.assets.logotipe.size >= 296">
                   <i class="ri-add-line primary--text"></i>
                 </v-btn>
               </div>
             </div>
 
-            <v-slider
-              v-model="SetForm.payload.assets.logotipe.size"
-              min="50"
-              max="296"
-              @change="UpdateStoreSetform"
-            ></v-slider>
+            <v-slider v-model="SetForm.payload.assets.logotipe.size" min="50" max="296"
+              @change="UpdateStoreSetform"></v-slider>
 
             <!-- Textos -->
             <div class="label">3 - Título</div>
-            <v-text-field
-              solo
-              label="Digite o Título"
-              class="input_set_theme"
-              v-model="SetForm.payload.data.initcomp.title"
-              @input="
+            <v-text-field solo label="Digite o Título" class="input_set_theme"
+              v-model="SetForm.payload.data.initcomp.title" @input="
                 validateStep(4);
-                UpdateStoreSetform();
-              "
-            ></v-text-field>
+              UpdateStoreSetform();
+              "></v-text-field>
 
             <div class="label">4 - Descrição</div>
-            <v-text-field
-              solo
-              label="Digite sua Descrição"
-              class="input_set_theme"
-              v-model="SetForm.payload.data.initcomp.description"
-              @input="
+            <v-text-field solo label="Digite sua Descrição" class="input_set_theme"
+              v-model="SetForm.payload.data.initcomp.description" @input="
                 validateStep(4);
-                UpdateStoreSetform();
-              "
-            ></v-text-field>
+              UpdateStoreSetform();
+              "></v-text-field>
           </v-card>
 
-          <v-btn
-            class="pa-2"
-            color="primary"
-            @click="page = 5"
-            :disabled="!stepValid[4]"
-          >
+          <v-btn class="pa-2" color="primary" @click="page = 5" :disabled="!stepValid[4]">
             Continue
           </v-btn>
           <v-btn class="pa-2" text @click="page -= 1">Voltar</v-btn>
@@ -333,65 +209,27 @@
         <v-stepper-content step="5">
           <v-card class="pa-5 created_theme">
             <div class="label">1 - Nome</div>
-            <v-text-field
-              solo
-              label="Digite nome fantasia"
-              v-model="SetForm.payload.data.business.name"
-              class="input_set_theme"
-              :rules="rulesStep5.name"
-              disabled
-              @input="validateStep(5)"
-            ></v-text-field>
+            <v-text-field solo label="Digite nome fantasia" v-model="SetForm.payload.data.business.name"
+              class="input_set_theme" :rules="rulesStep5.name" disabled @input="validateStep(5)"></v-text-field>
 
             <div class="label">2 - E-mail</div>
-            <v-text-field
-              solo
-              label="Digite o seu e-mail"
-              v-model="SetForm.payload.data.business.email"
-              class="input_set_theme"
-              :rules="rulesStep5.email"
-              disabled
-              @input="validateStep(5)"
-            ></v-text-field>
+            <v-text-field solo label="Digite o seu e-mail" v-model="SetForm.payload.data.business.email"
+              class="input_set_theme" :rules="rulesStep5.email" disabled @input="validateStep(5)"></v-text-field>
 
             <div class="label">3 - Telefone</div>
-            <v-text-field
-              solo
-              label="Digite o seu Telefone"
-              v-model="SetForm.payload.data.business.phone"
-              class="input_set_theme"
-              :rules="rulesStep5.phone"
-              disabled
-              @input="validateStep(5)"
-            ></v-text-field>
+            <v-text-field solo label="Digite o seu Telefone" v-model="SetForm.payload.data.business.phone"
+              class="input_set_theme" :rules="rulesStep5.phone" disabled @input="validateStep(5)"></v-text-field>
 
             <div class="label">4 - Whatsapp</div>
-            <v-text-field
-              solo
-              label="Digite o seu Whatsapp"
-              v-model="SetForm.payload.data.business.whatsapp"
-              class="input_set_theme"
-              :rules="rulesStep5.whatsapp"
-              @input="validateStep(5)"
-            ></v-text-field>
+            <v-text-field solo label="Digite o seu Whatsapp" v-model="SetForm.payload.data.business.whatsapp"
+              class="input_set_theme" :rules="rulesStep5.whatsapp" @input="validateStep(5)"></v-text-field>
 
             <div class="label">5 - Website</div>
-            <v-text-field
-              solo
-              label="Digite o site"
-              v-model="SetForm.payload.data.business.website"
-              class="input_set_theme"
-              :rules="rulesStep5.website"
-              @input="validateStep(5)"
-            ></v-text-field>
+            <v-text-field solo label="Digite o site" v-model="SetForm.payload.data.business.website"
+              class="input_set_theme" :rules="rulesStep5.website" @input="validateStep(5)"></v-text-field>
           </v-card>
 
-          <v-btn
-            class="pa-2"
-            color="primary"
-            @click="page = 6"
-            :disabled="!stepValid[5]"
-          >
+          <v-btn class="pa-2" color="primary" @click="page = 6" :disabled="!stepValid[5]">
             Continue
           </v-btn>
           <v-btn class="pa-2" text @click="page -= 1">Voltar</v-btn>
@@ -403,84 +241,40 @@
         <v-stepper-content step="6">
           <v-card class="pa-5 created_theme">
             <div class="label">1 - Título</div>
-            <v-text-field
-              solo
-              label="Título de SEO"
-              class="input_set_theme"
-              :rules="rulesStep6.title"
-              v-model="SetForm.payload.seo.title"
-              @input="validateStep(6)"
-            ></v-text-field>
+            <v-text-field solo label="Título de SEO" class="input_set_theme" :rules="rulesStep6.title"
+              v-model="SetForm.payload.seo.title" @input="validateStep(6)"></v-text-field>
 
             <div class="label">2 - Descrição</div>
-            <v-text-field
-              solo
-              label="Descrição do SEO"
-              class="input_set_theme"
-              v-model="SetForm.payload.seo.description"
-              :rules="rulesStep6.description"
-              @input="validateStep(6)"
-            ></v-text-field>
+            <v-text-field solo label="Descrição do SEO" class="input_set_theme"
+              v-model="SetForm.payload.seo.description" :rules="rulesStep6.description"
+              @input="validateStep(6)"></v-text-field>
 
             <div class="label">3 - Imagem</div>
-            <v-file-input
-              accept="image/png, image/svg"
-              solo
-              label="Imagem SEO"
-              class="input_set_theme"
-              v-model="localFiles.seoImage"
-              :rules="rulesStep6.image"
-              @change="onChangeSeoImage"
-            ></v-file-input>
+            <v-file-input accept="image/png, image/svg" solo label="Imagem SEO" class="input_set_theme"
+              v-model="localFiles.seoImage" :rules="rulesStep6.image" @change="onChangeSeoImage"></v-file-input>
 
             <div class="label">4 - Twitter-site</div>
-            <v-text-field
-              solo
-              label="Digite o Twitter-site"
-              class="input_set_theme"
-              v-model="SetForm.payload.seo['twitter-site']"
-              :rules="rulesStep6.twitterSite"
-              @input="validateStep(6)"
-            ></v-text-field>
+            <v-text-field solo label="Digite o Twitter-site" class="input_set_theme"
+              v-model="SetForm.payload.seo['twitter-site']" :rules="rulesStep6.twitterSite"
+              @input="validateStep(6)"></v-text-field>
 
             <div class="label">5 - Twitter-title</div>
-            <v-text-field
-              solo
-              label="Digite o Twitter-title"
-              class="input_set_theme"
-              v-model="SetForm.payload.seo['twitter-title']"
-              :rules="rulesStep6.twitterTitle"
-              @input="validateStep(6)"
-            ></v-text-field>
+            <v-text-field solo label="Digite o Twitter-title" class="input_set_theme"
+              v-model="SetForm.payload.seo['twitter-title']" :rules="rulesStep6.twitterTitle"
+              @input="validateStep(6)"></v-text-field>
 
             <div class="label">6 - Twitter-descrição</div>
-            <v-text-field
-              solo
-              label="Digite o Twitter-descrição"
-              class="input_set_theme"
-              v-model="SetForm.payload.seo['twitter-description']"
-              :rules="rulesStep6.twitterDescription"
-              @input="validateStep(6)"
-            ></v-text-field>
+            <v-text-field solo label="Digite o Twitter-descrição" class="input_set_theme"
+              v-model="SetForm.payload.seo['twitter-description']" :rules="rulesStep6.twitterDescription"
+              @input="validateStep(6)"></v-text-field>
 
             <div class="label">7 - Twitter-img</div>
-            <v-file-input
-              accept="image/png, image/svg"
-              solo
-              label="Twitter image"
-              class="input_set_theme"
-              v-model="localFiles.twitterImage"
-              :rules="rulesStep6.twitterImage"
-              @change="onChangeTwitterImage"
-            ></v-file-input>
+            <v-file-input accept="image/png, image/svg" solo label="Twitter image" class="input_set_theme"
+              v-model="localFiles.twitterImage" :rules="rulesStep6.twitterImage"
+              @change="onChangeTwitterImage"></v-file-input>
           </v-card>
 
-          <v-btn
-            class="pa-2"
-            color="primary"
-            @click="page = 7"
-            :disabled="!stepValid[6]"
-          >
+          <v-btn class="pa-2" color="primary" @click="page = 7" :disabled="!stepValid[6]">
             Continue
           </v-btn>
           <v-btn class="pa-2" text @click="page -= 1">Voltar</v-btn>
@@ -492,68 +286,33 @@
         <v-stepper-content step="7">
           <v-card class="pa-5 created_theme">
             <div class="label">1 - Você tem app?</div>
-            <v-switch
-              class="mt-0 mb-2"
-              v-model="SetForm.payload.data.initcomp.app"
-              :label="
-                SetForm.payload.data.initcomp.app ? 'Eu tenho' : 'Não há app'
-              "
-              color="primary"
-              hide-details
-              @change="validateStep(7)"
-            ></v-switch>
+            <v-switch class="mt-0 mb-2" v-model="SetForm.payload.data.initcomp.app" :label="SetForm.payload.data.initcomp.app ? 'Eu tenho' : 'Não há app'
+              " color="primary" hide-details @change="validateStep(7)"></v-switch>
 
             <div v-if="SetForm.payload.data.initcomp.app">
               <div class="label">2 - Descrição de app</div>
-              <v-text-field
-                solo
-                label="Digite descrição de app"
-                class="input_set_theme"
-                :rules="rulesStep7.bottom_text"
-                v-model="SetForm.payload.data.initcomp.bottom_text"
-                @input="validateStep(7)"
-              ></v-text-field>
+              <v-text-field solo label="Digite descrição de app" class="input_set_theme" :rules="rulesStep7.bottom_text"
+                v-model="SetForm.payload.data.initcomp.bottom_text" @input="validateStep(7)"></v-text-field>
 
               <div class="label">3 - GooglePlay</div>
-              <v-text-field
-                solo
-                label="Link do GooglePlay"
-                class="input_set_theme"
-                v-model="SetForm.payload.data.initcomp.googlepay"
-              ></v-text-field>
+              <v-text-field solo label="Link do GooglePlay" class="input_set_theme"
+                v-model="SetForm.payload.data.initcomp.googlepay"></v-text-field>
 
               <div class="label">4 - AppStore</div>
-              <v-text-field
-                solo
-                label="Link do AppStore"
-                class="input_set_theme"
-                v-model="SetForm.payload.data.initcomp.appstore"
-              ></v-text-field>
+              <v-text-field solo label="Link do AppStore" class="input_set_theme"
+                v-model="SetForm.payload.data.initcomp.appstore"></v-text-field>
             </div>
 
             <div class="label">Dominio da sua aplicação?</div>
-            <v-text-field
-              solo
-              label="ex: aqpago.app"
-              class="input_set_theme"
-              v-model="SetForm.payload.data.business.external_link.base_url"
-            ></v-text-field>
+            <v-text-field solo label="ex: aqpago.app" class="input_set_theme"
+              v-model="SetForm.payload.data.business.external_link.base_url"></v-text-field>
 
             <div class="label">Dominio do seu link de pagamento?</div>
-            <v-text-field
-              solo
-              label="ex: link.aqpago.app"
-              class="input_set_theme"
-              v-model="SetForm.payload.data.business.external_link.link_payment"
-            ></v-text-field>
+            <v-text-field solo label="ex: link.aqpago.app" class="input_set_theme"
+              v-model="SetForm.payload.data.business.external_link.link_payment"></v-text-field>
           </v-card>
 
-          <v-btn
-            class="pa-2"
-            color="primary"
-            @click="submitForm"
-            :disabled="!stepValid[7]"
-          >
+          <v-btn class="pa-2" color="primary" @click="submitForm" :disabled="!stepValid[7]">
             Finalizar
           </v-btn>
           <v-btn class="pa-2" text @click="page -= 1">Voltar</v-btn>
@@ -568,13 +327,9 @@
     <div class="cards_created_preview">
       <!-- <v-btn @click="DeleteStoreSetform()">teste</v-btn> -->
 
-      <V2ThemeCreatedPreviewMain
-        :SetForm="SetForm"
-        :page="page"
-        v-if="page === 1 || page === 2"
-      />
+      <V2ThemeCreatedPreviewMain :SetForm="SetForm" :page="page" v-show="page === 1 || page === 2" />
 
-      <div class="comppreviewright" v-if="page === 4 || page === 7">
+      <div class="comppreviewright" v-show="page === 4 || page === 7">
         <PageLoginLeftComponente :SetForm="SetForm" />
       </div>
     </div>
@@ -841,89 +596,113 @@ export default {
     },
 
     // =========== UPLOAD GENÉRICO ===========
-    async uploadAsset(key, file) {
-      if (!file) return;
+   addCacheBust(url) {
+    if (!url) return url;
+    const sep = url.includes("?") ? "&" : "?";
+    return `${url}${sep}t=${Date.now()}`;
+  },
 
-      if (!this.SetForm.themeId || !this.SetForm.configId) {
-        this.error = "themeId/configId não encontrados para upload de assets.";
-        return;
-      }
+  async uploadAsset(key, file) {
+    if (!file) return;
 
-      const fd = new FormData();
-      fd.append("themeId", this.SetForm.themeId);
-      fd.append("configId", this.SetForm.configId);
-      fd.append("file", file);
+    if (!this.SetForm.themeId || !this.SetForm.configId) {
+      this.error = "themeId/configId não encontrados para upload de assets.";
+      return;
+    }
 
-      try {
-        this.loading = true;
-        this.error = null;
+    const fd = new FormData();
+    fd.append("themeId", this.SetForm.themeId);
+    fd.append("configId", this.SetForm.configId);
+    fd.append("file", file);
 
-        const { data } = await this.$axios.post(
-          `/admin/whitelabel/assets/upload?key=${encodeURIComponent(key)}`,
-          fd,
-          {
-            headers: { "Content-Type": "multipart/form-data" },
-            onUploadProgress: (e) => {
-              if (e.total) {
-                this.progress = Math.round((e.loaded * 100) / e.total);
-              }
-            },
-          }
-        );
+    try {
+      this.loading = true;
+      this.error = null;
 
-        // Pega a URL padrão do novo padrão de resposta
-        const urlFromBody = data?.body?.urls?.url;
+      const { data } = await this.$axios.post(
+        `/admin/whitelabel/assets/upload?key=${encodeURIComponent(key)}`,
+        fd,
+        {
+          headers: { "Content-Type": "multipart/form-data" },
+          onUploadProgress: (e) => {
+            if (e.total) {
+              this.progress = Math.round((e.loaded * 100) / e.total);
+            }
+          },
+        }
+      );
 
-        if (urlFromBody) {
-          // Usa a key enviada na requisição para setar no SetForm
-          this.setAssetUrlByKey(key, urlFromBody);
+      const urlsObj = data?.body?.urls || data?.urls || null;
+      const singleUrl = data?.body?.url || data?.url || null;
+
+      console.log(
+        "uploadAsset key=",
+        key,
+        "urlsObj=",
+        urlsObj,
+        "singleUrl=",
+        singleUrl
+      );
+
+      let finalUrl = null;
+
+      // 1) Caso: body.urls é um objeto (ex: { url: 'https://...' } ou { 'assets.icon.img512x512': 'https://...' })
+      if (urlsObj && typeof urlsObj === "object") {
+        if (urlsObj.url) {
+          // formato { urls: { url: 'https://...' } }
+          finalUrl = urlsObj.url;
+        } else if (urlsObj[key]) {
+          // formato { urls: { 'assets.initcomp.img': 'https://...' } }
+          finalUrl = urlsObj[key];
         } else {
-          // Fallback defensivo se um dia voltar com outro formato
-          const urls = data?.body?.urls || data?.urls;
-          if (urls && typeof urls === "object") {
-            Object.keys(urls).forEach((assetKey) => {
-              this.setAssetUrlByKey(assetKey, urls[assetKey]);
-            });
-          } else if (data?.body?.url || data?.url) {
-            this.setAssetUrlByKey(key, data.body?.url || data.url);
-          }
+          // fallback: pega a primeira key do objeto
+          const firstKey = Object.keys(urlsObj)[0];
+          finalUrl = urlsObj[firstKey];
         }
+      }
+      // 2) Caso: veio só uma URL simples em body.url ou data.url (STRING)
+      else if (singleUrl) {
+        finalUrl = singleUrl;
+      }
 
+      if (finalUrl) {
+        this.setAssetUrlByKey(key, this.addCacheBust(finalUrl));
         this.UpdateStoreSetform();
-      } catch (err) {
-        this.error =
-          err?.response?.data?.mensagem ||
-          err?.response?.data?.message ||
-          err?.message ||
-          "Erro ao enviar arquivo";
-        this.$toast.error(this.error);
-      } finally {
-        this.loading = false;
-        this.progress = 0;
+      } else {
+        console.warn("Nenhuma URL encontrada na resposta do upload", data);
       }
-    },
+    } catch (err) {
+      this.error =
+        err?.response?.data?.mensagem ||
+        err?.response?.data?.message ||
+        err?.message ||
+        "Erro ao enviar arquivo";
+      this.$toast.error(this.error);
+    } finally {
+      this.loading = false;
+      this.progress = 0;
+    }
+  },
 
-    setAssetUrlByKey(assetKey, url) {
-      if (!this.SetForm) return;
+  setAssetUrlByKey(assetKey, url) {
+    if (!this.SetForm) return;
 
-      // Se seus assets ficam dentro de payload; ajuste se for direto no SetForm
-      const root = this.SetForm.payload || this.SetForm;
+    const root = this.SetForm.payload || this.SetForm;
 
-      const parts = assetKey.split(".");
-      let target = root;
+    const parts = assetKey.split(".");
+    let target = root;
 
-      for (let i = 0; i < parts.length - 1; i++) {
-        const p = parts[i];
-        if (!target[p]) {
-          this.$set(target, p, {});
-        }
-        target = target[p];
+    for (let i = 0; i < parts.length - 1; i++) {
+      const p = parts[i];
+      if (!target[p]) {
+        this.$set(target, p, {});
       }
+      target = target[p];
+    }
 
-      const lastKey = parts[parts.length - 1];
-      this.$set(target, lastKey, url);
-    },
-
+    const lastKey = parts[parts.length - 1];
+    this.$set(target, lastKey, url);
+  },
     // =========== HANDLERS FILE INPUTS ===========
     async onChangeFavicon(file) {
       if (!file) {
@@ -1116,7 +895,7 @@ export default {
       try {
         const data = await this.$axios.post(
           "/admin/whitelabel/configs/" + id + "/publish",
-          { themeId: themeId}
+          { themeId: themeId }
         );
         this.$router.push("/painel/theme");
       } catch (err) {

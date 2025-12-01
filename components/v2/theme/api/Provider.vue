@@ -1,8 +1,5 @@
 <template>
-  <div
-    class="loader_main_theme d-flex justify-center align-center"
-    v-if="loading"
-  >
+  <div class="loader_main_theme d-flex justify-center align-center" v-if="loading">
     <!-- <v-progress-circular
         :size="70"
         :width="7"
@@ -35,7 +32,7 @@ export default {
   //   }
   // },
   methods: {
-    ...mapActions("theme", ["salvar", "salvarLink"]),
+    ...mapActions("theme", ["salvar", "salvarLink", "salvarIdTheme"]),
 
     CreatedColorData() {
       let color = this.data?.styles?.color;
@@ -107,6 +104,8 @@ export default {
     async GetThemeResgisted(hash) {
       this.loading = true;
       this.error = null;
+      this.$store.commit("theme/salvarIdTheme", hash);
+
       try {
         const response = await this.$axios.get(
           "/public/whitelabel/config?token=none",

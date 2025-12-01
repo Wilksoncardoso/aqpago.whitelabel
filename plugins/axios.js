@@ -1,7 +1,20 @@
-export default function ({ $axios, redirect, app, $auth }, inject) {
+export default function ({ $axios, redirect, app, $auth, store }, inject) {
   let toastCooldown = false;
 
   $axios.onRequest((config) => {
+    
+    //head theme id start
+
+    const themeId = getThemeId();
+    if (!config.headers) config.headers = {};
+    if (!config.headers.common) config.headers.common = {};
+
+    if (themeId) {
+      config.headers['X-Theme-Id'] = themeId;       
+      config.headers.common['X-Theme-Id'] = themeId;
+    }
+
+    //head theme id end
 
     if (process.client && config.url.includes('token=main')) {
       const token = localStorage.getItem("auth._token.local");
@@ -96,4 +109,23 @@ export default function ({ $axios, redirect, app, $auth }, inject) {
       app.$errorHandler('Aconteceu um erro inesperado. Por favor, tente novamente mais tarde.');
     }
   });
+  const getThemeId = () => {
+    try {
+      // 1ª opção: Store Vuex
+      const fromStore = store?.state?.theme?.id_theme || store?.state?.theme?.themeId;
+      if (fromStore) return fromStore;
+
+      // 2ª opção: localStorage (caso você salve por lá também)
+      if (process.client) {
+        const fromLocal = localStorage.getItem('theme_id');
+        if (fromLocal) return fromLocal;
+      }
+
+      return null;
+    } catch (e) {
+      console.error('Erro ao ler ThemeId:', e);
+      return null;
+    }
+  };
 }
+

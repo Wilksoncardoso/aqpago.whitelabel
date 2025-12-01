@@ -1,7 +1,7 @@
 <template>
   <div class="cards_created_theme preview pa-4 white">
     <h3 class="primary--text mb-4">Preview</h3>
-    <components :is="WindowReturn" :SetForm="SetForm"></components>
+    <components :is="WindowReturn" :SetForm="up"></components>
   </div>
 </template>
 
@@ -17,6 +17,9 @@ export default {
   },
 
   computed: {
+    up(){
+      return this.SetForm
+    },
     WindowReturn() {
       switch (this.page) {
         case 1:
