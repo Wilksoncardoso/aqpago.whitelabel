@@ -1,0 +1,1162 @@
+<template lang="html">
+    <div class="termos-page">
+        <div class="mx-auto d-flex justify-space-between align-center my-5" style="max-width: 1200px;">
+          <div>
+              <img class="mb-5" :src="theme?.assets?.logotipe?.img" :width="theme?.assets?.logotipe?.size"></img>
+            <h4 class="primary--text mb-1">{{ theme?.data?.business?.name }}</h4>
+            <p class="primary--text mb-1">E-mail : {{ theme?.data?.business?.email }}</p>
+            <p class="primary--text mb-1">Telefone : {{ theme?.data?.business?.phone }}</p>
+          </div>
+          <v-btn class="px-3 py-2" color="primary" to="/">Voltar</v-btn>
+        </div>
+        
+
+        <section class="hero">
+            <h1>Política de Privacidade</h1>
+            <p class="hero-subtitle">Lei Geral de Proteção de Dados Pessoais (LGPD) — Lei 13.709 de 14.08.2018</p>
+            <div class="hero-meta">
+                <div class="meta-item">
+                    <svg class="meta-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                    <span>Versão de 25 de Agosto de 2023</span>
+                </div>
+                <div class="meta-item">
+                    <svg class="meta-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                    </svg>
+                    <span>Proteção de Dados Garantida</span>
+                </div>
+            </div>
+        </section>
+
+        <div class="container">
+            <aside class="sidebar">
+                <nav class="nav-card">
+                    <div class="nav-title">Índice</div>
+                    <ul class="nav-list">
+                        <li><a href="#intro">Introdução</a></li>
+                        <li><a href="#definicoes">1. Definições</a></li>
+                        <li><a href="#aceite">2. Aceite da Política</a></li>
+                        <li><a href="#tratamento">3. Tratamento de Dados</a></li>
+                        <li><a href="#seguranca">4. Segurança e Boas Práticas</a></li>
+                        <li><a href="#termino">5. Término do Tratamento</a></li>
+                        <li><a href="#compartilhamento">6. Compartilhamento</a></li>
+                        <li><a href="#protecao">7. Proteção de Registros</a></li>
+                        <li><a href="#cookies">8. Política de Cookies</a></li>
+                        <li><a href="#tolerancia">9. Tolerância</a></li>
+                        <li><a href="#alteracoes">10. Alterações</a></li>
+                        <li><a href="#disposicoes">11. Disposições Finais</a></li>
+                    </ul>
+                </nav>
+            </aside>
+
+            <main class="content">
+                <section id="intro" class="section intro-section">
+                    <h2>Entenda como funciona</h2>
+
+                    <h3>Quando a LGPD entra em vigor?</h3>
+                    <p>A LGPD entrou em vigor em 18 de setembro de 2020.</p>
+
+                    <h3>O que é a Lei Geral de Proteção de Dados?</h3>
+                    <p>É uma lei que estabelece regras ao uso de dados pessoais de pessoas físicas por entidades
+                        públicas e privadas. A LGPD é uma norma que garante direitos aos titulares dos dados e
+                        estabelece uma regra mínima para coleta, armazenamento, tratamento e compartilhamento de dados
+                        pessoais de pessoas físicas. As regras estabelecidas pela LGPD devem ser observadas por todos os
+                        setores do mercado: bancos, hospitais, comércios, empresas de e-commerce e também o setor
+                        público.</p>
+
+                    <h3>O que são dados pessoais e dados pessoais sensíveis?</h3>
+                    <p>Os <strong>dados pessoais</strong> são informações que identificam uma pessoa. Já os
+                        <strong>dados pessoais sensíveis</strong> são informações sobre origem racial ou étnica,
+                        convicção religiosa, opinião política, filiação a sindicato ou a organização de caráter
+                        religioso, filosófico ou político, dado referente à saúde ou à vida sexual, dado genético ou
+                        biométrico, quando vinculado a uma pessoa natural.
+                    </p>
+
+                    <div class="info-box">
+                        <p><strong>Nosso compromisso:</strong> Assegurar que você desfrute ao máximo dos nossos
+                            serviços, proporcionando a melhor experiência possível. Para alcançar isso, valorizamos
+                            profundamente a sua privacidade e a segurança dos seus dados pessoais, os quais serão sempre
+                            tratados com a máxima importância.</p>
+                    </div>
+
+                    <p>CONSIDERANDO a Lei Geral de Proteção de Dados – LGPD (Lei 13.709/18) e o Marco Civil da Internet
+                        (Lei 12.965/14), juntamente com seu Regulamento (Decreto 8.771/16), a AQBank Instituição de
+                        Pagamentos Ltda ("AQBank"), objetivando adequar suas atividades, e prezando-se sempre pela
+                        proteção dos Direitos Fundamentais de Liberdade e de privacidade e o livre desenvolvimento da
+                        pessoa natural (artigo 1º, caput da LGPD), e lembrando-se sempre que as normas contidas naquele
+                        diploma legal possuem caráter de interesse nacional (artigo 1º, parágrafo único da LGPD),
+                        estabelece nesta Política de Privacidade as condições para utilização dos sites (incluindo o
+                        internet banking) e aplicativos da AQBank Instituição de Pagamento por meio dos quais o Usuário
+                        poderá acessar os serviços e conteúdos disponibilizados pela AQBank de forma a esclarecer as
+                        obrigações e responsabilidades de seus Usuários.</p>
+
+                    <p>DECLARA a empresa AQBank que poderá estabelecer Políticas de Privacidade específicas e aplicáveis
+                        a determinado Site e/ou Aplicativo, que complementarão e/ou prevalecerão sobre estes Termos de
+                        Uso e Política de Privacidade.</p>
+
+                    <p>DECLARA, ainda, que é consignatária da ideia de que o Acesso à Internet é Essencial ao exercício
+                        da cidadania, sendo sempre resguardados os direitos do usuário.</p>
+
+                    <div class="dpo-card">
+                        <h4>DPO (Data Protection Officer)</h4>
+                        <p>De acordo com a disposição do artigo 41 da Lei Geral de Proteção de Dados, a empresa conta
+                            com um data protection officer (ou "DPO – encarregado de dados") nomeado, cujas funções são
+                            apoiar a empresa em relação a todos os mecanismos de garantia da proteção de dados pessoais
+                            e orientar a empresa e colaboradores sobre privacidade de dados pessoais.</p>
+                        <p><strong>Contato:</strong> <a href="mailto:dpo@aqbank.com.br">dpo@aqbank.com.br</a><br>
+                            <strong>Portal:</strong> <a href="https://aqbank.com.br/dpo"
+                                target="_blank">https://aqbank.com.br/dpo</a>
+                        </p>
+                    </div>
+                </section>
+
+                <section id="definicoes" class="section">
+                    <div class="section-header">
+                        <div class="section-number">1</div>
+                        <h2>Das Definições</h2>
+                    </div>
+
+                    <p>Para os fins desta Política de Privacidade, consideram-se:</p>
+
+                    <ul class="definition-list">
+                        <li class="definition-item">
+                            <div class="definition-term">Agentes de tratamento</div>
+                            <div class="definition-desc">O controlador e o operador.</div>
+                        </li>
+                        <li class="definition-item">
+                            <div class="definition-term">Banco de dados</div>
+                            <div class="definition-desc">Conjunto estruturado de dados pessoais, estabelecido em um ou
+                                em vários locais, em suporte eletrônico ou físico.</div>
+                        </li>
+                        <li class="definition-item">
+                            <div class="definition-term">Conexão à internet</div>
+                            <div class="definition-desc">A habilitação de um terminal para envio e recebimento de
+                                pacotes de dados pela internet, mediante a atribuição ou autenticação de um endereço IP.
+                            </div>
+                        </li>
+                        <li class="definition-item">
+                            <div class="definition-term">Controlador</div>
+                            <div class="definition-desc">Pessoa natural ou jurídica, de direito público ou privado, a
+                                quem competem as decisões referentes ao tratamento de dados pessoais.</div>
+                        </li>
+                        <li class="definition-item">
+                            <div class="definition-term">Dados pessoais</div>
+                            <div class="definition-desc">Informação relacionada a pessoa natural identificada ou
+                                identificável.</div>
+                        </li>
+                        <li class="definition-item">
+                            <div class="definition-term">Dado pessoal sensível</div>
+                            <div class="definition-desc">Dado pessoal sobre origem racial ou étnica, convicção
+                                religiosa, opinião política, filiação a sindicato ou a organização de caráter religioso,
+                                filosófico ou político, dado referente à saúde ou à vida sexual, dado genético ou
+                                biométrico, quando vinculado a uma pessoa natural.</div>
+                        </li>
+                        <li class="definition-item">
+                            <div class="definition-term">Endereço IP</div>
+                            <div class="definition-desc">O código atribuído a um Terminal de uma rede para permitir sua
+                                identificação, definido segundo parâmetros internacionais.</div>
+                        </li>
+                        <li class="definition-item">
+                            <div class="definition-term">Internet</div>
+                            <div class="definition-desc">O sistema constituído do conjunto de protocolos lógicos,
+                                estruturado em escala mundial para uso público e irrestrito, com a finalidade de
+                                possibilitar a comunicação de dados entre terminais por meio de diferentes redes.</div>
+                        </li>
+                        <li class="definition-item">
+                            <div class="definition-term">Registro de conexão</div>
+                            <div class="definition-desc">O conjunto de informações referentes à data e hora de início e
+                                término de uma conexão à internet, sua duração e o endereço IP utilizado pelo terminal
+                                para o envio e recebimento de pacotes de dados.</div>
+                        </li>
+                        <li class="definition-item">
+                            <div class="definition-term">Senha</div>
+                            <div class="definition-desc">Conjunto de caracteres que podem ser constituídos por letras
+                                e/ou números, com a finalidade de verificar a identidade do Usuário para acesso ao Site
+                                e/ou Aplicativo.</div>
+                        </li>
+                        <li class="definition-item">
+                            <div class="definition-term">Sites e/ou Aplicativos</div>
+                            <div class="definition-desc">Sites (incluindo o internet banking) e aplicativos da Holding
+                                AQBANK por meio dos quais o Usuário acessa os serviços e conteúdos disponibilizados pela
+                                AQBank.</div>
+                        </li>
+                        <li class="definition-item">
+                            <div class="definition-term">Terminais</div>
+                            <div class="definition-desc">Computadores, notebooks, netbooks, smartphones, tablets, palm
+                                tops e quaisquer outros dispositivos que se conectem à Internet.</div>
+                        </li>
+                        <li class="definition-item">
+                            <div class="definition-term">Titular</div>
+                            <div class="definition-desc">Pessoa natural a quem se referem os dados pessoais que são
+                                objeto de tratamento.</div>
+                        </li>
+                        <li class="definition-item">
+                            <div class="definition-term">Operador</div>
+                            <div class="definition-desc">Pessoa natural ou jurídica, de direito público ou privado, que
+                                realiza o tratamento de dados pessoais em nome do controlador.</div>
+                        </li>
+                        <li class="definition-item">
+                            <div class="definition-term">Usuários</div>
+                            <div class="definition-desc">Todas as pessoas físicas que utilizarão os Sites e/ou
+                                Aplicativos, maiores de 18 (dezoito) anos ou emancipadas e totalmente capazes de
+                                praticar os atos da vida civil ou os absolutamente ou relativamente incapazes
+                                devidamente representados ou assistidos.</div>
+                        </li>
+                    </ul>
+                </section>
+
+                <section id="aceite" class="section">
+                    <div class="section-header">
+                        <div class="section-number">2</div>
+                        <h2>Aceite da Política de Privacidade</h2>
+                    </div>
+
+                    <p>Ao acessar o Site e/ou Aplicativo da AQBank Instituição de Pagamento, o Usuário concorda e aceita
+                        integralmente as disposições desta Política de Privacidade.</p>
+
+                    <div class="alert-box">
+                        <p>CASO VOCÊ NÃO CONCORDE COM OS TERMOS DESSA POLÍTICA DE PRIVACIDADE, POR FAVOR, NÃO utilize os
+                            serviços da AQBank Instituição de Pagamentos, NÃO CONTINUE O SEU PROCEDIMENTO DE CADASTRO E
+                            NÃO ADQUIRA OU UTILIZE NOSSOS SERVIÇOS.</p>
+                    </div>
+                </section>
+
+                <section id="tratamento" class="section">
+                    <div class="section-header">
+                        <div class="section-number">3</div>
+                        <h2>Da Disciplina do Tratamento de Dados Pessoais – LGPD</h2>
+                    </div>
+
+                    <p>A disciplina da proteção de dados pessoais tem como fundamento:</p>
+
+                    <ul class="definition-list">
+                        <li class="definition-item">
+                            <div class="definition-desc">O respeito à privacidade</div>
+                        </li>
+                        <li class="definition-item">
+                            <div class="definition-desc">A autodeterminação informativa</div>
+                        </li>
+                        <li class="definition-item">
+                            <div class="definition-desc">A liberdade de expressão, de informação, de comunicação e de
+                                opinião</div>
+                        </li>
+                        <li class="definition-item">
+                            <div class="definition-desc">A inviolabilidade da intimidade, da honra e da imagem</div>
+                        </li>
+                        <li class="definition-item">
+                            <div class="definition-desc">O desenvolvimento econômico e tecnológico e a inovação</div>
+                        </li>
+                        <li class="definition-item">
+                            <div class="definition-desc">A livre iniciativa, a livre concorrência e a defesa do
+                                consumidor</div>
+                        </li>
+                        <li class="definition-item">
+                            <div class="definition-desc">Os direitos humanos, o livre desenvolvimento da personalidade,
+                                a dignidade e o exercício da cidadania pelas pessoas naturais</div>
+                        </li>
+                    </ul>
+
+                    <h3>Da Incidência da LGPD</h3>
+                    <p>Segundo o que dispõe o artigo 3º da LGPD, tal norma se aplica a qualquer operação de tratamento
+                        realizada por pessoa natural ou por pessoa jurídica de direito público ou privado,
+                        independentemente do meio, do país de sua sede ou do país onde estejam localizados os dados,
+                        desde que:</p>
+
+                    <ul class="definition-list">
+                        <li class="definition-item">
+                            <div class="definition-desc">A operação de tratamento seja realizada no território nacional
+                            </div>
+                        </li>
+                        <li class="definition-item">
+                            <div class="definition-desc">A atividade de tratamento tenha por objetivo a oferta ou o
+                                fornecimento de bens ou serviços ou o tratamento de dados de indivíduos localizados no
+                                território nacional</div>
+                        </li>
+                        <li class="definition-item">
+                            <div class="definition-desc">Os dados pessoais objeto do tratamento tenham sido coletados no
+                                território nacional</div>
+                        </li>
+                    </ul>
+
+                    <div class="info-box">
+                        <p>Consideram-se coletados no território nacional os dados pessoais cujo titular nele se
+                            encontre no momento da coleta.</p>
+                    </div>
+                </section>
+
+                <section id="seguranca" class="section">
+                    <div class="section-header">
+                        <div class="section-number">4</div>
+                        <h2>Da Segurança e das Boas Práticas</h2>
+                    </div>
+
+                    <h3>Da Segurança e do Sigilo de Dados</h3>
+                    <p>A AQBank, como agente de tratamento, adota medidas de segurança, técnicas e administrativas aptas
+                        a proteger os dados pessoais de acessos não autorizados e de situações acidentais ou ilícitas de
+                        destruição, perda, alteração, comunicação ou qualquer forma de tratamento inadequado ou ilícito.
+                    </p>
+
+                    <p>A AQBank somente coletará Dados Pessoais dos Usuários que naveguem na plataforma ou que utilizem
+                        os nossos serviços. Nós coletamos o mínimo possível de Dados Pessoais necessários para alcançar
+                        as finalidades para as quais esses mesmos dados foram coletados.</p>
+
+                    <h3>Das Boas Práticas e de Governança</h3>
+                    <p>A AQBank, no âmbito de suas competências, pelo tratamento de dados pessoais, possui regras de
+                        boas práticas e de governança que estabeleçam:</p>
+
+                    <ul class="definition-list">
+                        <li class="definition-item">
+                            <div class="definition-desc">As condições de organização e o regime de funcionamento</div>
+                        </li>
+                        <li class="definition-item">
+                            <div class="definition-desc">Os procedimentos, incluindo reclamações e petições de titulares
+                            </div>
+                        </li>
+                        <li class="definition-item">
+                            <div class="definition-desc">As normas de segurança e os padrões técnicos</div>
+                        </li>
+                        <li class="definition-item">
+                            <div class="definition-desc">As obrigações específicas para os diversos envolvidos no
+                                tratamento</div>
+                        </li>
+                        <li class="definition-item">
+                            <div class="definition-desc">As ações educativas e os mecanismos internos de supervisão e de
+                                mitigação de riscos</div>
+                        </li>
+                    </ul>
+                </section>
+
+                <section id="termino" class="section">
+                    <div class="section-header">
+                        <div class="section-number">5</div>
+                        <h2>Do Término do Tratamento de Dados</h2>
+                    </div>
+
+                    <p>O término do tratamento de dados pela AQBank, de acordo com a LGPD, se dará nas seguintes
+                        hipóteses:</p>
+
+                    <ul class="definition-list">
+                        <li class="definition-item">
+                            <div class="definition-desc">Quando for verificado que a finalidade foi alcançada ou de que
+                                os dados deixaram de ser necessários ou pertinentes ao alcance da finalidade específica
+                                almejada</div>
+                        </li>
+                        <li class="definition-item">
+                            <div class="definition-desc">Quando for verificado o fim do período de tratamento</div>
+                        </li>
+                        <li class="definition-item">
+                            <div class="definition-desc">Até que Você, como titular, exerça os seus direitos de oposição
+                                ou cancelamento, solicitando a exclusão do Dado Pessoal ou retirando o seu consentimento
+                            </div>
+                        </li>
+                        <li class="definition-item">
+                            <div class="definition-desc">Quando houver determinação da autoridade nacional</div>
+                        </li>
+                    </ul>
+
+                    <div class="info-box">
+                        <p><strong>Importante:</strong> Com o término do tratamento de dados, determina a LGPD a sua
+                            eliminação, exceto para: cumprimento de obrigação legal ou regulatória pelo controlador;
+                            transferência a terceiro, desde que respeitados os requisitos de tratamento de dados; ou uso
+                            exclusivo do controlador, vedado seu acesso por terceiro, e desde que anonimizados os dados.
+                        </p>
+                    </div>
+                </section>
+
+                <section id="compartilhamento" class="section">
+                    <div class="section-header">
+                        <div class="section-number">6</div>
+                        <h2>Com Quem Nós Compartilhamos os Seus Dados Pessoais?</h2>
+                    </div>
+
+                    <p>Todas as informações coletadas pela AQBank sobre o Usuário são confidenciais. <strong>Em hipótese
+                            alguma nós venderemos as suas informações.</strong></p>
+
+                    <p>No entanto, podemos compartilhá-las com terceiros, inclusive seus Dados Pessoais, caso seja
+                        necessário para:</p>
+
+                    <h3>Prestação de Serviços</h3>
+                    <p>Seus Dados Pessoais podem ser compartilhados com alguns de nossos parceiros e fornecedores, a fim
+                        de viabilizarmos a prestação dos nossos serviços a você.</p>
+
+                    <h3>Acesso ao Aplicativo ou Site</h3>
+                    <p>Seus Dados Pessoais podem ser compartilhados com alguns de nossos parceiros e fornecedores de
+                        serviços de web analytics, para possibilitar que você acesse o aplicativo e/ou site sem
+                        problemas e para que, a partir de uma avaliação das suas interações, possamos compreender como
+                        melhorar nossos serviços.</p>
+
+                    <h3>Resguardo de Direitos</h3>
+                    <p>A AQBank poderá compartilhar seus Dados Pessoais com terceiros, caso seja necessário para
+                        resguardar os nossos direitos e interesses, cumprir uma obrigação legal relacionada aos seus
+                        negócios ou atender a uma ordem judicial.</p>
+
+                    <div class="info-box">
+                        <p>Em todos os casos, seus Dados Pessoais somente serão compartilhados com terceiros apenas para
+                            atender as finalidades aqui descritas e no estrito limite necessário. A AQBank sempre que
+                            possível, irá anonimizar os seus Dados Pessoais antes do compartilhamento.</p>
+                    </div>
+                </section>
+
+                <section id="protecao" class="section">
+                    <div class="section-header">
+                        <div class="section-number">7</div>
+                        <h2>Da Proteção ao Registro, aos Dados Pessoais e às Comunicações Privadas</h2>
+                    </div>
+
+                    <p>A guarda e a disponibilização dos registros de conexão e de acesso a aplicações de internet de
+                        que trata a Lei 12.965, de 2014, bem como de dados pessoais e do conteúdo de comunicações
+                        privadas, devem atender à preservação da intimidade, da vida privada, da honra e da imagem das
+                        partes direta ou indiretamente envolvidas (artigo 10 da Lei 12.965).</p>
+
+                    <p>As medidas e os procedimentos de segurança e de sigilo devem ser informados pelo responsável pela
+                        provisão de serviços de forma clara e atender a padrões definidos em regulamento, respeitado seu
+                        direito de confidencialidade quanto a segredos empresariais (artigo 10, §3º da Lei 12.965/14).
+                    </p>
+                </section>
+
+                <section id="cookies" class="section">
+                    <div class="section-header">
+                        <div class="section-number">8</div>
+                        <h2>Da Política sobre Cookies</h2>
+                    </div>
+
+                    <p>Existem 02 (duas) formas de coleta de informações dos Usuários:</p>
+
+                    <ul class="definition-list">
+                        <li class="definition-item">
+                            <div class="definition-term">Cadastro voluntário</div>
+                            <div class="definition-desc">Por meio do cadastro realizado pelo próprio Usuário no Site
+                                e/ou Aplicativo, fornecidos voluntariamente.</div>
+                        </li>
+                        <li class="definition-item">
+                            <div class="definition-term">Cookies e tecnologias similares</div>
+                            <div class="definition-desc">Por meio do uso de cookies ou de outra tecnologia que permita
+                                armazenar informações a respeito da navegação do Usuário no Site e/ou Aplicativo.</div>
+                        </li>
+                    </ul>
+
+                    <p>Os cookies são pequenos arquivos que podem ou não ser adicionados no seu Terminal e que permitem
+                        armazenar e reconhecer dados da sua navegação.</p>
+
+                    <h3>Tipos de Cookies Utilizados</h3>
+
+                    <div class="cookie-grid">
+                        <div class="cookie-card">
+                            <h4>
+                                <span class="cookie-icon">🔒</span>
+                                Cookies de Segurança
+                            </h4>
+                            <p>Utilizados para ativar recursos de segurança dos Sites e/ou Aplicativos, com a finalidade
+                                de auxiliar o monitoramento e/ou detecção de atividades maliciosas, bem como de proteger
+                                as informações do Usuário do acesso por terceiros não autorizados.</p>
+                        </div>
+                        <div class="cookie-card">
+                            <h4>
+                                <span class="cookie-icon">👤</span>
+                                Cookies de Autenticação
+                            </h4>
+                            <p>Servem para reconhecer um determinado Usuário, possibilitando o acesso e utilização do
+                                Site e/ou Aplicativo com conteúdo e/ou serviços restritos e proporcionando experiências
+                                de navegação mais personalizadas.</p>
+                        </div>
+                        <div class="cookie-card">
+                            <h4>
+                                <span class="cookie-icon">📊</span>
+                                Cookies de Pesquisa, Análise e Desempenho
+                            </h4>
+                            <p>Ajudam a entender o desempenho do Site e/ou Aplicativo, medir a audiência, verificar os
+                                hábitos de navegação dos Usuários, bem como a forma pela qual chegou na página.</p>
+                        </div>
+                        <div class="cookie-card">
+                            <h4>
+                                <span class="cookie-icon">📢</span>
+                                Cookies de Propaganda
+                            </h4>
+                            <p>Usados para apresentar publicidade relevante ao Usuário, tanto dentro quanto fora do Site
+                                e/ou Aplicativo ou em sites de parceiros, bem como para saber se os Usuários que
+                                visualizaram a publicidade visitaram o Site e/ou Aplicativo.</p>
+                        </div>
+                    </div>
+
+                    <h3>Parceiros de Tecnologia</h3>
+                    <div class="partners-list">
+                        <div class="partner-item">
+                            <span class="partner-bullet"></span>
+                            <span>Caf — <a href="https://caf.io/privacy-policy" target="_blank">Privacy
+                                    Policy</a></span>
+                        </div>
+                        <div class="partner-item">
+                            <span class="partner-bullet"></span>
+                            <span>Stark SCD S.A</span>
+                        </div>
+                        <div class="partner-item">
+                            <span class="partner-bullet"></span>
+                            <span>Unico ID Tech — <a href="https://unico.io/politica-de-privacidade"
+                                    target="_blank">Política de Privacidade</a></span>
+                        </div>
+                    </div>
+
+                    <h3>Registros de Navegação Coletados</h3>
+                    <p>Para os fins descritos, a AQBank poderá coletar, armazenar, tratar, processar e utilizar as
+                        seguintes informações:</p>
+
+                    <ul class="definition-list">
+                        <li class="definition-item">
+                            <div class="definition-desc">Localização geográfica</div>
+                        </li>
+                        <li class="definition-item">
+                            <div class="definition-desc">Sistema operacional utilizado pelo Usuário</div>
+                        </li>
+                        <li class="definition-item">
+                            <div class="definition-desc">Navegador e suas respectivas versões</div>
+                        </li>
+                        <li class="definition-item">
+                            <div class="definition-desc">Resolução de tela</div>
+                        </li>
+                        <li class="definition-item">
+                            <div class="definition-desc">Java (linguagem de programação)</div>
+                        </li>
+                        <li class="definition-item">
+                            <div class="definition-desc">Reprodutor de flash instalado</div>
+                        </li>
+                        <li class="definition-item">
+                            <div class="definition-desc">Endereço IP</div>
+                        </li>
+                        <li class="definition-item">
+                            <div class="definition-desc">Código ID (IMEI) do aparelho mobile</div>
+                        </li>
+                        <li class="definition-item">
+                            <div class="definition-desc">Informações referentes à data e hora de uso</div>
+                        </li>
+                        <li class="definition-item">
+                            <div class="definition-desc">Informações referentes às quantidades de cliques e páginas
+                                acessadas</div>
+                        </li>
+                    </ul>
+
+                    <h3>Google Analytics</h3>
+                    <p>A ferramenta "Google Analytics" é usada para coletar informações sobre o uso desse site, como a
+                        frequência com que os usuários visitam o site, as páginas visitadas e quais outros sites foram
+                        acessados antes desse.</p>
+
+                    <p>O Google Analytics coleta apenas o seu endereço IP na data que visitar este site, ao invés de seu
+                        nome ou outras informações de identificação. As informações recebidas são usadas somente para
+                        melhorar os serviços no site e não são combinadas com informações pessoais identificáveis.</p>
+
+                    <div class="info-box">
+                        <p><strong>Como rejeitar ou apagar cookies?</strong> A maioria dos navegadores da Internet
+                            aceitam cookies, entretanto, os usuários podem configurar seus navegadores para recusar
+                            certos tipos de cookies ou cookies específicos. Todos os browsers permitem ao utilizador
+                            aceitar, recusar ou apagar cookies através do menu "opções" ou "preferências".</p>
+                    </div>
+                </section>
+
+                <section id="tolerancia" class="section">
+                    <div class="section-header">
+                        <div class="section-number">9</div>
+                        <h2>Da Tolerância</h2>
+                    </div>
+
+                    <p>A tolerância quanto ao eventual descumprimento de quaisquer das disposições desta Política de
+                        Privacidade por qualquer Usuário não constituirá renúncia ao direito de exigir o cumprimento da
+                        obrigação, nem perdão, nem alteração do que consta aqui previsto.</p>
+                </section>
+
+                <section id="alteracoes" class="section">
+                    <div class="section-header">
+                        <div class="section-number">10</div>
+                        <h2>Alterações do Acesso e Políticas de Privacidade</h2>
+                    </div>
+
+                    <p>A AQBank, a qualquer tempo, a seu exclusivo critério e sem necessidade de qualquer aviso prévio
+                        ou posterior a qualquer Usuário ou terceiros, poderá:</p>
+
+                    <ul class="definition-list">
+                        <li class="definition-item">
+                            <div class="definition-desc">Suspender, cancelar ou interromper o acesso ao Site e/ou
+                                Aplicativo</div>
+                        </li>
+                        <li class="definition-item">
+                            <div class="definition-desc">Remover, alterar e/ou atualizar no todo ou em parte o Site e/ou
+                                Aplicativo bem como seus respectivos conteúdos e/ou Termos de Uso e Política de
+                                Privacidade</div>
+                        </li>
+                    </ul>
+
+                    <p>Qualquer alteração e/ou atualização destes Termos de Uso e Política de Privacidade passará a
+                        vigorar a partir da data de sua publicação no Site e/ou Aplicativo e deverá ser integralmente
+                        observada pelos Usuários.</p>
+                </section>
+
+                <section id="disposicoes" class="section">
+                    <div class="section-header">
+                        <div class="section-number">11</div>
+                        <h2>Disposições Finais</h2>
+                    </div>
+
+                    <p>A aplicação das regras aqui expressamente estabelecidas constituem rol meramente exemplificativo,
+                        e não exclui a incidência das demais leis que regem o presente sistema.</p>
+                </section>
+            </main>
+        </div>
+
+        <script>
+        // Highlight current section in navigation
+        const sections = document.querySelectorAll('.section');
+        const navLinks = document.querySelectorAll('.nav-list a');
+
+        function highlightNav() {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', highlightNav);
+        highlightNav();
+    </script>
+    </div>
+</template>
+<script>
+
+export default {
+    name: "termosPage",
+    layout: "DefaultLayout",
+    computed: {
+
+        theme() {
+            return this.$store?.state?.theme?.data || null;
+        },
+    },
+
+}
+</script>
+<style lang="scss">
+.termos-page {
+    :root {
+        --aq-turquoise: #00B4A6;
+        --primary: #009688;
+        --primaryop: #E0F7F5;
+        --aq-navy: #1A2B3C;
+        --aq-gray-900: #1F2937;
+        --aq-gray-700: #374151;
+        --aq-gray-500: #6B7280;
+        --aq-gray-300: #D1D5DB;
+        --aq-gray-100: #F3F4F6;
+        --aq-white: #FFFFFF;
+        --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+        --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+        color: var(--aq-gray-700);
+        line-height: 1.7;
+        background: linear-gradient(180deg, var(--primaryop) 0%, var(--aq-white) 300px);
+        min-height: 100vh;
+    }
+
+    /* Header */
+    header {
+        background: var(--aq-white);
+        border-bottom: 1px solid var(--aq-gray-300);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        box-shadow: var(--shadow-sm);
+    }
+
+    .header-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 1rem 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .logo {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        text-decoration: none;
+    }
+
+    .logo-icon {
+        width: 40px;
+        height: 40px;
+        background: linear-gradient(135deg, var(--primary) 0%, var(--primary) 100%);
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-family: 'Space Grotesk', sans-serif;
+        font-weight: 700;
+        font-size: 1rem;
+    }
+
+    .logo-text {
+        font-family: 'Space Grotesk', sans-serif;
+        font-weight: 700;
+        font-size: 1.5rem;
+        color: var(--aq-navy);
+    }
+
+    .logo-text span {
+        color: var(--primary);
+    }
+
+    .header-badge {
+        background: var(--primaryop);
+        color: var(--primary);
+        padding: 0.5rem 1rem;
+        border-radius: 2rem;
+        font-size: 0.875rem;
+        font-weight: 600;
+    }
+
+    /* Hero Section */
+    .hero {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem 2rem 3rem;
+        text-align: center;
+    }
+
+    .hero h1 {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: clamp(2rem, 5vw, 3rem);
+        font-weight: 700;
+        color: var(--aq-navy);
+        margin-bottom: 1rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1.125rem;
+        color: var(--aq-gray-500);
+        max-width: 600px;
+        margin: 0 auto 1.5rem;
+    }
+
+    .hero-meta {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 2rem;
+        flex-wrap: wrap;
+    }
+
+    .meta-item {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: var(--aq-gray-500);
+        font-size: 0.875rem;
+    }
+
+    .meta-icon {
+        width: 20px;
+        height: 20px;
+        color: var(--primary);
+    }
+
+    /* Layout */
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem 4rem;
+        display: grid;
+        grid-template-columns: 280px 1fr;
+        gap: 3rem;
+    }
+
+    @media (max-width: 900px) {
+        .container {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    /* Sidebar Navigation */
+    .sidebar {
+        position: sticky;
+        top: 20px;
+        height: fit-content;
+    }
+
+    @media (max-width: 900px) {
+        .sidebar {
+            position: relative;
+            top: 0;
+        }
+    }
+
+    .nav-card {
+        background: var(--aq-white);
+        border-radius: 16px;
+        padding: 1.5rem;
+        box-shadow: var(--shadow-md);
+        border: 1px solid var(--aq-gray-100);
+    }
+
+    .nav-title {
+        font-family: 'Space Grotesk', sans-serif;
+        font-weight: 600;
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--aq-gray-500);
+        margin-bottom: 1rem;
+        padding-bottom: 0.75rem;
+        border-bottom: 1px solid var(--aq-gray-100);
+    }
+
+    .nav-list {
+        list-style: none;
+    }
+
+    .nav-list li {
+        margin-bottom: 0.25rem;
+    }
+
+    .nav-list a {
+        display: block;
+        padding: 0.625rem 0.875rem;
+        color: var(--aq-gray-700);
+        text-decoration: none;
+        font-size: 0.875rem;
+        border-radius: 8px;
+        transition: all 0.2s ease;
+    }
+
+    .nav-list a:hover {
+        background: var(--primaryop);
+        color: var(--primary);
+    }
+
+    .nav-list a.active {
+        background: var(--primary);
+        color: white;
+        font-weight: 500;
+    }
+
+    /* Main Content */
+    .content {
+        background: var(--aq-white);
+        border-radius: 20px;
+        padding: 3rem;
+        box-shadow: var(--shadow-lg);
+        border: 1px solid var(--aq-gray-100);
+    }
+
+    @media (max-width: 600px) {
+        .content {
+            padding: 1.5rem;
+            border-radius: 16px;
+        }
+    }
+
+    /* Typography */
+    .section {
+        margin-bottom: 3rem;
+        padding-bottom: 2rem;
+        border-bottom: 1px solid var(--aq-gray-100);
+    }
+
+    .section:last-child {
+        margin-bottom: 0;
+        padding-bottom: 0;
+        border-bottom: none;
+    }
+
+    .section-header {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .section-number {
+        width: 40px;
+        height: 40px;
+        background: var(--primary);
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-family: 'Space Grotesk', sans-serif;
+        font-weight: 700;
+        font-size: 1rem;
+        flex-shrink: 0;
+    }
+
+    h2 {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--aq-navy);
+    }
+
+    h3 {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 1.125rem;
+        font-weight: 600;
+        color: var(--aq-navy);
+        margin: 1.5rem 0 0.75rem;
+    }
+
+    p {
+        margin-bottom: 1rem;
+        color: var(--aq-gray-700);
+    }
+
+    /* Info Box */
+    .info-box {
+        background: var(--primaryop);
+        border-left: 4px solid var(--primary);
+        padding: 1.25rem 1.5rem;
+        border-radius: 0 12px 12px 0;
+        margin: 1.5rem 0;
+    }
+
+    .info-box p {
+        margin: 0;
+        color: var(--aq-gray-700);
+    }
+
+    .info-box strong {
+        color: var(--primary);
+    }
+
+    /* Alert Box */
+    .alert-box {
+        background: #FEF3C7;
+        border: 1px solid #F59E0B;
+        padding: 1.25rem 1.5rem;
+        border-radius: 12px;
+        margin: 1.5rem 0;
+    }
+
+    .alert-box p {
+        margin: 0;
+        color: #92400E;
+        font-weight: 500;
+    }
+
+    /* DPO Card */
+    .dpo-card {
+        background: linear-gradient(135deg, var(--aq-navy) 0%, #2D3F50 100%);
+        border-radius: 16px;
+        padding: 2rem;
+        color: white;
+        margin: 1.5rem 0;
+    }
+
+    .dpo-card h4 {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 1.125rem;
+        font-weight: 600;
+        margin-bottom: 0.75rem;
+        color: var(--primary-light);
+    }
+
+    .dpo-card p {
+        color: rgba(255, 255, 255, 0.9);
+        margin-bottom: 1rem;
+    }
+
+    .dpo-card a {
+        color: var(--primary);
+        text-decoration: none;
+        font-weight: 500;
+    }
+
+    .dpo-card a:hover {
+        text-decoration: underline;
+    }
+
+    /* Definition List */
+    .definition-list {
+        list-style: none;
+        margin: 1rem 0;
+    }
+
+    .definition-item {
+        padding: 1rem 0;
+        border-bottom: 1px solid var(--aq-gray-100);
+    }
+
+    .definition-item:last-child {
+        border-bottom: none;
+    }
+
+    .definition-term {
+        font-weight: 600;
+        color: var(--aq-navy);
+        margin-bottom: 0.25rem;
+    }
+
+    .definition-desc {
+        color: var(--aq-gray-500);
+        font-size: 0.9375rem;
+    }
+
+    /* Cookie Types */
+    .cookie-grid {
+        display: grid;
+        gap: 1rem;
+        margin: 1.5rem 0;
+    }
+
+    .cookie-card {
+        background: var(--aq-gray-100);
+        border-radius: 12px;
+        padding: 1.25rem;
+        border: 1px solid var(--aq-gray-300);
+    }
+
+    .cookie-card h4 {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--aq-navy);
+        margin-bottom: 0.5rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .cookie-icon {
+        width: 24px;
+        height: 24px;
+        background: var(--primary);
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .cookie-card p {
+        margin: 0;
+        font-size: 0.875rem;
+        color: var(--aq-gray-500);
+    }
+
+    /* Partners List */
+    .partners-list {
+        display: grid;
+        gap: 0.75rem;
+        margin: 1rem 0;
+    }
+
+    .partner-item {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 0.875rem 1rem;
+        background: var(--aq-gray-100);
+        border-radius: 10px;
+    }
+
+    .partner-bullet {
+        width: 8px;
+        height: 8px;
+        background: var(--primary);
+        border-radius: 50%;
+        flex-shrink: 0;
+    }
+
+    .partner-item span {
+        color: var(--aq-gray-700);
+        font-size: 0.9375rem;
+    }
+
+    .partner-item a {
+        color: var(--primary);
+        text-decoration: none;
+    }
+
+    .partner-item a:hover {
+        text-decoration: underline;
+    }
+
+    /* Intro Section */
+    .intro-section {
+        margin-bottom: 2.5rem;
+    }
+
+    .intro-section p {
+        font-size: 1.0625rem;
+        line-height: 1.8;
+    }
+
+    .intro-section .lead {
+        font-size: 1.125rem;
+        color: var(--aq-gray-900);
+        font-weight: 500;
+    }
+
+    /* Animated elements */
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .section {
+        animation: fadeInUp 0.5s ease forwards;
+    }
+
+    /* Print Styles */
+    @media print {
+
+        header,
+        .sidebar,
+        footer {
+            display: none;
+        }
+
+        .container {
+            grid-template-columns: 1fr;
+        }
+
+        .content {
+            box-shadow: none;
+            border: none;
+        }
+    }
+}
+</style>

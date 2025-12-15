@@ -251,9 +251,6 @@ export default {
       termo: false,
     };
   },
-  beforeDestroy() {
-    clearInterval(this.intervalId);
-  },
   methods: {
     ...mapActions("user", ["salvar"]),
     ...mapActions("workspace", ["salvar"]),

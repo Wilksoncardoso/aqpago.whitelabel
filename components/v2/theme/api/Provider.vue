@@ -229,8 +229,10 @@ export default {
   },
   computed: {
     HostName() {
-      return "aqpago-whitelabel.vercel.app";
-      // return process.client ? window.location.host : null;
+      // return "aqpago-whitelabel.vercel.app" ;
+      // return "whitelabel.aqpago.app" ;
+
+      return process.client ? window.location.host : null;
     },
   },
   created() {
@@ -259,13 +261,11 @@ export default {
   background: var(--primary);
 }
 
-/* Personalização da Scrollbar para Firefox */
 html {
   scrollbar-width: thin;
   scrollbar-color: var(--primary) var(--primaryop);
 }
 
-/* Estilo para navegadores mais antigos */
 body {
   scrollbar-face-color: var(--primary);
   scrollbar-track-color: var(--primaryop);

@@ -22,7 +22,7 @@
             <div class="title mb-3 primary--text">Navbar</div>
 
             <!-- Favicon -->
-            <div class="label disabled">
+            <div class="label ">
               1 - Favicon <span>(png ou svg)</span>
             </div>
             <v-file-input
@@ -30,12 +30,12 @@
               placeholder="ex : Navbar.png"
               solo
               label="ex : Navbar.png"
-              class="input_set_theme disabled"
+              class="input_set_theme "
               v-model="localFiles.favicon"
               :rules="rulesStep1.favicon"
               hint="Favicon será renderizado em 512px (gerando derivativos)"
               persistent-hint
-              disabled
+              
               @change="onChangeFavicon"
             ></v-file-input>
 
@@ -207,32 +207,30 @@
             <div class="title mb-3 primary--text">Login | Password | Token</div>
 
             <!-- BG esquerdo -->
-            <div class="label disabled">
+            <div class="label ">
               1 - Imagem esquerda background <span>(png ou jpeg)</span>
             </div>
             <v-file-input
               accept="image/png, image/svg"
-              class="input_set_theme disabled"
+              class="input_set_theme "
               placeholder="ex : Background.png"
               solo
               label="Imagem esquerda background"
               v-model="localFiles.initBg"
               :rules="rulesStep4.image"
               @change="onChangeInitImg"
-              disabled
             ></v-file-input>
 
             <!-- Logotipo -->
-            <div class="label disabled">
+            <div class="label ">
               2 - Logotipo <span>(svg, png ou jpeg)</span>
             </div>
             <v-file-input
               accept="image/png, image/svg"
               placeholder="ex : Logotipo.png"
               solo
-              disabled
               label="ex : Logotipo.png"
-              class="input_set_theme disabled"
+              class="input_set_theme "
               v-model="localFiles.logo"
               :rules="rulesStep4.logotipo"
               :hint="
@@ -425,16 +423,16 @@
               @input="validateStep(6)"
             ></v-text-field>
 
-            <div class="label disabled">3 - Imagem</div>
+            <div class="label ">3 - Imagem</div>
             <v-file-input
               accept="image/png, image/svg"
               solo
               label="Imagem SEO"
-              class="input_set_theme disabled"
+              class="input_set_theme "
               v-model="localFiles.seoImage"
               :rules="rulesStep6.image"
               @change="onChangeSeoImage"
-              disabled
+             
             ></v-file-input>
 
             <div class="label">4 - Twitter-site</div>
@@ -467,13 +465,12 @@
               @input="validateStep(6)"
             ></v-text-field>
 
-            <div class="label disabled">7 - Twitter-img</div>
+            <div class="label ">7 - Twitter-img</div>
             <v-file-input
               accept="image/png, image/svg"
               solo
               label="Twitter image"
-              class="input_set_theme disabled"
-              disabled
+              class="input_set_theme "
               v-model="localFiles.twitterImage"
               :rules="rulesStep6.twitterImage"
               @change="onChangeTwitterImage"
@@ -873,7 +870,7 @@ export default {
         this.loading = true;
         this.error = null;
 
-        const { data } = await this.$axios.put(
+        const { data } = await this.$axios.post(
           `/admin/whitelabel/assets/upload?key=${encodeURIComponent(key)}`,
           fd,
           {
