@@ -11,10 +11,10 @@
               ></i>
             </div>
             <div>
-              <h2>Themas & Personalização</h2>
+              <h2>Temas e Personalização do Painel White Label</h2>
 
               <h5>
-                Gerencie os temas do seu marketplace de forma fácil e rápida.
+                Personalize o tema de seu aplicativo web white label, de forma fácil e rápida!
               </h5>
             </div>
           </div>

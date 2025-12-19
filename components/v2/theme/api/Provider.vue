@@ -229,7 +229,7 @@ export default {
   },
   computed: {
     HostName() {
-      // return "aqpago-whitelabel.vercel.app" ;
+      return "aqpago-whitelabel.vercel.app" ;
       // return "whitelabel.aqpago.app" ;
 
       return process.client ? window.location.host : null;

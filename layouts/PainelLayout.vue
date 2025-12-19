@@ -234,7 +234,7 @@ export default {
 
             {
               permission: true,
-              label: "Theme",
+              label: "Personalizar Painel",
               to: "/painel/theme",
               icon: icon__simulador,
               submenu: [],
