@@ -1,242 +1,164 @@
 <template>
-  <div class="loader_main_theme d-flex justify-center align-center" v-if="loading">
-    <!-- <v-progress-circular
-        :size="70"
-        :width="7"
-        color="#000000"
-        indeterminate
-      ></v-progress-circular> -->
-  </div>
+  <div class="loader_main_theme d-flex justify-center align-center" v-if="loading"></div>
 </template>
 
 <script>
-import { mapState, mapActions } from "vuex";
+import { mapState } from "vuex";
 
 export default {
   data() {
     return {
-      data: {},
       error: null,
-      loading: true,
     };
   },
-  //   watch: {
-  //   data: {
-  //     deep: true,
-  //     handler(val) {
-  //       if (val?.styles?.color?.primary) {
-  //         this.CreatedColorData();
-  //         this.$store.commit("theme/salvar", val);
-  //       }
-  //     }
-  //   }
-  // },
+
+  computed: {
+    ...mapState("theme", ["data", "loaded"]),
+
+    loading() {
+      return !this.loaded || !this.data;
+    },
+  },
+
+  watch: {
+    data: {
+      immediate: true,
+      deep: true,
+      handler(val) {
+        if (!val) return;
+        this.applyThemeColors(val);
+      },
+    },
+  },
+
   methods: {
-    ...mapActions("theme", ["salvar", "salvarLink", "salvarIdTheme"]),
+    applyThemeColors(data) {
+      const color = data?.styles?.color;
+      const menuBackground = data?.styles?.menuleft?.background;
+      const menu = data?.styles?.menuleft;
 
-    CreatedColorData() {
-      let color = this.data?.styles?.color;
-      let menu_background = this.data?.styles?.menuleft?.background;
-      let menu_Color = this.data?.styles?.menuleft;
-      this.$vuetify.theme.themes.light.primary = this.normalizeColor(
-        color.primary
-      );
-      this.$vuetify.theme.themes.dark.primary = this.normalizeColor(
-        color.primary
-      );
-      if (process.client) {
-        // css
-        document.documentElement.style.setProperty(
-          "--primary",
-          this.normalizeColor(color.primary)
-        );
-        document.documentElement.style.setProperty(
-          "--primary_svg",
-          this.normalizeColor(color.primary)
-        );
+      if (!color) return;
 
-        document.documentElement.style.setProperty(
-          "--primaryop",
-          this.normalizeColor(color.primary_op)
-        );
-        document.documentElement.style.setProperty(
-          "--secondary",
-          this.normalizeColor(color.secondary)
-        );
+      // Vuetify theme
 
-        document.documentElement.style.setProperty(
-          "--menu-color-primary",
-          this.normalizeColor(menu_Color?.font?.color)
-        );
-        document.documentElement.style.setProperty(
-          "--menu-title-color-primary",
-          this.normalizeColor(menu_Color?.title?.color)
-        );
-        document.documentElement.style.setProperty(
-          "--background-primary",
-          this.normalizeColor(menu_background.primary)
-        );
-        document.documentElement.style.setProperty(
-          "--background-secondary",
-          this.normalizeColor(menu_background.secondary)
-        );
-      }
+
+      // CSS vars (client only)
+      if (!process.client) return;
+
+      const rootStyle = document.documentElement.style;
+
+      this.$nextTick(() => {
+        // seta para light e dark
+        this.$vuetify.theme.themes.light.primary = this.normalizeColor(color.primary);
+        this.$vuetify.theme.themes.dark.primary = this.normalizeColor(color.primary);
+
+        // força o tema atual a refletir imediatamente (bem importante)
+        Object.assign(this.$vuetify.theme.currentTheme, {
+            primary: this.normalizeColor(color.primary),
+        });
+
+        // se você usa customProperties, isso ajuda a refletir também
+        // (não quebra se não tiver)
+        if (this.$vuetify.theme.options) {
+          this.$vuetify.theme.options.customProperties = true;
+        }
+      });
+
+      rootStyle.setProperty("--primary", this.normalizeColor(color.primary));
+      rootStyle.setProperty("--primary_svg", this.normalizeColor(color.primary));
+      rootStyle.setProperty("--primaryop", this.normalizeColor(color.primary_op));
+      rootStyle.setProperty("--secondary", this.normalizeColor(color.secondary));
+
+      rootStyle.setProperty("--menu-color-primary", this.normalizeColor(menu?.font?.color));
+      rootStyle.setProperty("--menu-title-color-primary", this.normalizeColor(menu?.title?.color));
+      rootStyle.setProperty("--background-primary", this.normalizeColor(menuBackground?.primary));
+      rootStyle.setProperty("--background-secondary", this.normalizeColor(menuBackground?.secondary));
+
     },
-    async GetThemeId() {
-      this.loading = true;
-      this.error = null;
 
-      try {
-        const response = await this.$axios.get(
-          "/public/whitelabel/theme?domain=" + this.HostName + "&token=none"
-        );
-        this.GetThemeResgisted(response.data.body.theme_id);
-      } catch (err) {
-        this.error =
-          err?.response?.data?.mensagem ||
-          err?.response?.data?.message ||
-          err?.message ||
-          "Erro ao enviar";
-      } finally {
-        this.loading = false;
-      }
-    },
-    async GetThemeResgisted(hash) {
-      this.loading = true;
-      this.error = null;
-      this.$store.commit("theme/salvarIdTheme", hash);
-
-      try {
-        const response = await this.$axios.get(
-          "/public/whitelabel/config?token=none",
-          {
-            headers: {
-              "X-Theme-Id": hash,
-            },
-          }
-        );
-
-        this.data = response.data;
-        this.CreatedColorData();
-        this.$store.commit("theme/salvar", this.data);
-        this.$store.commit("theme/salvarLink", this.data?.data?.business?.external_link?.link_payment || "https://aqbank.online/");
-
-      } catch (err) {
-        this.error =
-          err?.response?.data?.mensagem ||
-          err?.response?.data?.message ||
-          err?.message ||
-          "Erro ao enviar";
-
-        console.error("Erro GetThemeResgisted:", err);
-      } finally {
-        this.loading = false;
-      }
-    },
     normalizeColor(hex) {
-      if (hex?.length === 9) {
-        return hex.substring(0, 7); // remove o AA
-      }
+      if (!hex) return hex;
+      if (hex.length === 9) return hex.substring(0, 7); // remove alpha
       return hex;
     },
   },
+
   head() {
-    const seo = this.data?.seo || {};
-    const assets = this.data?.assets || {};
+    const data = this.data || {};
+    const seo = data?.seo || {};
+    const assets = data?.assets || {};
+
+    const host = process.server
+      ? this.$ssrContext?.req?.headers?.["x-forwarded-host"] ||
+      this.$ssrContext?.req?.headers?.host
+      : window.location.host;
+
+    const baseUrl = `https://${host}`;
+
+    const abs = (url) =>
+      url ? new URL(url, baseUrl).href : "";
 
     return {
-      title: seo?.title || "Aguarde...",
+      title: seo?.title || "Aguarde..",
+
       meta: [
         {
+          hid: "description",
+          name: "description",
+          content: seo?.description || "",
+        },
+        {
+          hid: "theme-color",
           name: "theme-color",
-          content: seo?.["theme-color"] || "var(--primary)",
+          content: seo?.["theme-color"] || "#000000",
         },
         {
-          property: "og:locale",
-          content: seo?.locale || "pt_BR",
-        },
-        {
+          hid: "og:title",
           property: "og:title",
           content: seo?.title || "",
         },
         {
+          hid: "og:description",
           property: "og:description",
           content: seo?.description || "",
         },
         {
+          hid: "og:image",
           property: "og:image",
-          content: seo?.["image-url"] || "",
+          content: abs(seo?.["image-url"]),
         },
         {
-          name: "twitter:site",
-          content: seo?.["twitter-site"] || "",
+          hid: "og:url",
+          property: "og:url",
+          content: baseUrl,
         },
         {
-          name: "twitter:title",
-          content: seo?.["twitter-title"] || "",
-        },
-        {
-          name: "twitter:description",
-          content: seo?.["twitter-description"] || "",
-        },
-        {
-          property: "twitter:image",
-          content: seo?.["twitter-image-url"] || seo?.["image-url"] || "",
+          hid: "og:locale",
+          property: "og:locale",
+          content: seo?.locale || "pt_BR",
         },
       ],
+
       link: [
         {
+          hid: "icon-32",
           rel: "icon",
-          type: "image/x-icon",
-          href: assets?.icon?.img32x32 || "",
-        },
-        {
-          rel: "icon",
-          type: "image/x-icon",
-          href: assets?.icon?.img32x32 || "",
-        },
-        {
-          rel: "icon",
-          type: "image/svg+xml",
           sizes: "32x32",
-          href: assets?.icon?.img32x32 || "",
+          href: abs(assets?.icon?.img32x32),
         },
         {
+          hid: "icon-192",
           rel: "icon",
-          type: "image/svg+xml",
-          sizes: "96x96",
-          href: assets?.icon?.img96x96 || "",
-        },
-        {
-          rel: "icon",
-          type: "image/svg+xml",
           sizes: "192x192",
-          href: assets?.icon?.img192x192 || "",
+          href: abs(assets?.icon?.img192x192),
         },
         {
+          hid: "apple-touch",
           rel: "apple-touch-icon",
-          sizes: "300x300",
-          href: assets?.icon?.img300x300 || "",
-        },
-        {
-          rel: "icon",
-          type: "image/svg+xml",
-          sizes: "512x512",
-          href: assets?.icon?.img512x512 || "",
+          href: abs(assets?.icon?.img300x300),
         },
       ],
     };
-  },
-  computed: {
-    HostName() {
-      return "aqpago-whitelabel.vercel.app" ;
-      // return "whitelabel.aqpago.app" ;
-
-      return process.client ? window.location.host : null;
-    },
-  },
-  created() {
-    this.GetThemeId();
   },
 };
 </script>
@@ -257,21 +179,9 @@ export default {
   border: 3px solid var(--primaryop);
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: var(--primary);
-}
-
 html {
   scrollbar-width: thin;
   scrollbar-color: var(--primary) var(--primaryop);
-}
-
-body {
-  scrollbar-face-color: var(--primary);
-  scrollbar-track-color: var(--primaryop);
-  scrollbar-arrow-color: var(--primaryop);
-  scrollbar-shadow-color: var(--primary);
-  scrollbar-dark-shadow-color: var(--primary);
 }
 
 .loader_main_theme {

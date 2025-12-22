@@ -1,14 +1,11 @@
 <template>
   <div>
     <div class="card_default pa-5 mb-5">
-      <div class="d-flex justify-space-between align-center mb-7">
+      <div class="d-flex justify-space-between align-center mb-10">
         <div>
           <div class="d-flex">
             <div>
-              <i
-                class="ri-palette-line mr-2"
-                style="font-size: 20px; color: rgb(82, 82, 82)"
-              ></i>
+              <i class="ri-palette-line mr-2" style="font-size: 20px; color: rgb(82, 82, 82)"></i>
             </div>
             <div>
               <h2>Temas e Personalização do Painel White Label</h2>
@@ -19,24 +16,45 @@
             </div>
           </div>
         </div>
-        <v-btn to="/painel/theme/created" class="btn_default" color="primary"
-          >Criar theme</v-btn
-        >
+        <v-btn to="/painel/theme/created" class="btn_default" color="primary">Criar theme</v-btn>
       </div>
-      <div>
-        <div v-if="!loading">
-          <V2ThemeListaMain
-            :ListThemes="ListThemes"
-            :ArrayListThemes="ArrayListThemes"
-            :page="page"
-            :loadingList="loading"
-            @update:PageChange="Change_Setpage"
-            v-if="ArrayListThemes.length > 0"
-          />
-          <V2ThemeListaNolistMain v-else />
+      <div class="d-flex justify-space-between ">
+        <div style="position: sticky; top: 10px; height: fit-content;">
+          <V2ThemeIconDns :copybutton="copybutton" />
+          <div class="mx-auto text-center">
+            <div @click="copy(dns)" class="px-3 py-2 my-4 "
+              style="background: var(--primaryop); display: inline-block; border-radius: 5px; font-size: 13px; cursor: pointer;">
+              <b>DNS:</b> {{ dns }} <v-btn @click="copy(dns)" icon color="primary" class="ml-1 pa-1"><i
+                  class="ri-file-copy-line"></i></v-btn>
+            </div>
+          </div>
+          <div class="card_dns ml-6">
+            <h4 class="mb-2 primary--text">Conecte seu domínio ao seu Whitelabel</h4>
+            <p>Para que seu Whitelabel funcione corretamente, é necessário apontar o DNS do seu domínio para nossa
+              infraestrutura. A alteração é feita diretamente no provedor onde seu domínio foi registrado (ex:
+              Registro.br, GoDaddy,
+              Cloudflare).</p>
+            <p><b>Essa configuração permite que:</b></p>
+            <ul class="mb-2">
+              <li>Seu domínio exiba a plataforma com sua marca;</li>
+              <li>Os serviços funcionem com segurança e estabilidade;</li>
+              <li>Seus clientes acessem o sistema usando seu próprio endereço.</li>
+            </ul>
+            <p>A alteração é feita diretamente no provedor onde seu domínio foi registrado (ex: Registro.br, GoDaddy,
+              Cloudflare).</p>
+          </div>
         </div>
-        <V2DashboardListaLoadingMain v-else />
+        <div class="ml-4">
+          <div v-if="!loading">
+            <V2ThemeListaMain :ListThemes="ListThemes" :ArrayListThemes="ArrayListThemes" :page="page"
+              :loadingList="loading" @update:PageChange="Change_Setpage" v-if="ArrayListThemes.length > 0" />
+            <V2ThemeListaNolistMain v-else />
+          </div>
+          <V2DashboardListaLoadingMain v-else />
+        </div>
       </div>
+
+
     </div>
   </div>
 </template>
@@ -46,6 +64,8 @@ export default {
   layout: "PainelLayout",
   data() {
     return {
+      dns: "34.151.221.30",
+      copybutton: false,
       ListThemes: [
         {
           id: 32193021321,
@@ -506,6 +526,43 @@ export default {
       this.page.to = data.page;
       return this.ReturnListTheme();
     },
+    copy(txt) {
+      var m = document;
+      txt = m.createTextNode(txt);
+      var w = window;
+      var b = m.body;
+      b.appendChild(txt);
+      if (b.createTextRange) {
+        var d = b.createTextRange();
+        d.moveToElementText(txt);
+        d.select();
+        m.execCommand("copy");
+      } else {
+        var d = m.createRange();
+        var g = w.getSelection;
+        d.selectNodeContents(txt);
+        g().removeAllRanges();
+        g().addRange(d);
+        m.execCommand("copy");
+        g().removeAllRanges();
+      }
+      txt.remove();
+      this.blinkCopyButton()
+    },
+    blinkCopyButton() {
+      let count = 0
+
+      const interval = setInterval(() => {
+        this.copybutton = !this.copybutton
+        count++
+
+        // 2 piscadas = 4 trocas (true/false)
+        if (count === 5) {
+          clearInterval(interval)
+          this.copybutton = false // estado final desejado
+        }
+      }, 250) // velocidade do piscar
+    }
   },
 };
 </script>
@@ -517,14 +574,17 @@ export default {
   background: #fff;
   width: 100%;
   display: block;
+
   h2 {
     color: var(--content-primary, #131313);
     font-size: 16px;
     font-style: normal;
     font-weight: 600;
-    line-height: 24px; /* 150% */
+    line-height: 24px;
+    /* 150% */
     letter-spacing: -0.32px;
   }
+
   h5 {
     font-size: 14px;
     font-style: normal;
@@ -533,6 +593,20 @@ export default {
     color: var(--content-tertiary, #989898);
     line-height: 20px;
     letter-spacing: -0.28px;
+  }
+
+  .card_dns {
+    max-width: 450px;
+
+    p {
+      font-size: 13px;
+    }
+
+    ul {
+      li {
+        font-size: 14px;
+      }
+    }
   }
 }
 </style>

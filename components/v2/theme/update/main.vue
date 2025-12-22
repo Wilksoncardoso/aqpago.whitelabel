@@ -655,88 +655,113 @@ export default {
       }
     },
     // =========== UPLOAD GENÉRICO ===========
-    async uploadAsset(key, file) {
-      if (!file) return;
+      addCacheBust(url) {
+    if (!url) return url;
+    const sep = url.includes("?") ? "&" : "?";
+    return `${url}${sep}t=${Date.now()}`;
+  },
 
-      if (!this.SetForm.themeId || !this.SetForm.configId) {
-        this.error = "themeId/configId não encontrados para upload de assets.";
-        return;
-      }
+  async uploadAsset(key, file) {
+    if (!file) return;
 
-      const fd = new FormData();
-      fd.append("themeId", this.SetForm.themeId);
-      fd.append("configId", this.SetForm.configId);
-      fd.append("file", file);
+    if (!this.SetForm.themeId || !this.SetForm.configId) {
+      this.error = "themeId/configId não encontrados para upload de assets.";
+      return;
+    }
 
-      try {
-        this.loading = true;
-        this.error = null;
+    const fd = new FormData();
+    fd.append("themeId", this.SetForm.themeId);
+    fd.append("configId", this.SetForm.configId);
+    fd.append("file", file);
 
-        const { data } = await this.$axios.post(
-          `/admin/whitelabel/assets/upload?key=${encodeURIComponent(key)}`,
-          fd,
-          {
-            headers: { "Content-Type": "multipart/form-data" },
-            onUploadProgress: (e) => {
-              if (e.total) {
-                this.progress = Math.round((e.loaded * 100) / e.total);
-              }
-            },
-          }
-        );
+    try {
+      this.loading = true;
+      this.error = null;
 
-        // Pega a URL padrão do novo padrão de resposta
-        const urlFromBody = data?.body?.urls?.url;
+      const { data } = await this.$axios.post(
+        `/admin/whitelabel/assets/upload?key=${encodeURIComponent(key)}`,
+        fd,
+        {
+          headers: { "Content-Type": "multipart/form-data" },
+          onUploadProgress: (e) => {
+            if (e.total) {
+              this.progress = Math.round((e.loaded * 100) / e.total);
+            }
+          },
+        }
+      );
 
-        if (urlFromBody) {
-          // Usa a key enviada na requisição para setar no SetForm
-          this.setAssetUrlByKey(key, urlFromBody);
+      const urlsObj = data?.body?.urls || data?.urls || null;
+      const singleUrl = data?.body?.url || data?.url || null;
+
+      console.log(
+        "uploadAsset key=",
+        key,
+        "urlsObj=",
+        urlsObj,
+        "singleUrl=",
+        singleUrl
+      );
+
+      let finalUrl = null;
+
+      // 1) Caso: body.urls é um objeto (ex: { url: 'https://...' } ou { 'assets.icon.img512x512': 'https://...' })
+      if (urlsObj && typeof urlsObj === "object") {
+        if (urlsObj.url) {
+          // formato { urls: { url: 'https://...' } }
+          finalUrl = urlsObj.url;
+        } else if (urlsObj[key]) {
+          // formato { urls: { 'assets.initcomp.img': 'https://...' } }
+          finalUrl = urlsObj[key];
         } else {
-          // Fallback defensivo se um dia voltar com outro formato
-          const urls = data?.body?.urls || data?.urls;
-          if (urls && typeof urls === "object") {
-            Object.keys(urls).forEach((assetKey) => {
-              this.setAssetUrlByKey(assetKey, urls[assetKey]);
-            });
-          } else if (data?.body?.url || data?.url) {
-            this.setAssetUrlByKey(key, data.body?.url || data.url);
-          }
+          // fallback: pega a primeira key do objeto
+          const firstKey = Object.keys(urlsObj)[0];
+          finalUrl = urlsObj[firstKey];
         }
+      }
+      // 2) Caso: veio só uma URL simples em body.url ou data.url (STRING)
+      else if (singleUrl) {
+        finalUrl = singleUrl;
+      }
 
+      if (finalUrl) {
+        this.setAssetUrlByKey(key, this.addCacheBust(finalUrl));
         this.UpdateStoreSetform();
-      } catch (err) {
-        this.error =
-          err?.response?.data?.mensagem ||
-          err?.response?.data?.message ||
-          err?.message ||
-          "Erro ao enviar arquivo";
-        this.$toast.error(this.error);
-      } finally {
-        this.loading = false;
-        this.progress = 0;
+      } else {
+        console.warn("Nenhuma URL encontrada na resposta do upload", data);
       }
-    },
+    } catch (err) {
+      this.error =
+        err?.response?.data?.mensagem ||
+        err?.response?.data?.message ||
+        err?.message ||
+        "Erro ao enviar arquivo";
+      this.$toast.error(this.error);
+    } finally {
+      this.loading = false;
+      this.progress = 0;
+    }
+  },
 
-    setAssetUrlByKey(assetKey, url) {
-      if (!this.SetForm) return;
+  setAssetUrlByKey(assetKey, url) {
+    if (!this.SetForm) return;
 
-      // Se seus assets ficam dentro de payload; ajuste se for direto no SetForm
-      const root = this.SetForm.payload || this.SetForm;
+    const root = this.SetForm.payload || this.SetForm;
 
-      const parts = assetKey.split(".");
-      let target = root;
+    const parts = assetKey.split(".");
+    let target = root;
 
-      for (let i = 0; i < parts.length - 1; i++) {
-        const p = parts[i];
-        if (!target[p]) {
-          this.$set(target, p, {});
-        }
-        target = target[p];
+    for (let i = 0; i < parts.length - 1; i++) {
+      const p = parts[i];
+      if (!target[p]) {
+        this.$set(target, p, {});
       }
+      target = target[p];
+    }
 
-      const lastKey = parts[parts.length - 1];
-      this.$set(target, lastKey, url);
-    },
+    const lastKey = parts[parts.length - 1];
+    this.$set(target, lastKey, url);
+  },
 
     // =========== HANDLERS FILE INPUTS ===========
     async onChangeFavicon(file) {

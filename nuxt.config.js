@@ -199,14 +199,12 @@ export default {
     },
   },
 
-  router: {},
-
   loading: {
     height: "3px",
   },
 
   router: {
-    middleware: ['auth-expiration']
+    middleware: ['auth-expiration',"theme"]
   },
   auth: {
     strategies: {
