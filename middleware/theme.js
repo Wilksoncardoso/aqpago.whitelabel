@@ -5,9 +5,8 @@ export default async function themeMiddleware({ app, store, req, route }) {
       ? (req?.headers?.["x-forwarded-host"] || req?.headers?.host)
       : window.location.host
 
-  // opcional: permitir override por query (?domain=...)
-  const domain = 'aqpago-whitelabel.vercel.app'
-//   const domain = (route?.query?.domain || host || "").toString().trim()
+  // const domain = 'aqpago-whitelabel.vercel.app'
+  const domain = (route?.query?.domain || host || "").toString().trim()
 
   // se por algum motivo não tiver domain, não quebra SSR
   if (!domain) return
