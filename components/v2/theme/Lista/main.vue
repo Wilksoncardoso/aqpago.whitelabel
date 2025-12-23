@@ -1,5 +1,6 @@
 <template>
   <div>
+  
     <div class="d-flex flex-wrap cards_items_themes">
       <div
         class="cards_item mx-2 my-2"

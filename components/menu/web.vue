@@ -122,7 +122,7 @@
         </div>
       </div>
 
-      <div v-else class="white--text">Menu Carregando...</div>
+      <div v-else class="white--text"><MenuLoadingMain/></div>
       <MenuWorkspaceMain
         ref="modalWorkspaceMain"
         :data="data__user?.workspace"

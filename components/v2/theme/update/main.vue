@@ -498,7 +498,7 @@ export default {
             "Descrição de app deve ter pelo menos 5 caracteres",
         ],
       },
-      SetForm: {
+       SetForm: {
         themeId: "",
         configId: "",
         workspaceId: "",
@@ -528,14 +528,14 @@ export default {
             },
             menuleft: {
               background: {
-                primary: "",
-                secondary: "",
+                primary: "#000000",
+                secondary: "#000000",
               },
               font: {
-                color: "",
+                color: "#ffffff",
               },
               title: {
-                color: "",
+                color: "#b3b3b3",
               },
             },
           },
@@ -617,7 +617,6 @@ export default {
   methods: {
     ...mapActions("theme", ["salvarSetform", "deleteSetform"]),
     clearFavicon(variable) {
-      console.log('Clearing favicon:', variable);
       this.$set(this.SetForm, variable, '')
     },
     VariableInitUpdate() {
@@ -694,14 +693,6 @@ export default {
       const urlsObj = data?.body?.urls || data?.urls || null;
       const singleUrl = data?.body?.url || data?.url || null;
 
-      console.log(
-        "uploadAsset key=",
-        key,
-        "urlsObj=",
-        urlsObj,
-        "singleUrl=",
-        singleUrl
-      );
 
       let finalUrl = null;
 

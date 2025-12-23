@@ -79,7 +79,7 @@ export default {
     return_extrato_conta_digital() {
       this.error = "";
       this.$axios
-        .$get("/user-moviments?limit=6")
+        .$get("/user-moviments?limit=7")
         .then((response) => {
           this.list_conta_digital = response.data;
         })

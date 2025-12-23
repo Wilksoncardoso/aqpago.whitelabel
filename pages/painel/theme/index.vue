@@ -1,6 +1,13 @@
 <template>
   <div>
     <div class="card_default pa-5 mb-5">
+      <v-snackbar v-model="snackbar">
+        <div class="d-flex">
+          <i class="ri-checkbox-circle-fill mr-2  "></i>
+          <div>Copiado</div>
+        </div>
+
+      </v-snackbar>
       <div class="d-flex justify-space-between align-center mb-10">
         <div>
           <div class="d-flex">
@@ -44,13 +51,13 @@
               Cloudflare).</p>
           </div>
         </div>
-        <div class="ml-4">
+        <div class="ml-4" style="width: 100%; max-width: 650px;">
           <div v-if="!loading">
             <V2ThemeListaMain :ListThemes="ListThemes" :ArrayListThemes="ArrayListThemes" :page="page"
               :loadingList="loading" @update:PageChange="Change_Setpage" v-if="ArrayListThemes.length > 0" />
             <V2ThemeListaNolistMain v-else />
           </div>
-          <V2DashboardListaLoadingMain v-else />
+          <V2ThemeListaLoadingMain v-else />
         </div>
       </div>
 
@@ -60,12 +67,14 @@
 </template>
 
 <script>
+
 export default {
   layout: "PainelLayout",
   data() {
     return {
       dns: "34.151.221.30",
       copybutton: false,
+      snackbar: false,
       ListThemes: [
         {
           id: 32193021321,
@@ -481,7 +490,7 @@ export default {
     this.ReturnListTheme();
   },
   methods: {
-    ReturnListTheme() {
+    async ReturnListTheme() {
       this.loading = true;
 
       const initialDate = this.filtro.date
@@ -527,6 +536,7 @@ export default {
       return this.ReturnListTheme();
     },
     copy(txt) {
+      this.snackbar = true
       var m = document;
       txt = m.createTextNode(txt);
       var w = window;
@@ -548,6 +558,10 @@ export default {
       }
       txt.remove();
       this.blinkCopyButton()
+      setTimeout(() => {
+        this.snackbar = !this.snackbar
+      }, 2000);
+
     },
     blinkCopyButton() {
       let count = 0

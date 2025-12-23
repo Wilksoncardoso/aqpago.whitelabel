@@ -28,6 +28,43 @@ export default {
       const date = this.$moment(data).format("DD/MM/YYYY");
       return date;
     },
+    normalizeToRgbNumbers(color) {
+      if (!color) return '0,0,0'
+
+      // já no formato "0,0,0"
+      if (/^\d{1,3},\d{1,3},\d{1,3}$/.test(color)) {
+        return color
+      }
+
+      // rgb(...) ou rgba(...)
+      if (color.startsWith('rgb')) {
+        const values = color
+          .replace(/rgba?\(/, '')
+          .replace(')', '')
+          .split(',')
+          .map(v => v.trim())
+
+        return `${values[0]},${values[1]},${values[2]}`
+      }
+
+      // hex
+      if (color.startsWith('#')) {
+        let hex = color.replace('#', '')
+
+        if (hex.length === 3) {
+          hex = hex.split('').map(c => c + c).join('')
+        }
+
+        const r = parseInt(hex.substring(0, 2), 16)
+        const g = parseInt(hex.substring(2, 4), 16)
+        const b = parseInt(hex.substring(4, 6), 16)
+
+        return `${r},${g},${b}`
+      }
+
+      return '0,0,0'
+    },
+
     downloadPdf() {
       const doc = new this.$jsPDF("p", "pt", "a4");
 
@@ -80,7 +117,7 @@ export default {
       ];
 
       doc.autoTable({
-        head: [["Relatório AQPago pagamentos"]],
+        head: [["Relatório " + this.NomeEmpresa]],
         startY: 5,
         margin: { top: 5, right: 5, bottom: 5, left: 5 },
         headStyles: {
@@ -382,7 +419,7 @@ export default {
       ];
 
       // Adiciona o título na primeira linha
-      this.$XLSX.utils.sheet_add_aoa(ws, [[" Relatório AQPago pagamentos"]], {
+      this.$XLSX.utils.sheet_add_aoa(ws, [[" Relatório " + this.NomeEmpresa]], {
         origin: "A1",
       });
       this.$XLSX.utils.sheet_add_aoa(ws, [["Extrato do período:"]], {
@@ -469,7 +506,7 @@ export default {
                     <CODE>0</CODE>
                         <SEVERITY>INFO</SEVERITY>
                     </STATUS>
-                    <ORG>AQPAGO PAGAMENTOS LTDA</ORG>
+                    <ORG> ${this.NomeEmpresa}</ORG>
                 </SONRS>
             </SIGNONMSGSRSV1>
             <BANKMSGSRSV1>
@@ -481,17 +518,15 @@ export default {
                     <ACCTTYPE>CHECKING</ACCTTYPE>
                     </BANKACCTFROM>
                     <BANKTRANLIST>
-                    <DTSTART>${
-                      this.$moment(this.form.initial_date).format("YYYYMMDD") +
-                      "000000"
-                    }</DTSTART>
-                    <DTEND>${
-                      this.$moment(this.form.final_date).format("YYYYMMDD") +
-                      "000000"
-                    }</DTEND>
+                    <DTSTART>${this.$moment(this.form.initial_date).format("YYYYMMDD") +
+        "000000"
+        }</DTSTART>
+                    <DTEND>${this.$moment(this.form.final_date).format("YYYYMMDD") +
+        "000000"
+        }</DTEND>
                     ${transactions
-                      .map(
-                        (transaction) => `
+          .map(
+            (transaction) => `
                     <STMTTRN>
                         <TRNTYPE>${transaction.tipo}</TRNTYPE>
                         <DTPOSTED>${transaction.data}</DTPOSTED>
@@ -499,8 +534,8 @@ export default {
                         <FITID>${transaction.id}</FITID>
                         <MEMO>${transaction.description}</MEMO>
                     </STMTTRN>`
-                      )
-                      .join("")}
+          )
+          .join("")}
                     </BANKTRANLIST>
                 </STMTRS>
                 </STMTTRNRS>
@@ -538,6 +573,12 @@ export default {
     },
   },
   computed: {
+    NomeEmpresa() {
+      return this.$store?.state?.theme?.data?.data?.business?.name || null;
+    },
+    CorEmpresa() {
+      return this.$store?.state?.theme?.data?.styles?.color?.primary || null;
+    },
     name_store() {
       var full__name =
         this.return__user?.nome + " " + this.return__user?.sobrenome;

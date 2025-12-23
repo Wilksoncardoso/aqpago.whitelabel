@@ -38,32 +38,15 @@ export default {
       const menu = data?.styles?.menuleft;
 
       if (!color) return;
-
-      // Vuetify theme
-
-
       // CSS vars (client only)
       if (!process.client) return;
+      if (!this.$vuetify || !this.$vuetify.theme) return;
+      const primary = this.normalizeColor(color?.primary);
+      if (!primary) return;
+
+
 
       const rootStyle = document.documentElement.style;
-
-      this.$nextTick(() => {
-        // seta para light e dark
-        this.$vuetify.theme.themes.light.primary = this.normalizeColor(color.primary);
-        this.$vuetify.theme.themes.dark.primary = this.normalizeColor(color.primary);
-
-        // força o tema atual a refletir imediatamente (bem importante)
-        Object.assign(this.$vuetify.theme.currentTheme, {
-            primary: this.normalizeColor(color.primary),
-        });
-
-        // se você usa customProperties, isso ajuda a refletir também
-        // (não quebra se não tiver)
-        if (this.$vuetify.theme.options) {
-          this.$vuetify.theme.options.customProperties = true;
-        }
-      });
-
       rootStyle.setProperty("--primary", this.normalizeColor(color.primary));
       rootStyle.setProperty("--primary_svg", this.normalizeColor(color.primary));
       rootStyle.setProperty("--primaryop", this.normalizeColor(color.primary_op));
@@ -74,8 +57,28 @@ export default {
       rootStyle.setProperty("--background-primary", this.normalizeColor(menuBackground?.primary));
       rootStyle.setProperty("--background-secondary", this.normalizeColor(menuBackground?.secondary));
 
+
+      this.$nextTick(() => {
+
+        this.$vuetify.theme.themes.light.primary = primary;
+        this.$vuetify.theme.themes.dark.primary = primary;
+        Object.assign(this.$vuetify.theme.currentTheme, {
+          primary,
+        });
+        if (this.$vuetify.theme.options) {
+          this.$vuetify.theme.options.customProperties = true;
+        }
+      });
     },
 
+    ColorCreatedVuetify(color) {
+      this.$vuetify.theme.themes.light.primary = this.normalizeColor(
+        color.primary
+      );
+      this.$vuetify.theme.themes.dark.primary = this.normalizeColor(
+        color.primary
+      );
+    },
     normalizeColor(hex) {
       if (!hex) return hex;
       if (hex.length === 9) return hex.substring(0, 7); // remove alpha

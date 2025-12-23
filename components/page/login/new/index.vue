@@ -70,7 +70,7 @@
       </template>
     </v-text-field>
     <div class="d-flex justify-end mt-4 mb-9">
-      <nuxt-link class="reset_form primary--text" to="/password-reset"
+      <nuxt-link class="reset_form " to="/password-reset" style="color:var(--primary)"
         >Não consigo acessar</nuxt-link
       >
     </div>

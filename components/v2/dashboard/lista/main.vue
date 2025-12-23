@@ -168,7 +168,7 @@
         v-else
         class="card_one_main cards_style pa-5 ml-2 d-flex align-center justify-center"
       >
-        <V2DashboardLinkpayMain />
+        <V2DashboardLinkpayMain :loading_saldo="loading?.extrato"/>
       </div>
     </div>
   </div>
