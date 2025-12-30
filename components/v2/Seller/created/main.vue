@@ -8,6 +8,10 @@
             ><i class="ri-close-line"
           /></v-btn>
         </div>
+        {{ loading }}
+        <v-btn @click="endereco__data_business()">
+          teste
+        </v-btn>
         <v-stepper v-model="page" vertical style="box-shadow: none">
           <!-- STEP 1: Empresa -->
           <v-stepper-step :complete="page > 1" step="1"
@@ -375,7 +379,7 @@ export default {
   directives: { mask },
   data() {
     return {
-      page: 1,
+      page: 2,
       dialog: false,
       valid1: false,
       valid2: false,
@@ -402,7 +406,7 @@ export default {
         mcc: "0",
         statement_descriptor: "",
         business_address: {
-          zip_code: "",
+          zip_code: "67010250",
           street: "",
           number: "",
           city: "",
@@ -600,8 +604,11 @@ export default {
     },
     // CEP empresa
     return_api_endereco_business(v) {
-      if (v && String(v).length === 9)
-        setTimeout(this.endereco__data_business, 400);
+      if(!this.loading){
+      if (v && String(v).length === 9){
+          setTimeout(this.endereco__data_business, 400);
+        }
+      }
     },
     async endereco__data_business() {
       try {
@@ -625,8 +632,11 @@ export default {
     },
     // CEP proprietário (agora no passo 4)
     return_api_endereco_owner(v) {
-      if (v && String(v).length === 9)
-        setTimeout(this.endereco__data_owner, 400);
+      if(!this.loading){
+      if (v && String(v).length === 9){
+          setTimeout(this.endereco__data_owner, 400);
+        }
+      }
     },
     async endereco__data_owner() {
       try {
@@ -661,7 +671,7 @@ export default {
       try {
         this.loading = true;
         const res = await this.$axios.$get(
-          `https://viacep.com.br/ws/${this.form.business_address.zip_code}/json/`
+          `https://viacep.com.br/ws/${this.form.business_address.zip_code}/json/?token=none`
         );
         this.loading = false;
         if (res?.erro)
@@ -687,11 +697,12 @@ export default {
             const response = await this.$axios.get(
               `/accreditation?page=1&ein=${this.form.ein}`
             );
-            if (response.data.data.length > 0) {
+            if (response?.data?.data?.length > 0) {
               this.error = "CNPJ já cadastrado.";
               this.$toast.error(this.error);
               this.isCnpjRegistered = true;
             } else {
+              console.log("CNPJ não cadastrado");
               this.error = null;
               this.isCnpjRegistered = false;
             }
@@ -729,7 +740,7 @@ export default {
       if (this.isCnpjRegistered) {
         return "CNPJ já cadastrado na base";
       }
-      return ''
+      return true
     },
   },
 };

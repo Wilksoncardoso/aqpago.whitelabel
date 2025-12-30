@@ -87,6 +87,7 @@
 
           <!-- submneu component end -->
         </div>
+        {{ theme?.data?.business?.whatsapp }}
         <div class="menu_contact">
           <div class="pa-4 card_main_contact ma-4 ">
             <h5 class="mb-4">Teve algum problema ou precisa de suporte?</h5>
@@ -101,7 +102,7 @@
               </v-btn>
               <v-btn
                 target="_blank"
-                href="tel:+08009898100"
+                :href="'tel:' + theme?.data?.business?.phone"
                 color="primary"
                 icon
                 class="pa-2 button_icon_contact mr-2"
@@ -110,7 +111,11 @@
               </v-btn>
               <v-btn
                 target="_blank"
-                href="https://wa.me/message/QGT7ZBSXHMGGG1"
+                  :href="
+                'https://api.whatsapp.com/send/?phone=55' +
+                theme?.data?.business?.whatsapp +
+                '&type=phone_number&app_absent=0'
+              "
                 color="primary"
                 icon
                 class="pa-2 button_icon_contact mr-2"

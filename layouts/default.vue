@@ -17,4 +17,8 @@ export default {
   },
 };
 </script>
-<style lang="scss"></style>
+<style lang="scss">
+.v-input.v-input--is-focused .v-input__control .v-input__slot {
+  border: 2px solid var(--primary) !important;
+}
+</style>
