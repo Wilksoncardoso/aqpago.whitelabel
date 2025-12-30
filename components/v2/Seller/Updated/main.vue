@@ -627,16 +627,16 @@ export default {
       try {
         this.loading = true;
         const res = await this.$axios.$get(
-          `https://viacep.com.br/ws/${this.form.business_address.zip_code}/json/`
+          `https://brasilapi.com.br/api/cep/v1/${this.form.business_address.zip_code}`
         );
         this.loading = false;
         if (res?.erro)
           return (this.error = "Endereço da empresa não localizado!");
         Object.assign(this.form.business_address, {
-          street: res.logradouro || "",
-          district: res.bairro || "",
-          city: res.localidade || "",
-          state: res.uf || "",
+         street: res.street || "",
+          district: res.neighborhood || "",
+          city: res.city || "",
+          state: res.state || "",
         });
       } catch {
         this.loading = false;
@@ -653,16 +653,16 @@ export default {
       try {
         this.loading = true;
         const res = await this.$axios.$get(
-          `https://viacep.com.br/ws/${this.form.owner.address.zip_code}/json/`
+          `https://brasilapi.com.br/api/cep/v1/${this.form.owner.address.zip_code}`
         );
         this.loading = false;
         if (res?.erro)
           return (this.error = "Endereço do proprietário não localizado!");
         Object.assign(this.form.owner.address, {
-          street: res.logradouro || "",
-          district: res.bairro || "",
-          city: res.localidade || "",
-          state: res.uf || "",
+         street: res.street || "",
+          district: res.neighborhood || "",
+          city: res.city || "",
+          state: res.state || "",
         });
       } catch {
         this.loading = false;

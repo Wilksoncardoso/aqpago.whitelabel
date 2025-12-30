@@ -8,10 +8,7 @@
             ><i class="ri-close-line"
           /></v-btn>
         </div>
-        {{ loading }}
-        <v-btn @click="endereco__data_business()">
-          teste
-        </v-btn>
+
         <v-stepper v-model="page" vertical style="box-shadow: none">
           <!-- STEP 1: Empresa -->
           <v-stepper-step :complete="page > 1" step="1"
@@ -379,7 +376,7 @@ export default {
   directives: { mask },
   data() {
     return {
-      page: 2,
+      page: 1,
       dialog: false,
       valid1: false,
       valid2: false,
@@ -610,26 +607,27 @@ export default {
         }
       }
     },
-    async endereco__data_business() {
-      try {
-        this.loading = true;
-        const res = await this.$axios.$get(
-          `https://viacep.com.br/ws/${this.form.business_address.zip_code}/json/`
-        );
-        this.loading = false;
-        if (res?.erro)
-          return (this.error = "Endereço da empresa não localizado!");
-        Object.assign(this.form.business_address, {
-          street: res.logradouro || "",
-          district: res.bairro || "",
-          city: res.localidade || "",
-          state: res.uf || "",
-        });
-      } catch {
-        this.loading = false;
-        this.error = "Erro ao buscar CEP da empresa.";
-      }
-    },
+    // async endereco__data_business() {
+    //   try {
+    //     this.loading = true;
+    //     const res = await this.$axios.$get(
+    //       `https://opencep.com/v1/${this.form.business_address.zip_code}`
+    //       // `https://viacep.com.br/ws/${this.form.business_address.zip_code}/json/`
+    //     );
+    //     this.loading = false;
+    //     if (res?.erro)
+    //       return (this.error = "Endereço da empresa não localizado!");
+    //     Object.assign(this.form.business_address, {
+    //       street: res.logradouro || "",
+    //       district: res.bairro || "",
+    //       city: res.localidade || "",
+    //       state: res.uf || "",
+    //     });
+    //   } catch {
+    //     this.loading = false;
+    //     this.error = "Erro ao buscar CEP da empresa.";
+    //   }
+    // },
     // CEP proprietário (agora no passo 4)
     return_api_endereco_owner(v) {
       if(!this.loading){
@@ -642,16 +640,17 @@ export default {
       try {
         this.loading = true;
         const res = await this.$axios.$get(
-          `https://viacep.com.br/ws/${this.form.owner.address.zip_code}/json/`
+          `https://brasilapi.com.br/api/cep/v1/${this.form.owner.address.zip_code}`
+
         );
         this.loading = false;
         if (res?.erro)
           return (this.error = "Endereço do proprietário não localizado!");
         Object.assign(this.form.owner.address, {
-          street: res.logradouro || "",
-          district: res.bairro || "",
-          city: res.localidade || "",
-          state: res.uf || "",
+          street: res.street || "",
+          district: res.neighborhood || "",
+          city: res.city || "",
+          state: res.state || "",
         });
       } catch {
         this.loading = false;
@@ -671,16 +670,16 @@ export default {
       try {
         this.loading = true;
         const res = await this.$axios.$get(
-          `https://viacep.com.br/ws/${this.form.business_address.zip_code}/json/?token=none`
+          `https://brasilapi.com.br/api/cep/v1/${this.form.business_address.zip_code}`
         );
         this.loading = false;
         if (res?.erro)
           return (this.error = "Endereço da empresa não localizado!");
         Object.assign(this.form.business_address, {
-          street: res.logradouro || "",
-          district: res.bairro || "",
-          city: res.localidade || "",
-          state: res.uf || "",
+          street: res.street || "",
+          district: res.neighborhood || "",
+          city: res.city || "",
+          state: res.state || "",
         });
       } catch {
         this.loading = false;
