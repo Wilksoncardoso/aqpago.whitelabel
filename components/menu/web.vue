@@ -87,7 +87,6 @@
 
           <!-- submneu component end -->
         </div>
-        {{ theme?.data?.business?.whatsapp }}
         <div class="menu_contact">
           <div class="pa-4 card_main_contact ma-4 ">
             <h5 class="mb-4">Teve algum problema ou precisa de suporte?</h5>
