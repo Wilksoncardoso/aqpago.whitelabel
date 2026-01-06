@@ -161,8 +161,7 @@
             <div><icon__share__compartilhar /></div>
             <div class="label__compartilhar">Compartilhar</div>
           </div>
-          <share__compartilhar :link="linkpayment + '/linkpay/?value=' + body.hash_id" :value="body.valor" />
-          {{ body.hash_id }}
+          <share__compartilhar :link="linkpayment + '/linkpay/?value=' + body.invoice_id" :value="body.valor" />
           <v-btn
             color="primary"
             to="/painel/link_payment/create"

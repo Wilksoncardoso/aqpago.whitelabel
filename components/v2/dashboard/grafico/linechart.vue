@@ -210,7 +210,7 @@ export default {
 
       // Preencher os labels e os dados dos datasets
       this.chartData.labels = sortedDates.map((date) => {
-        return `${this.$moment(date).add(3, "hours").format("LT")}`;
+        return `${this.$moment(date).format("LT")}`;
       });
 
       this.chartData.datasets[0].data = sortedDates.map(

@@ -43,8 +43,8 @@
           class="d-flex justify-center copy__value "
           
         >
-        <v-btn @click="copy__item({ url: body.url })" class="pa-0" text>
-          <div class="d-flex">
+        <v-btn @click="copy__item(link + 'linkpay/?value='+ body.invoice_id)" class="px-2 py-1" text>
+          <div class="d-flex align-center">
             <div><icon__copy /></div>
           <div class="ml-2 link__url">https://aqbank.online/invoic....</div>
           </div>
@@ -63,13 +63,13 @@
         <div class="mb-2 titulo__compartilhar">Compartilhar</div>
       </div>
       <v-btn
-        class="icon__menu whatsapp"
+        class="icon__menu whatsapp "
         :href="
           'https://api.whatsapp.com/send?text=' +
           'Cobrança no valor de R$' +
           money__function(body.valor) +
           ' no link ' +
-          body.url
+          link + 'linkpay/?value='+ body.invoice_id
         "
         target="_blank"
       >
@@ -128,10 +128,14 @@ export default {
     icon__whatsapp,
     icon__telegram,
   },
-
+  computed:{
+    link() {
+      return this.$store?.state?.theme?.link || null;
+    },
+  },
   methods: {
-    copy__item() {
-      let url__copy = this.body.url;
+    copy__item(link) {
+      let url__copy = link;
       this.copy__label = "Copiado!";
       // Create a temporary textarea to hold the text to copy
       const textarea = document.createElement("textarea");

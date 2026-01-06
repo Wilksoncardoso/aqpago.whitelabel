@@ -13,55 +13,30 @@
             crédito e faça a melhor escolha para seu cliente.
           </p>
         </div>
-        <div class="card__plano">
+        <div class="card__plano mb-0">
           <div class="label">Plano</div>
-          <div class="d-flex align-center">
-            <div
-              class="px-2 py-2"
-              :style="{
-                background: theme?.styles?.menuleft?.background?.primary,
-                borderRadius: '10px',
-              }"
-            >
-              <img
-                :src="theme?.assets?.logotipe?.img"
-                :alt="theme?.data?.initcomp?.title"
-                style="width: 100px"
-                class="d-flex"
-              />
-            </div>
-
-            <div class="ml-2 plano__titulo">
-              {{ data__plano?.plano_assinatura }}
+          <div class="d-flex">
+            <div class="px-5 py-5 logo-comp" :style="{
+              borderRadius: '10px',
+            }">
+              <img :src="theme?.assets?.logotipe?.img" :alt="theme?.data?.initcomp?.title" style="width: 100px"
+                class="d-flex" />
             </div>
           </div>
+          <div class="plano__titulo mt-3">
+            {{ data__plano?.plano_assinatura }}
+          </div>
+          <v-divider class="my-4"></v-divider>
         </div>
-        <div class="card__input">
+        <div class="card__input mt-0">
           <div class="label">Informe o valor que deseja simular:</div>
-          <v-text-field
-            solo
-            label="R$ 0,00"
-            type="tel"
-            class="input__padrao"
-            v-money="money"
-            v-model="value"
-          >
+          <v-text-field solo label="R$ 0,00" type="tel" class="input__padrao" v-money="money" v-model="value">
           </v-text-field>
 
           <div class="label">Opções de pagamento:</div>
-          <v-select
-            solo
-            :items="option__payment"
-            item-text="label"
-            item-value="value"
-            filled
-            class="input__padrao"
-            label="Filled style"
-            v-model="simulador.method"
-            :menu-props="{ bottom: true, offsetY: true }"
-            @change="loading__bandeira(), method__type($event)"
-            v-if="!loading"
-          >
+          <v-select solo :items="option__payment" item-text="label" item-value="value" filled class="input__padrao"
+            label="Filled style" v-model="simulador.method" :menu-props="{ bottom: true, offsetY: true }"
+            @change="loading__bandeira(), method__type($event)" v-if="!loading">
             <template v-slot:append>
               <v__icon__select />
             </template>
@@ -69,39 +44,20 @@
 
           <div class="label">Bandeiras:</div>
 
-          <v-select
-            solo
-            class="bandeira__simulador input__padrao"
-            v-model="simulador.bandeira"
-            :items="bandeiras"
-            return-object
-            filled
-            label="Filled style"
-            :menu-props="{ bottom: true, offsetY: true }"
-            v-if="!loading"
-          >
+          <v-select solo class="bandeira__simulador input__padrao" v-model="simulador.bandeira" :items="bandeiras"
+            return-object filled label="Filled style" :menu-props="{ bottom: true, offsetY: true }" v-if="!loading">
             <template v-slot:item="{ item }">
               <div class="d-flex align-center flex-wrap" style="width: 412px">
                 <div v-for="data in getFirstValue(item)" :key="data">
-                  <component
-                    class="icon__select ma-2"
-                    :is="getBandComponent(data)"
-                  ></component>
+                  <component class="icon__select ma-2" :is="getBandComponent(data)"></component>
                 </div>
               </div>
             </template>
 
             <template v-slot:selection="{ item }">
-              <div
-                class="d-flex align-center flex-wrap"
-                style="width: 412px"
-                v-if="item != 'Banescard'"
-              >
+              <div class="d-flex align-center flex-wrap" style="width: 412px" v-if="item != 'Banescard'">
                 <div v-for="data in getFirstValue(item)" :key="data">
-                  <component
-                    class="icon__select ma-2"
-                    :is="getBandComponent(data)"
-                  ></component>
+                  <component class="icon__select ma-2" :is="getBandComponent(data)"></component>
                 </div>
               </div>
             </template>
@@ -110,28 +66,16 @@
               <v__icon__select />
             </template>
           </v-select>
-          <v-skeleton-loader
-            class="mx-auto"
-            width="100%"
-            type="list-item"
-            v-if="loading"
-          ></v-skeleton-loader>
+          <v-skeleton-loader class="mx-auto" width="100%" type="list-item" v-if="loading"></v-skeleton-loader>
           <div class="d-flex justify-space-between">
             <div>
-              <v-btn-toggle
-                v-model="simulador.payment"
-                mandatory
-                @change="loading__bandeira(), payment__type($event)"
-              >
+              <v-btn-toggle v-model="simulador.payment" mandatory @change="loading__bandeira(), payment__type($event)">
                 <div class="d-flex">
                   <div class="d-flex-inline">
                     <v-btn value="debit" class="button__simulador">
                       Débito
                     </v-btn>
-                    <div
-                      class="porcentagem__bandeira debito"
-                      v-show="simulador.payment === 'debit'"
-                    >
+                    <div class="porcentagem__bandeira debito" v-show="simulador.payment === 'debit'">
                       {{ percentual__taxas__returned | decimalFilter }}%
                     </div>
                   </div>
@@ -139,10 +83,7 @@
                     <v-btn value="credit" class="button__simulador">
                       Crédito
                     </v-btn>
-                    <div
-                      class="porcentagem__bandeira credito"
-                      v-show="simulador.payment === 'credit'"
-                    >
+                    <div class="porcentagem__bandeira credito" v-show="simulador.payment === 'credit'">
                       {{ percentual__taxas__returned | decimalFilter }}%
                     </div>
                   </div>
@@ -152,24 +93,13 @@
             <div class="d-flex" v-if="simulador.payment != 'debit'">
               <div>
                 <v-btn icon @click="dwon__parcela()" :disabled="simulador.parcela === 1">
-                  <i
-                    class="ri-indeterminate-circle-fill primary--text"
-                    style="font-size: 30px"
-                  ></i>
+                  <i class="ri-indeterminate-circle-fill primary--text" style="font-size: 30px"></i>
                 </v-btn>
               </div>
               <div>
-                <v-select
-                  solo
-                  :items="items"
-                  item-text="label"
-                  item-value="value"
-                  filled
-                  label="Filled style"
-                  v-model="simulador.parcela"
-                  :menu-props="{ bottom: true, offsetY: true }"
-                  class="select__simulador__parcela"
-                >
+                <v-select solo :items="items" item-text="label" item-value="value" filled label="Filled style"
+                  v-model="simulador.parcela" :menu-props="{ bottom: true, offsetY: true }"
+                  class="select__simulador__parcela">
                   <template v-slot:append>
                     <v__icon__select />
                   </template>
@@ -182,24 +112,16 @@
               </div>
               <div>
                 <v-btn icon @click="up__parcela()">
-                  <i
-                    class="ri-add-circle-fill primary--text"
-                    style="font-size: 30px"
-                  ></i>
+                  <i class="ri-add-circle-fill primary--text" style="font-size: 30px"></i>
                 </v-btn>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <card__calcular
-        :valor="valor"
-        :loading="loading"
-        :simulador="simulador"
-        :percentual__taxas__returned="percentual__taxas__returned"
-        v-if="percentual__taxas__returned != 0"
-        class="card__right__simulador"
-      />
+      <card__calcular :valor="valor" :loading="loading" :simulador="simulador"
+        :percentual__taxas__returned="percentual__taxas__returned" v-if="percentual__taxas__returned != 0"
+        class="card__right__simulador" />
     </div>
   </div>
 </template>
@@ -758,6 +680,10 @@ export default {
     line-height: 28px;
     margin-bottom: 48px;
 
+    .logo-comp {
+      background: linear-gradient(240.58deg, var(--background-primary) -29%, var(--background-secondary) 57.16%);
+    }
+
     .plano__titulo {
       font-size: 16px;
       font-weight: 600;
@@ -772,8 +698,7 @@ export default {
       margin-bottom: 8px;
     }
 
-    .v-text-field {
-    }
+    .v-text-field {}
   }
 }
 
@@ -781,8 +706,7 @@ export default {
   width: 40px;
   height: auto;
   border-radius: 2.233px;
-  box-shadow: 0px 0.5581395030021667px 2.232558012008667px 0px
-    rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 0.5581395030021667px 2.232558012008667px 0px rgba(0, 0, 0, 0.1);
   margin-right: 8px;
   object-fit: contain;
 
@@ -818,9 +742,7 @@ export default {
   transition: 0.5s;
 }
 
-.v-text-field.v-text-field--enclosed:not(.v-text-field--rounded)
-  > .v-input__control
-  > .v-input__slot,
+.v-text-field.v-text-field--enclosed:not(.v-text-field--rounded)>.v-input__control>.v-input__slot,
 .v-text-field.v-text-field--enclosed .v-text-field__details {
   &.bandeira__simulador {
     padding: 12px 12px;
@@ -860,6 +782,7 @@ export default {
   margin-right: 24px;
   border-radius: 6px !important;
   box-shadow: none !important;
+
   &.v-item--active {
     background: $color-primary !important;
     color: $color-white !important;

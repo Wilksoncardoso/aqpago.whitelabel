@@ -27,12 +27,12 @@
   <stop offset="1" stop-color="#0DFB4D" stop-opacity="0.16"/>
   </linearGradient>
   <linearGradient id="paint4_linear_4145_183901" x1="10.2891" y1="42.991" x2="75.8297" y2="42.991" gradientUnits="userSpaceOnUse">
-  <stop offset="0.06" stop-color="#843BDE"/>
-  <stop offset="1" stop-color="var(--primary)"/>
+  <stop offset="0.06" stop-color="var(--background-primary)"/>
+  <stop offset="1" stop-color="var(--background-secondary)"/>
   </linearGradient>
   <linearGradient id="paint5_linear_4145_183901" x1="8.29199" y1="41.991" x2="73.8326" y2="41.991" gradientUnits="userSpaceOnUse">
-  <stop offset="0.06" stop-color="#843BDE"/>
-  <stop offset="1" stop-color="var(--primary)"/>
+  <stop offset="0.06" stop-color="var(--background-primary)"/>
+  <stop offset="1" stop-color="var(--background-secondary)"/>
   </linearGradient>
   </defs>
   </svg>
