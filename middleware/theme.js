@@ -48,7 +48,7 @@ export default async function themeMiddleware({ app, store, req, route }) {
         },
       }
     )
-
+    console.log(configRes)
     const data = configRes?.data
     if (!data) return
 
