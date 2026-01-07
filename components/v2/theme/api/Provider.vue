@@ -44,8 +44,6 @@ export default {
       const primary = this.normalizeColor(color?.primary);
       if (!primary) return;
 
-
-
       const rootStyle = document.documentElement.style;
       rootStyle.setProperty("--primary", this.normalizeColor(color.primary));
       rootStyle.setProperty("--primary_svg", this.normalizeColor(color.primary));
@@ -57,9 +55,14 @@ export default {
       rootStyle.setProperty("--background-primary", this.normalizeColor(menuBackground?.primary));
       rootStyle.setProperty("--background-secondary", this.normalizeColor(menuBackground?.secondary));
 
+      this.ReforceColor(primary);
+      setTimeout(() => {
+        this.ReforceColor(primary);
+      }, 5000);
 
+    },
+    ReforceColor(primary) {
       this.$nextTick(() => {
-
         this.$vuetify.theme.themes.light.primary = primary;
         this.$vuetify.theme.themes.dark.primary = primary;
         Object.assign(this.$vuetify.theme.currentTheme, {
@@ -70,7 +73,6 @@ export default {
         }
       });
     },
-
     ColorCreatedVuetify(color) {
       this.$vuetify.theme.themes.light.primary = this.normalizeColor(
         color.primary

@@ -105,6 +105,8 @@
           counter
           auto-grow
           rows="1"
+          class="input__padrao"
+
         >
         </v-textarea>
         <div class="text-right">
@@ -325,10 +327,8 @@ export default {
 
 .value__cpf {
   height: 60px;
-  background: #ffffff;
+  background: #e7e7e7;
   border: 1px solid rgba(26, 26, 26, 0.1);
-  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2),
-    0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
   border-radius: 8px;
   padding: 0 12px;
 }

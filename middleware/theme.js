@@ -5,8 +5,8 @@ export default async function themeMiddleware({ app, store, req, route }) {
       ? (req?.headers?.["x-forwarded-host"] || req?.headers?.host)
       : window.location.host
 
-  // const domain = 'aqpago-whitelabel.vercel.app'
-  const domain = (route?.query?.domain || host || "").toString().trim()
+  const domain = 'aqpago-whitelabel.vercel.app'
+  // const domain = (route?.query?.domain || host || "").toString().trim()
 
   // se por algum motivo não tiver domain, não quebra SSR
   if (!domain) return
@@ -48,25 +48,39 @@ export default async function themeMiddleware({ app, store, req, route }) {
         },
       }
     )
-    console.log(configRes)
     const data = configRes?.data
     if (!data) return
 
     store.commit("theme/salvar", data)
 
+    const rawLink = data?.data?.business?.external_link?.link_payment;
     store.commit(
       "theme/salvarLink",
-      data?.data?.business?.external_link?.link_payment || "https://aqbank.online/"
+      extractHostname(rawLink, "aqbank.online")
     )
 
     store.commit("theme/setLoaded", true)
   } catch (err) {
-    // Importante: não derrubar SSR por erro de API
-    // Você pode logar no server pra debugar
     if (process.server) {
       // eslint-disable-next-line no-console
       console.error("[middleware/theme] erro:", err?.message || err)
     }
     store.commit("theme/setLoaded", false)
+  }
+}
+
+
+export function extractHostname(input, fallback = "aqbank.online") {
+  if (!input || typeof input !== "string") return fallback;
+
+  const value = input.trim();
+  if (!value) return fallback;
+
+  try {
+    const withProtocol = /^https?:\/\//i.test(value) ? value : `https://${value}`;
+    const host = new URL(withProtocol).hostname || fallback;
+    return host.replace(/^www\./i, "");
+  } catch {
+    return fallback;
   }
 }
