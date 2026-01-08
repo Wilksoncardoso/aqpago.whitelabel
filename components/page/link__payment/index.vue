@@ -11,18 +11,20 @@
       </div>
       <div>
         <v-btn color="primary" class="normal" @click="create__link()">
-          <icon__add__link class="mr-2" /> Gerar link de pagamento</v-btn
-        >
+          <icon__add__link class="mr-2" /> Gerar link de pagamento
+        </v-btn>
       </div>
     </div>
+    <v-snackbar v-model="snackbar">
+      <div class="d-flex">
+        <i class="ri-checkbox-circle-fill mr-2"></i>
+        <div>Copiado</div>
+      </div>
 
-    <v-btn
-      color="primary"
-      class="normal"
-      @click="filter__link__modal()"
-      outlined
-      ><span class="mr-1"><icon__filtro /></span> Filtrar</v-btn
-    >
+    </v-snackbar>
+    <v-btn color="primary" class="normal" @click="filter__link__modal()" outlined><span class="mr-1">
+        <icon__filtro />
+      </span> Filtrar</v-btn>
     <div class="d-flex justify-space-between titulo__link">
       <div class="descricao">Descrição</div>
       <div class="valor">Valor</div>
@@ -31,12 +33,8 @@
       <div class="tipo">Tipo</div>
       <div class="acoes">Ações</div>
     </div>
-    <div
-      class="d-flex justify-space-between value__link"
-      v-for="(data, index) in result__api__link"
-      v-if="!loading"
-      :key="index"
-    >
+    <div class="d-flex justify-space-between value__link" v-for="(data, index) in result__api__link" v-if="!loading"
+      :key="index">
       <div class="descricao">{{ data.produto_nome }}</div>
       <div class="valor primary--text">R$ {{ data.valor | money }}</div>
 
@@ -44,18 +42,14 @@
         {{ moment(data.data_vencimento).format("DD/MM/YYYY") }}
       </div>
       <div class="status">
-        <span
-          :class="
-            status__return(data.status, data.data_vencimento, data.pagamento)
-          "
-          >{{
+        <span :class="status__return(data.status, data.data_vencimento, data.pagamento)
+          ">{{
             status__return__label(
               data.status,
               data.data_vencimento,
               data.pagamento
             )
-          }}</span
-        >
+          }}</span>
       </div>
       <div class="tipo d-flex align-center">
         <div v-if="data?.pagamento_pix" class="mr-2">
@@ -72,57 +66,34 @@
         </div>
       </div>
       <div class="acoes">
-        <v-btn
-          icon
-          class="pa-2 icon_copy"
-          @click="copy(link + '/linkpay/?value=' + data.hash_id)"
-          color="primary"
-        >
+        <v-btn icon class="pa-2 icon_copy" @click="copy(link + '/linkpay/?value=' + data.hash_id)" color="primary">
           <i class="ri-file-copy-line"></i>
         </v-btn>
-        <v-btn
-          class="button__icon__view pa-2"
-          color="primary"
-          icon
-          @click="datails__object(data.hash_id, data.id, data.pagamento)"
-        >
+        <v-btn class="button__icon__view pa-2" color="primary" icon
+          @click="datails__object(data.hash_id, data.id, data.pagamento)">
           <i class="ri-file-search-line" style="font-size: 16px"></i>
         </v-btn>
       </div>
     </div>
     <loading__component v-if="loading" />
     <list__null__result v-if="!loading && result__api__link.length === 0" />
-    <div
-      class="d-flex align-center mt-8 justify-center"
-      v-if="loading === false && result__api__link.length > 0"
-    >
+    <div class="d-flex align-center mt-8 justify-center" v-if="loading === false && result__api__link.length > 0">
       <div>
-        <v-btn
-          class="button__back__nav mt-3"
-          icon
-          @click="back__page({ value: 'back' })"
-          :disabled="disabled__page__back"
-          ><icon__next__page
-        /></v-btn>
+        <v-btn class="button__back__nav mt-3" icon @click="back__page({ value: 'back' })"
+          :disabled="disabled__page__back">
+          <icon__next__page />
+        </v-btn>
       </div>
       <div>
-        <v-pagination
-          class="navigation_pagination mt-4"
-          v-model="pagination"
-          :length="page__total"
-          :total-visible="7"
-          @input="handlePaginationClick"
-        ></v-pagination>
+        <v-pagination class="navigation_pagination mt-4" v-model="pagination" :length="page__total" :total-visible="7"
+          @input="handlePaginationClick"></v-pagination>
       </div>
 
       <div>
-        <v-btn
-          class="button__next__nav mt-3"
-          icon
-          @click="next__page({ value: 'next' })"
-          :disabled="disabled__page__next"
-          ><icon__next__page class="next_nav"
-        /></v-btn>
+        <v-btn class="button__next__nav mt-3" icon @click="next__page({ value: 'next' })"
+          :disabled="disabled__page__next">
+          <icon__next__page class="next_nav" />
+        </v-btn>
       </div>
     </div>
   </div>
@@ -158,6 +129,7 @@ export default {
     return {
       pagination: 1,
       moment: moment,
+      snackbar:false,
       // data__atual: "2023-07-26",
     };
   },
@@ -196,6 +168,7 @@ export default {
         m.execCommand("copy");
         g().removeAllRanges();
       }
+      this.snackbar = true;
       txt.remove();
     },
     filter__link__modal() {
@@ -353,6 +326,7 @@ export default {
   margin-bottom: 100px;
   border-radius: 8px;
   box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
+
   .titulo__link__payment {
     color: $color-black;
     font-size: 20px;
@@ -360,15 +334,18 @@ export default {
     font-weight: 600;
     line-height: normal;
   }
+
   .label__link__payment {
     color: $color-black;
     font-size: 16px;
     font-weight: 400;
     line-height: 28px;
   }
+
   .item__link__payment {
     margin-bottom: 48px;
   }
+
   .titulo__link {
     margin-top: 24px;
     border-top: 1px solid rgba(19, 19, 19, 0.1);
@@ -381,30 +358,38 @@ export default {
     font-style: normal;
     font-weight: 500;
     line-height: normal;
+
     .descricao {
       width: 250px;
     }
+
     .valor {
       width: 160px;
     }
+
     .vencimento {
       width: 160px;
       text-align: center;
     }
+
     .status {
       width: 252px;
     }
+
     .acoes {
       width: 164px;
       text-align: center;
     }
+
     .tipo {
       width: 164px;
     }
   }
+
   .value__link {
     padding-top: 24px;
     padding-bottom: 24px;
+
     .descricao {
       color: $color-black;
       font-size: 14px;
@@ -417,6 +402,7 @@ export default {
       word-wrap: break-word;
       overflow-wrap: break-word;
     }
+
     .valor {
       width: 160px;
       font-size: 14px;
@@ -424,6 +410,7 @@ export default {
       font-weight: 600;
       line-height: normal;
     }
+
     .vencimento {
       width: 160px;
       text-align: center;
@@ -432,8 +419,10 @@ export default {
       font-weight: 500;
       line-height: normal;
     }
+
     .status {
       width: 252px;
+
       span {
         font-size: 12px;
         font-style: normal;
@@ -442,40 +431,49 @@ export default {
         padding: 8px 16px;
         border-radius: 12px;
         text-transform: lowercase;
+
         &.PENDENTE {
           color: #ef8a13;
           background: rgba(255, 192, 67, 0.1);
         }
+
         &.CANCELADA {
           color: #f14a2f;
           background: rgba(195, 27, 0, 0.1);
         }
+
         &.EXPIRADO,
         &.FALHADA {
           color: rgba(26, 26, 26, 0.5);
           background: rgba(26, 26, 26, 0.1);
         }
+
         &.ATIVO {
           color: #1aaa55;
           background: rgba(22, 136, 69, 0.1);
         }
+
         &.ANALISANDO {
           background: #f3f3f3;
         }
+
         &.APROVADO {
           color: #1aaa55;
           background: rgba(114, 163, 134, 0.1);
         }
       }
     }
+
     .acoes {
       width: 164px;
       text-align: center;
     }
+
     .tipo {
       width: 164px;
     }
   }
+
   .button__icon__view.v-btn--disabled {
     svg {
       path {
@@ -483,6 +481,7 @@ export default {
       }
     }
   }
+
   .button__next__nav {
     position: relative;
     left: -43px;
@@ -493,13 +492,16 @@ export default {
     background: #fff;
     box-shadow: none !important;
     border-radius: 8px;
+
     .next_nav {
       transform: rotate(180deg);
     }
+
     &.v-btn--disabled {
       opacity: 0.4;
     }
   }
+
   .button__back__nav {
     position: relative;
     left: 43px;
@@ -510,10 +512,12 @@ export default {
     background: #fff;
     box-shadow: none !important;
     border-radius: 8px;
+
     &.v-btn--disabled {
       opacity: 0.4;
     }
   }
+
   .v-pagination {
     .v-pagination__navigation {
       opacity: 0;

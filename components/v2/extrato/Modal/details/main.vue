@@ -1,6 +1,13 @@
 <template>
   <div class="text-center">
     <v-dialog v-model="dialog" width="700">
+      <v-snackbar v-model="snackbar">
+        <div class="d-flex">
+          <i class="ri-checkbox-circle-fill mr-2"></i>
+          <div>Copiado</div>
+        </div>
+
+      </v-snackbar>
       <v-card
         class="pa-6 comp_details_transaction"
         style="border-radius: 20px"
@@ -318,6 +325,7 @@ export default {
         comp: true,
       },
       data: {},
+      snackbar:false,
       error: null,
     };
   },
@@ -388,10 +396,8 @@ export default {
         g().removeAllRanges();
       }
       txt.remove();
-      this.copy = true;
-      setTimeout(() => {
-        this.copy = false;
-      }, 4000);
+      this.snackbar = true;
+     
     },
   },
   computed: {

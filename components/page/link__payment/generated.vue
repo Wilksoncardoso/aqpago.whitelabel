@@ -1,5 +1,6 @@
 <template lang="html">
   <div id="card__link__payment__generated">
+
     <div class="card__principal mx-auto">
       <div class="d-flex justify-center">
         <div class="d-flex-inline text-center">
@@ -39,18 +40,15 @@
           </div>
         </div>
 
-        <div
-          class="d-flex justify-center copy__value "
-          
-        >
-        <v-btn @click="copy__item(link + 'linkpay/?value='+ body.invoice_id)" class="px-2 py-1" text>
-          <div class="d-flex align-center">
-            <div><icon__copy /></div>
-          <div class="ml-2 link__url">https://aqbank.online/invoic....</div>
-          </div>
-        </v-btn>
-          <!-- <div><icon__copy /></div>
-          <div class="ml-2 link__url">https://aqbank.online/invoic....</div> -->
+        <div class="d-flex justify-center copy__value ">
+          <v-btn text color="primary" @click="copy__item(link + '/linkpay/?value=' + body.invoice_id)" class="pa-2" >
+            <div class="d-flex align-center">
+              <div>
+                <i class="ri-file-copy-line"></i>
+              </div>
+              <div class="ml-2 link__url">{{ link + '/linkpay/?value=' + body.invoice_id }}</div>
+            </div>
+          </v-btn>
         </div>
       </div>
     </div>
@@ -58,41 +56,39 @@
       <p class="text-center label__compartilhar">
         Compartilhe com seu cliente como quiser para receber este pagamento.
       </p>
-      <div class="d-flex align-center item__compartilhar__titulo">
-        <div><icon__share /></div>
+      <div class="d-flex align-center item__compartilhar__titulo mb-2">
+        <div>
+          <icon__share />
+        </div>
         <div class="mb-2 titulo__compartilhar">Compartilhar</div>
       </div>
-      <v-btn
-        class="icon__menu whatsapp "
-        :href="
-          'https://api.whatsapp.com/send?text=' +
-          'Cobrança no valor de R$' +
-          money__function(body.valor) +
-          ' no link ' +
-          link + 'linkpay/?value='+ body.invoice_id
-        "
-        target="_blank"
-      >
-        <icon__whatsapp />
+      <v-btn icon class="icon__menu whatsapp mr-2" :href="'https://api.whatsapp.com/send?text=' +
+        'Cobrança no valor de R$' +
+        money__function(body.valor) +
+        ' no link ' +
+        link + '/linkpay/?value=' + body.invoice_id
+        " target="_blank">
+        <i class="ri-whatsapp-fill primary--text" style="font-size: 25px;"></i>
       </v-btn>
-      <v-btn
-        class="icon__menu telegram"
-        :href="
-          'https://t.me/share/url?url=' +
-          'Cobrança no valor de R$' +
-          money__function(body.valor) +
-          ' no link ' +
-          body.url
-        "
-        target="_blank"
-      >
-        <icon__telegram />
+      <v-btn icon class="icon__menu telegram" :href="'https://t.me/share/url?url=' +
+        'Cobrança no valor de R$' +
+        money__function(body.valor) +
+        ' no link ' +
+        body.url
+        " target="_blank">
+        <i class="ri-telegram-fill primary--text" style="font-size: 25px;"></i>
+
       </v-btn>
     </div>
+    <v-snackbar v-model="snackbar">
+      <div class="d-flex">
+        <i class="ri-checkbox-circle-fill mr-2"></i>
+        <div>Copiado</div>
+      </div>
+
+    </v-snackbar>
     <div class="d-flex justify-center">
-      <v-btn color="primary" class="normal" to="/painel/link_payment/"
-        >Meus links de pagamento</v-btn
-      >
+      <v-btn color="primary" class="normal" to="/painel/link_payment/">Meus links de pagamento</v-btn>
     </div>
   </div>
 </template>
@@ -119,6 +115,7 @@ export default {
     return {
       moment: moment,
       copy__label: "Clique, para copiar!",
+      snackbar: false,
     };
   },
   components: {
@@ -128,7 +125,7 @@ export default {
     icon__whatsapp,
     icon__telegram,
   },
-  computed:{
+  computed: {
     link() {
       return this.$store?.state?.theme?.link || null;
     },
@@ -146,7 +143,7 @@ export default {
       // Select the text and copy it to the clipboard
       textarea.select();
       document.execCommand("copy");
-      this.label = "Copiado !";
+      this.snackbar = true;
       // Remove the temporary textarea
       document.body.removeChild(textarea);
     },
@@ -231,8 +228,10 @@ export default {
   margin-bottom: 100px;
   border-radius: 8px;
   box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
+
   .card__principal {
     width: 344px;
+
     .label__link__g {
       margin-top: 24px;
       margin-bottom: 32px;
@@ -246,6 +245,7 @@ export default {
       font-size: 20px;
       font-weight: 600;
     }
+
     .label__link {
       color: $color-black;
       font-size: 14px;
@@ -253,17 +253,20 @@ export default {
       line-height: 28px;
       text-align: center;
     }
+
     .value__link {
       font-size: 16px;
       font-weight: 600;
       margin-bottom: 32px;
     }
+
     .form__payment__link {
       font-size: 14px;
       font-weight: 400;
       line-height: 28px;
       color: $color-black;
     }
+
     .list__form__payment {
       color: $color-black;
       font-size: 16px;
@@ -272,32 +275,42 @@ export default {
       line-height: normal;
       text-align: center;
       margin-bottom: 32px;
+
       div {
         margin-bottom: 8px;
       }
     }
+
     .link__url {
-      color: rgba(19, 19, 19, 0.3);
+      color: var(--primary);
       font-size: 14px;
-      font-style: normal;
-      font-weight: 600;
+      font-style: italic;
+      font-weight: 400;
       line-height: normal;
+      white-space: nowrap;
+      overflow: hidden;
+      max-width: 250px;
+      text-overflow: ellipsis;
     }
+
     .copy__value {
       cursor: pointer;
       display: block;
       margin-bottom: 80px;
     }
   }
+
   .card__link__share {
     max-width: 528px;
     width: 100%;
+
     .label__compartilhar {
       color: rgba(26, 26, 26, 0.5);
       font-size: 14px;
       font-weight: 500;
       margin-bottom: 24px;
     }
+
     .titulo__compartilhar {
       margin-left: 8px;
       color: $color-black;
@@ -306,9 +319,11 @@ export default {
       font-weight: 700;
       line-height: 28px;
     }
+
     .item__compartilhar__titulo {
       margin-bottom: 26px;
     }
+
     .icon__menu {
       min-height: 44px;
       min-width: 44px;

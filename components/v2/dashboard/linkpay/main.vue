@@ -1,6 +1,13 @@
 <template>
   <div style="width: 100%">
     <div class="list-main-link-payment" v-if="!loading && !loading_saldo">
+        <v-snackbar v-model="snackbar">
+        <div class="d-flex">
+          <i class="ri-checkbox-circle-fill mr-2"></i>
+          <div>Copiado</div>
+        </div>
+
+      </v-snackbar>
       <div v-if="ListPaymentLink.length > 0">
         <div class="d-flex justify-space-between align-center">
           <div class="title_comp_link">
@@ -69,6 +76,7 @@ export default {
       ListPaymentLink: [],
       error: "",
       loading: true,
+      snackbar: false,
     };
   },
   computed: {
@@ -117,6 +125,7 @@ export default {
         m.execCommand("copy");
         g().removeAllRanges();
       }
+      this.snackbar = true;
       txt.remove();
     },
     status__return__label(status, data, pagamento) {

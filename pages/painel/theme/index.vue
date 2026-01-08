@@ -3,7 +3,7 @@
     <div class="card_default pa-5 mb-5">
       <v-snackbar v-model="snackbar">
         <div class="d-flex">
-          <i class="ri-checkbox-circle-fill mr-2  "></i>
+          <i class="ri-checkbox-circle-fill mr-2"></i>
           <div>Copiado</div>
         </div>
 

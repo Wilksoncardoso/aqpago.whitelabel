@@ -2,7 +2,7 @@
   <div>
     <div class="d-flex justify-center">
       <div v-for="(data, index) in compartilhar__array" :key="index">
-        <v-btn class="button__share" :class="data.label" target="_blank" :href="data.url+ 'Aqui está o link de pagamento gerado para você no valor de R$'+money(value) + ' '+link">
+        <v-btn class="button__share" icon :class="data.label" target="_blank" :href="data.url+ 'Aqui está o link de pagamento gerado para você no valor de R$'+money(value) + ' '+link">
           <component :is="data.icon"></component>
         </v-btn>
       </div>

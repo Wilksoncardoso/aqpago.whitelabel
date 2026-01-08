@@ -94,7 +94,7 @@
             </div>
             <div class="label__payment mt-10" v-if="body?.boleto_discounts[0]?.percentage">Data limite do desconto</div>
             <div class="value__payment data" v-if="body?.boleto_discounts[0]?.percentage">
-              {{   $textCap($moment(body?.boleto_discounts[0]?.date).format("DD MMMM YYYY")) }}
+              {{ $textCap($moment(body?.boleto_discounts[0]?.date).format("DD MMMM YYYY")) }}
             </div>
           </v-col>
           <v-col cols="12" lg="3" xl="3">
@@ -112,22 +112,18 @@
         </v-row>
       </div>
 
-      <div
-        class="label__payment card__princiapal__payment"
-        v-if="details__page.payment__object != null"
-      >
+      <div class="label__payment card__princiapal__payment" v-if="details__page.payment__object != null">
         <v-divider class="my-10"></v-divider>
         Histórico de transações:
       </div>
-      <v-row
-        v-for="(data, index) in details__page.payment__object"
-        :key="index"
-        v-if="details__page.payment__object != ''"
-      >
+      <v-row v-for="(data, index) in details__page.payment__object" :key="index"
+        v-if="details__page.payment__object != ''">
         <v-col cols="12" lg="6" xl="6">
           <div class="value__payment list__result__payment data">
             <div class="d-flex">
-              <div><div class="status__badge" :class="data.status"></div></div>
+              <div>
+                <div class="status__badge" :class="data.status"></div>
+              </div>
               <div class="icon__type">
                 <component :is="data.forma_pagamento" />
               </div>
@@ -144,8 +140,8 @@
               {{ moment(data.user.created_at).format("L") }}
             </div>
             <div class="ml-4">
-              <v-btn color="primary" text @click="resumo__payment"
-                >Ver transação <icon__up class="mt-1" />
+              <v-btn color="primary" text @click="resumo__payment">Ver transação
+                <icon__up class="mt-1" />
               </v-btn>
             </div>
           </div>
@@ -158,16 +154,14 @@
             Compartilhe com seu cliente como quiser para receber este pagamento.
           </div>
           <div class="d-flex justify-center card__label__compartilhar">
-            <div><icon__share__compartilhar /></div>
+            <div>
+              <icon__share__compartilhar />
+            </div>
             <div class="label__compartilhar">Compartilhar</div>
           </div>
           <share__compartilhar :link="linkpayment + '/linkpay/?value=' + body.invoice_id" :value="body.valor" />
-          <v-btn
-            color="primary"
-            to="/painel/link_payment/create"
-            class="button__create"
-            >Criar link de pagamento similar</v-btn
-          >
+          <v-btn color="primary" to="/painel/link_payment/create" class="button__create">Criar link de pagamento
+            similar</v-btn>
 
           <!-- <v-btn color="danger" @click="excluirMeuObjeto()">deletar vuex</v-btn> -->
         </v-col>
@@ -284,7 +278,7 @@ export default {
       return moment(); // Pega a data e hora atual
     },
     ...mapState("link", ["link__object"]),
- linkpayment() {
+    linkpayment() {
       return this.$store?.state?.theme?.link || null;
     },
     getTimeRemaining() {
@@ -447,6 +441,7 @@ export default {
   border-radius: 8px;
   margin-top: 24px;
   margin-bottom: 24px;
+
   .titulo__payment {
     font-size: 20px;
     font-style: normal;
@@ -455,20 +450,27 @@ export default {
     color: $color-black;
     margin-bottom: 48px;
   }
+
   .label__payment {
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
-    line-height: 28px; /* 175% */
+    line-height: 28px;
+    /* 175% */
+    color: #868686;
+    margin-bottom: 8px;
   }
+
   .card__princiapal__payment {
     margin-top: 8px;
     margin-bottom: 8px;
   }
+
   .value__payment {
     &.list__result__payment {
       margin-bottom: 5px !important;
     }
+
     &.money {
       font-size: 20px;
       font-style: normal;
@@ -476,20 +478,25 @@ export default {
       line-height: normal;
       color: $color-black;
     }
+
     &.data {
       color: $color-black;
       font-size: 16px;
       font-style: normal;
       font-weight: 600;
       line-height: normal;
+      margin-bottom: 24px;
     }
 
     font-size: 16px;
+    margin-bottom: 32px;
   }
+
   .my-10 {
     margin-top: 24px;
     margin-bottom: 48px;
   }
+
   .value__payment__form {
     margin-top: 8px;
     color: $color-black;
@@ -497,19 +504,23 @@ export default {
     font-style: normal;
     font-weight: 600;
     line-height: normal;
-    margin-bottom: 24px;
+    margin-bottom: 32px;
   }
+
   .card__label__compartilhar {
     margin-top: 24px;
     margin-bottom: 24px;
+
     .label__compartilhar {
       font-size: 16px;
       font-style: normal;
       font-weight: 700;
-      line-height: 28px; /* 175% */
+      line-height: 28px;
+      /* 175% */
       margin-left: 8px;
     }
   }
+
   .label__compartilhar__negativo {
     color: rgba(26, 26, 26, 0.5);
     font-size: 14px;
@@ -517,6 +528,7 @@ export default {
     font-weight: 500;
     line-height: normal;
   }
+
   .status__badge {
     width: 10px;
     height: 10px;
@@ -524,26 +536,33 @@ export default {
     position: relative;
     top: 4px;
     margin-right: 10px;
+
     &.PENDENTE {
       background: $status__pedente;
     }
+
     &.FALHA.NO.PAGAMENTO {
       background: $status__blocked;
     }
+
     &.APROVADO {
       background: $status__succeeded;
     }
+
     &.CANCELADA {
       background: $status__blocked;
     }
   }
+
   .button__create {
     margin-top: 48px;
     padding: 16px 24px !important;
   }
+
   .icon__type {
     margin-right: 4px;
   }
+
   .parcela__type {
     margin-right: 8px;
   }

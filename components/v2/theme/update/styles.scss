@@ -1,10 +1,11 @@
+$btn-size-pass: 25px;
 .cards_created_theme {
   border-radius: 6px;
   -webkit-border-radius: 6px;
   -moz-border-radius: 6px;
   -ms-border-radius: 6px;
   -o-border-radius: 6px;
-    width: 600px;
+  width: 600px;
 
   .created_theme {
     box-shadow: none !important;
@@ -21,7 +22,7 @@
       }
     }
   }
-  .disabled{
+  .disabled {
     opacity: 0.15;
     pointer-events: none;
   }
@@ -56,9 +57,19 @@
       }
     }
   }
+  .icon_pass{
+    min-width: $btn-size-pass;
+    min-height: $btn-size-pass;
+    max-width: $btn-size-pass;
+    max-height: $btn-size-pass;
+  }
+  .text-description{
+    font-size: 12px;
+    color: #666666;
+  }
 }
-.line_url{
-height: 20px;
+.line_url {
+  height: 20px;
   width: 90%;
   text-wrap: nowrap;
   overflow: hidden;
@@ -70,7 +81,7 @@ height: 20px;
   position: sticky;
   top: 0;
   height: fit-content;
-  .comppreviewright{
+  .comppreviewright {
     position: relative;
     scale: 0.9;
     border-radius: 20px;
@@ -78,5 +89,5 @@ height: 20px;
     -moz-border-radius: 20px;
     -ms-border-radius: 20px;
     -o-border-radius: 20px;
-}
+  }
 }

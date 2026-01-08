@@ -16,11 +16,9 @@
     "@nuxtjs/proxy": "^2.1.0",
     "body-parser": "^1.20.2",
     "caniuse-lite": "^1.0.30001727",
-    "cleave.js": "^1.6.0",
     "core-js": "^3.25.3",
     "cors": "^2.8.5",
     "file-saver": "^2.0.5",
-    "gsap": "^3.11.4",
     "html-to-image": "^1.11.11",
     "html2canvas": "^1.4.1",
     "jspdf": "^2.5.1",
@@ -28,7 +26,6 @@
     "moment": "^2.29.4",
     "node-fetch-native": "^1.2.0",
     "nuxt": "^2.15.8",
-    "nuxt-robots-module": "^1.5.1",
     "ofx-js": "^0.2.0",
     "remixicon": "^4.6.0",
     "v-money": "^0.8.1",
@@ -46,10 +43,7 @@
   },
   "devDependencies": {
     "@nuxt/image": "^0.7.1",
-    "@nuxt/types": "~2.17.0",
     "@nuxtjs/google-fonts": "^2.0.0",
-    "@nuxtjs/vuetify": "^1.12.3",
-    "@vue/devtools": "^7.7.7",
-    "concurrently": "^8.0.1"
+    "@nuxtjs/vuetify": "^1.12.3"
   }
 }

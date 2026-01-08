@@ -5,7 +5,7 @@ export default {
   loading: false,
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: "Aguarde...",
+    title: "",
     htmlAttrs: {
       lang: "pt-br",
     },
@@ -105,7 +105,6 @@ export default {
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     // "vue-social-sharing/nuxt",
-    "nuxt-robots-module",
     "@nuxtjs/axios",
     "@nuxtjs/proxy",
     '@nuxtjs/auth-next',

@@ -4,10 +4,27 @@
     <V2ThemeApiProvider ref="temapadrao" />
     <!-- FORM PRINCIPAL -->
     <div class="cards_created_theme pa-4 white">
-      <div class="d-flex justify-space-between">
+      <div class="d-flex justify-space-between align-center ">
         <h3 class="primary--text">Editar Painel</h3>
-        <v-btn color="primary" text class="pa-2" to="/painel/theme">Voltar</v-btn>
+
+        <div class="d-flex">
+          <div class="d-flex align-center mr-2">
+            <div class="mr-2 text-description" v-html="pageLabel"></div>
+            <v-btn outlined icon class="icon_pass mr-1" color="primary" @click="page--" :disabled="page <= 1">
+              <i class="ri-arrow-drop-left-line"></i>
+
+            </v-btn>
+            <v-btn outlined icon class="icon_pass" color="primary" @click="page++" :disabled="page === 7">
+              <i class="ri-arrow-drop-right-line"></i>
+            </v-btn>
+
+
+          </div>
+          <v-btn color="primary" text class="pa-2" to="/painel/theme">Voltar</v-btn>
+        </div>
       </div>
+
+
       <v-stepper v-model="page" vertical>
         <!-- STEP 1 - ASSETS & ICONS -->
         <v-stepper-step :complete="page > 1" step="1">
@@ -305,7 +322,7 @@
               @input="validateStep(6)"></v-text-field>
 
             <div class="label ">7 - Twitter-img</div>
-             <div v-if="SetForm.payload.seo['twitter-image-url']">
+            <div v-if="SetForm.payload.seo['twitter-image-url']">
               <div class="d-flex justify-space-between ">
                 <v-chip style="width: 100%;">
                   {{ SetForm.payload.seo['twitter-image-url'] }}
@@ -498,7 +515,7 @@ export default {
             "Descrição de app deve ter pelo menos 5 caracteres",
         ],
       },
-       SetForm: {
+      SetForm: {
         themeId: "",
         configId: "",
         workspaceId: "",
@@ -583,6 +600,11 @@ export default {
     data() {
       return this.$store?.state?.user?.user__data;
     },
+    pageLabel() {
+      return this.page === 7
+        ? 'Última etapa'
+        : `Etapa <b>${this.page}</b>, total de 7`
+    }
   },
 
   watch: {
@@ -654,105 +676,105 @@ export default {
       }
     },
     // =========== UPLOAD GENÉRICO ===========
-      addCacheBust(url) {
-    if (!url) return url;
-    const sep = url.includes("?") ? "&" : "?";
-    return `${url}${sep}t=${Date.now()}`;
-  },
+    addCacheBust(url) {
+      if (!url) return url;
+      const sep = url.includes("?") ? "&" : "?";
+      return `${url}${sep}t=${Date.now()}`;
+    },
 
-  async uploadAsset(key, file) {
-    if (!file) return;
+    async uploadAsset(key, file) {
+      if (!file) return;
 
-    if (!this.SetForm.themeId || !this.SetForm.configId) {
-      this.error = "themeId/configId não encontrados para upload de assets.";
-      return;
-    }
+      if (!this.SetForm.themeId || !this.SetForm.configId) {
+        this.error = "themeId/configId não encontrados para upload de assets.";
+        return;
+      }
 
-    const fd = new FormData();
-    fd.append("themeId", this.SetForm.themeId);
-    fd.append("configId", this.SetForm.configId);
-    fd.append("file", file);
+      const fd = new FormData();
+      fd.append("themeId", this.SetForm.themeId);
+      fd.append("configId", this.SetForm.configId);
+      fd.append("file", file);
 
-    try {
-      this.loading = true;
-      this.error = null;
+      try {
+        this.loading = true;
+        this.error = null;
 
-      const { data } = await this.$axios.post(
-        `/admin/whitelabel/assets/upload?key=${encodeURIComponent(key)}`,
-        fd,
-        {
-          headers: { "Content-Type": "multipart/form-data" },
-          onUploadProgress: (e) => {
-            if (e.total) {
-              this.progress = Math.round((e.loaded * 100) / e.total);
-            }
-          },
+        const { data } = await this.$axios.post(
+          `/admin/whitelabel/assets/upload?key=${encodeURIComponent(key)}`,
+          fd,
+          {
+            headers: { "Content-Type": "multipart/form-data" },
+            onUploadProgress: (e) => {
+              if (e.total) {
+                this.progress = Math.round((e.loaded * 100) / e.total);
+              }
+            },
+          }
+        );
+
+        const urlsObj = data?.body?.urls || data?.urls || null;
+        const singleUrl = data?.body?.url || data?.url || null;
+
+
+        let finalUrl = null;
+
+        // 1) Caso: body.urls é um objeto (ex: { url: 'https://...' } ou { 'assets.icon.img512x512': 'https://...' })
+        if (urlsObj && typeof urlsObj === "object") {
+          if (urlsObj.url) {
+            // formato { urls: { url: 'https://...' } }
+            finalUrl = urlsObj.url;
+          } else if (urlsObj[key]) {
+            // formato { urls: { 'assets.initcomp.img': 'https://...' } }
+            finalUrl = urlsObj[key];
+          } else {
+            // fallback: pega a primeira key do objeto
+            const firstKey = Object.keys(urlsObj)[0];
+            finalUrl = urlsObj[firstKey];
+          }
         }
-      );
+        // 2) Caso: veio só uma URL simples em body.url ou data.url (STRING)
+        else if (singleUrl) {
+          finalUrl = singleUrl;
+        }
 
-      const urlsObj = data?.body?.urls || data?.urls || null;
-      const singleUrl = data?.body?.url || data?.url || null;
-
-
-      let finalUrl = null;
-
-      // 1) Caso: body.urls é um objeto (ex: { url: 'https://...' } ou { 'assets.icon.img512x512': 'https://...' })
-      if (urlsObj && typeof urlsObj === "object") {
-        if (urlsObj.url) {
-          // formato { urls: { url: 'https://...' } }
-          finalUrl = urlsObj.url;
-        } else if (urlsObj[key]) {
-          // formato { urls: { 'assets.initcomp.img': 'https://...' } }
-          finalUrl = urlsObj[key];
+        if (finalUrl) {
+          this.setAssetUrlByKey(key, this.addCacheBust(finalUrl));
+          this.UpdateStoreSetform();
         } else {
-          // fallback: pega a primeira key do objeto
-          const firstKey = Object.keys(urlsObj)[0];
-          finalUrl = urlsObj[firstKey];
+          console.warn("Nenhuma URL encontrada na resposta do upload", data);
         }
+      } catch (err) {
+        this.error =
+          err?.response?.data?.mensagem ||
+          err?.response?.data?.message ||
+          err?.message ||
+          "Erro ao enviar arquivo";
+        this.$toast.error(this.error);
+      } finally {
+        this.loading = false;
+        this.progress = 0;
       }
-      // 2) Caso: veio só uma URL simples em body.url ou data.url (STRING)
-      else if (singleUrl) {
-        finalUrl = singleUrl;
+    },
+
+    setAssetUrlByKey(assetKey, url) {
+      if (!this.SetForm) return;
+
+      const root = this.SetForm.payload || this.SetForm;
+
+      const parts = assetKey.split(".");
+      let target = root;
+
+      for (let i = 0; i < parts.length - 1; i++) {
+        const p = parts[i];
+        if (!target[p]) {
+          this.$set(target, p, {});
+        }
+        target = target[p];
       }
 
-      if (finalUrl) {
-        this.setAssetUrlByKey(key, this.addCacheBust(finalUrl));
-        this.UpdateStoreSetform();
-      } else {
-        console.warn("Nenhuma URL encontrada na resposta do upload", data);
-      }
-    } catch (err) {
-      this.error =
-        err?.response?.data?.mensagem ||
-        err?.response?.data?.message ||
-        err?.message ||
-        "Erro ao enviar arquivo";
-      this.$toast.error(this.error);
-    } finally {
-      this.loading = false;
-      this.progress = 0;
-    }
-  },
-
-  setAssetUrlByKey(assetKey, url) {
-    if (!this.SetForm) return;
-
-    const root = this.SetForm.payload || this.SetForm;
-
-    const parts = assetKey.split(".");
-    let target = root;
-
-    for (let i = 0; i < parts.length - 1; i++) {
-      const p = parts[i];
-      if (!target[p]) {
-        this.$set(target, p, {});
-      }
-      target = target[p];
-    }
-
-    const lastKey = parts[parts.length - 1];
-    this.$set(target, lastKey, url);
-  },
+      const lastKey = parts[parts.length - 1];
+      this.$set(target, lastKey, url);
+    },
 
     // =========== HANDLERS FILE INPUTS ===========
     async onChangeFavicon(file) {
