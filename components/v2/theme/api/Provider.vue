@@ -45,6 +45,8 @@ export default {
       if (!primary) return;
 
       const rootStyle = document.documentElement.style;
+
+      this.$vuetify.theme.themes.light.primary = this.normalizeColor(color.primary);
       rootStyle.setProperty("--primary", this.normalizeColor(color.primary));
       rootStyle.setProperty("--primary_svg", this.normalizeColor(color.primary));
       rootStyle.setProperty("--primaryop", this.normalizeColor(color.primary_op));
@@ -56,21 +58,21 @@ export default {
       rootStyle.setProperty("--background-secondary", this.normalizeColor(menuBackground?.secondary));
 
       this.ReforceColor(primary);
+
       setTimeout(() => {
         this.ReforceColor(primary);
-      }, 5000);
-
+      }, 4000);
     },
     ReforceColor(primary) {
       this.$nextTick(() => {
         this.$vuetify.theme.themes.light.primary = primary;
         this.$vuetify.theme.themes.dark.primary = primary;
-        Object.assign(this.$vuetify.theme.currentTheme, {
-          primary,
-        });
         if (this.$vuetify.theme.options) {
           this.$vuetify.theme.options.customProperties = true;
         }
+        Object.assign(this.$vuetify.theme.currentTheme, {
+          primary,
+        });
       });
     },
     ColorCreatedVuetify(color) {

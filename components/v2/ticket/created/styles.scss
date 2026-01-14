@@ -1,0 +1,68 @@
+.main_atendimento {
+  border-radius: 12px;
+  border: 1px solid var(--border-secondary, #efefef);
+  background: #fff;
+  width: 100%;
+  display: block;
+
+  h2 {
+    color: var(--content-primary, #131313);
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 24px;
+    /* 150% */
+    letter-spacing: -0.32px;
+  }
+
+  h5 {
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 28px;
+    color: var(--content-tertiary, #989898);
+    line-height: 20px;
+    letter-spacing: -0.28px;
+  }
+  .input_default_new {
+    .v-file-input {
+      .v-input__slot {
+        box-shadow: none !important;
+        border: 1px solid #eee;
+      }
+
+      &.error--text {
+        .v-input__slot {
+          border: 1px solid #db3b21;
+        }
+      }
+    }
+  }
+  .input_default_new {
+    .v-input__prepend-outer {
+      display: none;
+    }
+  }
+  .form-atendimento{
+    label {
+      font-size: 12px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      display: block;
+    }
+  }
+ 
+}
+.card_dns {
+  max-width: 450px;
+
+  p {
+    font-size: 13px;
+  }
+
+  ul {
+    li {
+      font-size: 14px;
+    }
+  }
+}

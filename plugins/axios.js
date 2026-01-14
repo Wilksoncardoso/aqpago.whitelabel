@@ -30,7 +30,9 @@ export default function ({ $axios, redirect, app, $auth, store }, inject) {
     else if (process.client && config.url.includes('token=none')) {
       delete config.headers.common.Authorization;
       delete config.headers.Authorization;
-      config.headers.common.Authorization = "";
+      // config.headers.common.Authorization = "";
+      // config.headers.Authorization = "";
+       config.headers.common.Authorization = null;
       config.headers.Authorization = "";
 
     }

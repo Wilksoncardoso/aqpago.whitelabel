@@ -203,6 +203,7 @@ export default {
       loading_logar: {},
       items: [
         { label: "Perfil", to: "/painel/perfil", permission: false },
+        { label: "Taxas", to: "/painel/taxas", permission: false },
         { label: "Operadores", to: "/painel/operadores", permission: true },
         { label: "Sair", to: "/painel/logout", permission: false },
       ],

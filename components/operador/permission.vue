@@ -52,11 +52,11 @@ export default {
         "/painel/minhaschaves-pix": ["my_keys"],
         "/painel/pixcopiaecola": ["pix_copy_paste"],
         "/painel/link_payment": ["payment_link"],
-        "/painel/clientes": ["client"],
-
+        
         // Rota Responsavel regras
+        "/painel/meus-clientes": ["client", true],
+        "/painel/theme": ["mkt", true],
         "/painel/integracao": ["api", true],
-        // "/painel/theme": ["mkt", true],
       };
 
       const spec = routePermissions[this.currentRoute];

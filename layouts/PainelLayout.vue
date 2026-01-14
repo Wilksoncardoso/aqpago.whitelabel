@@ -3,11 +3,7 @@
     <V2ThemeApiProvider ref="temapadrao" />
 
     <V2MenuTopMain :data="data.data" :loading="loading" />
-    <menu__web
-      :data="data.data"
-      :loading="loading"
-      :menu="return_itens_menu_permission"
-    />
+    <menu__web :data="data.data" :loading="loading" :menu="return_itens_menu_permission" />
     <Nuxt class="container__body container__group" :usuario="data.data" />
     <mobile__component />
     <OperadorPermission />
@@ -245,6 +241,7 @@ export default {
         },
       ],
       data: [],
+      saldo: {},
       menssager_data: [],
       loading: true,
       error: "",
@@ -268,7 +265,7 @@ export default {
         })
         .finally(() => (this.loading = false));
     },
-    async return__saldo() {
+    async return__data_user() {
       await this.$axios
         .$get("/user_data")
         .then((response) => {
@@ -282,6 +279,7 @@ export default {
           this.error = error.response.data.mensagem;
         });
     },
+   
   },
   computed: {
     url() {
@@ -308,8 +306,8 @@ export default {
                 item.submenu = item.submenu.filter((subItem) => {
                   return subItem.op_permission
                     ? subItem.op_permission.some(
-                        (perm) => permission_list[perm] === 1
-                      )
+                      (perm) => permission_list[perm] === 1
+                    )
                     : true;
                 });
               }
@@ -338,7 +336,7 @@ export default {
     },
   },
   created() {
-    this.return__saldo();
+    this.return__data_user();
   },
 };
 </script>
@@ -348,9 +346,11 @@ export default {
   width: 100%;
   background: #f8f9fd !important;
 }
+
 .v-input--is-label-active,
 .v-input--checkbox {
   .v-input--selection-controls__input {
+
     .icon-checkbox-on,
     .mdi-checkbox-marked {
       background-color: var(--primary) !important;
