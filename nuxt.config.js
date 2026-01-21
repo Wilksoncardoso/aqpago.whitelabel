@@ -121,7 +121,7 @@ export default {
   ],
   recaptcha: {
     hideBadge: false,
-    siteKey: '6Ler7lEsAAAAAOfBOKM6Xzk2fGr9y5L4qBKr-CRo',
+    siteKey: '6LfB9VEsAAAAAMFOQMqxNobtj7yJWc99vwLubm0Y',
     version: 2, // ou 3
     size: 'normal' // compact | invisible
   },
