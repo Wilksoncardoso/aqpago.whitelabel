@@ -79,6 +79,7 @@
       :list_workspace="list_workspace"
       ref="Modal"
     />
+      <recaptcha @success="onVerify" />
 
     <v-btn
       @click="enter__login()"
@@ -109,6 +110,7 @@ export default {
         cpf: "",
         cnpj: "",
       },
+      recaptchaToken: null,
       form: {
         cpf: "",
         cnpj: "",
@@ -177,7 +179,9 @@ export default {
 
       setTimeout(() => {
         this.$axios
-          .$post("/auth/login_pf", form)
+          .$post("/auth/login_pf", form, {
+            recaptcha: this.recaptchaToken
+          })
           // .$post("/auth/login0077239", form)
           .then((response) => {
             this.loading = !this.loading;
@@ -221,7 +225,9 @@ export default {
       }
 
       this.$axios
-        .$post("/auth/login_pj", form)
+        .$post("/auth/login_pj", form, {
+            recaptcha: this.recaptchaToken
+          })
         // .$post("/auth/login_cnpj0077239", form)
         .then((response) => {
           this.$toast.info(

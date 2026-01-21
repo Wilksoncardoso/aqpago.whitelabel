@@ -13,7 +13,7 @@
           <icon__cnpj class="mr-2" />
         </template>
       </v-text-field>
-
+    
       <v-text-field solo label="000.000.000-00" type="tel" class="input__form" @keyup="format__cpf__met()"
         @input="format__cpf__met()" v-model="cpf" v-mask="['###.###.###-##']" :error-messages="error.cpf">
         <template #prepend-inner>
@@ -41,7 +41,6 @@
       <div class="d-flex justify-end my-4">
         <nuxt-link class="link__esqueci primary--text" to="/password-reset">Esqueceu a senha?</nuxt-link>
       </div>
-      <recaptcha @success="onVerify" />
       <v-btn class="button__login" :loading="loading" @click="verify_workspace()" block color="primary">
         Entrar
       </v-btn>
@@ -69,6 +68,7 @@ export default {
   data() {
     return {
       disableSubmit: false,
+      recaptchaToken: '',
       loading: false,
       tp__conta: "pj",
       show1: false,
@@ -138,9 +138,7 @@ export default {
     logar__pj() {
       setTimeout(() => {
         this.$axios
-          .$post("/auth/login_pj", this.form, {
-            recaptcha: this.recaptchaToken
-          })
+          .$post("/auth/login_pj", this.form)
           .then((response) => {
             this.loading = !true;
             this.mensagem = response.mensagem; // "Pagamento processado com sucesso!"
@@ -204,9 +202,7 @@ export default {
         .replace("-", "");
     },
   },
-  mounted() {
-    const token_user = localStorage.getItem("token");
-  },
+  
 };
 </script>
 
