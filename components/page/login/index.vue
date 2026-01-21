@@ -6,48 +6,23 @@
         <v-btn value="pj" style="border: none"> Conta Empresa</v-btn>
       </v-btn-toggle> -->
       <h3 class="text-left mb-6">Internet Banking Conta PJ</h3>
-      <v-text-field
-        solo
-        label="00.000.000/0000-00"
-        type="tel"
-        class="input__form"
-        v-model="cnpj"
-        v-mask="['##.###.###/####-##']"
-        @keyup="format__cnpj__met()"
-        @input="format__cnpj__met()"
-        :error-messages="error.cnpj"
-      >
+      <v-text-field solo label="00.000.000/0000-00" type="tel" class="input__form" v-model="cnpj"
+        v-mask="['##.###.###/####-##']" @keyup="format__cnpj__met()" @input="format__cnpj__met()"
+        :error-messages="error.cnpj">
         <template #prepend-inner>
           <icon__cnpj class="mr-2" />
         </template>
       </v-text-field>
 
-      <v-text-field
-        solo
-        label="000.000.000-00"
-        type="tel"
-        class="input__form"
-        @keyup="format__cpf__met()"
-        @input="format__cpf__met()"
-        v-model="cpf"
-        v-mask="['###.###.###-##']"
-        :error-messages="error.cpf"
-      >
+      <v-text-field solo label="000.000.000-00" type="tel" class="input__form" @keyup="format__cpf__met()"
+        @input="format__cpf__met()" v-model="cpf" v-mask="['###.###.###-##']" :error-messages="error.cpf">
         <template #prepend-inner>
           <icon__pf class="mr-2" />
         </template>
       </v-text-field>
 
-      <v-text-field
-        solo
-        label="*********"
-        class="input__form"
-        :type="show1 ? 'text' : 'password'"
-        v-mask="['######']"
-        v-model="form.senha"
-        @click:append="show1 = !show1"
-        :error-messages="(error, error.senha)"
-      >
+      <v-text-field solo label="*********" class="input__form" :type="show1 ? 'text' : 'password'" v-mask="['######']"
+        v-model="form.senha" @click:append="show1 = !show1" :error-messages="(error, error.senha)">
         <template #append>
           <v-btn icon @click="show1 = !show1">
             <span v-if="show1 === true">
@@ -64,28 +39,15 @@
       </v-text-field>
 
       <div class="d-flex justify-end my-4">
-        <nuxt-link class="link__esqueci primary--text" to="/password-reset"
-          >Esqueceu a senha?</nuxt-link
-        >
+        <nuxt-link class="link__esqueci primary--text" to="/password-reset">Esqueceu a senha?</nuxt-link>
       </div>
-      <v-btn
-        class="button__login"
-        :loading="loading"
-        @click="verify_workspace()"
-        block
-        color="primary"
-      >
+      <recaptcha @success="onVerify" />
+      <v-btn class="button__login" :loading="loading" @click="verify_workspace()" block color="primary">
         Entrar
       </v-btn>
-          <recaptcha @success="onVerify" />
-          
-      <v-btn
-        class="central__ajuda"
-        color="pimary__central__ajuda "
-        outlined
-        target="_blank"
-        href="https://site.aqpago.com.br/ajuda-fale-conosco/"
-      >
+
+      <v-btn class="central__ajuda" color="pimary__central__ajuda " outlined target="_blank"
+        href="https://site.aqpago.com.br/ajuda-fale-conosco/">
         <icon__atendimento />
         <span class="ml-2 primary--text"> Central de Ajuda </span>
       </v-btn>
@@ -133,7 +95,7 @@ export default {
     // VueRecaptcha
   },
   methods: {
-    
+
     login() {
       this.loading = true;
 
@@ -157,9 +119,9 @@ export default {
             );
             this.$router.push(
               "/verify-token?value=" +
-                response.autorization +
-                "&type=" +
-                this.tp__conta
+              response.autorization +
+              "&type=" +
+              this.tp__conta
             );
           })
           .catch((error) => {
@@ -176,7 +138,9 @@ export default {
     logar__pj() {
       setTimeout(() => {
         this.$axios
-          .$post("/auth/login_pj", this.form)
+          .$post("/auth/login_pj", this.form, {
+            recaptcha: this.recaptchaToken
+          })
           .then((response) => {
             this.loading = !true;
             this.mensagem = response.mensagem; // "Pagamento processado com sucesso!"
@@ -185,9 +149,9 @@ export default {
             );
             this.$router.push(
               "/verify-token?value=" +
-                response.autorization +
-                "&type=" +
-                this.tp__conta
+              response.autorization +
+              "&type=" +
+              this.tp__conta
             );
           })
           .catch((error) => {
