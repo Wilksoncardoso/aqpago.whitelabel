@@ -1064,7 +1064,6 @@ export default {
             font-size: 1.125rem;
             font-weight: 600;
             color: var(--aq-navy);
-            margin: 1.5rem 0 0.75rem;
         }
 
         h4 {

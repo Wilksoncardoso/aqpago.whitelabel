@@ -182,7 +182,6 @@ export default {
                     !this.InFiltro.card_brand ||
                     t.card_brand.includes(this.InFiltro.card_brand);
 
-
                 return matchPayment && matchCapture && matchBrand;
             });
         },

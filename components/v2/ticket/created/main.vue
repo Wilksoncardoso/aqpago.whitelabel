@@ -40,7 +40,7 @@
             <v-row>
               <v-col cols="12" md="6">
                 <label>Opções de atendimento</label>
-                <v-select v-model="form.category" :items="ArrayCategories" class="input__padrao " item-text="text"
+                <v-select v-model="form.category" :items="ArrayCategories" class="input__padrao" item-text="text"
                   item-value="value" label="Categoria" solo :rules="rules.category" :disabled="loading"
                   prepend-inner-icon="ri-list-check-2"> <template #append>
                     <i class="ri-arrow-drop-down-fill" style="font-size: 25px;"></i>

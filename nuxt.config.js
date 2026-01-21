@@ -108,6 +108,7 @@ export default {
     "@nuxtjs/axios",
     "@nuxtjs/proxy",
     '@nuxtjs/auth-next',
+    '@nuxtjs/recaptcha',
     "vue-toastification/nuxt",
     [
       "vue-toastification/nuxt",
@@ -118,7 +119,12 @@ export default {
     ],
     // "@nuxtjs/recaptcha",
   ],
-
+  recaptcha: {
+    hideBadge: false,
+    siteKey: '6Ler7lEsAAAAAOfBOKM6Xzk2fGr9y5L4qBKr-CRo',
+    version: 2, // ou 3
+    size: 'normal' // compact | invisible
+  },
   alias: {
     "@integracao": "~/components/page/integracao",
     "@cobranca-recorrente": "~/components/page/cobranca-recorrente",
@@ -203,7 +209,7 @@ export default {
   },
 
   router: {
-    middleware: ['auth-expiration',"theme"]
+    middleware: ['auth-expiration', "theme"]
   },
   auth: {
     strategies: {

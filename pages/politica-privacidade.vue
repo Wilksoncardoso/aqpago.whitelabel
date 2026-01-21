@@ -648,6 +648,9 @@ export default {
 </script>
 <style lang="scss">
 .termos-page {
+    h3{
+         margin: 1.5rem 0 0.75rem;
+    }
     :root {
         --aq-turquoise: #00B4A6;
         --primary: #009688;
@@ -929,7 +932,7 @@ export default {
         font-size: 1.125rem;
         font-weight: 600;
         color: var(--aq-navy);
-        margin: 1.5rem 0 0.75rem;
+       
     }
 
     p {

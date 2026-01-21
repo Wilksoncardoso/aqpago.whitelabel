@@ -31,7 +31,7 @@
       >
       </v-text-field>
     </div>
-
+    
     <div class="label_login">CPF</div>
     <v-text-field
       solo
@@ -123,6 +123,9 @@ export default {
       this.form.workspace_id = workspace;
       this.$refs.Modal.dialog = false;
       this.logar__pj();
+    },
+    onVerify(token) {
+      this.recaptchaToken = token
     },
     async verify_workspace() {
       this.loading = true;

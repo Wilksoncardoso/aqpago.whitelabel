@@ -77,6 +77,8 @@
       >
         Entrar
       </v-btn>
+          <recaptcha @success="onVerify" />
+          
       <v-btn
         class="central__ajuda"
         color="pimary__central__ajuda "
